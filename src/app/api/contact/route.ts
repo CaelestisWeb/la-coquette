@@ -10,7 +10,7 @@ export async function POST(req: NextRequest) {
   }
 
   await resend.emails.send({
-    from: 'La Coquette <contact@lacoquette-bycaro.fr>',
+    from: 'La Coquette <onboarding@resend.dev>',
     to: 'contact@lacoquette-bycaro.fr',
     replyTo: email,
     subject: sujet ? `[La Coquette] ${sujet} — ${nom}` : `[La Coquette] Message de ${nom}`,
