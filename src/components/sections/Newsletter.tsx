@@ -8,7 +8,7 @@ export default function Newsletter() {
           Sur mesure
         </span>
         <h2 className="font-display text-4xl sm:text-5xl text-blanc mt-3">
-          Optez pour des boucles<br />d'oreilles <span className="text-or italic">faites pour vous</span>
+          Optez pour des boucles d'oreilles<br /><span className="text-or italic">faites pour vous</span>
         </h2>
         <p className="font-body text-sm text-blanc/50 leading-relaxed mt-5">
           Décrivez vos envies à Caroline et elle créera la paire qui vous ressemble.
