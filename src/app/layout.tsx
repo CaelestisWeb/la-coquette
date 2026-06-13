@@ -32,6 +32,7 @@ export const metadata: Metadata = {
   title: 'La Coquette |Bijoux artisanaux pour femmes élégantes',
   description: 'Découvrez la collection La Coquette : bijoux en acier inoxydable, élégants et durables. Boucles d\'oreilles, bracelets, colliers pensés pour révéler votre féminité au quotidien.',
   keywords: ['bijoux', 'boucles d\'oreilles', 'bracelets', 'colliers', 'artisanal', 'acier inoxydable', 'femme'],
+  icons: { icon: '/logo.png', apple: '/logo.png' },
   openGraph: {
     title: 'La Coquette |Bijoux artisanaux',
     description: 'Des créations pensées pour révéler votre élégance au quotidien.',
