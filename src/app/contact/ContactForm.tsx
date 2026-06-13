@@ -7,14 +7,30 @@ const inputClass = "w-full border border-gris bg-blanc font-body text-sm text-no
 export default function ContactForm() {
   const [form, setForm] = useState({ nom: '', email: '', sujet: '', message: '' });
   const [sent, setSent] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
     setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
   }
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    setSent(true);
+    setLoading(true);
+    setError('');
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      });
+      if (!res.ok) throw new Error();
+      setSent(true);
+    } catch {
+      setError('Une erreur est survenue. Veuillez réessayer ou nous contacter directement.');
+    } finally {
+      setLoading(false);
+    }
   }
 
   if (sent) {
@@ -56,8 +72,9 @@ export default function ContactForm() {
         <label className="font-body text-[10px] tracking-widest uppercase text-taupe block mb-2">Message *</label>
         <textarea name="message" value={form.message} onChange={handleChange} required rows={5} placeholder="Votre message..." className={`${inputClass} resize-none`} />
       </div>
-      <button type="submit" className="w-full bg-noir text-blanc font-body font-medium text-xs tracking-widest uppercase py-4 hover:bg-or transition-colors duration-300">
-        Envoyer le message
+      {error && <p className="font-body text-xs text-red-500">{error}</p>}
+      <button type="submit" disabled={loading} className="w-full bg-noir text-blanc font-body font-medium text-xs tracking-widest uppercase py-4 hover:bg-or transition-colors duration-300 disabled:opacity-60 disabled:cursor-not-allowed">
+        {loading ? 'Envoi en cours…' : 'Envoyer le message'}
       </button>
     </form>
   );

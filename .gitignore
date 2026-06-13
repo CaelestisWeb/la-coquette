@@ -1,5 +1,10 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+# Scripts de déploiement local (contiennent des tokens)
+auto-deploy-loop.ps1
+auto-deploy.ps1
+deploy.bat
+
 # dependencies
 /node_modules
 /.pnp
