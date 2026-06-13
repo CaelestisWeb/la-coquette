@@ -22,7 +22,7 @@ export const products: Product[] = [
     price: 15,
     description: "Des puces en forme de cœur délicat, pour rappeler chaque jour la douceur de ce que vous aimez. Légères et élégantes, elles s'accordent à toutes vos tenues.",
     material: "Acier inoxydable doré",
-    image: "https://picsum.photos/seed/b01/600/600",
+    image: "/boucles-placeholder.jpg",
     featured: true,
   },
   {
@@ -33,7 +33,7 @@ export const products: Product[] = [
     price: 22,
     description: "Des créoles minimalistes à l'éclat doré subtil. Leur finesse en fait un indispensable du quotidien, du matin au soir.",
     material: "Acier inoxydable doré",
-    image: "https://picsum.photos/seed/b02/600/600",
+    image: "/boucles-placeholder.jpg",
     featured: true,
   },
   {
@@ -44,7 +44,7 @@ export const products: Product[] = [
     price: 18,
     description: "Une perle rosée suspendue dans un écrin doré. La douceur à l'état pur, pour un style naturellement raffiné.",
     material: "Acier inoxydable doré, perle synthétique",
-    image: "https://picsum.photos/seed/b03/600/600",
+    image: "/boucles-placeholder.jpg",
   },
   {
     id: "b04",
@@ -54,7 +54,7 @@ export const products: Product[] = [
     price: 26,
     description: "Longues et gracieuses, ces pendantes en forme de goutte captent la lumière à chacun de vos mouvements.",
     material: "Acier inoxydable doré",
-    image: "https://picsum.photos/seed/b04/600/600",
+    image: "/boucles-placeholder.jpg",
   },
   {
     id: "b05",
@@ -64,7 +64,7 @@ export const products: Product[] = [
     price: 19,
     description: "Une étoile à votre oreille pour rappeler que vous brillez. Design épuré, effet précieux.",
     material: "Acier inoxydable doré",
-    image: "https://picsum.photos/seed/b05/600/600",
+    image: "/boucles-placeholder.jpg",
     featured: true,
   },
   {
@@ -75,7 +75,7 @@ export const products: Product[] = [
     price: 24,
     description: "Deux anneaux fins entrelacés en un jeu de courbes élégant. Modernes et raffinés.",
     material: "Acier inoxydable doré",
-    image: "https://picsum.photos/seed/b06/600/600",
+    image: "/boucles-placeholder.jpg",
   },
   {
     id: "b07",
@@ -85,7 +85,7 @@ export const products: Product[] = [
     price: 28,
     description: "Trois petits anneaux en cascade pour un effet de mouvement doux et envoûtant.",
     material: "Acier inoxydable doré",
-    image: "https://picsum.photos/seed/b07/600/600",
+    image: "/boucles-placeholder.jpg",
   },
   {
     id: "b08",
@@ -95,7 +95,7 @@ export const products: Product[] = [
     price: 17,
     description: "Une petite fleur épanouie à chaque oreille. La nature dans toute sa délicatesse.",
     material: "Acier inoxydable doré",
-    image: "https://picsum.photos/seed/b08/600/600",
+    image: "/boucles-placeholder.jpg",
   },
   {
     id: "b09",
@@ -105,7 +105,7 @@ export const products: Product[] = [
     price: 21,
     description: "Des créoles à surface travaillée pour capter la lumière sous tous les angles.",
     material: "Acier inoxydable doré",
-    image: "https://picsum.photos/seed/b09/600/600",
+    image: "/boucles-placeholder.jpg",
   },
   {
     id: "b10",
@@ -115,7 +115,7 @@ export const products: Product[] = [
     price: 32,
     description: "Un hommage à l'Art Déco : lignes géométriques, précision et sophistication intemporelle.",
     material: "Acier inoxydable doré",
-    image: "https://picsum.photos/seed/b10/600/600",
+    image: "/boucles-placeholder.jpg",
     featured: true,
   },
 
