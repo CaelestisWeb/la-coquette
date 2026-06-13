@@ -100,18 +100,62 @@ export default function CartDrawer() {
         </div>
 
         {/* Pied */}
-        {items.length > 0 && (
-          <div className="px-6 py-6 border-t border-gris space-y-4">
-            <div className="flex justify-between items-center">
-              <span className="font-body text-sm text-taupe tracking-wide uppercase text-xs">Total</span>
-              <span className="font-display text-xl text-noir">{total.toFixed(0)} €</span>
+        {items.length > 0 && (() => {
+          const SHIPPING_THRESHOLD = 50;
+          const SHIPPING_COST = 2.99;
+          const isFree = total >= SHIPPING_THRESHOLD;
+          const shipping = isFree ? 0 : SHIPPING_COST;
+          const remaining = SHIPPING_THRESHOLD - total;
+          const progress = Math.min((total / SHIPPING_THRESHOLD) * 100, 100);
+
+          return (
+            <div className="px-6 py-6 border-t border-gris space-y-4">
+              {/* Barre livraison gratuite */}
+              <div>
+                {isFree ? (
+                  <p className="font-body text-[11px] text-or text-center tracking-wide">
+                    ✓ Livraison offerte !
+                  </p>
+                ) : (
+                  <p className="font-body text-[11px] text-taupe text-center">
+                    Plus que <span className="text-noir font-medium">{remaining.toFixed(2)} €</span> pour la livraison gratuite
+                  </p>
+                )}
+                <div className="mt-2 h-1 bg-gris rounded-full overflow-hidden">
+                  <div
+                    className="h-full bg-or transition-all duration-500"
+                    style={{ width: `${progress}%` }}
+                  />
+                </div>
+              </div>
+
+              {/* Sous-total */}
+              <div className="flex justify-between items-center">
+                <span className="font-body text-xs text-taupe uppercase tracking-wide">Sous-total</span>
+                <span className="font-body text-sm text-noir">{total.toFixed(2)} €</span>
+              </div>
+
+              {/* Livraison */}
+              <div className="flex justify-between items-center">
+                <span className="font-body text-xs text-taupe uppercase tracking-wide">Livraison</span>
+                {isFree
+                  ? <span className="font-body text-sm text-or">Gratuite</span>
+                  : <span className="font-body text-sm text-noir">{SHIPPING_COST.toFixed(2)} €</span>
+                }
+              </div>
+
+              {/* Total */}
+              <div className="flex justify-between items-center pt-2 border-t border-gris">
+                <span className="font-body text-xs text-taupe uppercase tracking-wide">Total</span>
+                <span className="font-display text-xl text-noir">{(total + shipping).toFixed(2)} €</span>
+              </div>
+
+              <button className="w-full bg-noir text-blanc font-body font-medium tracking-widest text-xs uppercase py-4 hover:bg-or transition-colors duration-300">
+                Commander
+              </button>
             </div>
-            <p className="text-[10px] font-body text-taupe">Livraison calculée à la commande · La Poste</p>
-            <button className="w-full bg-noir text-blanc font-body font-medium tracking-widest text-xs uppercase py-4 hover:bg-or transition-colors duration-300">
-              Commander
-            </button>
-          </div>
-        )}
+          );
+        })()}
       </aside>
     </>
   );
