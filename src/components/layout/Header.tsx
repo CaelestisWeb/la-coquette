@@ -36,8 +36,7 @@ export default function Header() {
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
 
         <Link href="/" className="flex-shrink-0">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/logo.svg" alt="La Coquette" style={{ height: '52px', width: 'auto' }} />
+          <Image src="/logo.png" alt="La Coquette" height={52} width={160} style={{ height: '52px', width: 'auto' }} />
         </Link>
 
         {/* Nav desktop */}
