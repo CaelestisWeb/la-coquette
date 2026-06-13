@@ -57,11 +57,6 @@ export default function Footer() {
                 contact@lacoquette-bycaro.fr
               </a>
             </li>
-            <li>
-              <a href="tel:0777888746" className="font-body text-sm text-blanc/50 hover:text-or transition-colors">
-                07 77 88 87 46
-              </a>
-            </li>
           </ul>
           <div className="mt-8">
             <Link href="/contact" className="inline-flex items-center gap-2 font-body text-xs tracking-widest uppercase text-or border border-or px-5 py-2.5 hover:bg-or hover:text-blanc transition-colors duration-300">

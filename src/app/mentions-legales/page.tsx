@@ -21,7 +21,7 @@ export default function MentionsLegalesPage() {
             SIRET : 479 539 082 00095<br />
             Drôme (26)<br />
             Email : contact@lacoquette-bycaro.fr<br />
-            Tél : 07 77 88 87 46</p>
+</p>
           </section>
 
           <section>
