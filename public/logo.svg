@@ -1,0 +1,33 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" fill="none">
+  <!-- Grand arc C ouvert à droite -->
+  <path
+    d="M 143,39 A 75,75 0 1,0 143,161"
+    stroke="#C69C3D"
+    stroke-width="1.6"
+    stroke-linecap="round"
+    fill="none"
+  />
+  <!-- Texte La Coquette -->
+  <text
+    x="97"
+    y="105"
+    font-family="'Cormorant Garamond', Georgia, serif"
+    font-size="21"
+    font-style="italic"
+    fill="#111111"
+    text-anchor="middle"
+  >La Coquette</text>
+  <!-- Petit cœur doré -->
+  <path
+    d="M 97,128 C 97,128 88,121 88,117 C 88,113 90.5,111 93,111 C 94.8,111 96.4,112.2 97,113.5 C 97.6,112.2 99.2,111 101,111 C 103.5,111 106,113 106,117 C 106,121 97,128 97,128 Z"
+    fill="#C69C3D"
+  />
+  <!-- Ligne fluide depuis le cœur vers l'arc -->
+  <path
+    d="M 106,117 Q 122,120 143,128"
+    stroke="#C69C3D"
+    stroke-width="1.0"
+    stroke-linecap="round"
+    fill="none"
+  />
+</svg>

@@ -1,0 +1,64 @@
+'use client';
+
+import { useState } from 'react';
+
+const inputClass = "w-full border border-gris bg-blanc font-body text-sm text-noir px-4 py-3 outline-none focus:border-or transition-colors placeholder:text-taupe/60";
+
+export default function ContactForm() {
+  const [form, setForm] = useState({ nom: '', email: '', sujet: '', message: '' });
+  const [sent, setSent] = useState(false);
+
+  function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
+    setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
+  }
+
+  function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setSent(true);
+  }
+
+  if (sent) {
+    return (
+      <div className="bg-blanc p-10 text-center flex flex-col items-center gap-5">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#C69C3D" strokeWidth="1.2">
+          <circle cx="12" cy="12" r="10"/><polyline points="20 6 9 17 4 12"/>
+        </svg>
+        <h3 className="font-display text-2xl text-noir">Message envoyé !</h3>
+        <p className="font-body text-sm text-taupe">Merci. Caroline vous répondra dans les plus brefs délais.</p>
+      </div>
+    );
+  }
+
+  return (
+    <form onSubmit={handleSubmit} className="bg-blanc p-8 space-y-5">
+      <h2 className="font-display text-2xl text-noir mb-6">Envoyer un message</h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        <div>
+          <label className="font-body text-[10px] tracking-widest uppercase text-taupe block mb-2">Nom *</label>
+          <input name="nom" value={form.nom} onChange={handleChange} required placeholder="Votre nom" className={inputClass} />
+        </div>
+        <div>
+          <label className="font-body text-[10px] tracking-widest uppercase text-taupe block mb-2">Email *</label>
+          <input type="email" name="email" value={form.email} onChange={handleChange} required placeholder="votre@email.fr" className={inputClass} />
+        </div>
+      </div>
+      <div>
+        <label className="font-body text-[10px] tracking-widest uppercase text-taupe block mb-2">Sujet</label>
+        <select name="sujet" value={form.sujet} onChange={handleChange} className={inputClass}>
+          <option value="">Choisir un sujet</option>
+          <option>Commande</option>
+          <option>Bijou personnalisé</option>
+          <option>Question sur un produit</option>
+          <option>Autre</option>
+        </select>
+      </div>
+      <div>
+        <label className="font-body text-[10px] tracking-widest uppercase text-taupe block mb-2">Message *</label>
+        <textarea name="message" value={form.message} onChange={handleChange} required rows={5} placeholder="Votre message..." className={`${inputClass} resize-none`} />
+      </div>
+      <button type="submit" className="w-full bg-noir text-blanc font-body font-medium text-xs tracking-widest uppercase py-4 hover:bg-or transition-colors duration-300">
+        Envoyer le message
+      </button>
+    </form>
+  );
+}
