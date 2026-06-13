@@ -20,7 +20,7 @@ export default function MentionsLegalesPage() {
             Auto-entrepreneur / Entreprise individuelle<br />
             SIRET : 479 539 082 00095<br />
             Drôme (26)<br />
-            Email : contact@lacoquettebycaro.fr<br />
+            Email : contact@lacoquette-bycaro.fr<br />
             Tél : 07 77 88 87 46</p>
           </section>
 
@@ -37,7 +37,7 @@ export default function MentionsLegalesPage() {
 
           <section>
             <h2 className="font-display text-2xl text-noir mb-4">Données personnelles</h2>
-            <p>Les informations collectées via les formulaires sont destinées exclusivement à La Coquette et ne seront en aucun cas cédées à des tiers. Conformément au RGPD, vous disposez d'un droit d'accès, de rectification et de suppression de vos données en contactant : contact@lacoquettebycaro.fr</p>
+            <p>Les informations collectées via les formulaires sont destinées exclusivement à La Coquette et ne seront en aucun cas cédées à des tiers. Conformément au RGPD, vous disposez d'un droit d'accès, de rectification et de suppression de vos données en contactant : contact@lacoquette-bycaro.fr</p>
           </section>
 
           <section>

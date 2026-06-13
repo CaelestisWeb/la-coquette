@@ -53,8 +53,8 @@ export default function Footer() {
           <ul className="space-y-3">
             <li className="font-body text-sm text-blanc/50">Drôme (26)</li>
             <li>
-              <a href="mailto:contact@lacoquettebycaro.fr" className="font-body text-sm text-blanc/50 hover:text-or transition-colors">
-                contact@lacoquettebycaro.fr
+              <a href="mailto:contact@lacoquette-bycaro.fr" className="font-body text-sm text-blanc/50 hover:text-or transition-colors">
+                contact@lacoquette-bycaro.fr
               </a>
             </li>
             <li>

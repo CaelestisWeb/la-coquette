@@ -33,8 +33,8 @@ const infos = [
       </svg>
     ),
     label: 'Email',
-    value: 'contact@lacoquettebycaro.fr',
-    href: 'mailto:contact@lacoquettebycaro.fr',
+    value: 'contact@lacoquette-bycaro.fr',
+    href: 'mailto:contact@lacoquette-bycaro.fr',
   },
 ];
 
