@@ -15,7 +15,7 @@ export async function POST(req: NextRequest) {
 
   const { data, error } = await resend.emails.send({
     from: 'La Coquette <onboarding@resend.dev>',
-    to: 'contact@lacoquette-bycaro.fr',
+    to: 'contact@caelestis.fr',
     replyTo: email,
     subject,
     html: `
