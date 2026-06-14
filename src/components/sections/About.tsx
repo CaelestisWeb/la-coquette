@@ -10,8 +10,8 @@ export default function About() {
         <div className="relative order-2 lg:order-1">
           <div className="aspect-[3/4] w-full max-w-sm overflow-hidden">
             <Image
-              src="https://picsum.photos/seed/about-caroline/480/640"
-              alt="Caroline, créatrice La Coquette"
+              src="/boucles-placeholder.jpg"
+              alt="Création artisanale La Coquette par Caroline"
               fill
               className="object-cover"
               sizes="(max-width: 1024px) 100vw, 50vw"

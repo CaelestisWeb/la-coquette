@@ -13,7 +13,7 @@ const article = {
   excerpt: 'Comment Caroline a transformé sa passion pour les bijoux en une belle aventure entrepreneuriale.',
   category: 'Notre histoire',
   date: '1 mai 2026',
-  image: 'https://picsum.photos/seed/blog06/600/400',
+  image: '/boucles-placeholder.jpg',
   readTime: '6 min',
 };
 

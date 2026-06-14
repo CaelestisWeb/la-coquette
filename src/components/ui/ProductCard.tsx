@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useCart } from '@/context/CartContext';
-import type { Product } from '@/data/products';
+import { categoryLabels, type Product } from '@/data/products';
 
 export default function ProductCard({ product }: { product: Product }) {
   const { addItem } = useCart();
@@ -14,10 +14,7 @@ export default function ProductCard({ product }: { product: Product }) {
     addItem({ id: product.id, name: product.name, price: product.price, image: product.image });
   }
 
-  const catLabel =
-    product.category === 'boucles' ? "Boucles d'oreilles"
-    : product.category === 'bracelets' ? 'Bracelets'
-    : 'Colliers';
+  const catLabel = categoryLabels[product.category];
 
   return (
     <Link href={`/boutique/${product.slug}`} className="group block bg-blanc overflow-hidden">

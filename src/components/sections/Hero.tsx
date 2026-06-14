@@ -28,7 +28,7 @@ export default function Hero() {
           {/* Stats */}
           <div className="flex gap-6 sm:gap-10 mt-7 pt-7 border-t border-gris">
             <div>
-              <p className="font-display text-2xl text-noir">30+</p>
+              <p className="font-display text-2xl text-noir">10+</p>
               <p className="font-body text-[10px] text-taupe tracking-wider uppercase mt-1">Créations</p>
             </div>
             <div>
@@ -61,8 +61,8 @@ export default function Hero() {
 
           <div className="relative z-10 aspect-[4/5] w-full max-w-[260px] sm:max-w-sm mx-auto lg:max-w-md lg:ml-auto overflow-hidden">
             <Image
-              src="https://picsum.photos/seed/hero-lacoquette/600/750"
-              alt="Bijoux La Coquette"
+              src="/boucles-placeholder.jpg"
+              alt="Boucles d'oreilles artisanales La Coquette"
               fill
               priority
               className="object-cover"
@@ -70,7 +70,7 @@ export default function Hero() {
             />
             <div className="absolute bottom-4 left-4 sm:bottom-6 sm:left-6 bg-blanc px-4 py-2 sm:px-5 sm:py-3 shadow-lg">
               <p className="font-body text-[9px] tracking-[0.2em] uppercase text-taupe">Livraison offerte</p>
-              <p className="font-display text-sm sm:text-base text-noir">dès 60 €</p>
+              <p className="font-display text-sm sm:text-base text-noir">dès 50 €</p>
             </div>
           </div>
         </div>

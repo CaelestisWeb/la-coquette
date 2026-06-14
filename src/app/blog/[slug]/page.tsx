@@ -1,9 +1,18 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
 
-export const metadata: Metadata = {
-  title: 'Article | La Coquette',
-};
+function slugToTitle(slug: string) {
+  return slug.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const title = slugToTitle(slug);
+  return {
+    title,
+    description: `${title} — Conseils et inspirations bijoux par La Coquette.`,
+  };
+}
 
 export default async function ArticlePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;

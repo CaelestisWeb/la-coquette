@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { products, categoryLabels, type ProductCategory } from '@/data/products';
 import ProductCard from '@/components/ui/ProductCard';
 import type { Metadata } from 'next';
@@ -43,7 +44,7 @@ export default async function BoutiquePage({
       <div className="max-w-7xl mx-auto px-6 py-10">
         <div className="flex flex-wrap gap-3 justify-center">
           {categories.map(c => (
-            <a
+            <Link
               key={c.value}
               href={c.value === 'all' ? '/boutique' : `/boutique?cat=${c.value}`}
               className={`font-body text-[10px] font-medium tracking-[0.18em] uppercase px-6 py-2.5 border transition-colors duration-200 ${
@@ -53,7 +54,7 @@ export default async function BoutiquePage({
               }`}
             >
               {c.label}
-            </a>
+            </Link>
           ))}
         </div>
 
