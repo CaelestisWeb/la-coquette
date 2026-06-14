@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import { useCart } from '@/context/CartContext';
 
 export default function CartDrawer() {
@@ -150,9 +151,10 @@ export default function CartDrawer() {
                 <span className="font-display text-xl text-noir">{(total + shipping).toFixed(2)} €</span>
               </div>
 
-              <button className="w-full bg-noir text-blanc font-body font-medium tracking-widest text-xs uppercase py-4 hover:bg-or transition-colors duration-300">
+              <Link href="/checkout" onClick={() => setIsOpen(false)}
+                className="block w-full bg-noir text-blanc font-body font-medium tracking-widest text-xs uppercase py-4 hover:bg-or transition-colors duration-300 text-center">
                 Commander
-              </button>
+              </Link>
             </div>
           );
         })()}
