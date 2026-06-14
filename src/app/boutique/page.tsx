@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { products, categoryLabels, type ProductCategory } from '@/data/products';
 import ProductCard from '@/components/ui/ProductCard';
+import SectionLabel from '@/components/ui/SectionLabel';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -28,10 +29,8 @@ export default async function BoutiquePage({
   return (
     <div className="pt-20 min-h-screen bg-ivoire">
       {/* En-tête */}
-      <div className="bg-rose py-20 text-center">
-        <span className="font-body text-[10px] font-semibold tracking-[0.25em] uppercase text-or">
-          Nos créations
-        </span>
+      <div className="bg-rose py-24 text-center">
+        <SectionLabel align="center">Nos créations</SectionLabel>
         <h1 className="font-display text-4xl sm:text-5xl md:text-6xl text-noir mt-3">
           La Boutique
         </h1>

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import ContactForm from './ContactForm';
+import SectionLabel from '@/components/ui/SectionLabel';
 
 export const metadata: Metadata = {
   title: 'Contact | La Coquette',
@@ -31,10 +32,8 @@ const infos = [
 export default function ContactPage() {
   return (
     <div className="pt-20 min-h-screen bg-ivoire">
-      <div className="bg-rose py-20 text-center">
-        <span className="font-body text-[10px] font-semibold tracking-[0.25em] uppercase text-or">
-          Parlons-nous
-        </span>
+      <div className="bg-rose py-24 text-center">
+        <SectionLabel align="center">Parlons-nous</SectionLabel>
         <h1 className="font-display text-4xl sm:text-5xl md:text-6xl text-noir mt-3">
           Nous contacter
         </h1>
