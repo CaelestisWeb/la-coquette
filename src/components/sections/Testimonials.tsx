@@ -1,3 +1,5 @@
+import SectionLabel from '@/components/ui/SectionLabel';
+
 const testimonials = [
   {
     name: 'Sophie M.',
@@ -50,14 +52,12 @@ function Card({ t, className = '' }: { t: Testimonial; className?: string }) {
 
 export default function Testimonials() {
   return (
-    <section className="bg-beige py-20 sm:py-24 overflow-hidden">
+    <section className="bg-rose py-24 sm:py-28 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
 
-        <div className="text-center mb-12 reveal">
-          <span className="font-body text-[10px] font-semibold tracking-[0.25em] uppercase text-or">
-            Elles nous font confiance
-          </span>
-          <h2 className="font-display text-4xl sm:text-5xl text-noir mt-3">
+        <div className="text-center mb-14 reveal">
+          <SectionLabel align="center">Elles nous font confiance</SectionLabel>
+          <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl text-noir mt-3">
             Avis clients
           </h2>
         </div>

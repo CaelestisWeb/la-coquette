@@ -1,3 +1,5 @@
+import SectionLabel from '@/components/ui/SectionLabel';
+
 const values = [
   {
     icon: (
@@ -40,28 +42,29 @@ const values = [
 
 export default function Values() {
   return (
-    <section className="bg-rose py-24">
-      <div className="max-w-7xl mx-auto px-6">
+    <section className="bg-noir py-28 relative overflow-hidden">
+      {/* Halo doré diffus */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[28rem] h-[28rem] rounded-full bg-or opacity-[0.08] blur-3xl pointer-events-none" />
+
+      <div className="relative max-w-7xl mx-auto px-6">
 
         {/* Titre */}
-        <div className="text-center mb-12 reveal">
-          <span className="font-body text-[10px] font-semibold tracking-[0.25em] uppercase text-or">
-            Ce qui nous anime
-          </span>
-          <h2 className="font-display text-4xl sm:text-5xl text-noir mt-3">
+        <div className="text-center mb-14 reveal">
+          <SectionLabel align="center">Ce qui nous anime</SectionLabel>
+          <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl text-blanc mt-3">
             Nos valeurs
           </h2>
         </div>
 
         {/* Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
           {values.map((v, i) => (
-            <div key={v.title} className={`bg-blanc p-6 sm:p-8 flex flex-col gap-5 group hover:shadow-lg transition-shadow duration-300 reveal reveal-d${i + 1}`}>
+            <div key={v.title} className={`border border-blanc/10 bg-blanc/[0.03] p-7 sm:p-8 flex flex-col gap-5 group hover:border-or/40 hover:bg-blanc/[0.05] transition-all duration-300 reveal reveal-d${i + 1}`}>
               <span className="text-or group-hover:scale-110 transition-transform duration-300 origin-left w-fit">
                 {v.icon}
               </span>
-              <h3 className="font-display text-2xl text-noir">{v.title}</h3>
-              <p className="font-body text-sm text-taupe leading-relaxed">{v.text}</p>
+              <h3 className="font-display text-2xl text-blanc">{v.title}</h3>
+              <p className="font-body text-sm text-blanc/55 leading-relaxed">{v.text}</p>
             </div>
           ))}
         </div>

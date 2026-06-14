@@ -8,7 +8,7 @@ export default function Hero() {
   return (
     <section className="relative min-h-screen bg-ivoire pt-20 flex items-center overflow-hidden">
       {/* Halo chaud diffus en fond */}
-      <div className="absolute -top-32 right-0 w-[34rem] h-[34rem] rounded-full bg-rose opacity-40 blur-[120px] pointer-events-none" />
+      <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-rose opacity-50 blur-3xl pointer-events-none" />
 
       <div className="relative max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-24 items-center py-12 lg:py-20">
 
