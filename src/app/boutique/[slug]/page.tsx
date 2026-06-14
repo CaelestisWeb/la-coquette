@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { products, getProductBySlug, categoryLabels } from '@/data/products';
 import AddToCartButton from './AddToCartButton';
+import ProductCard from '@/components/ui/ProductCard';
 import type { Metadata } from 'next';
 
 type Props = { params: Promise<{ slug: string }> };
@@ -25,6 +26,8 @@ export default async function ProductPage({ params }: Props) {
   const { slug } = await params;
   const product = getProductBySlug(slug);
   if (!product) notFound();
+
+  const related = products.filter(p => p.id !== product.id).slice(0, 4);
 
   const productJsonLd = {
     '@context': 'https://schema.org',
@@ -124,6 +127,23 @@ export default async function ProductPage({ params }: Props) {
             </div>
           </div>
         </div>
+
+        {/* Produits similaires */}
+        {related.length > 0 && (
+          <section className="mt-24">
+            <div className="text-center mb-10">
+              <span className="font-body text-[10px] font-semibold tracking-[0.25em] uppercase text-or">
+                Sélection
+              </span>
+              <h2 className="font-display text-3xl sm:text-4xl text-noir mt-2">Vous aimerez aussi</h2>
+            </div>
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
+              {related.map(p => (
+                <ProductCard key={p.id} product={p} />
+              ))}
+            </div>
+          </section>
+        )}
       </div>
     </div>
   );

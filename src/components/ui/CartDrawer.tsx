@@ -2,10 +2,23 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+import { useEffect } from 'react';
 import { useCart } from '@/context/CartContext';
 
 export default function CartDrawer() {
   const { items, removeItem, updateQty, total, count, isOpen, setIsOpen } = useCart();
+
+  // Fermeture avec Échap + blocage du scroll de fond quand le panier est ouvert
+  useEffect(() => {
+    if (!isOpen) return;
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setIsOpen(false); };
+    document.addEventListener('keydown', onKey);
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.removeEventListener('keydown', onKey);
+      document.body.style.overflow = '';
+    };
+  }, [isOpen, setIsOpen]);
 
   return (
     <>
@@ -14,11 +27,16 @@ export default function CartDrawer() {
         <div
           className="fixed inset-0 bg-noir/30 z-40 backdrop-blur-sm"
           onClick={() => setIsOpen(false)}
+          aria-hidden
         />
       )}
 
       {/* Panneau */}
       <aside
+        role="dialog"
+        aria-modal="true"
+        aria-label="Panier"
+        aria-hidden={!isOpen}
         className={`fixed top-0 right-0 h-full w-full max-w-sm bg-blanc z-50 flex flex-col shadow-2xl transition-transform duration-300 ease-in-out ${
           isOpen ? 'translate-x-0' : 'translate-x-full'
         }`}

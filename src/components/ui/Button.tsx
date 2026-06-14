@@ -14,8 +14,8 @@ type ButtonProps = {
 const base = 'inline-flex items-center justify-center font-body font-medium tracking-widest text-xs uppercase transition-all duration-300 cursor-pointer';
 
 const variants = {
-  primary:   'bg-noir text-blanc px-8 py-3.5 hover:bg-or',
-  secondary: 'border border-or text-or px-8 py-3.5 hover:bg-or hover:text-blanc',
+  primary:   'bg-noir text-blanc px-8 py-3.5 hover:bg-or hover:-translate-y-0.5 hover:shadow-lg',
+  secondary: 'border border-or text-or px-8 py-3.5 hover:bg-or hover:text-blanc hover:-translate-y-0.5',
   ghost:     'text-noir underline-offset-4 hover:underline hover:text-or px-0 py-1',
 };
 
