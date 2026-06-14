@@ -7,8 +7,8 @@ const STAR_PATH = 'M8,1.5 L9.5,5.9 L14.2,6 L10.5,8.8 L11.8,13.3 L8,10.6 L4.2,13.
 export default function Hero() {
   return (
     <section className="relative min-h-screen bg-ivoire pt-20 flex items-center overflow-hidden">
-      {/* Halo chaud diffus en fond */}
-      <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-rose opacity-50 blur-3xl pointer-events-none" />
+      {/* Halo chaud très diffus en fond */}
+      <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-rose opacity-30 blur-3xl pointer-events-none" />
 
       <div className="relative max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-24 items-center py-12 lg:py-20">
 
@@ -16,11 +16,11 @@ export default function Hero() {
         <div className="animate-fadein">
           <SectionLabel>Bijoux artisanaux · Drôme</SectionLabel>
 
-          <h1 className="font-display text-4xl sm:text-6xl lg:text-7xl text-noir mt-6 leading-[1.05]">
+          <h1 className="font-display text-5xl sm:text-6xl lg:text-[5.25rem] text-noir mt-7 leading-[1.04]">
             Des bijoux pensés
             <br className="max-lg:hidden" />
             {' '}pour révéler votre{' '}
-            <em className="font-accent not-italic text-or">élégance</em>
+            <em className="italic font-light text-or">élégance</em>
           </h1>
 
           <p className="font-body text-sm sm:text-base text-taupe leading-relaxed mt-7 max-w-md">
@@ -58,12 +58,10 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Image encadrée */}
-        <div className="relative mx-auto lg:ml-auto w-full max-w-[300px] sm:max-w-sm lg:max-w-md">
-          {/* Panneau chaud décalé derrière */}
-          <div className="absolute -top-4 -right-4 sm:-top-5 sm:-right-5 w-full h-full bg-rose pointer-events-none" />
-          {/* Filet doré */}
-          <div className="absolute -bottom-3 -left-3 sm:-bottom-4 sm:-left-4 w-full h-full border border-or/40 pointer-events-none" />
+        {/* Image — cadre épuré, filet doré fin */}
+        <div className="relative mx-auto lg:ml-auto w-full max-w-[300px] sm:max-w-sm lg:max-w-md p-3 sm:p-4">
+          {/* Filet doré encadrant, décalé */}
+          <div className="absolute inset-0 border border-or/30 translate-x-2 translate-y-2 sm:translate-x-3 sm:translate-y-3 pointer-events-none" />
 
           <div className="relative z-10 aspect-[4/5] w-full overflow-hidden">
             <Image
@@ -74,9 +72,9 @@ export default function Hero() {
               className="object-cover"
               sizes="(max-width: 640px) 75vw, (max-width: 1024px) 45vw, 40vw"
             />
-            <div className="absolute bottom-4 left-4 sm:bottom-6 sm:left-6 bg-blanc/95 backdrop-blur-sm px-4 py-2.5 sm:px-5 sm:py-3 shadow-lg">
-              <p className="font-body text-[9px] tracking-[0.2em] uppercase text-taupe">Livraison offerte</p>
-              <p className="font-display text-base sm:text-lg text-noir">dès 50 €</p>
+            <div className="absolute bottom-4 left-4 sm:bottom-6 sm:left-6 bg-blanc/95 backdrop-blur-sm px-4 py-2.5 sm:px-5 sm:py-3">
+              <p className="font-body text-[9px] tracking-[0.25em] uppercase text-taupe">Livraison offerte</p>
+              <p className="font-display italic text-lg sm:text-xl text-noir">dès 50 €</p>
             </div>
           </div>
         </div>

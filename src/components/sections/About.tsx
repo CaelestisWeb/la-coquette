@@ -4,15 +4,13 @@ import SectionLabel from '@/components/ui/SectionLabel';
 
 export default function About() {
   return (
-    <section className="bg-beige py-28">
+    <section className="bg-ivoire py-32">
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
 
-        {/* Image encadrée */}
-        <div className="relative order-2 lg:order-1 w-full max-w-sm mx-auto lg:mx-0">
-          {/* Panneau chaud décalé */}
-          <div className="absolute -top-4 -left-4 sm:-top-5 sm:-left-5 w-full h-full bg-blanc pointer-events-none" />
-          {/* Filet doré */}
-          <div className="absolute -bottom-3 -right-3 sm:-bottom-4 sm:-right-4 w-full h-full border border-or/40 pointer-events-none" />
+        {/* Image — cadre épuré, filet doré fin */}
+        <div className="relative order-2 lg:order-1 w-full max-w-sm mx-auto lg:mx-0 p-3 sm:p-4">
+          {/* Filet doré encadrant, décalé */}
+          <div className="absolute inset-0 border border-or/30 -translate-x-2 translate-y-2 sm:-translate-x-3 sm:translate-y-3 pointer-events-none" />
 
           <div className="relative z-10 aspect-[3/4] w-full overflow-hidden">
             <Image
@@ -24,11 +22,11 @@ export default function About() {
             />
           </div>
           {/* Citation flottante */}
-          <div className="absolute z-20 -bottom-6 -right-6 bg-noir text-blanc p-6 max-w-[210px] hidden lg:block shadow-xl">
-            <p className="font-accent text-2xl leading-snug text-blanc/90">
+          <div className="absolute z-20 -bottom-5 -right-2 lg:-right-6 bg-noir text-blanc px-7 py-6 max-w-[230px] hidden lg:block">
+            <p className="font-display italic text-2xl leading-snug text-blanc">
               «&nbsp;Chaque bijou porte une part de moi.&nbsp;»
             </p>
-            <p className="font-body text-[10px] tracking-[0.2em] uppercase text-or mt-3">Caroline</p>
+            <p className="font-body text-[10px] tracking-[0.25em] uppercase text-or mt-4">Caroline</p>
           </div>
         </div>
 
@@ -71,11 +69,11 @@ export default function About() {
           </div>
 
           {/* Citation — mobile uniquement */}
-          <div className="lg:hidden mt-10 bg-noir text-blanc p-6">
-            <p className="font-accent text-xl leading-snug text-blanc/90">
+          <div className="lg:hidden mt-10 bg-noir text-blanc px-7 py-6">
+            <p className="font-display italic text-2xl leading-snug text-blanc">
               «&nbsp;Chaque bijou porte une part de moi.&nbsp;»
             </p>
-            <p className="font-body text-[10px] tracking-[0.2em] uppercase text-or mt-3">Caroline</p>
+            <p className="font-body text-[10px] tracking-[0.25em] uppercase text-or mt-4">Caroline</p>
           </div>
         </div>
       </div>

@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Pompiere, Montserrat, Caveat } from 'next/font/google';
+import { Cormorant_Garamond, Jost } from 'next/font/google';
 import './globals.css';
 import { CartProvider } from '@/context/CartContext';
 import Header from '@/components/layout/Header';
@@ -7,24 +7,20 @@ import Footer from '@/components/layout/Footer';
 import CartDrawer from '@/components/ui/CartDrawer';
 import ScrollReveal from '@/components/ui/ScrollReveal';
 
-const pompiere = Pompiere({
+// Serif haute-couture — titres & accents (italique)
+const cormorant = Cormorant_Garamond({
   subsets: ['latin'],
-  weight: ['400'],
-  variable: '--font-pompiere',
+  weight: ['300', '400', '500', '600'],
+  style: ['normal', 'italic'],
+  variable: '--font-cormorant',
   display: 'swap',
 });
 
-const montserrat = Montserrat({
+// Sans géométrique raffiné, esprit Art Déco — corps, labels, UI
+const jost = Jost({
   subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700'],
-  variable: '--font-montserrat',
-  display: 'swap',
-});
-
-const caveat = Caveat({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-  variable: '--font-caveat',
+  weight: ['300', '400', '500'],
+  variable: '--font-jost',
   display: 'swap',
 });
 
@@ -72,7 +68,7 @@ const jsonLd = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="fr" className={`${pompiere.variable} ${montserrat.variable} ${caveat.variable}`}>
+    <html lang="fr" className={`${cormorant.variable} ${jost.variable}`}>
       <body className="min-h-screen flex flex-col" suppressHydrationWarning>
         <script
           type="application/ld+json"

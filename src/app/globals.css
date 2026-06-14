@@ -12,9 +12,9 @@
   --color-blanc:   #FFFFFF;
 
   /* ── Typographies ── */
-  --font-display: var(--font-pompiere);
-  --font-body:    var(--font-montserrat);
-  --font-accent:  var(--font-caveat);
+  --font-display: var(--font-cormorant);
+  --font-body:    var(--font-jost);
+  --font-accent:  var(--font-cormorant);
 }
 
 @layer base {
@@ -29,13 +29,19 @@
   }
 
   h1, h2, h3, h4, h5 {
-    font-family: var(--font-display), Georgia, serif;
+    font-family: var(--font-display), 'Cormorant Garamond', Georgia, serif;
     font-weight: 400;
-    line-height: 1.1;
+    line-height: 1.08;
+    letter-spacing: -0.01em;
     text-wrap: balance;
   }
 
+  /* Grands titres : graisse légère = élégance haute-couture */
+  h1 { font-weight: 300; }
+
   p { text-wrap: pretty; }
+
+  body { font-family: var(--font-body), system-ui, sans-serif; }
 
   ::selection {
     background-color: #E8DCDC;
