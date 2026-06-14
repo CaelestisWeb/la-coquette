@@ -1,14 +1,20 @@
 import Image from 'next/image';
 import Button from '@/components/ui/Button';
+import SectionLabel from '@/components/ui/SectionLabel';
 
 export default function About() {
   return (
-    <section className="bg-ivoire py-24">
-      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+    <section className="bg-beige py-28">
+      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
 
-        {/* Image */}
-        <div className="relative order-2 lg:order-1">
-          <div className="aspect-[3/4] w-full max-w-sm overflow-hidden">
+        {/* Image encadrée */}
+        <div className="relative order-2 lg:order-1 w-full max-w-sm mx-auto lg:mx-0">
+          {/* Panneau chaud décalé */}
+          <div className="absolute -top-4 -left-4 sm:-top-5 sm:-left-5 w-full h-full bg-blanc pointer-events-none" />
+          {/* Filet doré */}
+          <div className="absolute -bottom-3 -right-3 sm:-bottom-4 sm:-right-4 w-full h-full border border-or/40 pointer-events-none" />
+
+          <div className="relative z-10 aspect-[3/4] w-full overflow-hidden">
             <Image
               src="/boucles-placeholder.jpg"
               alt="Création artisanale La Coquette par Caroline"
@@ -18,20 +24,18 @@ export default function About() {
             />
           </div>
           {/* Citation flottante */}
-          <div className="absolute -bottom-6 -right-6 bg-noir text-blanc p-6 max-w-[200px] hidden lg:block">
+          <div className="absolute z-20 -bottom-6 -right-6 bg-noir text-blanc p-6 max-w-[210px] hidden lg:block shadow-xl">
             <p className="font-accent text-2xl leading-snug text-blanc/90">
-              "Chaque bijou porte une part de moi."
+              «&nbsp;Chaque bijou porte une part de moi.&nbsp;»
             </p>
-            <p className="font-body text-[10px] tracking-widest uppercase text-or mt-3">Caroline</p>
+            <p className="font-body text-[10px] tracking-[0.2em] uppercase text-or mt-3">Caroline</p>
           </div>
         </div>
 
         {/* Texte */}
         <div className="order-1 lg:order-2 reveal">
-          <span className="font-body text-[10px] font-semibold tracking-[0.25em] uppercase text-or">
-            Notre histoire
-          </span>
-          <h2 className="font-display text-4xl sm:text-5xl text-noir mt-3">
+          <SectionLabel>Notre histoire</SectionLabel>
+          <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl text-noir mt-3">
             Créé avec passion,<br />
             porté avec fierté
           </h2>
@@ -67,11 +71,11 @@ export default function About() {
           </div>
 
           {/* Citation — mobile uniquement */}
-          <div className="lg:hidden mt-8 bg-noir text-blanc p-6">
+          <div className="lg:hidden mt-10 bg-noir text-blanc p-6">
             <p className="font-accent text-xl leading-snug text-blanc/90">
-              "Chaque bijou porte une part de moi."
+              «&nbsp;Chaque bijou porte une part de moi.&nbsp;»
             </p>
-            <p className="font-body text-[10px] tracking-widest uppercase text-or mt-3">Caroline</p>
+            <p className="font-body text-[10px] tracking-[0.2em] uppercase text-or mt-3">Caroline</p>
           </div>
         </div>
       </div>
