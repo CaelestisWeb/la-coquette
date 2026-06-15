@@ -40,7 +40,7 @@ export const metadata: Metadata = {
   description: 'Découvrez la collection La Coquette : boucles d\'oreilles artisanales en acier inoxydable doré, élégantes et durables, pensées pour révéler votre féminité au quotidien.',
   keywords: ['bijoux artisanaux', 'boucles d\'oreilles', 'acier inoxydable doré', 'bijoux femme', 'Drôme', 'fait main', 'La Coquette'],
   authors: [{ name: 'La Coquette' }],
-  icons: { icon: '/logo.png', apple: '/logo.png' },
+  icons: { icon: '/favicon.svg', apple: '/favicon.svg' },
   alternates: { canonical: '/' },
   openGraph: {
     title: 'La Coquette | Bijoux artisanaux',
