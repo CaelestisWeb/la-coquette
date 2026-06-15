@@ -1,20 +1,20 @@
 @import "tailwindcss";
 
 @theme {
-  /* ── Couleurs La Coquette ── */
-  --color-rose:    #E8DCDC;
-  --color-noir:    #111111;
-  --color-or:      #C69C3D;
-  --color-beige:   #F3EEE8;
-  --color-ivoire:  #FAF8F6;
-  --color-taupe:   #A89D97;
-  --color-gris:    #D8D1CD;
+  /* ── Palette monochrome — luxe minimaliste ── */
+  --color-noir:    #111111;   /* presque-noir */
   --color-blanc:   #FFFFFF;
+  --color-ivoire:  #FAF8F6;   /* blanc chaud — fond principal */
+  --color-beige:   #F2EEE9;   /* panneau clair subtil */
+  --color-rose:    #ECE7E1;   /* grège chaud (remplace le rose) */
+  --color-gris:    #DCD7D1;   /* filets, bordures */
+  --color-taupe:   #8E867D;   /* texte secondaire, labels */
+  --color-or:      #9A9189;   /* « accent » neutre — stone (remplace l'or) */
 
   /* ── Typographies ── */
-  --font-display: var(--font-cormorant);
-  --font-body:    var(--font-jost);
-  --font-accent:  var(--font-cormorant);
+  --font-display: var(--font-jost);
+  --font-body:    var(--font-inter);
+  --font-accent:  var(--font-jost);
 }
 
 @layer base {
@@ -29,22 +29,22 @@
   }
 
   h1, h2, h3, h4, h5 {
-    font-family: var(--font-display), 'Cormorant Garamond', Georgia, serif;
+    font-family: var(--font-display), system-ui, sans-serif;
     font-weight: 400;
-    line-height: 1.08;
-    letter-spacing: -0.01em;
+    line-height: 1.06;
+    letter-spacing: -0.02em;
     text-wrap: balance;
   }
 
-  /* Grands titres : graisse légère = élégance haute-couture */
-  h1 { font-weight: 300; }
+  /* Grands titres : graisse légère = élégance minimaliste */
+  h1, h2 { font-weight: 300; }
 
   p { text-wrap: pretty; }
 
   body { font-family: var(--font-body), system-ui, sans-serif; }
 
   ::selection {
-    background-color: #E8DCDC;
+    background-color: #ECE7E1;
     color: #111111;
   }
 
@@ -81,11 +81,11 @@
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: #D8D1CD; border-radius: 4px; }
-::-webkit-scrollbar-thumb:hover { background: #C69C3D; }
+::-webkit-scrollbar-thumb:hover { background: #9A9189; }
 ::-webkit-scrollbar-horizontal { height: 0; }
 
 /* ── Focus accessible ── */
-:focus-visible { outline: 1.5px solid #C69C3D; outline-offset: 3px; border-radius: 2px; }
+:focus-visible { outline: 1.5px solid #111111; outline-offset: 3px; border-radius: 2px; }
 
 /* ── Snap scroll témoignages ── */
 .snap-testimonials { -webkit-overflow-scrolling: touch; scroll-snap-type: x mandatory; }

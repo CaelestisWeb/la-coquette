@@ -20,7 +20,7 @@ export default function Hero() {
             Des bijoux pensés
             <br className="max-lg:hidden" />
             {' '}pour révéler votre{' '}
-            <em className="italic font-light text-or">élégance</em>
+            <span className="text-taupe">élégance</span>
           </h1>
 
           <p className="font-body text-sm sm:text-base text-taupe leading-relaxed mt-7 max-w-md">
@@ -74,7 +74,7 @@ export default function Hero() {
             />
             <div className="absolute bottom-4 left-4 sm:bottom-6 sm:left-6 bg-blanc/95 backdrop-blur-sm px-4 py-2.5 sm:px-5 sm:py-3">
               <p className="font-body text-[9px] tracking-[0.25em] uppercase text-taupe">Livraison offerte</p>
-              <p className="font-display italic text-lg sm:text-xl text-noir">dès 50 €</p>
+              <p className="font-display text-lg sm:text-xl text-noir">dès 50 €</p>
             </div>
           </div>
         </div>

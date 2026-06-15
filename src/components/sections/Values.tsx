@@ -57,7 +57,7 @@ export default function Values() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-gris/60">
           {values.map((v, i) => (
             <div key={v.title} className={`bg-blanc px-7 py-12 flex flex-col items-center text-center gap-5 group reveal reveal-d${i + 1}`}>
-              <span className="font-display italic text-2xl text-or/70">0{i + 1}</span>
+              <span className="font-body font-light text-sm tracking-[0.2em] text-taupe">0{i + 1}</span>
               <span className="text-or group-hover:scale-110 transition-transform duration-500 ease-out">
                 {v.icon}
               </span>

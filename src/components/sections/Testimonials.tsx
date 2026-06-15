@@ -41,7 +41,7 @@ function Card({ t, className = '' }: { t: Testimonial; className?: string }) {
   return (
     <div className={`bg-blanc flex flex-col gap-5 ${className}`}>
       <Stars n={t.rating} />
-      <p className="font-display italic text-xl text-noir/75 leading-relaxed flex-1">«&nbsp;{t.text}&nbsp;»</p>
+      <p className="font-body font-light text-base text-noir/75 leading-relaxed flex-1">«&nbsp;{t.text}&nbsp;»</p>
       <div className="pt-5 border-t border-gris/70">
         <p className="font-display text-2xl text-noir">{t.name}</p>
         <p className="font-body text-[11px] text-taupe tracking-[0.15em] uppercase mt-0.5">{t.location}</p>

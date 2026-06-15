@@ -23,10 +23,10 @@ export default function About() {
           </div>
           {/* Citation flottante */}
           <div className="absolute z-20 -bottom-5 -right-2 lg:-right-6 bg-noir text-blanc px-7 py-6 max-w-[230px] hidden lg:block">
-            <p className="font-display italic text-2xl leading-snug text-blanc">
+            <p className="font-display font-light text-2xl leading-snug text-blanc">
               «&nbsp;Chaque bijou porte une part de moi.&nbsp;»
             </p>
-            <p className="font-body text-[10px] tracking-[0.25em] uppercase text-or mt-4">Caroline</p>
+            <p className="font-body text-[10px] tracking-[0.25em] uppercase text-blanc/45 mt-4">Caroline</p>
           </div>
         </div>
 
@@ -70,10 +70,10 @@ export default function About() {
 
           {/* Citation — mobile uniquement */}
           <div className="lg:hidden mt-10 bg-noir text-blanc px-7 py-6">
-            <p className="font-display italic text-2xl leading-snug text-blanc">
+            <p className="font-display font-light text-2xl leading-snug text-blanc">
               «&nbsp;Chaque bijou porte une part de moi.&nbsp;»
             </p>
-            <p className="font-body text-[10px] tracking-[0.25em] uppercase text-or mt-4">Caroline</p>
+            <p className="font-body text-[10px] tracking-[0.25em] uppercase text-blanc/45 mt-4">Caroline</p>
           </div>
         </div>
       </div>
