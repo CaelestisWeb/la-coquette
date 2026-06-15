@@ -15,6 +15,7 @@
   --font-display: var(--font-jost);
   --font-body:    var(--font-inter);
   --font-accent:  var(--font-jost);
+  --font-logo:    var(--font-pompiere);
 }
 
 @layer base {

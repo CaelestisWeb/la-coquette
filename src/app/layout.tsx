@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Jost, Inter } from 'next/font/google';
+import { Jost, Inter, Pompiere } from 'next/font/google';
 import './globals.css';
 import { CartProvider } from '@/context/CartContext';
 import Header from '@/components/layout/Header';
@@ -20,6 +20,14 @@ const inter = Inter({
   subsets: ['latin'],
   weight: ['300', '400', '500'],
   variable: '--font-inter',
+  display: 'swap',
+});
+
+// Display décorative — uniquement le wordmark du logo
+const pompiere = Pompiere({
+  subsets: ['latin'],
+  weight: ['400'],
+  variable: '--font-pompiere',
   display: 'swap',
 });
 
@@ -67,7 +75,7 @@ const jsonLd = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="fr" className={`${jost.variable} ${inter.variable}`}>
+    <html lang="fr" className={`${jost.variable} ${inter.variable} ${pompiere.variable}`}>
       <body className="min-h-screen flex flex-col" suppressHydrationWarning>
         <script
           type="application/ld+json"
