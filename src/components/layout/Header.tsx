@@ -1,7 +1,6 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import { useCart } from '@/context/CartContext';
@@ -35,8 +34,10 @@ export default function Header() {
     >
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
 
-        <Link href="/" className="flex-shrink-0">
-          <Image src="/logo.png" alt="La Coquette" height={52} width={160} style={{ height: '52px', width: 'auto' }} />
+        <Link href="/" className="flex-shrink-0" aria-label="La Coquette — accueil">
+          <span className="font-display text-xl sm:text-2xl font-light tracking-[0.28em] uppercase text-noir">
+            La&nbsp;Coquette
+          </span>
         </Link>
 
         {/* Nav desktop */}
