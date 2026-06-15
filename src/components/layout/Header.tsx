@@ -45,8 +45,8 @@ export default function Header() {
             <Link
               key={link.href}
               href={link.href}
-              className={`font-body text-[11px] font-medium tracking-[0.18em] uppercase transition-colors duration-200 ${
-                pathname === link.href ? 'text-or' : 'text-noir hover:text-or'
+              className={`font-body text-[11px] font-normal tracking-[0.2em] uppercase transition-colors duration-300 ${
+                pathname === link.href ? 'text-noir' : 'text-taupe hover:text-noir'
               }`}
             >
               {link.label}
@@ -57,7 +57,7 @@ export default function Header() {
         <div className="flex items-center gap-4">
           <button
             onClick={() => setIsOpen(true)}
-            className="relative p-2 text-noir hover:text-or transition-colors"
+            className="relative p-2 text-noir hover:text-taupe transition-colors"
             aria-label="Ouvrir le panier"
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
@@ -66,7 +66,7 @@ export default function Header() {
               <path d="M16 10a4 4 0 01-8 0"/>
             </svg>
             {count > 0 && (
-              <span className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-or text-blanc text-[9px] font-body font-bold flex items-center justify-center rounded-full">
+              <span className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-noir text-blanc text-[9px] font-body font-medium flex items-center justify-center rounded-full">
                 {count}
               </span>
             )}

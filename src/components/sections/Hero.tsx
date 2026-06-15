@@ -43,7 +43,7 @@ export default function Hero() {
               <div className="flex items-center gap-[3px] h-[1.875rem]">
                 {Array.from({ length: 5 }).map((_, i) => (
                   <svg key={i} width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden>
-                    <path d={STAR_PATH} fill="#C69C3D" stroke="#C69C3D" strokeWidth="0.9" strokeLinejoin="round" />
+                    <path d={STAR_PATH} fill="#111111" stroke="#111111" strokeWidth="0.9" strokeLinejoin="round" />
                   </svg>
                 ))}
               </div>

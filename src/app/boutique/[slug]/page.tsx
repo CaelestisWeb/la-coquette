@@ -105,7 +105,7 @@ export default async function ProductPage({ params }: Props) {
             <ul className="mt-6 space-y-2">
               {['Hypoallergénique', 'Résistant à l\'eau', 'Livraison soignée par La Poste'].map(a => (
                 <li key={a} className="flex items-center gap-2 font-body text-sm text-taupe">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#C69C3D" strokeWidth="2">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#111111" strokeWidth="2">
                     <polyline points="20 6 9 17 4 12"/>
                   </svg>
                   {a}

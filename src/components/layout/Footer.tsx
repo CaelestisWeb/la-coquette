@@ -16,7 +16,7 @@ export default function Footer() {
             href="https://www.instagram.com/lacoquette_bycaro/"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-blanc/50 hover:text-or transition-colors text-sm font-body"
+            className="inline-flex items-center gap-2 text-blanc/50 hover:text-blanc transition-colors text-sm font-body"
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
               <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
@@ -29,7 +29,7 @@ export default function Footer() {
 
         {/* Navigation */}
         <div>
-          <p className="font-body text-[10px] font-semibold tracking-[0.2em] uppercase text-or mb-6">Navigation</p>
+          <p className="font-body text-[10px] font-semibold tracking-[0.2em] uppercase text-blanc/45 mb-6">Navigation</p>
           <ul className="space-y-3">
             {[
               { href: '/', label: 'Accueil' },
@@ -39,7 +39,7 @@ export default function Footer() {
               { href: '/contact', label: 'Contact' },
             ].map(l => (
               <li key={l.href}>
-                <Link href={l.href} className="font-body text-sm text-blanc/50 hover:text-or transition-colors">
+                <Link href={l.href} className="font-body text-sm text-blanc/50 hover:text-blanc transition-colors">
                   {l.label}
                 </Link>
               </li>
@@ -49,17 +49,17 @@ export default function Footer() {
 
         {/* Contact */}
         <div>
-          <p className="font-body text-[10px] font-semibold tracking-[0.2em] uppercase text-or mb-6">Contact</p>
+          <p className="font-body text-[10px] font-semibold tracking-[0.2em] uppercase text-blanc/45 mb-6">Contact</p>
           <ul className="space-y-3">
             <li className="font-body text-sm text-blanc/50">Drôme (26)</li>
             <li>
-              <a href="mailto:contact@lacoquette-bycaro.fr" className="font-body text-sm text-blanc/50 hover:text-or transition-colors">
+              <a href="mailto:contact@lacoquette-bycaro.fr" className="font-body text-sm text-blanc/50 hover:text-blanc transition-colors">
                 contact@lacoquette-bycaro.fr
               </a>
             </li>
           </ul>
           <div className="mt-8">
-            <Link href="/contact" className="inline-flex items-center gap-2 font-body text-xs tracking-widest uppercase text-or border border-or px-5 py-2.5 hover:bg-or hover:text-blanc transition-colors duration-300">
+            <Link href="/contact" className="inline-flex items-center gap-2 font-body text-[11px] tracking-[0.22em] uppercase text-blanc border border-blanc/25 px-6 py-3 hover:bg-blanc hover:text-noir transition-colors duration-500">
               Nous contacter
             </Link>
           </div>

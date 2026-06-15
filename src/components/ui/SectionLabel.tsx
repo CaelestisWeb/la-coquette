@@ -5,17 +5,14 @@ type Props = {
 };
 
 /**
- * Eyebrow éditorial : filet doré + libellé en petites capitales espacées.
- * En version centrée, le filet encadre le texte des deux côtés.
+ * Eyebrow minimaliste : libellé en petites capitales largement espacées.
  */
-export default function SectionLabel({ children, align = 'left', className = '' }: Props) {
+export default function SectionLabel({ children, className = '' }: Props) {
   return (
     <span
-      className={`inline-flex items-center gap-3 font-body text-[10px] font-semibold tracking-[0.28em] uppercase text-or ${className}`}
+      className={`block font-body text-[10px] font-medium tracking-[0.3em] uppercase text-taupe ${className}`}
     >
-      <span className="block w-8 h-px bg-or/55" aria-hidden />
       {children}
-      {align === 'center' && <span className="block w-8 h-px bg-or/55" aria-hidden />}
     </span>
   );
 }

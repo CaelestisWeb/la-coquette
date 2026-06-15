@@ -36,7 +36,7 @@ export default function ContactForm() {
   if (sent) {
     return (
       <div className="bg-blanc p-10 text-center flex flex-col items-center gap-5">
-        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#C69C3D" strokeWidth="1.2">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#111111" strokeWidth="1.2">
           <circle cx="12" cy="12" r="10"/><polyline points="20 6 9 17 4 12"/>
         </svg>
         <h3 className="font-display text-2xl text-noir">Message envoyé !</h3>
