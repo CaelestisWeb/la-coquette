@@ -20,7 +20,7 @@ export default function Footer() {
             alt="La Coquette — Bijoux artisanaux"
             width={639}
             height={321}
-            className="w-52 h-auto"
+            className="w-72 sm:w-[22rem] h-auto"
           />
           <p className="font-body font-light text-sm leading-relaxed text-blanc/55 max-w-sm">
             Des bijoux artisanaux en acier inoxydable, conçus avec passion dans la Drôme
