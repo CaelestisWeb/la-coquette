@@ -27,6 +27,9 @@ export default function Header() {
 
   useEffect(() => { setMenuOpen(false); }, [pathname]);
 
+  // Sur la page d'accueil non scrollée : liens blancs sur la bannière sombre
+  const onDarkHero = pathname === '/' && !scrolled;
+
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-30 transition-all duration-300 ${

@@ -8,6 +8,11 @@ export default function FeaturedProducts() {
     <section className="bg-blanc py-28">
       <div className="max-w-7xl mx-auto px-6">
 
+        {/* Accroche Caroline */}
+        <p className="font-body font-light text-sm sm:text-base text-taupe leading-relaxed max-w-md mb-14 reveal">
+          Créés avec passion par Caroline, chaque bijou La Coquette est façonné en acier inoxydable de qualité, pour vous accompagner du matin au soir avec grâce et confiance.
+        </p>
+
         {/* Titre */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-5 mb-12 sm:mb-16 reveal">
           <div>
