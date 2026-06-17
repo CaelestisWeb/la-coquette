@@ -5,7 +5,7 @@ import { featuredProducts } from '@/data/products';
 
 export default function FeaturedProducts() {
   return (
-    <section className="bg-blanc py-28">
+    <section className="bg-ivoire py-28">
       <div className="max-w-7xl mx-auto px-6">
 
         {/* Titre */}

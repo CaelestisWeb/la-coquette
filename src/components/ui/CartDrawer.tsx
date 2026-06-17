@@ -38,7 +38,7 @@ export default function CartDrawer() {
         aria-modal="true"
         aria-label="Panier"
         aria-hidden={!isOpen}
-        className={`fixed top-0 right-0 h-full w-full max-w-sm bg-blanc z-50 flex flex-col shadow-2xl transition-transform duration-300 ease-in-out ${
+        className={`fixed top-0 right-0 h-full w-full max-w-sm bg-creme z-50 flex flex-col shadow-2xl transition-transform duration-300 ease-in-out ${
           isOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >

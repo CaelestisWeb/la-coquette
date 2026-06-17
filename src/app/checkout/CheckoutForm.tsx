@@ -146,19 +146,19 @@ export default function CheckoutForm() {
                 <div>
                   <label className="font-body text-[10px] tracking-widest uppercase text-taupe block mb-1 text-center">Prénom *</label>
                   <input required value={form.prenom} onChange={e => setForm(f => ({ ...f, prenom: e.target.value }))}
-                    className="w-full border border-gris bg-blanc px-4 py-3 font-body text-sm text-noir outline-none focus:border-noir transition-colors" />
+                    className="w-full border border-gris bg-creme px-4 py-3 font-body text-sm text-noir outline-none focus:border-noir transition-colors" />
                 </div>
                 <div>
                   <label className="font-body text-[10px] tracking-widest uppercase text-taupe block mb-1 text-center">Nom *</label>
                   <input required value={form.nom} onChange={e => setForm(f => ({ ...f, nom: e.target.value }))}
-                    className="w-full border border-gris bg-blanc px-4 py-3 font-body text-sm text-noir outline-none focus:border-noir transition-colors" />
+                    className="w-full border border-gris bg-creme px-4 py-3 font-body text-sm text-noir outline-none focus:border-noir transition-colors" />
                 </div>
               </div>
 
               <div>
                 <label className="font-body text-[10px] tracking-widest uppercase text-taupe block mb-1 text-center">Email *</label>
                 <input required type="email" value={form.email} onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
-                  className="w-full border border-gris bg-blanc px-4 py-3 font-body text-sm text-noir outline-none focus:border-noir transition-colors" />
+                  className="w-full border border-gris bg-creme px-4 py-3 font-body text-sm text-noir outline-none focus:border-noir transition-colors" />
               </div>
 
               {/* Adresse avec autocomplétion */}
@@ -169,9 +169,9 @@ export default function CheckoutForm() {
                   onBlur={() => setTimeout(() => setShowSuggestions(false), 150)}
                   autoComplete="off"
                   placeholder="Commencez à taper votre adresse..."
-                  className="w-full border border-gris bg-blanc px-4 py-3 font-body text-sm text-noir outline-none focus:border-noir transition-colors" />
+                  className="w-full border border-gris bg-creme px-4 py-3 font-body text-sm text-noir outline-none focus:border-noir transition-colors" />
                 {showSuggestions && suggestions.length > 0 && (
-                  <ul className="absolute z-20 w-full bg-blanc border border-gris shadow-md mt-1 max-h-72 overflow-y-auto rounded-md">
+                  <ul className="absolute z-20 w-full bg-creme border border-gris shadow-md mt-1 max-h-72 overflow-y-auto rounded-md">
                     {suggestions.map((s, i) => (
                       <li key={i} onMouseDown={() => selectSuggestion(s)}
                         className="px-4 py-2.5 font-body text-sm text-noir hover:bg-ivoire cursor-pointer border-b border-gris last:border-0">
@@ -186,12 +186,12 @@ export default function CheckoutForm() {
                 <div>
                   <label className="font-body text-[10px] tracking-widest uppercase text-taupe block mb-1 text-center">Code postal *</label>
                   <input required value={form.codePostal} onChange={e => setForm(f => ({ ...f, codePostal: e.target.value }))}
-                    className="w-full border border-gris bg-blanc px-4 py-3 font-body text-sm text-noir outline-none focus:border-noir transition-colors" />
+                    className="w-full border border-gris bg-creme px-4 py-3 font-body text-sm text-noir outline-none focus:border-noir transition-colors" />
                 </div>
                 <div>
                   <label className="font-body text-[10px] tracking-widest uppercase text-taupe block mb-1 text-center">Ville *</label>
                   <input required value={form.ville} onChange={e => setForm(f => ({ ...f, ville: e.target.value }))}
-                    className="w-full border border-gris bg-blanc px-4 py-3 font-body text-sm text-noir outline-none focus:border-noir transition-colors" />
+                    className="w-full border border-gris bg-creme px-4 py-3 font-body text-sm text-noir outline-none focus:border-noir transition-colors" />
                 </div>
               </div>
 

@@ -33,7 +33,7 @@ export default function Header() {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-30 transition-all duration-300 ${
-        scrolled ? 'bg-blanc/95 backdrop-blur-sm shadow-[0_2px_20px_rgba(17,17,17,0.06)]' : 'bg-transparent'
+        scrolled ? 'bg-ivoire/95 backdrop-blur-sm shadow-[0_2px_20px_rgba(17,17,17,0.06)]' : 'bg-transparent'
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 py-4 md:py-5">
@@ -105,7 +105,7 @@ export default function Header() {
       </div>
 
       {/* Menu mobile — slide animé */}
-      <div className={`md:hidden bg-blanc border-t border-gris overflow-hidden transition-all duration-300 ease-in-out ${
+      <div className={`md:hidden bg-ivoire border-t border-gris overflow-hidden transition-all duration-300 ease-in-out ${
         menuOpen ? 'max-h-72 opacity-100' : 'max-h-0 opacity-0 pointer-events-none'
       }`}>
         <nav className="px-6 py-6 flex flex-col gap-5">

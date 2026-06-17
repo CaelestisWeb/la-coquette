@@ -17,7 +17,7 @@ export default function ProductCard({ product }: { product: Product }) {
   const catLabel = categoryLabels[product.category];
 
   return (
-    <Link href={`/boutique/${product.slug}`} className="group block bg-blanc overflow-hidden">
+    <Link href={`/boutique/${product.slug}`} className="group block bg-creme overflow-hidden">
 
       {/* Image */}
       <div className="relative aspect-square overflow-hidden bg-beige rounded-md">
@@ -32,7 +32,7 @@ export default function ProductCard({ product }: { product: Product }) {
         <div className="absolute inset-0 bg-noir/0 group-hover:bg-noir/10 transition-all duration-300 hidden sm:flex items-end justify-center pb-4 opacity-0 group-hover:opacity-100">
           <button
             onClick={handleAdd}
-            className="bg-blanc text-noir text-[10px] font-body font-semibold tracking-widest uppercase px-6 py-2.5 hover:bg-or hover:text-blanc transition-colors duration-200"
+            className="bg-creme text-noir text-[10px] font-body font-semibold tracking-widest uppercase px-6 py-2.5 hover:bg-or hover:text-blanc transition-colors duration-200"
           >
             Ajouter au panier
           </button>

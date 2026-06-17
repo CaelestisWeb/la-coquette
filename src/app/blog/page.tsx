@@ -31,7 +31,7 @@ export default function BlogPage() {
       </div>
 
       <div className="max-w-4xl mx-auto px-6 py-16">
-        <Link href={`/blog/${article.slug}`} className="group block bg-blanc overflow-hidden rounded-lg">
+        <Link href={`/blog/${article.slug}`} className="group block bg-creme overflow-hidden rounded-lg">
           <div className="relative aspect-[16/9] overflow-hidden">
             <Image
               src={article.image}

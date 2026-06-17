@@ -39,7 +39,7 @@ type Testimonial = (typeof testimonials)[0];
 
 function Card({ t, className = '' }: { t: Testimonial; className?: string }) {
   return (
-    <div className={`bg-blanc rounded-lg flex flex-col items-center text-center gap-5 ${className}`}>
+    <div className={`bg-creme rounded-lg flex flex-col items-center text-center gap-5 ${className}`}>
       <Stars n={t.rating} />
       <p className="font-body font-light text-base text-noir/75 leading-relaxed flex-1">«&nbsp;{t.text}&nbsp;»</p>
       <div className="pt-5 border-t border-gris/70 w-full">

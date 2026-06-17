@@ -29,7 +29,7 @@ export default function Hero() {
         </h1>
 
         <div className="flex flex-wrap justify-center gap-3 mt-8">
-          <Button href="/boutique" variant="primary" className="!bg-blanc !text-noir hover:!bg-gris !px-6 !py-3 !text-[10px]">
+          <Button href="/boutique" variant="primary" className="!bg-creme !text-noir hover:!bg-gris !px-6 !py-3 !text-[10px]">
             Découvrir la boutique
           </Button>
           <Button href="/contact" variant="secondary" className="!border-blanc/40 !text-blanc hover:!border-blanc !px-6 !py-3 !text-[10px]">
