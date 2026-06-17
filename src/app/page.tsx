@@ -1,4 +1,5 @@
 import Hero from '@/components/sections/Hero';
+import Reassurance from '@/components/sections/Reassurance';
 import FeaturedProducts from '@/components/sections/FeaturedProducts';
 import Values from '@/components/sections/Values';
 import Testimonials from '@/components/sections/Testimonials';
@@ -8,6 +9,7 @@ export default function HomePage() {
   return (
     <>
       <Hero />
+      <Reassurance />
       <FeaturedProducts />
       <Values />
       <Testimonials />

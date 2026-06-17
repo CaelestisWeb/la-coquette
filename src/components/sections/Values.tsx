@@ -42,7 +42,7 @@ const values = [
 
 export default function Values() {
   return (
-    <section className="bg-blanc py-32">
+    <section className="bg-ivoire py-32">
       <div className="max-w-7xl mx-auto px-6">
 
         {/* Titre */}
