@@ -1,84 +1,87 @@
 import Image from 'next/image';
 import Button from '@/components/ui/Button';
-import SectionLabel from '@/components/ui/SectionLabel';
 
 const STAR_PATH = 'M8,1.5 L9.5,5.9 L14.2,6 L10.5,8.8 L11.8,13.3 L8,10.6 L4.2,13.3 L5.5,8.8 L1.8,6 L6.5,5.9Z';
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen bg-ivoire pt-20 flex items-center overflow-hidden">
-      {/* Halo chaud très diffus en fond */}
-      <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-rose opacity-30 blur-3xl pointer-events-none" />
+    <section className="relative min-h-screen overflow-hidden flex items-center">
 
-      <div className="relative max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-24 items-center py-12 lg:py-20">
+      {/* Image de fond plein écran */}
+      <Image
+        src="/hero-banner.jpg"
+        alt="Bijou artisanal La Coquette — créole dorée sur pierre"
+        fill
+        priority
+        className="object-cover object-[38%_50%]"
+        sizes="100vw"
+      />
 
-        {/* Texte */}
-        <div className="animate-fadein">
-          <SectionLabel>Bijoux artisanaux · Drôme</SectionLabel>
+      {/* Voile dégradé gauche → droite pour la lisibilité du texte */}
+      <div className="absolute inset-0 bg-gradient-to-r from-noir/80 via-noir/45 to-noir/0 pointer-events-none" />
+      {/* Voile bas → haut léger */}
+      <div className="absolute inset-0 bg-gradient-to-t from-noir/50 via-transparent to-noir/20 pointer-events-none" />
 
-          <h1 className="font-display text-5xl sm:text-6xl lg:text-[5.25rem] text-noir mt-7 leading-[1.04]">
-            Des bijoux pensés
-            <br className="max-lg:hidden" />
-            {' '}pour révéler votre{' '}
-            <span className="text-taupe">élégance</span>
-          </h1>
+      {/* Contenu */}
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 pt-28 pb-20">
+        <div className="max-w-xl">
 
-          <p className="font-body text-sm sm:text-base text-taupe leading-relaxed mt-7 max-w-md">
-            Créés avec passion par Caroline, chaque bijou La Coquette est façonné en acier inoxydable de qualité, pour vous accompagner du matin au soir avec grâce et confiance.
+          {/* Eyebrow */}
+          <p className="font-body text-[10px] font-medium tracking-[0.34em] uppercase text-blanc/65">
+            Bijoux artisanaux · Drôme
           </p>
 
+          {/* Titre */}
+          <h1 className="font-display font-light text-5xl sm:text-6xl lg:text-[5.5rem] text-blanc mt-6 leading-[1.02]">
+            Des bijoux pensés<br />
+            pour révéler<br />
+            votre <span className="text-blanc/70">élégance</span>
+          </h1>
+
+          {/* Sous-titre */}
+          <p className="font-body font-light text-sm sm:text-base text-blanc/65 leading-relaxed mt-7 max-w-sm">
+            Créés avec passion par Caroline, chaque bijou La Coquette est façonné en acier inoxydable de qualité, pour vous accompagner avec grâce au quotidien.
+          </p>
+
+          {/* CTA — variantes adaptées au fond sombre */}
+          <div className="flex flex-wrap gap-3 mt-10">
+            <Button href="/boutique" variant="primary" size="lg" className="!bg-blanc !text-noir hover:!bg-gris">
+              Découvrir la boutique
+            </Button>
+            <Button href="/contact" variant="secondary" size="lg" className="!border-blanc/40 !text-blanc hover:!border-blanc hover:!text-blanc">
+              Prendre contact
+            </Button>
+          </div>
+
           {/* Stats */}
-          <div className="flex items-stretch gap-5 sm:gap-8 mt-9 pt-9 border-t border-gris">
+          <div className="flex items-stretch gap-5 sm:gap-8 mt-12 pt-8 border-t border-blanc/20">
             <div>
-              <p className="font-display text-3xl text-noir leading-none">10+</p>
-              <p className="font-body text-[10px] text-taupe tracking-[0.15em] uppercase mt-2">Créations</p>
+              <p className="font-display text-3xl text-blanc leading-none">10+</p>
+              <p className="font-body text-[10px] text-blanc/55 tracking-[0.15em] uppercase mt-2">Créations</p>
             </div>
-            <div className="w-px bg-gris" aria-hidden />
+            <div className="w-px bg-blanc/20" aria-hidden />
             <div>
-              <p className="font-display text-3xl text-noir leading-none">100%</p>
-              <p className="font-body text-[10px] text-taupe tracking-[0.15em] uppercase mt-2">Acier inox.</p>
+              <p className="font-display text-3xl text-blanc leading-none">100%</p>
+              <p className="font-body text-[10px] text-blanc/55 tracking-[0.15em] uppercase mt-2">Acier inox.</p>
             </div>
-            <div className="w-px bg-gris" aria-hidden />
+            <div className="w-px bg-blanc/20" aria-hidden />
             <div>
               <div className="flex items-center gap-[3px] h-[1.875rem]">
                 {Array.from({ length: 5 }).map((_, i) => (
                   <svg key={i} width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden>
-                    <path d={STAR_PATH} fill="#111111" stroke="#111111" strokeWidth="0.9" strokeLinejoin="round" />
+                    <path d={STAR_PATH} fill="#FFFFFF" stroke="#FFFFFF" strokeWidth="0.9" strokeLinejoin="round" />
                   </svg>
                 ))}
               </div>
-              <p className="font-body text-[10px] text-taupe tracking-[0.15em] uppercase mt-2">Avis clients</p>
-            </div>
-          </div>
-
-          {/* CTA */}
-          <div className="flex flex-wrap gap-3 mt-9">
-            <Button href="/boutique" variant="primary" size="lg">Découvrir la boutique</Button>
-            <Button href="/contact" variant="secondary" size="lg">Prendre contact</Button>
-          </div>
-        </div>
-
-        {/* Image — cadre épuré, filet doré fin */}
-        <div className="relative mx-auto lg:ml-auto w-full max-w-[300px] sm:max-w-sm lg:max-w-md p-3 sm:p-4">
-          {/* Filet doré encadrant, décalé */}
-          <div className="absolute inset-0 border border-or/30 translate-x-2 translate-y-2 sm:translate-x-3 sm:translate-y-3 pointer-events-none" />
-
-          <div className="relative z-10 aspect-[4/5] w-full overflow-hidden">
-            <Image
-              src="/boucles-placeholder.jpg"
-              alt="Boucles d'oreilles artisanales La Coquette"
-              fill
-              priority
-              className="object-cover"
-              sizes="(max-width: 640px) 75vw, (max-width: 1024px) 45vw, 40vw"
-            />
-            <div className="absolute bottom-4 left-4 sm:bottom-6 sm:left-6 bg-blanc/95 backdrop-blur-sm px-4 py-2.5 sm:px-5 sm:py-3">
-              <p className="font-body text-[9px] tracking-[0.25em] uppercase text-taupe">Livraison offerte</p>
-              <p className="font-display text-lg sm:text-xl text-noir">dès 50 €</p>
+              <p className="font-body text-[10px] text-blanc/55 tracking-[0.15em] uppercase mt-2">Avis clients</p>
             </div>
           </div>
         </div>
+      </div>
 
+      {/* Indicateur de scroll */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-10">
+        <div className="w-px h-10 bg-blanc/30 animate-pulse" />
       </div>
     </section>
   );
