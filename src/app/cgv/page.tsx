@@ -60,13 +60,13 @@ export default function CGVPage() {
           <section>
             <h2 className="font-display text-2xl text-noir mb-4">8. Droit de rétractation</h2>
             <p>Conformément aux articles L221-18 et suivants du Code de la consommation, le Client dispose d'un délai de <strong className="text-noir font-medium">14 jours</strong> à compter de la réception de sa commande pour exercer son droit de rétractation, sans avoir à justifier de motif.</p>
-            <p className="mt-3">Pour l'exercer, il suffit d'en informer La Coquette par email à contact@lacoquette-bycaro.fr. Le produit doit être retourné dans son état d'origine, non porté, dans les 14 jours suivant la demande. Les frais de retour sont à la charge du Client. Le remboursement intervient dans les 14 jours suivant la réception du produit retourné.</p>
+            <p className="mt-3">Pour l'exercer, il suffit d'en informer La Coquette par email à contact@lacoquette-bycaro.fr avant l'expiration du délai (un modèle de formulaire de rétractation est disponible sur simple demande). Le produit doit être retourné dans son état d'origine, non porté, dans les 14 jours suivant la demande. Les frais de retour sont à la charge du Client. Le remboursement de la totalité des sommes versées (frais de livraison standard inclus) intervient dans les 14 jours suivant la récupération du produit, via le même moyen de paiement que celui utilisé lors de la commande.</p>
             <p className="mt-3"><strong className="text-noir font-medium">Exception :</strong> conformément à l'article L221-28 du Code de la consommation, le droit de rétractation ne s'applique pas aux bijoux personnalisés ou confectionnés sur mesure selon les spécifications du Client.</p>
           </section>
 
           <section>
             <h2 className="font-display text-2xl text-noir mb-4">9. Garanties légales</h2>
-            <p>Tous les produits bénéficient de la garantie légale de conformité (articles L217-3 et suivants du Code de la consommation) et de la garantie contre les vices cachés (articles 1641 et suivants du Code civil). En cas de produit non conforme ou défectueux, le Client peut contacter La Coquette à contact@lacoquette-bycaro.fr.</p>
+            <p>Indépendamment du droit de rétractation, tous les produits bénéficient de la <strong className="text-noir font-medium">garantie légale de conformité</strong> (articles L217-3 et suivants du Code de la consommation), d'une durée de 2 ans à compter de la délivrance du bien, ainsi que de la <strong className="text-noir font-medium">garantie contre les vices cachés</strong> (articles 1641 et suivants du Code civil). En cas de produit non conforme ou défectueux, le Client peut contacter La Coquette à contact@lacoquette-bycaro.fr afin d'obtenir la réparation, le remplacement ou le remboursement du produit.</p>
           </section>
 
           <section>
