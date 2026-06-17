@@ -3,9 +3,10 @@
 @theme {
   /* ── Palette monochrome — luxe minimaliste ── */
   --color-noir:    #111111;   /* presque-noir */
-  --color-blanc:   #FFFFFF;
-  --color-ivoire:  #FAF8F6;   /* blanc chaud — fond principal */
-  --color-beige:   #F2EEE9;   /* panneau clair subtil */
+  --color-blanc:   #FFFFFF;   /* blanc pur — réservé au texte sur fonds sombres */
+  --color-creme:   #FBF8F3;   /* crème chaud — surfaces & cartes (remplace le blanc) */
+  --color-ivoire:  #F4EEE5;   /* sable crème — fond principal */
+  --color-beige:   #F0EBE2;   /* panneau clair subtil */
   --color-rose:    #ECE7E1;   /* grège chaud (remplace le rose) */
   --color-gris:    #DCD7D1;   /* filets, bordures */
   --color-taupe:   #8E867D;   /* texte secondaire, labels */
@@ -25,7 +26,7 @@
   html {
     font-family: var(--font-body), system-ui, sans-serif;
     color: #111111;
-    background-color: #FAF8F6;
+    background-color: #F4EEE5;
     -webkit-font-smoothing: antialiased;
     scroll-behavior: smooth;
   }
