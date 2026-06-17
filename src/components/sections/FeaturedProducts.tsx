@@ -8,22 +8,15 @@ export default function FeaturedProducts() {
     <section className="bg-blanc py-28">
       <div className="max-w-7xl mx-auto px-6">
 
-        {/* Accroche Caro */}
-        <p className="font-body font-light text-sm sm:text-base text-taupe leading-relaxed max-w-md mb-14 reveal">
-          Créés avec passion par Caro, chaque bijou La Coquette est façonné en acier inoxydable de qualité, pour vous accompagner du matin au soir avec grâce et confiance.
-        </p>
-
         {/* Titre */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-5 mb-12 sm:mb-16 reveal">
-          <div>
-            <SectionLabel>Sélection</SectionLabel>
-            <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl text-noir mt-3">
-              Nos créations
-            </h2>
-          </div>
-          <Button href="/boutique" variant="ghost">
-            Voir toute la boutique →
-          </Button>
+        <div className="text-center mb-12 sm:mb-16 reveal">
+          <SectionLabel align="center">Sélection</SectionLabel>
+          <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl text-noir mt-3">
+            Nos créations
+          </h2>
+          <p className="font-body font-light text-sm sm:text-base text-taupe leading-relaxed max-w-xl mx-auto mt-5">
+            Créés avec passion par Caro, chaque bijou La Coquette est façonné en acier inoxydable de qualité, pour vous accompagner du matin au soir avec grâce et confiance.
+          </p>
         </div>
 
         {/* Grille */}
@@ -31,6 +24,13 @@ export default function FeaturedProducts() {
           {featuredProducts.map(product => (
             <ProductCard key={product.id} product={product} />
           ))}
+        </div>
+
+        {/* Lien boutique */}
+        <div className="text-center mt-14 reveal">
+          <Button href="/boutique" variant="ghost">
+            Voir toute la boutique →
+          </Button>
         </div>
       </div>
     </section>

@@ -40,23 +40,21 @@ export default function ProductCard({ product }: { product: Product }) {
       </div>
 
       {/* Infos */}
-      <div className="p-3 sm:p-4">
+      <div className="p-3 sm:p-4 text-center">
         <p className="text-[9px] sm:text-[10px] font-body font-medium tracking-[0.15em] uppercase text-taupe mb-1">
           {catLabel}
         </p>
         <h3 className="font-display text-base sm:text-lg text-noir group-hover:text-or transition-colors duration-200 leading-snug">
           {product.name}
         </h3>
-        <div className="flex items-center justify-between mt-1.5">
-          <p className="font-body text-sm text-taupe">{product.price} €</p>
-          {/* Bouton panier — mobile uniquement */}
-          <button
-            onClick={handleAdd}
-            className="sm:hidden text-[9px] font-body tracking-wide uppercase py-1.5 px-3 border border-gris text-taupe hover:border-or hover:text-or active:bg-or active:text-blanc active:border-or transition-colors duration-150"
-          >
-            + Panier
-          </button>
-        </div>
+        <p className="font-body text-sm text-taupe mt-1.5">{product.price} €</p>
+        {/* Bouton panier — mobile uniquement */}
+        <button
+          onClick={handleAdd}
+          className="sm:hidden mt-3 text-[9px] font-body tracking-wide uppercase py-1.5 px-4 border border-gris text-taupe rounded hover:border-or hover:text-or active:bg-or active:text-blanc active:border-or transition-colors duration-150"
+        >
+          + Panier
+        </button>
       </div>
 
     </Link>
