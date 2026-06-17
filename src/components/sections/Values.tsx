@@ -46,23 +46,30 @@ export default function Values() {
       <div className="max-w-7xl mx-auto px-6">
 
         {/* Titre */}
-        <div className="text-center mb-16 reveal">
+        <div className="text-center mb-16 sm:mb-20 reveal">
           <SectionLabel align="center">Ce qui nous anime</SectionLabel>
           <h2 className="font-display text-5xl sm:text-6xl text-noir mt-3">
             Nos valeurs
           </h2>
         </div>
 
-        {/* Grid — minimalisme aéré, séparateurs en filet */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-gris/60">
+        {/* Colonnes aérées séparées par de fins filets verticaux */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-y-16 lg:gap-y-0">
           {values.map((v, i) => (
-            <div key={v.title} className={`bg-creme px-7 py-12 flex flex-col items-center text-center gap-5 group reveal reveal-d${i + 1}`}>
-              <span className="font-body font-light text-sm tracking-[0.2em] text-taupe">0{i + 1}</span>
-              <span className="text-or group-hover:scale-110 transition-transform duration-500 ease-out">
+            <div
+              key={v.title}
+              className={`group px-6 lg:px-10 flex flex-col items-center text-center reveal reveal-d${i + 1} ${i > 0 ? 'lg:border-l border-gris/70' : ''}`}
+            >
+              <span className="font-body text-[11px] font-medium tracking-[0.35em] text-dore">
+                0{i + 1}
+              </span>
+              <span className="mt-7 w-16 h-16 rounded-full border border-gris flex items-center justify-center text-noir transition-colors duration-500 group-hover:border-dore group-hover:text-dore">
                 {v.icon}
               </span>
-              <h3 className="font-display text-3xl text-noir">{v.title}</h3>
-              <p className="font-body text-sm text-taupe leading-relaxed">{v.text}</p>
+              <h3 className="font-display text-2xl sm:text-3xl text-noir mt-7">{v.title}</h3>
+              <p className="font-body font-light text-sm text-taupe leading-relaxed mt-4 max-w-[15rem]">
+                {v.text}
+              </p>
             </div>
           ))}
         </div>
