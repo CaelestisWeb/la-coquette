@@ -23,11 +23,13 @@ export default function CGVPage() {
 
           <section>
             <h2 className="font-display text-2xl text-noir mb-4">2. Vendeur</h2>
-            <p><strong className="text-noir font-medium">La Coquette</strong> — Caro<br />
-            Entreprise individuelle (auto-entrepreneur)<br />
-            SIRET : 479 539 082 00095<br />
-            Drôme (26), France<br />
-            Email : contact@lacoquette-bycaro.fr</p>
+            <p><strong className="text-noir font-medium">La Coquette</strong><br />
+            Entreprise individuelle DESHAYES CAROLINE — micro-entreprise<br />
+            SIREN : 479 539 082 — SIRET : 479 539 082 00095<br />
+            RCS : 479 539 082 R.C.S. Romans<br />
+            N° TVA intracommunautaire : FR73479539082<br />
+            Activité : fabrication de bijoux fantaisie ; création et mise en place d'activités et d'événements pour dynamiser les ventes et fidéliser la clientèle.<br />
+            Contact : contact@lacoquette-bycaro.fr</p>
           </section>
 
           <section>
