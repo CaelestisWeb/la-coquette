@@ -3,9 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useCart } from '@/context/CartContext';
 import { useRouter } from 'next/navigation';
-
-const SHIPPING_THRESHOLD = 50;
-const SHIPPING_COST = 2.99;
+import { SHIPPING_THRESHOLD, SHIPPING_COST } from '@/lib/shipping';
 
 type AddressSuggestion = {
   label: string;
@@ -34,20 +32,28 @@ export default function CheckoutForm() {
   const sumupRef = useRef<HTMLDivElement>(null);
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  // Autocomplétion adresse française
+  // Autocomplétion adresse française (API officielle data.gouv — toute la France)
   async function searchAddress(query: string) {
-    if (query.length < 3) { setSuggestions([]); return; }
-    const res = await fetch(`https://api-adresse.data.gouv.fr/search/?q=${encodeURIComponent(query)}&limit=5&type=housenumber`);
-    const data = await res.json();
-    const results: AddressSuggestion[] = data.features.map((f: any) => ({
-      label: f.properties.label,
-      postcode: f.properties.postcode,
-      city: f.properties.city,
-      housenumber: f.properties.housenumber || '',
-      street: f.properties.street || '',
-    }));
-    setSuggestions(results);
-    setShowSuggestions(true);
+    if (query.trim().length < 3) { setSuggestions([]); setShowSuggestions(false); return; }
+    try {
+      const res = await fetch(
+        `https://api-adresse.data.gouv.fr/search/?q=${encodeURIComponent(query)}&limit=6&autocomplete=1`
+      );
+      if (!res.ok) return;
+      const data = await res.json();
+      const results: AddressSuggestion[] = (data.features ?? []).map((f: any) => ({
+        label: f.properties.label,
+        postcode: f.properties.postcode ?? '',
+        city: f.properties.city ?? '',
+        housenumber: f.properties.housenumber ?? '',
+        street: f.properties.street ?? f.properties.name ?? '',
+      }));
+      setSuggestions(results);
+      setShowSuggestions(results.length > 0);
+    } catch {
+      setSuggestions([]);
+      setShowSuggestions(false);
+    }
   }
 
   function handleAddressInput(value: string) {
@@ -159,15 +165,17 @@ export default function CheckoutForm() {
               <div className="relative">
                 <label className="font-body text-[10px] tracking-widest uppercase text-taupe block mb-1">Adresse *</label>
                 <input required value={form.adresse} onChange={e => handleAddressInput(e.target.value)}
+                  onFocus={() => { if (suggestions.length > 0) setShowSuggestions(true); }}
                   onBlur={() => setTimeout(() => setShowSuggestions(false), 150)}
+                  autoComplete="off"
                   placeholder="Commencez à taper votre adresse..."
                   className="w-full border border-gris bg-blanc px-4 py-3 font-body text-sm text-noir outline-none focus:border-noir transition-colors" />
                 {showSuggestions && suggestions.length > 0 && (
-                  <ul className="absolute z-10 w-full bg-blanc border border-gris shadow-md mt-1">
+                  <ul className="absolute z-20 w-full bg-blanc border border-gris shadow-md mt-1 max-h-72 overflow-y-auto">
                     {suggestions.map((s, i) => (
                       <li key={i} onMouseDown={() => selectSuggestion(s)}
-                        className="px-4 py-3 font-body text-sm text-noir hover:bg-ivoire cursor-pointer border-b border-gris last:border-0">
-                        {s.label}
+                        className="px-4 py-2.5 font-body text-sm text-noir hover:bg-ivoire cursor-pointer border-b border-gris last:border-0">
+                        <span className="block">{s.label}</span>
                       </li>
                     ))}
                   </ul>

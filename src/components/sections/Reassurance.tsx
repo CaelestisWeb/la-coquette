@@ -1,3 +1,5 @@
+import { SHIPPING_THRESHOLD } from '@/lib/shipping';
+
 const items = [
   {
     icon: (
@@ -9,7 +11,7 @@ const items = [
       </svg>
     ),
     title: 'Livraison offerte',
-    text: 'Dès 50 € d\'achat en France',
+    text: `Dès ${SHIPPING_THRESHOLD} € d'achat en France`,
   },
   {
     icon: (

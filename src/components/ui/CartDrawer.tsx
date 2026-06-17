@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect } from 'react';
 import { useCart } from '@/context/CartContext';
+import { SHIPPING_THRESHOLD, SHIPPING_COST } from '@/lib/shipping';
 
 export default function CartDrawer() {
   const { items, removeItem, updateQty, total, count, isOpen, setIsOpen } = useCart();
@@ -120,8 +121,6 @@ export default function CartDrawer() {
 
         {/* Pied */}
         {items.length > 0 && (() => {
-          const SHIPPING_THRESHOLD = 50;
-          const SHIPPING_COST = 2.99;
           const isFree = total >= SHIPPING_THRESHOLD;
           const shipping = isFree ? 0 : SHIPPING_COST;
           const remaining = SHIPPING_THRESHOLD - total;
