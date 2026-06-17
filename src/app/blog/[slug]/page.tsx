@@ -50,7 +50,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
             L'histoire de La Coquette
           </h1>
 
-          <div className="relative aspect-[16/10] w-full overflow-hidden mt-12">
+          <div className="relative aspect-[16/10] w-full overflow-hidden mt-12 rounded-lg">
             <Image
               src="/boucles-placeholder.jpg"
               alt="Création artisanale La Coquette par Caro"
@@ -97,10 +97,10 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
           </ul>
 
           <div className="mt-14 flex flex-wrap gap-3">
-            <Link href="/boutique" className="inline-flex items-center font-body text-[11px] tracking-[0.22em] uppercase bg-noir text-blanc px-8 py-4 hover:bg-taupe transition-colors duration-500">
+            <Link href="/boutique" className="inline-flex items-center font-body text-[11px] tracking-[0.22em] uppercase bg-noir text-blanc px-8 py-4 rounded hover:bg-taupe transition-colors duration-500">
               Découvrir les créations
             </Link>
-            <Link href="/contact" className="inline-flex items-center font-body text-[11px] tracking-[0.22em] uppercase border border-noir/25 text-noir px-8 py-4 hover:border-noir transition-colors duration-500">
+            <Link href="/contact" className="inline-flex items-center font-body text-[11px] tracking-[0.22em] uppercase border border-noir/25 text-noir px-8 py-4 rounded hover:border-noir transition-colors duration-500">
               Contacter Caro
             </Link>
           </div>
@@ -126,10 +126,10 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         </div>
 
         <div className="mt-12 flex gap-4">
-          <Link href="/boutique" className="inline-flex items-center font-body text-[11px] tracking-[0.22em] uppercase bg-noir text-blanc px-7 py-3.5 hover:bg-taupe transition-colors duration-500">
+          <Link href="/boutique" className="inline-flex items-center font-body text-[11px] tracking-[0.22em] uppercase bg-noir text-blanc px-7 py-3.5 rounded hover:bg-taupe transition-colors duration-500">
             Voir la boutique
           </Link>
-          <Link href="/blog" className="inline-flex items-center font-body text-[11px] tracking-[0.22em] uppercase border border-noir/25 text-noir px-7 py-3.5 hover:border-noir transition-colors duration-500">
+          <Link href="/blog" className="inline-flex items-center font-body text-[11px] tracking-[0.22em] uppercase border border-noir/25 text-noir px-7 py-3.5 rounded hover:border-noir transition-colors duration-500">
             Retour au journal
           </Link>
         </div>

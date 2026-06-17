@@ -35,7 +35,7 @@ export default function ContactForm() {
 
   if (sent) {
     return (
-      <div className="bg-blanc p-10 text-center flex flex-col items-center gap-5">
+      <div className="bg-blanc p-10 text-center flex flex-col items-center gap-5 rounded-lg">
         <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#111111" strokeWidth="1.2">
           <circle cx="12" cy="12" r="10"/><polyline points="20 6 9 17 4 12"/>
         </svg>
@@ -46,7 +46,7 @@ export default function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="bg-blanc p-8 space-y-5">
+    <form onSubmit={handleSubmit} className="bg-blanc p-8 space-y-5 rounded-lg">
       <h2 className="font-display text-2xl text-noir mb-6">Envoyer un message</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>

@@ -11,7 +11,7 @@ type ButtonProps = {
   disabled?: boolean;
 };
 
-const base = 'inline-flex items-center justify-center font-body font-normal tracking-[0.22em] text-[11px] uppercase transition-colors duration-500 cursor-pointer';
+const base = 'inline-flex items-center justify-center font-body font-normal tracking-[0.22em] text-[11px] uppercase transition-colors duration-500 cursor-pointer rounded';
 
 const variants = {
   primary:   'bg-noir text-blanc px-9 py-4 hover:bg-or',

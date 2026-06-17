@@ -53,7 +53,7 @@ export default function Footer() {
         <div className="mt-9 flex flex-col sm:flex-row items-center gap-5">
           <Link
             href="/contact"
-            className="inline-flex items-center font-body text-[11px] tracking-[0.22em] uppercase text-blanc border border-blanc/25 px-7 py-3.5 hover:bg-blanc hover:text-noir transition-colors duration-500"
+            className="inline-flex items-center font-body text-[11px] tracking-[0.22em] uppercase text-blanc border border-blanc/25 px-7 py-3.5 rounded hover:bg-blanc hover:text-noir transition-colors duration-500"
           >
             Nous contacter
           </Link>

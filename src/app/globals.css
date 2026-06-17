@@ -51,6 +51,9 @@
   }
 
   img { display: block; max-width: 100%; }
+
+  /* Arrondi léger par défaut sur les champs de formulaire */
+  input, textarea, select, button { border-radius: 4px; }
 }
 
 @keyframes fadeUp {

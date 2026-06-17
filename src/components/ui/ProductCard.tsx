@@ -20,7 +20,7 @@ export default function ProductCard({ product }: { product: Product }) {
     <Link href={`/boutique/${product.slug}`} className="group block bg-blanc overflow-hidden">
 
       {/* Image */}
-      <div className="relative aspect-square overflow-hidden bg-beige">
+      <div className="relative aspect-square overflow-hidden bg-beige rounded-md">
         <Image
           src={product.image}
           alt={product.name}

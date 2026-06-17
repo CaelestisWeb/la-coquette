@@ -63,7 +63,7 @@ export default function ContactPage() {
               </li>
             ))}
           </ul>
-          <div className="mt-10 p-6 bg-beige">
+          <div className="mt-10 p-6 bg-beige rounded-lg">
             <p className="font-body text-xs text-taupe leading-relaxed">
               <strong className="text-noir font-medium">Horaires :</strong><br />
               Du lundi au vendredi, de 9h à 18h.<br />

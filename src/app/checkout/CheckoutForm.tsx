@@ -171,7 +171,7 @@ export default function CheckoutForm() {
                   placeholder="Commencez à taper votre adresse..."
                   className="w-full border border-gris bg-blanc px-4 py-3 font-body text-sm text-noir outline-none focus:border-noir transition-colors" />
                 {showSuggestions && suggestions.length > 0 && (
-                  <ul className="absolute z-20 w-full bg-blanc border border-gris shadow-md mt-1 max-h-72 overflow-y-auto">
+                  <ul className="absolute z-20 w-full bg-blanc border border-gris shadow-md mt-1 max-h-72 overflow-y-auto rounded-md">
                     {suggestions.map((s, i) => (
                       <li key={i} onMouseDown={() => selectSuggestion(s)}
                         className="px-4 py-2.5 font-body text-sm text-noir hover:bg-ivoire cursor-pointer border-b border-gris last:border-0">
@@ -198,7 +198,7 @@ export default function CheckoutForm() {
               {error && <p className="font-body text-sm text-red-500">{error}</p>}
 
               <button type="submit" disabled={loading}
-                className="w-full bg-noir text-blanc font-body text-xs font-medium tracking-widest uppercase py-4 hover:bg-or transition-colors duration-300 disabled:opacity-50">
+                className="w-full bg-noir text-blanc font-body text-xs font-medium tracking-widest uppercase py-4 rounded hover:bg-or transition-colors duration-300 disabled:opacity-50">
                 {loading ? 'Chargement...' : 'Continuer vers le paiement →'}
               </button>
             </form>
@@ -216,7 +216,7 @@ export default function CheckoutForm() {
       </div>
 
       {/* Colonne droite — récapitulatif */}
-      <div className="bg-ivoire p-8 h-fit">
+      <div className="bg-ivoire p-8 h-fit rounded-lg">
         <h3 className="font-display text-2xl text-noir mb-6">Récapitulatif</h3>
         <ul className="space-y-4 mb-6">
           {items.map(item => (

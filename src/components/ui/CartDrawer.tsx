@@ -82,7 +82,7 @@ export default function CartDrawer() {
             <ul className="space-y-5">
               {items.map(item => (
                 <li key={item.id} className="flex gap-4">
-                  <div className="relative w-20 h-20 flex-shrink-0 bg-beige overflow-hidden">
+                  <div className="relative w-20 h-20 flex-shrink-0 bg-beige overflow-hidden rounded-md">
                     <Image src={item.image} alt={item.name} fill className="object-cover" />
                   </div>
                   <div className="flex-1 min-w-0">
@@ -172,7 +172,7 @@ export default function CartDrawer() {
               </div>
 
               <Link href="/checkout" onClick={() => setIsOpen(false)}
-                className="block w-full bg-noir text-blanc font-body font-medium tracking-widest text-xs uppercase py-4 hover:bg-or transition-colors duration-300 text-center">
+                className="block w-full bg-noir text-blanc font-body font-medium tracking-widest text-xs uppercase py-4 rounded hover:bg-or transition-colors duration-300 text-center">
                 Commander
               </Link>
             </div>

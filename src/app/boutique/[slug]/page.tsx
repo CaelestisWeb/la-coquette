@@ -71,7 +71,7 @@ export default async function ProductPage({ params }: Props) {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
 
           {/* Image */}
-          <div className="aspect-square relative overflow-hidden bg-beige">
+          <div className="aspect-square relative overflow-hidden bg-beige rounded-lg">
             <Image
               src={product.image}
               alt={product.name}
@@ -120,7 +120,7 @@ export default async function ProductPage({ params }: Props) {
             </div>
 
             {/* Livraison */}
-            <div className="mt-6 p-4 bg-beige flex items-start gap-3">
+            <div className="mt-6 p-4 bg-beige flex items-start gap-3 rounded-lg">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#111111" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" className="flex-shrink-0 mt-0.5" aria-hidden>
                 <rect x="1" y="6" width="13" height="11" rx="1" />
                 <path d="M14 9h4l3 3v5h-7z" />
