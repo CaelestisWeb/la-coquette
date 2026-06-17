@@ -21,7 +21,7 @@ export default async function BoutiquePage({
     : products;
 
   return (
-    <div className="pt-32 md:pt-40 min-h-screen bg-ivoire">
+    <div className="pt-32 md:pt-44 min-h-screen bg-ivoire">
       {/* En-tête */}
       <div className="bg-rose py-24 text-center">
         <SectionLabel align="center">Nos créations</SectionLabel>

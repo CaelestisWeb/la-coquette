@@ -48,7 +48,7 @@ export default async function ProductPage({ params }: Props) {
   };
 
   return (
-    <div className="pt-32 md:pt-40 min-h-screen bg-ivoire">
+    <div className="pt-32 md:pt-44 min-h-screen bg-ivoire">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }}

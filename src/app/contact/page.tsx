@@ -31,7 +31,7 @@ const infos = [
 
 export default function ContactPage() {
   return (
-    <div className="pt-32 md:pt-40 min-h-screen bg-ivoire">
+    <div className="pt-32 md:pt-44 min-h-screen bg-ivoire">
       <div className="bg-rose py-24 text-center">
         <SectionLabel align="center">Parlons-nous</SectionLabel>
         <h1 className="font-display text-4xl sm:text-5xl md:text-6xl text-noir mt-3">

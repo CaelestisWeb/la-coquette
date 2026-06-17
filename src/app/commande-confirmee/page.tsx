@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
 export default function CommandeConfirmeePage() {
   return (
-    <div className="pt-32 md:pt-40 min-h-screen bg-blanc flex items-center justify-center">
+    <div className="pt-32 md:pt-44 min-h-screen bg-blanc flex items-center justify-center">
       <div className="text-center px-6 py-20 max-w-md">
         <div className="w-16 h-16 rounded-full bg-rose flex items-center justify-center mx-auto mb-8">
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#111111" strokeWidth="1.5">
