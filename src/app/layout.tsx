@@ -63,7 +63,7 @@ const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Store',
   name: 'La Coquette',
-  description: 'Bijoux artisanaux en acier inoxydable doré, créés par Caroline dans la Drôme.',
+  description: 'Bijoux artisanaux en acier inoxydable doré, créés par Caro dans la Drôme.',
   url: 'https://lacoquette-bycaro.fr',
   email: 'contact@lacoquette-bycaro.fr',
   image: 'https://lacoquette-bycaro.fr/logo.png',

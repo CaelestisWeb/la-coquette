@@ -16,7 +16,7 @@ export default function MentionsLegalesPage() {
           <section>
             <h2 className="font-display text-2xl text-noir mb-4">Éditeur du site</h2>
             <p><strong className="text-noir font-medium">La Coquette</strong><br />
-            Caroline<br />
+            Caro<br />
             Auto-entrepreneur / Entreprise individuelle<br />
             SIRET : 479 539 082 00095<br />
             Drôme (26)<br />

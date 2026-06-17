@@ -13,7 +13,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (slug === HISTOIRE_SLUG) {
     return {
       title: "L'histoire de La Coquette",
-      description: "Comment Caroline a transformé sa passion pour les bijoux en une belle aventure artisanale dans la Drôme.",
+      description: "Comment Caro a transformé sa passion pour les bijoux en une belle aventure artisanale dans la Drôme.",
     };
   }
   const title = slugToTitle(slug);
@@ -53,7 +53,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
           <div className="relative aspect-[16/10] w-full overflow-hidden mt-12">
             <Image
               src="/boucles-placeholder.jpg"
-              alt="Création artisanale La Coquette par Caroline"
+              alt="Création artisanale La Coquette par Caro"
               fill
               priority
               className="object-cover"
@@ -63,7 +63,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
 
           <div className="mt-12 space-y-6 font-body font-light text-base sm:text-lg text-noir/75 leading-relaxed">
             <p>
-              Depuis plusieurs années, Caroline conçoit des bijoux élégants pour les femmes qui souhaitent prendre soin d'elles et se sentir belles au quotidien, sans compromis sur la qualité.
+              Depuis plusieurs années, Caro conçoit des bijoux élégants pour les femmes qui souhaitent prendre soin d'elles et se sentir belles au quotidien, sans compromis sur la qualité.
             </p>
             <p>
               Installée dans la Drôme, elle imagine chaque pièce avec soin : des formes épurées, des matières nobles, des finitions précises. Chaque bijou La Coquette est pensé pour durer et s'adapter à toutes vos envies.
@@ -78,7 +78,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
             <p className="font-display font-light text-3xl sm:text-4xl text-noir leading-snug">
               «&nbsp;Chaque bijou porte une part de moi.&nbsp;»
             </p>
-            <p className="font-body text-[10px] tracking-[0.3em] uppercase text-taupe mt-5">Caroline</p>
+            <p className="font-body text-[10px] tracking-[0.3em] uppercase text-taupe mt-5">Caro</p>
           </blockquote>
 
           {/* Points clés */}
@@ -101,7 +101,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
               Découvrir les créations
             </Link>
             <Link href="/contact" className="inline-flex items-center font-body text-[11px] tracking-[0.22em] uppercase border border-noir/25 text-noir px-8 py-4 hover:border-noir transition-colors duration-500">
-              Contacter Caroline
+              Contacter Caro
             </Link>
           </div>
         </article>
@@ -121,7 +121,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         </h1>
 
         <div className="mt-10 space-y-5 font-body font-light text-base text-noir/70 leading-relaxed">
-          <p>Cet article sera bientôt disponible. Caroline rédige avec soin chaque contenu pour vous apporter les meilleurs conseils sur les bijoux, le style et l'élégance au quotidien.</p>
+          <p>Cet article sera bientôt disponible. Caro rédige avec soin chaque contenu pour vous apporter les meilleurs conseils sur les bijoux, le style et l'élégance au quotidien.</p>
           <p>En attendant, n'hésitez pas à découvrir notre boutique ou à nous contacter directement.</p>
         </div>
 

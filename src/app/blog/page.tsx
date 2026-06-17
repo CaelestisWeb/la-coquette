@@ -5,13 +5,13 @@ import SectionLabel from '@/components/ui/SectionLabel';
 
 export const metadata: Metadata = {
   title: 'Journal | La Coquette',
-  description: 'Découvrez l\'histoire de La Coquette, comment Caroline a transformé sa passion pour les bijoux en une belle aventure entrepreneuriale.',
+  description: 'Découvrez l\'histoire de La Coquette, comment Caro a transformé sa passion pour les bijoux en une belle aventure entrepreneuriale.',
 };
 
 const article = {
   slug: 'histoire-de-la-coquette',
   title: 'L\'histoire de La Coquette',
-  excerpt: 'Comment Caroline a transformé sa passion pour les bijoux en une belle aventure entrepreneuriale.',
+  excerpt: 'Comment Caro a transformé sa passion pour les bijoux en une belle aventure entrepreneuriale.',
   category: 'Notre histoire',
   date: '1 mai 2026',
   image: '/boucles-placeholder.jpg',

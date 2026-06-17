@@ -17,7 +17,7 @@ export default function CommandeConfirmeePage() {
         </div>
         <h1 className="font-display text-4xl text-noir mb-4">Merci pour votre commande !</h1>
         <p className="font-body text-sm text-taupe leading-relaxed mb-10">
-          Caroline a bien reçu votre commande et vous contactera très prochainement pour confirmer les détails de livraison.
+          Caro a bien reçu votre commande et vous contactera très prochainement pour confirmer les détails de livraison.
         </p>
         <Link href="/boutique"
           className="inline-block bg-noir text-blanc font-body text-xs font-medium tracking-widest uppercase px-10 py-4 hover:bg-or transition-colors duration-300">

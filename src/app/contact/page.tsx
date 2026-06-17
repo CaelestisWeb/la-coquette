@@ -4,7 +4,7 @@ import SectionLabel from '@/components/ui/SectionLabel';
 
 export const metadata: Metadata = {
   title: 'Contact | La Coquette',
-  description: 'Contactez Caroline pour une commande, un bijou personnalisé ou toute question. Réponse rapide garantie.',
+  description: 'Contactez Caro pour une commande, un bijou personnalisé ou toute question. Réponse rapide garantie.',
 };
 
 const infos = [
@@ -38,7 +38,7 @@ export default function ContactPage() {
           Nous contacter
         </h1>
         <p className="font-body text-sm text-taupe mt-4 max-w-md mx-auto leading-relaxed">
-          Une question, une commande personnalisée ou simplement envie d'échanger ? Caroline vous répond avec plaisir.
+          Une question, une commande personnalisée ou simplement envie d'échanger ? Caro vous répond avec plaisir.
         </p>
       </div>
 
@@ -67,7 +67,7 @@ export default function ContactPage() {
             <p className="font-body text-xs text-taupe leading-relaxed">
               <strong className="text-noir font-medium">Horaires :</strong><br />
               Du lundi au vendredi, de 9h à 18h.<br />
-              Caroline répond généralement sous 24h.
+              Caro répond généralement sous 24h.
             </p>
           </div>
           <div className="mt-8">

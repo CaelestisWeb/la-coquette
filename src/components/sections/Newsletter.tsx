@@ -11,7 +11,7 @@ export default function Newsletter() {
           Optez pour des boucles d'oreilles<br />faites pour vous
         </h2>
         <p className="font-body font-light text-sm text-blanc/50 leading-relaxed mt-6">
-          Décrivez vos envies à Caroline et elle créera la paire qui vous ressemble.
+          Décrivez vos envies à Caro et elle créera la paire qui vous ressemble.
         </p>
         <Link
           href="/contact?sujet=Bijou+personnalisé"

@@ -8,9 +8,9 @@ export default function FeaturedProducts() {
     <section className="bg-blanc py-28">
       <div className="max-w-7xl mx-auto px-6">
 
-        {/* Accroche Caroline */}
+        {/* Accroche Caro */}
         <p className="font-body font-light text-sm sm:text-base text-taupe leading-relaxed max-w-md mb-14 reveal">
-          Créés avec passion par Caroline, chaque bijou La Coquette est façonné en acier inoxydable de qualité, pour vous accompagner du matin au soir avec grâce et confiance.
+          Créés avec passion par Caro, chaque bijou La Coquette est façonné en acier inoxydable de qualité, pour vous accompagner du matin au soir avec grâce et confiance.
         </p>
 
         {/* Titre */}

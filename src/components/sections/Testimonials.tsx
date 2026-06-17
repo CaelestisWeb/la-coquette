@@ -11,7 +11,7 @@ const testimonials = [
     name: 'Marie-Claire D.',
     location: 'Valence',
     rating: 5,
-    text: "Caroline est adorable et très réactive. Mes boucles d'oreilles sont exactement comme sur les photos, encore plus jolies en vrai. Elles ne s'oxydent pas, même au quotidien. Un vrai coup de cœur !",
+    text: "Caro est adorable et très réactive. Mes boucles d'oreilles sont exactement comme sur les photos, encore plus jolies en vrai. Elles ne s'oxydent pas, même au quotidien. Un vrai coup de cœur !",
   },
   {
     name: 'Élisa R.',

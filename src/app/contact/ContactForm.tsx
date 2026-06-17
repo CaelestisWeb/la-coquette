@@ -40,7 +40,7 @@ export default function ContactForm() {
           <circle cx="12" cy="12" r="10"/><polyline points="20 6 9 17 4 12"/>
         </svg>
         <h3 className="font-display text-2xl text-noir">Message envoyé !</h3>
-        <p className="font-body text-sm text-taupe">Merci. Caroline vous répondra dans les plus brefs délais.</p>
+        <p className="font-body text-sm text-taupe">Merci. Caro vous répondra dans les plus brefs délais.</p>
       </div>
     );
   }

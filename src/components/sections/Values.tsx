@@ -8,7 +8,7 @@ const values = [
       </svg>
     ),
     title: 'Passion',
-    text: 'Chaque bijou est imaginé avec amour et attention. La passion de Caroline pour la création se ressent dans chaque détail.',
+    text: 'Chaque bijou est imaginé avec amour et attention. La passion de Caro pour la création se ressent dans chaque détail.',
   },
   {
     icon: (
@@ -27,7 +27,7 @@ const values = [
       </svg>
     ),
     title: 'Proximité',
-    text: 'Caroline est à votre écoute pour chaque commande, chaque question. Une relation directe, chaleureuse et authentique.',
+    text: 'Caro est à votre écoute pour chaque commande, chaque question. Une relation directe, chaleureuse et authentique.',
   },
   {
     icon: (
