@@ -17,7 +17,7 @@ export default function PolitiqueConfidentialitePage() {
 
           <section>
             <h2 className="font-display text-2xl text-noir mb-4">1. Responsable du traitement</h2>
-            <p>Les données personnelles collectées sur ce site sont traitées par <strong className="text-noir font-medium">La Coquette</strong> (Caro), entreprise individuelle, Drôme (26). Pour toute question relative à vos données : contact@lacoquette-bycaro.fr.</p>
+            <p>Les données personnelles collectées sur ce site sont traitées par <strong className="text-noir font-medium">La Coquette</strong> — entreprise individuelle DESHAYES CAROLINE (SIRET 479 539 082 00095). Pour toute question relative à vos données : contact@lacoquette-bycaro.fr.</p>
           </section>
 
           <section>
@@ -52,17 +52,27 @@ export default function PolitiqueConfidentialitePage() {
           </section>
 
           <section>
-            <h2 className="font-display text-2xl text-noir mb-4">5. Durée de conservation</h2>
+            <h2 className="font-display text-2xl text-noir mb-4">5. Transferts hors de l'Union européenne</h2>
+            <p>Certains de nos prestataires techniques (notamment l'hébergeur Vercel et le prestataire de paiement SumUp) peuvent être amenés à traiter des données en dehors de l'Union européenne. Ces transferts sont encadrés par des garanties appropriées conformément au RGPD (clauses contractuelles types de la Commission européenne ou décision d'adéquation), afin d'assurer un niveau de protection équivalent à celui de l'Union.</p>
+          </section>
+
+          <section>
+            <h2 className="font-display text-2xl text-noir mb-4">6. Sécurité</h2>
+            <p>La Coquette met en œuvre des mesures techniques et organisationnelles adaptées pour protéger vos données : connexion chiffrée (HTTPS) sur l'ensemble du site, accès restreint aux informations, et traitement des paiements directement par notre prestataire sécurisé — <strong className="text-noir font-medium">aucune donnée bancaire n'est stockée par La Coquette</strong>.</p>
+          </section>
+
+          <section>
+            <h2 className="font-display text-2xl text-noir mb-4">7. Durée de conservation</h2>
             <p>Les données liées à une commande sont conservées le temps nécessaire au traitement puis archivées conformément aux obligations légales (notamment comptables, jusqu'à 10 ans). Les messages de contact sont conservés au maximum 3 ans après le dernier échange.</p>
           </section>
 
           <section>
-            <h2 className="font-display text-2xl text-noir mb-4">6. Vos droits</h2>
+            <h2 className="font-display text-2xl text-noir mb-4">8. Vos droits</h2>
             <p>Conformément au Règlement Général sur la Protection des Données (RGPD), vous disposez d'un droit d'accès, de rectification, d'effacement, de limitation, d'opposition et de portabilité de vos données. Pour les exercer, écrivez-nous à contact@lacoquette-bycaro.fr. Vous pouvez également introduire une réclamation auprès de la CNIL (<a href="https://www.cnil.fr" target="_blank" rel="noopener noreferrer" className="text-noir underline underline-offset-2 hover:text-dore transition-colors">cnil.fr</a>).</p>
           </section>
 
           <section>
-            <h2 className="font-display text-2xl text-noir mb-4">7. Cookies</h2>
+            <h2 className="font-display text-2xl text-noir mb-4">9. Cookies</h2>
             <p>Ce site utilise uniquement des cookies techniques nécessaires à son fonctionnement (panier, préférences de navigation). Aucun cookie publicitaire ni de pistage tiers n'est utilisé. Aucun consentement préalable n'est donc requis.</p>
           </section>
 

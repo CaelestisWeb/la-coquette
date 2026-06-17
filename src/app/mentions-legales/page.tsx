@@ -16,12 +16,12 @@ export default function MentionsLegalesPage() {
           <section>
             <h2 className="font-display text-2xl text-noir mb-4">Éditeur du site</h2>
             <p><strong className="text-noir font-medium">La Coquette</strong><br />
-            Caro<br />
-            Auto-entrepreneur / Entreprise individuelle<br />
-            SIRET : 479 539 082 00095<br />
-            Drôme (26)<br />
-            Email : contact@lacoquette-bycaro.fr<br />
-</p>
+            Entreprise individuelle DESHAYES CAROLINE — micro-entreprise<br />
+            SIREN : 479 539 082 — SIRET : 479 539 082 00095<br />
+            RCS : 479 539 082 R.C.S. Romans<br />
+            N° TVA intracommunautaire : FR73479539082<br />
+            Directrice de la publication : Caroline Deshayes<br />
+            Contact : contact@lacoquette-bycaro.fr</p>
           </section>
 
           <section>
@@ -37,7 +37,7 @@ export default function MentionsLegalesPage() {
 
           <section>
             <h2 className="font-display text-2xl text-noir mb-4">Données personnelles</h2>
-            <p>Les informations collectées via les formulaires sont destinées exclusivement à La Coquette et ne seront en aucun cas cédées à des tiers. Conformément au RGPD, vous disposez d'un droit d'accès, de rectification et de suppression de vos données en contactant : contact@lacoquette-bycaro.fr</p>
+            <p>Les informations collectées via les formulaires sont destinées exclusivement à La Coquette et ne seront en aucun cas cédées à des tiers. Conformément au RGPD, vous disposez d'un droit d'accès, de rectification et de suppression de vos données en contactant : contact@lacoquette-bycaro.fr. Pour le détail des traitements, consultez notre <a href="/politique-confidentialite" className="text-noir underline underline-offset-2 hover:text-dore transition-colors">Politique de confidentialité</a>.</p>
           </section>
 
           <section>
