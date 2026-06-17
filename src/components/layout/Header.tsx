@@ -40,12 +40,12 @@ export default function Header() {
 
         <Link href="/" className="flex-shrink-0" aria-label="La Coquette — accueil">
           <Image
-            src="/logo-wordmark.svg"
+            src={onDarkHero ? '/logo-wordmark-dark.svg' : '/logo-wordmark.svg'}
             alt="La Coquette"
             width={527}
             height={130}
             priority
-            className="h-8 sm:h-9 w-auto"
+            className="h-8 sm:h-9 w-auto transition-opacity duration-300"
           />
         </Link>
 
@@ -56,7 +56,9 @@ export default function Header() {
               key={link.href}
               href={link.href}
               className={`font-body text-[11px] font-normal tracking-[0.2em] uppercase transition-colors duration-300 ${
-                pathname === link.href ? 'text-noir' : 'text-taupe hover:text-noir'
+                onDarkHero
+                  ? pathname === link.href ? 'text-blanc' : 'text-blanc/65 hover:text-blanc'
+                  : pathname === link.href ? 'text-noir' : 'text-taupe hover:text-noir'
               }`}
             >
               {link.label}
@@ -67,7 +69,7 @@ export default function Header() {
         <div className="flex items-center gap-4">
           <button
             onClick={() => setIsOpen(true)}
-            className="relative p-2 text-noir hover:text-taupe transition-colors"
+            className={`relative p-2 transition-colors ${onDarkHero ? 'text-blanc/75 hover:text-blanc' : 'text-noir hover:text-taupe'}`}
             aria-label="Ouvrir le panier"
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
