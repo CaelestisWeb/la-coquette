@@ -10,6 +10,7 @@
   --color-gris:    #DCD7D1;   /* filets, bordures */
   --color-taupe:   #8E867D;   /* texte secondaire, labels */
   --color-or:      #9A9189;   /* « accent » neutre — stone (remplace l'or) */
+  --color-dore:    #BC9A4E;   /* or satiné — touches dorées discrètes (rappel des boucles) */
 
   /* ── Typographies ── */
   --font-display: var(--font-jost);
