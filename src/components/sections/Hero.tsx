@@ -23,7 +23,7 @@ export default function Hero() {
       {/* Contenu — centré, vers le bas */}
       <div className="relative z-20 w-full text-center px-6 pb-24 sm:pb-28">
 
-        <h1 className="font-display font-light text-[2.8rem] sm:text-6xl lg:text-[5.5rem] text-blanc leading-[1.05]">
+        <h1 className="font-display font-light text-[2.55rem] sm:text-[3.5rem] lg:text-[5.25rem] text-blanc leading-[1.05]">
           Des bijoux pensés<br />
           pour révéler votre <span className="text-blanc/65">élégance</span>
         </h1>

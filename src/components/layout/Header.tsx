@@ -36,43 +36,44 @@ export default function Header() {
         scrolled ? 'bg-blanc/95 backdrop-blur-sm shadow-[0_2px_20px_rgba(17,17,17,0.06)]' : 'bg-transparent'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-6 py-4 md:py-5">
 
-        <Link href="/" className="flex-shrink-0" aria-label="La Coquette — accueil">
-          <Image
-            src={onDarkHero ? '/logo-wordmark-dark.svg' : '/logo-wordmark.svg'}
-            alt="La Coquette"
-            width={527}
-            height={130}
-            priority
-            className="h-8 sm:h-9 w-auto transition-opacity duration-300"
-          />
-        </Link>
+        {/* Rangée du haut : logo centré, icônes en absolu */}
+        <div className="relative flex items-center justify-center">
 
-        {/* Nav desktop */}
-        <nav className="hidden md:flex items-center gap-10">
-          {navLinks.map(link => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className={`font-body text-[11px] font-normal tracking-[0.2em] uppercase transition-colors duration-300 ${
-                onDarkHero
-                  ? pathname === link.href ? 'text-blanc' : 'text-blanc/65 hover:text-blanc'
-                  : pathname === link.href ? 'text-noir' : 'text-taupe hover:text-noir'
-              }`}
-            >
-              {link.label}
-            </Link>
-          ))}
-        </nav>
+          {/* Burger — mobile, à gauche */}
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            className={`md:hidden absolute left-0 p-2 transition-colors ${onDarkHero ? 'text-blanc' : 'text-noir'}`}
+            aria-label={menuOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
+          >
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+              {menuOpen
+                ? <><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></>
+                : <><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></>
+              }
+            </svg>
+          </button>
 
-        <div className="flex items-center gap-4">
+          {/* Logo centré, grand */}
+          <Link href="/" aria-label="La Coquette — accueil">
+            <Image
+              src={onDarkHero ? '/logo-wordmark-dark.svg' : '/logo-wordmark.svg'}
+              alt="La Coquette"
+              width={527}
+              height={130}
+              priority
+              className={`w-auto transition-all duration-300 ${scrolled ? 'h-11 md:h-12' : 'h-12 md:h-16'}`}
+            />
+          </Link>
+
+          {/* Panier — à droite */}
           <button
             onClick={() => setIsOpen(true)}
-            className={`relative p-2 transition-colors ${onDarkHero ? 'text-blanc/75 hover:text-blanc' : 'text-noir hover:text-taupe'}`}
+            className={`absolute right-0 p-2 transition-colors ${onDarkHero ? 'text-blanc/80 hover:text-blanc' : 'text-noir hover:text-taupe'}`}
             aria-label="Ouvrir le panier"
           >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
               <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
               <line x1="3" y1="6" x2="21" y2="6"/>
               <path d="M16 10a4 4 0 01-8 0"/>
@@ -83,20 +84,24 @@ export default function Header() {
               </span>
             )}
           </button>
-
-          <button
-            onClick={() => setMenuOpen(!menuOpen)}
-            className="md:hidden p-2 text-noir"
-            aria-label={menuOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
-          >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-              {menuOpen
-                ? <><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></>
-                : <><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></>
-              }
-            </svg>
-          </button>
         </div>
+
+        {/* Rangée du bas : navigation centrée — desktop */}
+        <nav className="hidden md:flex items-center justify-center gap-10 lg:gap-14 mt-4">
+          {navLinks.map(link => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className={`font-body text-[11px] font-normal tracking-[0.22em] uppercase transition-colors duration-300 ${
+                onDarkHero
+                  ? pathname === link.href ? 'text-blanc' : 'text-blanc/65 hover:text-blanc'
+                  : pathname === link.href ? 'text-noir' : 'text-taupe hover:text-noir'
+              }`}
+            >
+              {link.label}
+            </Link>
+          ))}
+        </nav>
       </div>
 
       {/* Menu mobile — slide animé */}

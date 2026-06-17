@@ -41,7 +41,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
   // ── Article complet : L'histoire de La Coquette ──
   if (slug === HISTOIRE_SLUG) {
     return (
-      <div className="pt-20 min-h-screen bg-ivoire">
+      <div className="pt-24 md:pt-36 min-h-screen bg-ivoire">
         <article className="max-w-3xl mx-auto px-6 py-16">
           <Breadcrumb label="L'histoire de La Coquette" />
 
@@ -111,7 +111,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
 
   // ── Autres articles : à venir ──
   return (
-    <div className="pt-20 min-h-screen bg-ivoire">
+    <div className="pt-24 md:pt-36 min-h-screen bg-ivoire">
       <div className="max-w-2xl mx-auto px-6 py-16">
         <Breadcrumb label={slug.replace(/-/g, ' ')} />
 
