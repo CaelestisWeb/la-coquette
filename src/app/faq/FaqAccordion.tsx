@@ -31,8 +31,8 @@ export default function FaqAccordion({ items }: { items: Item[] }) {
               </span>
             </button>
             <div
-              className={`overflow-hidden transition-all duration-400 ease-in-out ${
-                isOpen ? 'max-h-96 pb-7 opacity-100' : 'max-h-0 opacity-0'
+              className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                isOpen ? 'max-h-[600px] pb-7 opacity-100' : 'max-h-0 opacity-0'
               }`}
             >
               <p className="font-body font-light text-sm text-taupe leading-relaxed max-w-2xl pr-6">
