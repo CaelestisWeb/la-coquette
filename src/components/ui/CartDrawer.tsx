@@ -132,8 +132,11 @@ export default function CartDrawer() {
               {/* Barre livraison gratuite */}
               <div>
                 {isFree ? (
-                  <p className="font-body text-[11px] text-or text-center tracking-wide">
-                    ✓ Livraison offerte !
+                  <p className="font-body text-[11px] text-noir text-center tracking-wide flex items-center justify-center gap-1.5">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                    Livraison offerte
                   </p>
                 ) : (
                   <p className="font-body text-[11px] text-taupe text-center">
