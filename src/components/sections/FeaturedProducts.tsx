@@ -15,7 +15,7 @@ export default function FeaturedProducts() {
             Nos créations
           </h2>
           <p className="font-body font-light text-sm sm:text-base text-taupe leading-relaxed max-w-xl mx-auto mt-5">
-            Créés avec passion par Caro, chaque bijou La Coquette est façonné en acier inoxydable de qualité, pour vous accompagner du matin au soir avec grâce et confiance.
+            Des boucles d'oreilles pendantes montées à la main par Caro, en acier inoxydable doré qui ne ternit pas — à porter sous la pluie comme sous les projecteurs.
           </p>
         </div>
 

@@ -27,7 +27,7 @@ export default async function BoutiquePage({
           Créations
         </h1>
         <p className="font-body text-sm text-taupe mt-4 max-w-md mx-auto leading-relaxed">
-          Bijoux artisanaux en acier inoxydable doré, pour révéler votre élégance au quotidien.
+          Des boucles d'oreilles pendantes faites main, en acier inoxydable doré : légères, sans nickel, et qui ne ternissent pas.
         </p>
       </div>
 

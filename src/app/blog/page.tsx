@@ -5,13 +5,13 @@ import SectionLabel from '@/components/ui/SectionLabel';
 
 export const metadata: Metadata = {
   title: 'Journal | La Coquette',
-  description: 'Découvrez l\'histoire de La Coquette, comment Caro a transformé sa passion pour les bijoux en une belle aventure entrepreneuriale.',
+  description: 'De son atelier dans la Drôme aux oreilles de ses clientes : la petite histoire des boucles d\'oreilles faites main de La Coquette.',
 };
 
 const article = {
   slug: 'histoire-de-la-coquette',
   title: 'L\'histoire de La Coquette',
-  excerpt: 'Comment Caro a transformé sa passion pour les bijoux en une belle aventure entrepreneuriale.',
+  excerpt: 'De son atelier dans la Drôme aux oreilles de ses clientes : la petite histoire des boucles La Coquette.',
   category: 'Notre histoire',
   date: '1 mai 2026',
   image: '/boucles-placeholder.jpg',

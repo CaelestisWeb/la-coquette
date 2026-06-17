@@ -13,7 +13,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (slug === HISTOIRE_SLUG) {
     return {
       title: "L'histoire de La Coquette",
-      description: "Comment Caro a transformé sa passion pour les bijoux en une belle aventure artisanale dans la Drôme.",
+      description: "De son atelier dans la Drôme aux oreilles de ses clientes : la petite histoire des boucles d'oreilles La Coquette.",
     };
   }
   const title = slugToTitle(slug);
@@ -63,13 +63,13 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
 
           <div className="mt-12 space-y-6 font-body font-light text-base sm:text-lg text-noir/75 leading-relaxed">
             <p>
-              Depuis plusieurs années, Caro conçoit des bijoux élégants pour les femmes qui souhaitent prendre soin d'elles et se sentir belles au quotidien, sans compromis sur la qualité.
+              La Coquette est née d'une idée simple : créer des boucles d'oreilles qu'on garde aux oreilles toute la journée — et qu'on finit par oublier tant elles sont légères.
             </p>
             <p>
-              Installée dans la Drôme, elle imagine chaque pièce avec soin : des formes épurées, des matières nobles, des finitions précises. Chaque bijou La Coquette est pensé pour durer et s'adapter à toutes vos envies.
+              Dans son atelier de la Drôme, Caro monte chaque paire à la main, une à une. Des formes pendantes, des couleurs choisies, des finitions vérifiées au cas par cas. Rien n'est produit en série.
             </p>
             <p>
-              Acier inoxydable doré, anti-allergie, résistant à l'eau : parce que l'élégance ne devrait pas avoir de contraintes.
+              Le choix de l'acier inoxydable doré n'a rien d'un hasard : il ne ternit pas, ne verdit pas la peau et se moque de l'eau. Des bijoux faits pour être portés vraiment — pas pour rester au fond d'une boîte.
             </p>
           </div>
 

@@ -38,7 +38,7 @@ export default function ContactPage() {
           Nous contacter
         </h1>
         <p className="font-body text-sm text-taupe mt-4 max-w-md mx-auto leading-relaxed">
-          Une question, une commande personnalisée ou simplement envie d'échanger ? Caro vous répond avec plaisir.
+          Une question, une envie de bijou sur-mesure, ou juste un mot ? C'est Caro qui lit et répond elle-même, en général sous 24h.
         </p>
       </div>
 
