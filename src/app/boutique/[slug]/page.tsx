@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import { products, getProductBySlug, categoryLabels } from '@/data/products';
 import AddToCartButton from './AddToCartButton';
 import ProductCard from '@/components/ui/ProductCard';
+import { SHIPPING_THRESHOLD } from '@/lib/shipping';
 import type { Metadata } from 'next';
 
 type Props = { params: Promise<{ slug: string }> };
@@ -128,7 +129,7 @@ export default async function ProductPage({ params }: Props) {
               </svg>
               <p className="font-body text-xs text-taupe leading-relaxed">
                 <strong className="text-noir font-medium">Livraison La Poste</strong>, sous 3 à 5 jours ouvrés.
-                Offerte dès 50 € d'achat.
+                Offerte dès {SHIPPING_THRESHOLD} € d'achat.
               </p>
             </div>
           </div>
