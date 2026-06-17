@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 function Breadcrumb({ label }: { label: string }) {
   return (
-    <nav className="font-body text-[10px] text-taupe tracking-[0.2em] uppercase mb-10 flex items-center gap-2" aria-label="Fil d'ariane">
+    <nav className="font-body text-[10px] text-taupe tracking-[0.2em] uppercase mb-10 flex items-center justify-center gap-2" aria-label="Fil d'ariane">
       <Link href="/" className="hover:text-noir transition-colors">Accueil</Link>
       <span aria-hidden>/</span>
       <Link href="/blog" className="hover:text-noir transition-colors">Journal</Link>
@@ -45,8 +45,8 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         <article className="max-w-3xl mx-auto px-6 py-16">
           <Breadcrumb label="L'histoire de La Coquette" />
 
-          <p className="font-body text-[10px] font-medium tracking-[0.3em] uppercase text-taupe">Notre histoire</p>
-          <h1 className="font-display font-light text-4xl sm:text-5xl lg:text-6xl text-noir mt-4 leading-[1.05]">
+          <p className="font-body text-[10px] font-medium tracking-[0.3em] uppercase text-dore text-center">Notre histoire</p>
+          <h1 className="font-display font-light text-4xl sm:text-5xl lg:text-6xl text-noir mt-4 leading-[1.05] text-center">
             L'histoire de La Coquette
           </h1>
 
@@ -82,21 +82,23 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
           </blockquote>
 
           {/* Points clés */}
-          <ul className="space-y-3">
-            {[
-              'Acier inoxydable hypoallergénique',
-              'Résistant à l\'eau et au temps',
-              'Livraison soignée par La Poste',
-              'Créations exclusives & artisanales',
-            ].map(point => (
-              <li key={point} className="flex items-center gap-3 font-body text-sm text-noir">
-                <span className="w-4 h-px bg-noir flex-shrink-0" />
-                {point}
-              </li>
-            ))}
-          </ul>
+          <div className="text-center">
+            <ul className="space-y-3 inline-flex flex-col items-start text-left">
+              {[
+                'Acier inoxydable hypoallergénique',
+                'Résistant à l\'eau et au temps',
+                'Livraison soignée par La Poste',
+                'Créations exclusives & artisanales',
+              ].map(point => (
+                <li key={point} className="flex items-center gap-3 font-body text-sm text-noir">
+                  <span className="w-4 h-px bg-noir flex-shrink-0" />
+                  {point}
+                </li>
+              ))}
+            </ul>
+          </div>
 
-          <div className="mt-14 flex flex-wrap gap-3">
+          <div className="mt-14 flex flex-wrap justify-center gap-3">
             <Link href="/boutique" className="inline-flex items-center font-body text-[11px] tracking-[0.22em] uppercase bg-noir text-blanc px-8 py-4 rounded hover:bg-taupe transition-colors duration-500">
               Découvrir les créations
             </Link>

@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 
-const inputClass = "w-full border border-gris bg-blanc font-body text-sm text-noir px-4 py-3 outline-none focus:border-or transition-colors placeholder:text-taupe/60";
+const inputClass = "w-full border border-gris bg-blanc font-body text-sm text-noir px-4 py-3 outline-none focus:border-or transition-colors placeholder:text-taupe/60 text-left";
 
 export default function ContactForm() {
   const [form, setForm] = useState({ nom: '', email: '', sujet: '', message: '' });
@@ -46,20 +46,20 @@ export default function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="bg-blanc p-8 space-y-5 rounded-lg">
+    <form onSubmit={handleSubmit} className="bg-blanc p-8 space-y-5 rounded-lg text-center">
       <h2 className="font-display text-2xl text-noir mb-6">Envoyer un message</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>
-          <label className="font-body text-[10px] tracking-widest uppercase text-taupe block mb-2">Nom *</label>
+          <label className="font-body text-[10px] tracking-widest uppercase text-taupe block mb-2 text-center">Nom *</label>
           <input name="nom" value={form.nom} onChange={handleChange} required placeholder="Votre nom" className={inputClass} />
         </div>
         <div>
-          <label className="font-body text-[10px] tracking-widest uppercase text-taupe block mb-2">Email *</label>
+          <label className="font-body text-[10px] tracking-widest uppercase text-taupe block mb-2 text-center">Email *</label>
           <input type="email" name="email" value={form.email} onChange={handleChange} required placeholder="votre@email.fr" className={inputClass} />
         </div>
       </div>
       <div>
-        <label className="font-body text-[10px] tracking-widest uppercase text-taupe block mb-2">Sujet</label>
+        <label className="font-body text-[10px] tracking-widest uppercase text-taupe block mb-2 text-center">Sujet</label>
         <select name="sujet" value={form.sujet} onChange={handleChange} className={inputClass}>
           <option value="">Choisir un sujet</option>
           <option>Commande</option>
@@ -69,7 +69,7 @@ export default function ContactForm() {
         </select>
       </div>
       <div>
-        <label className="font-body text-[10px] tracking-widest uppercase text-taupe block mb-2">Message *</label>
+        <label className="font-body text-[10px] tracking-widest uppercase text-taupe block mb-2 text-center">Message *</label>
         <textarea name="message" value={form.message} onChange={handleChange} required rows={5} placeholder="Votre message..." className={`${inputClass} resize-none`} />
       </div>
       {error && <p className="font-body text-xs text-red-500">{error}</p>}

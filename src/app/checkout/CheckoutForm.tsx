@@ -140,30 +140,30 @@ export default function CheckoutForm() {
       <div>
         {step === 'address' ? (
           <>
-            <h2 className="font-display text-3xl text-noir mb-8">Livraison</h2>
+            <h2 className="font-display text-3xl text-noir mb-8 text-center">Livraison</h2>
             <form onSubmit={handleAddressSubmit} className="space-y-5">
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="font-body text-[10px] tracking-widest uppercase text-taupe block mb-1">Prénom *</label>
+                  <label className="font-body text-[10px] tracking-widest uppercase text-taupe block mb-1 text-center">Prénom *</label>
                   <input required value={form.prenom} onChange={e => setForm(f => ({ ...f, prenom: e.target.value }))}
                     className="w-full border border-gris bg-blanc px-4 py-3 font-body text-sm text-noir outline-none focus:border-noir transition-colors" />
                 </div>
                 <div>
-                  <label className="font-body text-[10px] tracking-widest uppercase text-taupe block mb-1">Nom *</label>
+                  <label className="font-body text-[10px] tracking-widest uppercase text-taupe block mb-1 text-center">Nom *</label>
                   <input required value={form.nom} onChange={e => setForm(f => ({ ...f, nom: e.target.value }))}
                     className="w-full border border-gris bg-blanc px-4 py-3 font-body text-sm text-noir outline-none focus:border-noir transition-colors" />
                 </div>
               </div>
 
               <div>
-                <label className="font-body text-[10px] tracking-widest uppercase text-taupe block mb-1">Email *</label>
+                <label className="font-body text-[10px] tracking-widest uppercase text-taupe block mb-1 text-center">Email *</label>
                 <input required type="email" value={form.email} onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
                   className="w-full border border-gris bg-blanc px-4 py-3 font-body text-sm text-noir outline-none focus:border-noir transition-colors" />
               </div>
 
               {/* Adresse avec autocomplétion */}
               <div className="relative">
-                <label className="font-body text-[10px] tracking-widest uppercase text-taupe block mb-1">Adresse *</label>
+                <label className="font-body text-[10px] tracking-widest uppercase text-taupe block mb-1 text-center">Adresse *</label>
                 <input required value={form.adresse} onChange={e => handleAddressInput(e.target.value)}
                   onFocus={() => { if (suggestions.length > 0) setShowSuggestions(true); }}
                   onBlur={() => setTimeout(() => setShowSuggestions(false), 150)}
@@ -184,12 +184,12 @@ export default function CheckoutForm() {
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="font-body text-[10px] tracking-widest uppercase text-taupe block mb-1">Code postal *</label>
+                  <label className="font-body text-[10px] tracking-widest uppercase text-taupe block mb-1 text-center">Code postal *</label>
                   <input required value={form.codePostal} onChange={e => setForm(f => ({ ...f, codePostal: e.target.value }))}
                     className="w-full border border-gris bg-blanc px-4 py-3 font-body text-sm text-noir outline-none focus:border-noir transition-colors" />
                 </div>
                 <div>
-                  <label className="font-body text-[10px] tracking-widest uppercase text-taupe block mb-1">Ville *</label>
+                  <label className="font-body text-[10px] tracking-widest uppercase text-taupe block mb-1 text-center">Ville *</label>
                   <input required value={form.ville} onChange={e => setForm(f => ({ ...f, ville: e.target.value }))}
                     className="w-full border border-gris bg-blanc px-4 py-3 font-body text-sm text-noir outline-none focus:border-noir transition-colors" />
                 </div>
@@ -205,7 +205,7 @@ export default function CheckoutForm() {
           </>
         ) : (
           <>
-            <h2 className="font-display text-3xl text-noir mb-8">Paiement</h2>
+            <h2 className="font-display text-3xl text-noir mb-8 text-center">Paiement</h2>
             <div id="sumup-card" ref={sumupRef} />
             {error && <p className="font-body text-sm text-red-500 mt-4">{error}</p>}
             <button onClick={() => setStep('address')} className="mt-4 font-body text-xs text-taupe underline underline-offset-4">

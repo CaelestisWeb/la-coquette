@@ -44,12 +44,12 @@ export default function ContactPage() {
 
       <div className="max-w-6xl mx-auto px-6 py-20 grid grid-cols-1 lg:grid-cols-2 gap-16">
         {/* Infos */}
-        <div>
+        <div className="text-center">
           <h2 className="font-display text-3xl text-noir">Informations</h2>
           <ul className="mt-8 space-y-6">
             {infos.map(info => (
-              <li key={info.label} className="flex items-start gap-4">
-                <span className="text-or mt-0.5">{info.icon}</span>
+              <li key={info.label} className="flex flex-col items-center gap-2">
+                <span className="text-or">{info.icon}</span>
                 <div>
                   <p className="font-body text-[10px] tracking-[0.15em] uppercase text-taupe">{info.label}</p>
                   {info.href ? (
@@ -76,7 +76,7 @@ export default function ContactPage() {
               href="https://www.instagram.com/lacoquette_bycaro/"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 font-body text-sm text-noir hover:text-or transition-colors"
+              className="inline-flex items-center justify-center gap-2 font-body text-sm text-noir hover:text-or transition-colors"
             >
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/>

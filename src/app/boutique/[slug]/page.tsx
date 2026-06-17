@@ -56,7 +56,7 @@ export default async function ProductPage({ params }: Props) {
       <div className="max-w-6xl mx-auto px-6 py-16">
 
         {/* Fil d'ariane */}
-        <nav className="font-body text-[10px] text-taupe tracking-wide uppercase mb-10 flex items-center gap-2" aria-label="Fil d'ariane">
+        <nav className="font-body text-[10px] text-taupe tracking-wide uppercase mb-10 flex items-center justify-center gap-2" aria-label="Fil d'ariane">
           <Link href="/" className="hover:text-or transition-colors">Accueil</Link>
           <span aria-hidden>/</span>
           <Link href="/boutique" className="hover:text-or transition-colors">Boutique</Link>
@@ -83,7 +83,7 @@ export default async function ProductPage({ params }: Props) {
           </div>
 
           {/* Infos produit */}
-          <div className="lg:sticky lg:top-28">
+          <div className="lg:sticky lg:top-28 text-center">
             <span className="font-body text-[10px] font-semibold tracking-[0.2em] uppercase text-or">
               {categoryLabels[product.category]}
             </span>
@@ -92,18 +92,18 @@ export default async function ProductPage({ params }: Props) {
             </h1>
             <p className="font-display text-3xl text-or mt-4">{product.price} €</p>
 
-            <p className="font-body text-base text-taupe leading-relaxed mt-6">
+            <p className="font-body text-base text-taupe leading-relaxed mt-6 max-w-md mx-auto">
               {product.description}
             </p>
 
             {/* Matière */}
-            <div className="mt-6 flex items-center gap-3">
+            <div className="mt-6 flex items-center justify-center gap-3">
               <span className="w-4 h-px bg-or" />
               <span className="font-body text-xs text-taupe tracking-wide">{product.material}</span>
             </div>
 
             {/* Avantages */}
-            <ul className="mt-6 space-y-2">
+            <ul className="mt-6 space-y-2 inline-flex flex-col items-start mx-auto">
               {['Hypoallergénique', 'Résistant à l\'eau', 'Livraison soignée par La Poste'].map(a => (
                 <li key={a} className="flex items-center gap-2 font-body text-sm text-taupe">
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#111111" strokeWidth="2">
@@ -120,7 +120,7 @@ export default async function ProductPage({ params }: Props) {
             </div>
 
             {/* Livraison */}
-            <div className="mt-6 p-4 bg-beige flex items-start gap-3 rounded-lg">
+            <div className="mt-6 p-4 bg-beige flex items-start gap-3 rounded-lg text-left">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#111111" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" className="flex-shrink-0 mt-0.5" aria-hidden>
                 <rect x="1" y="6" width="13" height="11" rx="1" />
                 <path d="M14 9h4l3 3v5h-7z" />
