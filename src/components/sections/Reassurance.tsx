@@ -4,6 +4,26 @@ const items = [
   {
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 3l1.6 4.4L18 9l-4.4 1.6L12 15l-1.6-4.4L6 9l4.4-1.6z" />
+        <path d="M18 15l.8 2.2L21 18l-2.2.8L18 21l-.8-2.2L15 18l2.2-.8z" />
+      </svg>
+    ),
+    title: 'Fait main',
+    text: 'Créé avec soin dans la Drôme',
+  },
+  {
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 3c3.5 4 6 7 6 10a6 6 0 01-12 0c0-3 2.5-6 6-10z" />
+        <path d="M9.5 13.5a2.5 2.5 0 002.5 2.5" />
+      </svg>
+    ),
+    title: 'Acier inoxydable',
+    text: 'Hypoallergénique & durable',
+  },
+  {
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
         <rect x="1" y="6" width="13" height="11" rx="1" />
         <path d="M14 9h4l3 3v5h-7z" />
         <circle cx="6" cy="18.5" r="1.8" />
@@ -22,26 +42,6 @@ const items = [
     ),
     title: 'Paiement sécurisé',
     text: 'Transaction 100 % protégée',
-  },
-  {
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 3l1.6 4.4L18 9l-4.4 1.6L12 15l-1.6-4.4L6 9l4.4-1.6z" />
-        <path d="M18 15l.8 2.2L21 18l-2.2.8L18 21l-.8-2.2L15 18l2.2-.8z" />
-      </svg>
-    ),
-    title: 'Fait main',
-    text: 'Créé avec soin dans la Drôme',
-  },
-  {
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 3c3.5 4 6 7 6 10a6 6 0 01-12 0c0-3 2.5-6 6-10z" />
-        <path d="M9.5 13.5a2.5 2.5 0 002.5 2.5" />
-      </svg>
-    ),
-    title: 'Acier inoxydable',
-    text: 'Hypoallergénique & durable',
   },
 ];
 
