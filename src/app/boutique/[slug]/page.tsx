@@ -119,10 +119,16 @@ export default async function ProductPage({ params }: Props) {
             </div>
 
             {/* Livraison */}
-            <div className="mt-6 p-4 bg-beige">
+            <div className="mt-6 p-4 bg-beige flex items-start gap-3">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#111111" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" className="flex-shrink-0 mt-0.5" aria-hidden>
+                <rect x="1" y="6" width="13" height="11" rx="1" />
+                <path d="M14 9h4l3 3v5h-7z" />
+                <circle cx="6" cy="18.5" r="1.8" />
+                <circle cx="18" cy="18.5" r="1.8" />
+              </svg>
               <p className="font-body text-xs text-taupe leading-relaxed">
-                🚚 <strong className="text-noir">Livraison La Poste</strong>, sous 3 à 5 jours ouvrés.
-                Livraison offerte dès 50 € d'achat.
+                <strong className="text-noir font-medium">Livraison La Poste</strong>, sous 3 à 5 jours ouvrés.
+                Offerte dès 50 € d'achat.
               </p>
             </div>
           </div>
