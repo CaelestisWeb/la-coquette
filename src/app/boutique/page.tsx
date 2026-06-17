@@ -1,6 +1,5 @@
 import { products, type ProductCategory } from '@/data/products';
 import ProductCard from '@/components/ui/ProductCard';
-import SectionLabel from '@/components/ui/SectionLabel';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -24,9 +23,8 @@ export default async function BoutiquePage({
     <div className="pt-32 md:pt-44 min-h-screen bg-ivoire">
       {/* En-tête */}
       <div className="bg-rose py-24 text-center">
-        <SectionLabel align="center">Nos créations</SectionLabel>
-        <h1 className="font-display text-4xl sm:text-5xl md:text-6xl text-noir mt-3">
-          La Boutique
+        <h1 className="font-display text-4xl sm:text-5xl md:text-6xl text-noir">
+          Créations
         </h1>
         <p className="font-body text-sm text-taupe mt-4 max-w-md mx-auto leading-relaxed">
           Bijoux artisanaux en acier inoxydable doré, pour révéler votre élégance au quotidien.
