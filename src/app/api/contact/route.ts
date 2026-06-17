@@ -3,10 +3,20 @@ import { Resend } from 'resend';
 
 export async function POST(req: NextRequest) {
   const resend = new Resend(process.env.RESEND_API_KEY);
-  const { nom, email, sujet, message } = await req.json();
+  const { nom, email, sujet, message, entreprise } = await req.json();
+
+  // Honeypot : un humain ne remplit jamais ce champ caché → on ignore en silence
+  if (entreprise) {
+    return NextResponse.json({ ok: true });
+  }
 
   if (!nom || !email || !message) {
     return NextResponse.json({ error: 'Champs manquants' }, { status: 400 });
+  }
+
+  // Validation basique de l'email
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    return NextResponse.json({ error: 'Email invalide' }, { status: 400 });
   }
 
   const subject = sujet

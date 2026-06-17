@@ -5,7 +5,7 @@ import { useState } from 'react';
 const inputClass = "w-full border border-gris bg-creme font-body text-sm text-noir px-4 py-3 outline-none focus:border-or transition-colors placeholder:text-taupe/60 text-left";
 
 export default function ContactForm() {
-  const [form, setForm] = useState({ nom: '', email: '', sujet: '', message: '' });
+  const [form, setForm] = useState({ nom: '', email: '', sujet: '', message: '', entreprise: '' });
   const [sent, setSent] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -48,6 +48,19 @@ export default function ContactForm() {
   return (
     <form onSubmit={handleSubmit} className="bg-creme p-8 space-y-5 rounded-lg text-center">
       <h2 className="font-display text-2xl text-noir mb-6">Envoyer un message</h2>
+
+      {/* Honeypot anti-spam — caché aux humains, piège à robots */}
+      <input
+        type="text"
+        name="entreprise"
+        value={form.entreprise}
+        onChange={handleChange}
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        className="absolute w-px h-px -m-px overflow-hidden opacity-0 pointer-events-none"
+      />
+
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>
           <label className="font-body text-[10px] tracking-widest uppercase text-taupe block mb-2 text-center">Nom *</label>
