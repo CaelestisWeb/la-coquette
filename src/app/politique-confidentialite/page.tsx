@@ -17,7 +17,7 @@ export default function PolitiqueConfidentialitePage() {
 
           <section>
             <h2 className="font-display text-2xl text-noir mb-4">1. Responsable du traitement</h2>
-            <p>Les données personnelles collectées sur ce site sont traitées par <strong className="text-noir font-medium">La Coquette</strong> — entreprise individuelle DESHAYES CAROLINE (SIRET 479 539 082 00095). Pour toute question relative à vos données : contact@lacoquette-bycaro.fr.</p>
+            <p>Les données personnelles collectées sur ce site sont traitées par <strong className="text-noir font-medium">La Coquette</strong> — entreprise individuelle DESHAYES CAROLINE (SIRET 479 539 082 00095), 26750 Saint-Paul-lès-Romans. Pour toute question relative à vos données : contact@lacoquette-bycaro.fr.</p>
           </section>
 
           <section>

@@ -17,6 +17,7 @@ export default function MentionsLegalesPage() {
             <h2 className="font-display text-2xl text-noir mb-4">Éditeur du site</h2>
             <p><strong className="text-noir font-medium">La Coquette</strong><br />
             Entreprise individuelle DESHAYES CAROLINE — micro-entreprise<br />
+            26750 Saint-Paul-lès-Romans, France<br />
             SIREN : 479 539 082 — SIRET : 479 539 082 00095<br />
             RCS : 479 539 082 R.C.S. Romans<br />
             N° TVA intracommunautaire : FR73479539082<br />
