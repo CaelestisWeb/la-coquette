@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
 export default function CheckoutPage() {
   return (
-    <div className="pt-24 md:pt-36 min-h-screen bg-blanc">
+    <div className="pt-32 md:pt-40 min-h-screen bg-blanc">
       <div className="bg-rose py-12 text-center">
         <h1 className="font-display text-4xl text-noir">Ma commande</h1>
       </div>

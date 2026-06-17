@@ -23,16 +23,16 @@ export default function Hero() {
       {/* Contenu — centré, vers le bas */}
       <div className="relative z-20 w-full text-center px-6 pb-24 sm:pb-28">
 
-        <h1 className="font-display font-light text-[2.55rem] sm:text-[3.5rem] lg:text-[5.25rem] text-blanc leading-[1.05]">
+        <h1 className="font-display font-light text-[2.1rem] sm:text-[2.9rem] lg:text-[4.25rem] text-blanc leading-[1.08]">
           Des bijoux pensés<br />
           pour révéler votre <span className="text-blanc/65">élégance</span>
         </h1>
 
-        <div className="flex flex-wrap justify-center gap-4 mt-9">
-          <Button href="/boutique" variant="primary" size="lg" className="!bg-blanc !text-noir hover:!bg-gris">
+        <div className="flex flex-wrap justify-center gap-3 mt-8">
+          <Button href="/boutique" variant="primary" className="!bg-blanc !text-noir hover:!bg-gris !px-6 !py-3 !text-[10px]">
             Découvrir la boutique
           </Button>
-          <Button href="/contact" variant="secondary" size="lg" className="!border-blanc/40 !text-blanc hover:!border-blanc">
+          <Button href="/contact" variant="secondary" className="!border-blanc/40 !text-blanc hover:!border-blanc !px-6 !py-3 !text-[10px]">
             Prendre contact
           </Button>
         </div>

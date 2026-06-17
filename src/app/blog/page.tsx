@@ -20,7 +20,7 @@ const article = {
 
 export default function BlogPage() {
   return (
-    <div className="pt-24 md:pt-36 min-h-screen bg-ivoire">
+    <div className="pt-32 md:pt-40 min-h-screen bg-ivoire">
 
       {/* En-tête */}
       <div className="bg-rose py-24 text-center">
