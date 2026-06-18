@@ -3,44 +3,40 @@ import SectionLabel from '@/components/ui/SectionLabel';
 const values = [
   {
     icon: (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 3l1.6 4.4L18 9l-4.4 1.6L12 15l-1.6-4.4L6 9l4.4-1.6z"/>
-        <path d="M18 15l.8 2.2L21 18l-2.2.8L18 21l-.8-2.2L15 18l2.2-.8z"/>
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2">
+        <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
       </svg>
     ),
-    title: 'Fait main',
-    text: 'Chaque paire est montée à la main par Caro, dans son atelier de la Drôme — jamais en série.',
+    title: 'Passion',
+    text: 'Chaque bijou est imaginé avec amour et attention. La passion de Caro pour la création se ressent dans chaque détail.',
   },
   {
     icon: (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 3c3.5 4 6 7 6 10a6 6 0 01-12 0c0-3 2.5-6 6-10z"/>
-        <path d="M9.5 13.5a2.5 2.5 0 002.5 2.5"/>
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2">
+        <polyline points="20 6 9 17 4 12"/>
       </svg>
     ),
-    title: 'Inaltérable',
-    text: 'L\'acier inoxydable doré ne ternit pas et ne noircit pas la peau : douche, mer ou piscine, vos boucles restent intactes.',
+    title: 'Qualité',
+    text: 'Acier inoxydable doré, anti-allergie, résistant à l\'eau et au temps. Des matières nobles pour un rendu précieux et durable.',
   },
   {
     icon: (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 2l8 3v6c0 5-3.5 8.5-8 11-4.5-2.5-8-6-8-11V5z"/>
-        <path d="M9 12l2 2 4-4"/>
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2">
+        <circle cx="12" cy="12" r="10"/>
+        <path d="M12 8v4l3 3"/>
       </svg>
     ),
-    title: 'Sans nickel',
-    text: 'Hypoallergénique, pensé pour les oreilles sensibles. À porter du matin au soir sans jamais y penser.',
+    title: 'Proximité',
+    text: 'Caro est à votre écoute pour chaque commande, chaque question. Une relation directe, chaleureuse et authentique.',
   },
   {
     icon: (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M6 3h12l3 6-9 12L3 9z"/>
-        <path d="M3 9h18"/>
-        <path d="M9 3 8 9l4 12 4-12-1-6"/>
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
       </svg>
     ),
-    title: 'Sur-mesure',
-    text: 'Une couleur, une forme, une longueur en tête ? Caro crée la paire qui n\'existe que pour vous.',
+    title: 'Confiance',
+    text: 'Paiement sécurisé, livraison soignée, satisfaction garantie. Votre confiance est notre plus belle récompense.',
   },
 ];
 
@@ -51,9 +47,9 @@ export default function Values() {
 
         {/* Titre */}
         <div className="text-center mb-16 sm:mb-20 reveal">
-          <SectionLabel align="center">Savoir-faire</SectionLabel>
+          <SectionLabel align="center">Ce qui nous anime</SectionLabel>
           <h2 className="font-display text-5xl sm:text-6xl text-noir mt-3">
-            La signature La Coquette
+            Nos valeurs
           </h2>
         </div>
 
