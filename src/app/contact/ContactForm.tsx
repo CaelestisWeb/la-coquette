@@ -86,7 +86,7 @@ export default function ContactForm() {
         <textarea name="message" value={form.message} onChange={handleChange} required rows={5} placeholder="Votre message..." className={`${inputClass} resize-none`} />
       </div>
       {error && <p className="font-body text-xs text-red-500">{error}</p>}
-      <button type="submit" disabled={loading} className="w-full bg-noir text-blanc font-body font-medium text-xs tracking-widest uppercase py-4 hover:bg-or transition-colors duration-300 disabled:opacity-60 disabled:cursor-not-allowed">
+      <button type="submit" disabled={loading} className="w-full bg-noir text-blanc border border-dore rounded font-body font-medium text-xs tracking-widest uppercase py-4 hover:bg-or transition-colors duration-300 disabled:opacity-60 disabled:cursor-not-allowed">
         {loading ? 'Envoi en cours…' : 'Envoyer le message'}
       </button>
     </form>

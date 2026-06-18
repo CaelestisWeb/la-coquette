@@ -172,7 +172,7 @@ export default function CartDrawer() {
               </div>
 
               <Link href="/checkout" onClick={() => setIsOpen(false)}
-                className="block w-full bg-noir text-blanc font-body font-medium tracking-widest text-xs uppercase py-4 rounded hover:bg-or transition-colors duration-300 text-center">
+                className="block w-full bg-noir text-blanc border border-dore font-body font-medium tracking-widest text-xs uppercase py-4 rounded hover:bg-or transition-colors duration-300 text-center">
                 Commander
               </Link>
             </div>

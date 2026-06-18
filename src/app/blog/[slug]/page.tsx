@@ -99,10 +99,10 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
           </div>
 
           <div className="mt-14 flex flex-wrap justify-center gap-3">
-            <Link href="/boutique" className="inline-flex items-center font-body text-[11px] tracking-[0.22em] uppercase bg-noir text-blanc px-8 py-4 rounded hover:bg-taupe transition-colors duration-500">
+            <Link href="/boutique" className="inline-flex items-center font-body text-[11px] tracking-[0.22em] uppercase bg-noir text-blanc border border-dore px-8 py-4 rounded hover:bg-taupe transition-colors duration-500">
               Découvrir les créations
             </Link>
-            <Link href="/contact" className="inline-flex items-center font-body text-[11px] tracking-[0.22em] uppercase border border-noir/25 text-noir px-8 py-4 rounded hover:border-noir transition-colors duration-500">
+            <Link href="/contact" className="inline-flex items-center font-body text-[11px] tracking-[0.22em] uppercase border border-dore text-noir px-8 py-4 rounded hover:border-noir transition-colors duration-500">
               Contacter Caro
             </Link>
           </div>
@@ -128,10 +128,10 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         </div>
 
         <div className="mt-12 flex gap-4">
-          <Link href="/boutique" className="inline-flex items-center font-body text-[11px] tracking-[0.22em] uppercase bg-noir text-blanc px-7 py-3.5 rounded hover:bg-taupe transition-colors duration-500">
+          <Link href="/boutique" className="inline-flex items-center font-body text-[11px] tracking-[0.22em] uppercase bg-noir text-blanc border border-dore px-7 py-3.5 rounded hover:bg-taupe transition-colors duration-500">
             Voir la boutique
           </Link>
-          <Link href="/blog" className="inline-flex items-center font-body text-[11px] tracking-[0.22em] uppercase border border-noir/25 text-noir px-7 py-3.5 rounded hover:border-noir transition-colors duration-500">
+          <Link href="/blog" className="inline-flex items-center font-body text-[11px] tracking-[0.22em] uppercase border border-dore text-noir px-7 py-3.5 rounded hover:border-noir transition-colors duration-500">
             Retour au journal
           </Link>
         </div>

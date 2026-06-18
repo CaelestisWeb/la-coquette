@@ -20,7 +20,7 @@ export default function CommandeConfirmeePage() {
           Caro a bien reçu votre commande et vous contactera très prochainement pour confirmer les détails de livraison.
         </p>
         <Link href="/boutique"
-          className="inline-block bg-noir text-blanc font-body text-xs font-medium tracking-widest uppercase px-10 py-4 rounded hover:bg-or transition-colors duration-300">
+          className="inline-block bg-noir text-blanc border border-dore font-body text-xs font-medium tracking-widest uppercase px-10 py-4 rounded hover:bg-or transition-colors duration-300">
           Continuer mes achats
         </Link>
       </div>
