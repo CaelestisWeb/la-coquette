@@ -60,7 +60,7 @@ export default function Values() {
               key={v.title}
               className={`group px-6 lg:px-10 flex flex-col items-center text-center reveal reveal-d${i + 1} ${i > 0 ? 'lg:border-l border-gris/70' : ''}`}
             >
-              <span className="font-body text-[11px] font-medium tracking-[0.35em] text-dore">
+              <span className="font-body text-[11px] font-medium tracking-[0.35em] text-dore-mat">
                 0{i + 1}
               </span>
               <span className="mt-7 w-16 h-16 rounded-full border border-gris flex items-center justify-center text-noir transition-colors duration-500 group-hover:border-dore group-hover:text-dore">

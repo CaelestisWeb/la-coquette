@@ -72,12 +72,12 @@ export default function CGVPage() {
 
           <section>
             <h2 className="font-display text-2xl text-noir mb-4">10. Données personnelles</h2>
-            <p>Les données collectées lors de la commande sont nécessaires à son traitement et sont traitées conformément à notre <a href="/politique-confidentialite" className="text-noir underline underline-offset-2 hover:text-dore transition-colors">Politique de confidentialité</a>.</p>
+            <p>Les données collectées lors de la commande sont nécessaires à son traitement et sont traitées conformément à notre <a href="/politique-confidentialite" className="text-noir underline underline-offset-2 hover:text-dore-mat transition-colors">Politique de confidentialité</a>.</p>
           </section>
 
           <section>
             <h2 className="font-display text-2xl text-noir mb-4">11. Droit applicable & litiges</h2>
-            <p>Les présentes CGV sont soumises au droit français. En cas de litige, le Client peut recourir gratuitement à un médiateur de la consommation. Conformément à l'article L612-1 du Code de la consommation, les coordonnées du médiateur compétent seront communiquées sur demande à contact@lacoquette-bycaro.fr. Le Client peut également utiliser la plateforme européenne de règlement en ligne des litiges : <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener noreferrer" className="text-noir underline underline-offset-2 hover:text-dore transition-colors">ec.europa.eu/consumers/odr</a>.</p>
+            <p>Les présentes CGV sont soumises au droit français. En cas de litige, le Client peut recourir gratuitement à un médiateur de la consommation. Conformément à l'article L612-1 du Code de la consommation, les coordonnées du médiateur compétent seront communiquées sur demande à contact@lacoquette-bycaro.fr. Le Client peut également utiliser la plateforme européenne de règlement en ligne des litiges : <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener noreferrer" className="text-noir underline underline-offset-2 hover:text-dore-mat transition-colors">ec.europa.eu/consumers/odr</a>.</p>
           </section>
 
         </div>

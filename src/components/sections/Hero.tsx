@@ -25,7 +25,7 @@ export default function Hero() {
 
         <h1 className="font-display font-light text-[2.1rem] sm:text-[2.6rem] lg:text-[50px] text-blanc leading-[1.08]">
           Des bijoux pensés<br />
-          pour révéler votre <span className="text-dore">élégance</span>
+          pour révéler votre <span className="text-dore-mat">élégance</span>
         </h1>
 
         <div className="flex flex-wrap justify-center gap-3 mt-8">

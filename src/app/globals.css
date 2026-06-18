@@ -11,7 +11,8 @@
   --color-gris:    #DCD7D1;   /* filets, bordures */
   --color-taupe:   #6E655B;   /* texte secondaire, labels — assombri pour contraste AA */
   --color-or:      #9A9189;   /* « accent » neutre — stone (remplace l'or) */
-  --color-dore:    #A8842E;   /* or satiné — touches dorées discrètes (rappel des boucles) */
+  --color-dore:     #D4AF37;   /* or brillant — contours, bordures, décor */
+  --color-dore-mat: #A8842E;   /* or mat foncé — texte doré (eyebrows, accents) */
 
   /* ── Typographies ── */
   --font-display: var(--font-jost);

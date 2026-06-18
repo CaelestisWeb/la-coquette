@@ -68,7 +68,7 @@ export default function PolitiqueConfidentialitePage() {
 
           <section>
             <h2 className="font-display text-2xl text-noir mb-4">8. Vos droits</h2>
-            <p>Conformément au Règlement Général sur la Protection des Données (RGPD), vous disposez d'un droit d'accès, de rectification, d'effacement, de limitation, d'opposition et de portabilité de vos données. Pour les exercer, écrivez-nous à contact@lacoquette-bycaro.fr. Vous pouvez également introduire une réclamation auprès de la CNIL (<a href="https://www.cnil.fr" target="_blank" rel="noopener noreferrer" className="text-noir underline underline-offset-2 hover:text-dore transition-colors">cnil.fr</a>).</p>
+            <p>Conformément au Règlement Général sur la Protection des Données (RGPD), vous disposez d'un droit d'accès, de rectification, d'effacement, de limitation, d'opposition et de portabilité de vos données. Pour les exercer, écrivez-nous à contact@lacoquette-bycaro.fr. Vous pouvez également introduire une réclamation auprès de la CNIL (<a href="https://www.cnil.fr" target="_blank" rel="noopener noreferrer" className="text-noir underline underline-offset-2 hover:text-dore-mat transition-colors">cnil.fr</a>).</p>
           </section>
 
           <section>

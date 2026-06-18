@@ -28,7 +28,7 @@ function Stars({ n }: { n: number }) {
     <div className="flex items-center gap-[3px]">
       {Array.from({ length: 5 }).map((_, i) => (
         <svg key={i} width="13" height="13" viewBox="0 0 16 16" fill="none">
-          <path d={STAR_PATH} fill={i < n ? '#BC9A4E' : 'none'} stroke="#BC9A4E" strokeWidth="0.7" strokeLinejoin="round" />
+          <path d={STAR_PATH} fill={i < n ? '#D4AF37' : 'none'} stroke="#D4AF37" strokeWidth="0.7" strokeLinejoin="round" />
         </svg>
       ))}
     </div>

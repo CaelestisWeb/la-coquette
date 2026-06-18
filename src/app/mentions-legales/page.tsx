@@ -38,7 +38,7 @@ export default function MentionsLegalesPage() {
 
           <section>
             <h2 className="font-display text-2xl text-noir mb-4">Données personnelles</h2>
-            <p>Les informations collectées via les formulaires sont destinées exclusivement à La Coquette et ne seront en aucun cas cédées à des tiers. Conformément au RGPD, vous disposez d'un droit d'accès, de rectification et de suppression de vos données en contactant : contact@lacoquette-bycaro.fr. Pour le détail des traitements, consultez notre <a href="/politique-confidentialite" className="text-noir underline underline-offset-2 hover:text-dore transition-colors">Politique de confidentialité</a>.</p>
+            <p>Les informations collectées via les formulaires sont destinées exclusivement à La Coquette et ne seront en aucun cas cédées à des tiers. Conformément au RGPD, vous disposez d'un droit d'accès, de rectification et de suppression de vos données en contactant : contact@lacoquette-bycaro.fr. Pour le détail des traitements, consultez notre <a href="/politique-confidentialite" className="text-noir underline underline-offset-2 hover:text-dore-mat transition-colors">Politique de confidentialité</a>.</p>
           </section>
 
           <section>

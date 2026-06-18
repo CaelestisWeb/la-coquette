@@ -18,7 +18,7 @@ export default function FaqAccordion({ items }: { items: Item[] }) {
               aria-expanded={isOpen}
               className="w-full flex items-center justify-between gap-6 py-6 text-left group"
             >
-              <span className="font-display text-lg sm:text-xl text-noir group-hover:text-dore transition-colors duration-300">
+              <span className="font-display text-lg sm:text-xl text-noir group-hover:text-dore-mat transition-colors duration-300">
                 {it.q}
               </span>
               <span className="relative flex-shrink-0 w-5 h-5">

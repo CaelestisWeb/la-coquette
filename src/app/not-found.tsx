@@ -15,7 +15,7 @@ export default function NotFound() {
             Retour à l'accueil
           </Link>
           <Link href="/boutique"
-            className="inline-block border border-dore text-dore font-body text-xs font-medium tracking-widest uppercase px-8 py-3.5 rounded hover:bg-dore hover:text-blanc transition-colors duration-300">
+            className="inline-block border border-dore text-dore-mat font-body text-xs font-medium tracking-widest uppercase px-8 py-3.5 rounded hover:bg-dore hover:text-blanc transition-colors duration-300">
             Voir la boutique
           </Link>
         </div>
