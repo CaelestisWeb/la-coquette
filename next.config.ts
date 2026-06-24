@@ -17,8 +17,10 @@ const nextConfig: NextConfig = {
           { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
           { key: "X-DNS-Prefetch-Control", value: "on" },
           {
+            // payment=* autorise l'iframe SumUp (gateway.sumup.com) a utiliser
+            // l'API Payment Request, indispensable pour afficher Apple Pay / Google Pay.
             key: "Permissions-Policy",
-            value: "camera=(), microphone=(), geolocation=()",
+            value: "camera=(), microphone=(), geolocation=(), payment=*",
           },
           {
             key: "Strict-Transport-Security",
