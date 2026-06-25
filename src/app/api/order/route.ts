@@ -39,11 +39,19 @@ export async function POST(req: NextRequest) {
 
   const address = `${customer.prenom} ${customer.nom}<br/>${customer.adresse}<br/>${customer.codePostal} ${customer.ville}`;
 
-  const wrap = (inner: string) => `
-    <div style="font-family:Arial,Helvetica,sans-serif;max-width:560px;margin:0 auto;background:#FBF8F3;padding:32px 28px;color:#111111;">
-      ${inner}
-      <p style="margin-top:28px;font-size:12px;color:#9A9189;text-align:center;">La Coquette · Bijoux artisanaux · Drôme</p>
-    </div>`;
+  const wrap = (inner: string) => `<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body style="margin:0;padding:0;background:#F4EEE5;">
+  <div style="font-family:Arial,Helvetica,sans-serif;max-width:560px;margin:0 auto;background:#FBF8F3;padding:32px 28px;color:#111111;">
+    ${inner}
+    <p style="margin-top:28px;font-size:12px;color:#9A9189;text-align:center;">La Coquette · Bijoux artisanaux · Drôme</p>
+  </div>
+</body>
+</html>`;
 
   // ── 1. Email à Caro (essentiel) ─────────────────────────────
   const shopHtml = wrap(`
