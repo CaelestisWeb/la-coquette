@@ -27,6 +27,7 @@ export default function CheckoutForm() {
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [step, setStep] = useState<'address' | 'payment'>('address');
   const [checkoutId, setCheckoutId] = useState('');
+  const [orderRef, setOrderRef] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const sumupRef = useRef<HTMLDivElement>(null);
@@ -78,13 +79,15 @@ export default function CheckoutForm() {
     setLoading(true);
     setError('');
     try {
+      const ref = `LC-${Date.now()}`;
+      setOrderRef(ref);
       const res = await fetch('/api/sumup-checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           amount: grandTotal,
           description: `Commande La Coquette — ${form.prenom} ${form.nom}`,
-          reference: `LC-${Date.now()}`,
+          reference: ref,
         }),
       });
       const data = await res.json();
@@ -113,6 +116,20 @@ export default function CheckoutForm() {
         showInstallments: false,
         onResponse: (type: string, body: any) => {
           if (type === 'success') {
+            // Notifie la commande à Caro (+ confirmation cliente). Non bloquant :
+            // on redirige même si l'email échoue, le paiement est déjà validé.
+            fetch('/api/order', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                customer: form,
+                items: items.map(i => ({ name: i.name, quantity: i.quantity, price: i.price })),
+                subtotal: total,
+                shipping,
+                total: grandTotal,
+                reference: orderRef,
+              }),
+            }).catch(() => {});
             clearCart();
             router.push('/commande-confirmee');
           } else if (type === 'error') {
