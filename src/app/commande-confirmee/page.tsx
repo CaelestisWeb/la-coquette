@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import ClearCart from './ClearCart';
 
 export const metadata: Metadata = {
   title: 'Commande confirmée | La Coquette',
@@ -9,6 +10,7 @@ export const metadata: Metadata = {
 export default function CommandeConfirmeePage() {
   return (
     <div className="pt-32 md:pt-44 min-h-screen bg-ivoire flex items-center justify-center">
+      <ClearCart />
       <div className="text-center px-6 py-20 max-w-md">
         <div className="w-16 h-16 rounded-full bg-rose flex items-center justify-center mx-auto mb-8">
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#111111" strokeWidth="1.5">

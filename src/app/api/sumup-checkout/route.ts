@@ -19,7 +19,11 @@ export async function POST(req: NextRequest) {
       currency: 'EUR',
       merchant_code: 'M28Y0EMC',
       description: description || 'Commande La Coquette',
-      return_url: 'https://lacoquette-bycaro.fr/commande-confirmee',
+      // redirect_url (et non return_url) est OBLIGATOIRE pour les wallets/APM
+      // comme Apple Pay et Google Pay : c'est là que le client est renvoyé
+      // après le flux de paiement par redirection. Sans lui, Apple Pay ne
+      // s'initialise jamais (le bouton reste masqué), même si la carte marche.
+      redirect_url: 'https://lacoquette-bycaro.fr/commande-confirmee',
     }),
   });
 
