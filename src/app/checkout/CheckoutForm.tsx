@@ -1,8 +1,7 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useRef } from 'react';
 import { useCart } from '@/context/CartContext';
-import { useRouter } from 'next/navigation';
 import { SHIPPING_THRESHOLD, SHIPPING_COST } from '@/lib/shipping';
 
 type AddressSuggestion = {
@@ -14,8 +13,7 @@ type AddressSuggestion = {
 };
 
 export default function CheckoutForm() {
-  const { items, total, clearCart } = useCart();
-  const router = useRouter();
+  const { items, total } = useCart();
   const shipping = total >= SHIPPING_THRESHOLD ? 0 : SHIPPING_COST;
   const grandTotal = total + shipping;
 
@@ -25,12 +23,8 @@ export default function CheckoutForm() {
   });
   const [suggestions, setSuggestions] = useState<AddressSuggestion[]>([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
-  const [step, setStep] = useState<'address' | 'payment'>('address');
-  const [checkoutId, setCheckoutId] = useState('');
-  const [orderRef, setOrderRef] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const sumupRef = useRef<HTMLDivElement>(null);
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Autocomplétion adresse française (API officielle data.gouv — toute la France)
@@ -74,13 +68,12 @@ export default function CheckoutForm() {
     setShowSuggestions(false);
   }
 
-  async function handleAddressSubmit(e: React.FormEvent) {
+  async function handleCheckout(e: React.FormEvent) {
     e.preventDefault();
     setLoading(true);
     setError('');
     try {
       const ref = `LC-${Date.now()}`;
-      setOrderRef(ref);
       const res = await fetch('/api/sumup-checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -91,56 +84,30 @@ export default function CheckoutForm() {
         }),
       });
       const data = await res.json();
-      if (!res.ok) throw new Error(data.error || 'Erreur lors de la création du paiement');
-      setCheckoutId(data.checkoutId);
-      setStep('payment');
+      if (!res.ok || !data.hostedCheckoutUrl) {
+        throw new Error(data.error || 'Erreur lors de la création du paiement');
+      }
+
+      // Mémorise la commande : elle sera finalisée (email + vidage panier)
+      // au retour de la page de paiement SumUp.
+      sessionStorage.setItem('lacoquette-pending-order', JSON.stringify({
+        checkoutId: data.checkoutId,
+        reference: ref,
+        customer: form,
+        items: items.map(i => ({ name: i.name, quantity: i.quantity, price: i.price })),
+        subtotal: total,
+        shipping,
+        total: grandTotal,
+      }));
+
+      // Redirige vers la page de paiement hébergée SumUp (Apple Pay, Google
+      // Pay et carte y sont proposés automatiquement).
+      window.location.href = data.hostedCheckoutUrl;
     } catch (err: any) {
       setError(err.message);
-    } finally {
       setLoading(false);
     }
   }
-
-  // Monter le widget SumUp quand on passe à l'étape paiement
-  useEffect(() => {
-    if (step !== 'payment' || !checkoutId || !sumupRef.current) return;
-
-    const script = document.createElement('script');
-    script.src = 'https://gateway.sumup.com/gateway/ecom/card/v2/sdk.js';
-    script.async = true;
-    script.onload = () => {
-      (window as any).SumUpCard.mount({
-        id: 'sumup-card',
-        checkoutId,
-        donateSubmitButton: false,
-        showInstallments: false,
-        onResponse: (type: string, body: any) => {
-          if (type === 'success') {
-            // Notifie la commande à Caro (+ confirmation cliente). Non bloquant :
-            // on redirige même si l'email échoue, le paiement est déjà validé.
-            fetch('/api/order', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({
-                customer: form,
-                items: items.map(i => ({ name: i.name, quantity: i.quantity, price: i.price })),
-                subtotal: total,
-                shipping,
-                total: grandTotal,
-                reference: orderRef,
-              }),
-            }).catch(() => {});
-            clearCart();
-            router.push('/commande-confirmee');
-          } else if (type === 'error') {
-            setError('Paiement refusé. Vérifiez vos informations de carte.');
-          }
-        },
-      });
-    };
-    document.body.appendChild(script);
-    return () => { document.body.removeChild(script); };
-  }, [step, checkoutId]);
 
   if (items.length === 0) {
     return (
@@ -155,81 +122,73 @@ export default function CheckoutForm() {
 
       {/* Colonne gauche — formulaire */}
       <div>
-        {step === 'address' ? (
-          <>
-            <h2 className="font-display text-3xl text-noir mb-8 text-center">Livraison</h2>
-            <form onSubmit={handleAddressSubmit} className="space-y-5">
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="font-body text-[10px] tracking-widest uppercase text-taupe block mb-1 text-center">Prénom *</label>
-                  <input required value={form.prenom} onChange={e => setForm(f => ({ ...f, prenom: e.target.value }))}
-                    className="w-full border border-gris bg-creme px-4 py-3 font-body text-sm text-noir outline-none focus:border-noir transition-colors" />
-                </div>
-                <div>
-                  <label className="font-body text-[10px] tracking-widest uppercase text-taupe block mb-1 text-center">Nom *</label>
-                  <input required value={form.nom} onChange={e => setForm(f => ({ ...f, nom: e.target.value }))}
-                    className="w-full border border-gris bg-creme px-4 py-3 font-body text-sm text-noir outline-none focus:border-noir transition-colors" />
-                </div>
-              </div>
+        <h2 className="font-display text-3xl text-noir mb-8 text-center">Livraison</h2>
+        <form onSubmit={handleCheckout} className="space-y-5">
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="font-body text-[10px] tracking-widest uppercase text-taupe block mb-1 text-center">Prénom *</label>
+              <input required value={form.prenom} onChange={e => setForm(f => ({ ...f, prenom: e.target.value }))}
+                className="w-full border border-gris bg-creme px-4 py-3 font-body text-sm text-noir outline-none focus:border-noir transition-colors" />
+            </div>
+            <div>
+              <label className="font-body text-[10px] tracking-widest uppercase text-taupe block mb-1 text-center">Nom *</label>
+              <input required value={form.nom} onChange={e => setForm(f => ({ ...f, nom: e.target.value }))}
+                className="w-full border border-gris bg-creme px-4 py-3 font-body text-sm text-noir outline-none focus:border-noir transition-colors" />
+            </div>
+          </div>
 
-              <div>
-                <label className="font-body text-[10px] tracking-widest uppercase text-taupe block mb-1 text-center">Email *</label>
-                <input required type="email" value={form.email} onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
-                  className="w-full border border-gris bg-creme px-4 py-3 font-body text-sm text-noir outline-none focus:border-noir transition-colors" />
-              </div>
+          <div>
+            <label className="font-body text-[10px] tracking-widest uppercase text-taupe block mb-1 text-center">Email *</label>
+            <input required type="email" value={form.email} onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
+              className="w-full border border-gris bg-creme px-4 py-3 font-body text-sm text-noir outline-none focus:border-noir transition-colors" />
+          </div>
 
-              {/* Adresse avec autocomplétion */}
-              <div className="relative">
-                <label className="font-body text-[10px] tracking-widest uppercase text-taupe block mb-1 text-center">Adresse *</label>
-                <input required value={form.adresse} onChange={e => handleAddressInput(e.target.value)}
-                  onFocus={() => { if (suggestions.length > 0) setShowSuggestions(true); }}
-                  onBlur={() => setTimeout(() => setShowSuggestions(false), 150)}
-                  autoComplete="off"
-                  placeholder="Commencez à taper votre adresse..."
-                  className="w-full border border-gris bg-creme px-4 py-3 font-body text-sm text-noir outline-none focus:border-noir transition-colors" />
-                {showSuggestions && suggestions.length > 0 && (
-                  <ul className="absolute z-20 w-full bg-creme border border-gris shadow-md mt-1 max-h-72 overflow-y-auto rounded-md">
-                    {suggestions.map((s, i) => (
-                      <li key={i} onMouseDown={() => selectSuggestion(s)}
-                        className="px-4 py-2.5 font-body text-sm text-noir hover:bg-ivoire cursor-pointer border-b border-gris last:border-0">
-                        <span className="block">{s.label}</span>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </div>
+          {/* Adresse avec autocomplétion */}
+          <div className="relative">
+            <label className="font-body text-[10px] tracking-widest uppercase text-taupe block mb-1 text-center">Adresse *</label>
+            <input required value={form.adresse} onChange={e => handleAddressInput(e.target.value)}
+              onFocus={() => { if (suggestions.length > 0) setShowSuggestions(true); }}
+              onBlur={() => setTimeout(() => setShowSuggestions(false), 150)}
+              autoComplete="off"
+              placeholder="Commencez à taper votre adresse..."
+              className="w-full border border-gris bg-creme px-4 py-3 font-body text-sm text-noir outline-none focus:border-noir transition-colors" />
+            {showSuggestions && suggestions.length > 0 && (
+              <ul className="absolute z-20 w-full bg-creme border border-gris shadow-md mt-1 max-h-72 overflow-y-auto rounded-md">
+                {suggestions.map((s, i) => (
+                  <li key={i} onMouseDown={() => selectSuggestion(s)}
+                    className="px-4 py-2.5 font-body text-sm text-noir hover:bg-ivoire cursor-pointer border-b border-gris last:border-0">
+                    <span className="block">{s.label}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
 
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="font-body text-[10px] tracking-widest uppercase text-taupe block mb-1 text-center">Code postal *</label>
-                  <input required value={form.codePostal} onChange={e => setForm(f => ({ ...f, codePostal: e.target.value }))}
-                    className="w-full border border-gris bg-creme px-4 py-3 font-body text-sm text-noir outline-none focus:border-noir transition-colors" />
-                </div>
-                <div>
-                  <label className="font-body text-[10px] tracking-widest uppercase text-taupe block mb-1 text-center">Ville *</label>
-                  <input required value={form.ville} onChange={e => setForm(f => ({ ...f, ville: e.target.value }))}
-                    className="w-full border border-gris bg-creme px-4 py-3 font-body text-sm text-noir outline-none focus:border-noir transition-colors" />
-                </div>
-              </div>
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="font-body text-[10px] tracking-widest uppercase text-taupe block mb-1 text-center">Code postal *</label>
+              <input required value={form.codePostal} onChange={e => setForm(f => ({ ...f, codePostal: e.target.value }))}
+                className="w-full border border-gris bg-creme px-4 py-3 font-body text-sm text-noir outline-none focus:border-noir transition-colors" />
+            </div>
+            <div>
+              <label className="font-body text-[10px] tracking-widest uppercase text-taupe block mb-1 text-center">Ville *</label>
+              <input required value={form.ville} onChange={e => setForm(f => ({ ...f, ville: e.target.value }))}
+                className="w-full border border-gris bg-creme px-4 py-3 font-body text-sm text-noir outline-none focus:border-noir transition-colors" />
+            </div>
+          </div>
 
-              {error && <p className="font-body text-sm text-red-500">{error}</p>}
+          {error && <p className="font-body text-sm text-red-500">{error}</p>}
 
-              <button type="submit" disabled={loading}
-                className="w-full bg-noir text-blanc border border-dore font-body text-xs font-medium tracking-widest uppercase py-4 rounded hover:bg-or transition-colors duration-300 disabled:opacity-50">
-                {loading ? 'Chargement...' : 'Continuer vers le paiement →'}
-              </button>
-            </form>
-          </>
-        ) : (
-          <>
-            <h2 className="font-display text-3xl text-noir mb-8 text-center">Paiement</h2>
-            <div id="sumup-card" ref={sumupRef} />
-            {error && <p className="font-body text-sm text-red-500 mt-4">{error}</p>}
-            <button onClick={() => setStep('address')} className="mt-4 font-body text-xs text-taupe underline underline-offset-4">
-              ← Modifier l'adresse
-            </button>
-          </>
-        )}
+          <button type="submit" disabled={loading}
+            className="w-full bg-noir text-blanc border border-dore font-body text-xs font-medium tracking-widest uppercase py-4 rounded hover:bg-or transition-colors duration-300 disabled:opacity-50">
+            {loading ? 'Redirection vers le paiement...' : `Procéder au paiement · ${grandTotal.toFixed(2)} €`}
+          </button>
+
+          <p className="font-body text-[11px] text-taupe text-center leading-relaxed">
+            Paiement 100 % sécurisé via SumUp · Carte, Apple Pay et Google Pay acceptés.
+            Vous serez redirigé vers la page de paiement sécurisée.
+          </p>
+        </form>
       </div>
 
       {/* Colonne droite — récapitulatif */}

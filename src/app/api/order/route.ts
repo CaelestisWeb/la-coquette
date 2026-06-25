@@ -10,10 +10,28 @@ const eur = (n: number) => `${Number(n).toFixed(2)} €`;
 
 export async function POST(req: NextRequest) {
   const resend = new Resend(process.env.RESEND_API_KEY);
-  const { customer, items, subtotal, shipping, total, reference } = await req.json();
+  const { customer, items, subtotal, shipping, total, reference, checkoutId } = await req.json();
 
   if (!customer?.email || !Array.isArray(items) || items.length === 0) {
     return NextResponse.json({ error: 'Commande invalide' }, { status: 400 });
+  }
+
+  // Vérifie que le paiement a bien été encaissé côté SumUp avant d'envoyer
+  // quoi que ce soit : évite d'avertir Caro d'une commande non payée (cliente
+  // qui revient sur la page sans avoir finalisé le paiement, par exemple).
+  if (checkoutId) {
+    try {
+      const check = await fetch(`https://api.sumup.com/v0.1/checkouts/${checkoutId}`, {
+        headers: { Authorization: `Bearer ${process.env.SUMUP_SECRET_KEY}` },
+      });
+      const co = await check.json();
+      if (co.status !== 'PAID') {
+        return NextResponse.json({ ok: false, paid: false });
+      }
+    } catch (e) {
+      console.error('[order] Vérification du paiement impossible:', e);
+      return NextResponse.json({ ok: false, paid: false });
+    }
   }
 
   const date = new Date().toLocaleString('fr-FR', {
@@ -109,5 +127,5 @@ export async function POST(req: NextRequest) {
     console.warn('[order] Confirmation cliente non envoyée (domaine non vérifié ?):', JSON.stringify(custErr));
   }
 
-  return NextResponse.json({ ok: true });
+  return NextResponse.json({ ok: true, paid: true });
 }

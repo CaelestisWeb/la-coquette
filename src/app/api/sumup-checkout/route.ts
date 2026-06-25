@@ -19,11 +19,13 @@ export async function POST(req: NextRequest) {
       currency: 'EUR',
       merchant_code: 'M28Y0EMC',
       description: description || 'Commande La Coquette',
-      // redirect_url (et non return_url) est OBLIGATOIRE pour les wallets/APM
-      // comme Apple Pay et Google Pay : c'est là que le client est renvoyé
-      // après le flux de paiement par redirection. Sans lui, Apple Pay ne
-      // s'initialise jamais (le bouton reste masqué), même si la carte marche.
+      // redirect_url : où la cliente est renvoyée après avoir payé sur la
+      // page hébergée SumUp.
       redirect_url: 'https://lacoquette-bycaro.fr/commande-confirmee',
+      // Page de paiement hébergée par SumUp : Apple Pay / Google Pay / carte
+      // s'affichent automatiquement (domaine checkout.sumup.com déjà validé
+      // chez Apple), sans aucune vérification de domaine de notre côté.
+      hosted_checkout: { enabled: true },
     }),
   });
 
@@ -34,5 +36,11 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: data.message || 'Erreur SumUp' }, { status: 500 });
   }
 
-  return NextResponse.json({ checkoutId: data.id });
+  // URL de la page de paiement hébergée (fallback sur le format documenté).
+  const hostedCheckoutUrl =
+    data.hosted_checkout_url ||
+    data?.hosted_checkout?.url ||
+    `https://checkout.sumup.com/pay/${data.id}`;
+
+  return NextResponse.json({ checkoutId: data.id, hostedCheckoutUrl });
 }
