@@ -29,12 +29,13 @@ export async function POST(req: NextRequest) {
   const res = NextResponse.json({ ok: true, comingSoon, storage });
 
   // Cookie d'aperçu : permet de voir le vrai site même en mode « bientôt
-  // disponible » (valable 24 h sur ce navigateur).
+  // disponible » (valable 30 jours sur ce navigateur, pour travailler en
+  // interne sans se reconnecter sans cesse).
   res.cookies.set('lc_admin', '1', {
     httpOnly: true,
     sameSite: 'lax',
     path: '/',
-    maxAge: 60 * 60 * 24,
+    maxAge: 60 * 60 * 24 * 30,
   });
 
   return res;
