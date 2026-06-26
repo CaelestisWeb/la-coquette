@@ -6,6 +6,7 @@ import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import CartDrawer from '@/components/ui/CartDrawer';
 import ScrollReveal from '@/components/ui/ScrollReveal';
+import ConditionalChrome from '@/components/layout/ConditionalChrome';
 
 // Sans géométrique épuré — titres
 const jost = Jost({
@@ -82,11 +83,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         <CartProvider>
-          <Header />
-          <main className="flex-1">{children}</main>
-          <Footer />
-          <CartDrawer />
-          <ScrollReveal />
+          <ConditionalChrome
+            header={<Header />}
+            footer={<><Footer /><CartDrawer /><ScrollReveal /></>}
+          >
+            {children}
+          </ConditionalChrome>
         </CartProvider>
       </body>
     </html>
