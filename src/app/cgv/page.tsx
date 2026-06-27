@@ -77,7 +77,12 @@ export default function CGVPage() {
 
           <section>
             <h2 className="font-display text-2xl text-noir mb-4">11. Droit applicable & litiges</h2>
-            <p>Les présentes CGV sont soumises au droit français. En cas de litige, le Client peut recourir gratuitement à un médiateur de la consommation. Conformément à l'article L612-1 du Code de la consommation, les coordonnées du médiateur compétent seront communiquées sur demande à contact@lacoquette-bycaro.fr. Le Client peut également utiliser la plateforme européenne de règlement en ligne des litiges : <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener noreferrer" className="text-noir underline underline-offset-2 hover:text-dore-mat transition-colors">ec.europa.eu/consumers/odr</a>.</p>
+            <p>Les présentes CGV sont soumises au droit français.</p>
+            <p className="mt-3">Conformément aux articles L611-1 et suivants du Code de la consommation, après avoir adressé une réclamation écrite préalable à La Coquette (contact@lacoquette-bycaro.fr) restée sans réponse satisfaisante dans un délai d'un an, le Client peut recourir gratuitement au médiateur de la consommation auquel adhère La Coquette :</p>
+            <p className="mt-3"><strong className="text-noir font-medium">CM2C — Centre de Médiation de la Consommation des Conciliateurs de justice</strong><br />
+            49 rue de Ponthieu, 75008 Paris<br />
+            <a href="https://www.cm2c.net" target="_blank" rel="noopener noreferrer" className="text-noir underline underline-offset-2 hover:text-dore-mat transition-colors">www.cm2c.net</a> · Saisine en ligne : <a href="https://www.cm2c.net/declarer-un-litige.php" target="_blank" rel="noopener noreferrer" className="text-noir underline underline-offset-2 hover:text-dore-mat transition-colors">cm2c.net/declarer-un-litige.php</a></p>
+            <p className="mt-3">Le Client peut également recourir à la plateforme européenne de règlement en ligne des litiges : <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener noreferrer" className="text-noir underline underline-offset-2 hover:text-dore-mat transition-colors">ec.europa.eu/consumers/odr</a>.</p>
           </section>
 
         </div>
