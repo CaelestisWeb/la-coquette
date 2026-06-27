@@ -135,6 +135,13 @@ html.lenis, html.lenis body { height: auto; }
 .reveal-d3 { transition-delay: 0.24s; }
 .reveal-d4 { transition-delay: 0.32s; }
 
+/* Sans JavaScript (crawler, JS désactivé, échec du bundle) : on ne laisse
+   jamais une section masquée derrière une animation qui ne se jouera pas.
+   Le contenu reste visible par défaut. */
+@media (scripting: none) {
+  .reveal { opacity: 1; transform: none; }
+}
+
 /* ── Scrollbar fine ── */
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: transparent; }
