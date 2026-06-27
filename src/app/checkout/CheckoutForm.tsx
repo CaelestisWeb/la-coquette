@@ -180,7 +180,7 @@ export default function CheckoutForm() {
           {error && <p className="font-body text-sm text-red-500">{error}</p>}
 
           <button type="submit" disabled={loading}
-            className="w-full bg-noir text-blanc border border-dore font-body text-xs font-medium tracking-widest uppercase py-4 rounded hover:bg-or transition-colors duration-300 disabled:opacity-50">
+            className="w-full bg-noir text-blanc border border-noir font-body text-xs font-medium tracking-widest uppercase py-4 rounded hover:bg-or transition-colors duration-300 disabled:opacity-50">
             {loading ? 'Redirection vers le paiement...' : `Procéder au paiement · ${grandTotal.toFixed(2)} €`}
           </button>
 

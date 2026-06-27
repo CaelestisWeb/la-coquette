@@ -60,7 +60,7 @@ export default function AdminPage() {
             <button
               type="submit"
               disabled={loading || !password}
-              className="w-full bg-noir text-blanc border border-dore font-body text-xs font-medium tracking-widest uppercase py-4 rounded hover:bg-or transition-colors duration-300 disabled:opacity-50"
+              className="w-full bg-noir text-blanc border border-noir font-body text-xs font-medium tracking-widest uppercase py-4 rounded hover:bg-or transition-colors duration-300 disabled:opacity-50"
             >
               {loading ? 'Connexion…' : 'Se connecter'}
             </button>
@@ -96,7 +96,7 @@ export default function AdminPage() {
                 <button
                   onClick={() => call('off')}
                   disabled={loading}
-                  className="w-full bg-noir text-blanc border border-dore font-body text-xs font-medium tracking-widest uppercase py-4 rounded hover:bg-or transition-colors duration-300 disabled:opacity-50"
+                  className="w-full bg-noir text-blanc border border-noir font-body text-xs font-medium tracking-widest uppercase py-4 rounded hover:bg-or transition-colors duration-300 disabled:opacity-50"
                 >
                   {loading ? '…' : 'Mettre la boutique EN LIGNE'}
                 </button>
@@ -104,7 +104,7 @@ export default function AdminPage() {
                 <button
                   onClick={() => call('on')}
                   disabled={loading}
-                  className="w-full border border-dore text-dore-mat font-body text-xs font-medium tracking-widest uppercase py-4 rounded hover:bg-dore hover:text-blanc transition-colors duration-300 disabled:opacity-50"
+                  className="w-full border border-noir text-dore-mat font-body text-xs font-medium tracking-widest uppercase py-4 rounded hover:bg-dore hover:text-blanc transition-colors duration-300 disabled:opacity-50"
                 >
                   {loading ? '…' : 'Afficher « bientôt disponible »'}
                 </button>

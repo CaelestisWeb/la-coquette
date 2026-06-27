@@ -11,11 +11,11 @@ export default function NotFound() {
         </p>
         <div className="mt-10 flex flex-wrap gap-3 justify-center">
           <Link href="/"
-            className="inline-block bg-noir text-blanc border border-dore font-body text-xs font-medium tracking-widest uppercase px-8 py-3.5 rounded hover:bg-or transition-colors duration-300">
+            className="inline-block bg-noir text-blanc border border-noir font-body text-xs font-medium tracking-widest uppercase px-8 py-3.5 rounded hover:bg-or transition-colors duration-300">
             Retour à l'accueil
           </Link>
           <Link href="/boutique"
-            className="inline-block border border-dore text-dore-mat font-body text-xs font-medium tracking-widest uppercase px-8 py-3.5 rounded hover:bg-dore hover:text-blanc transition-colors duration-300">
+            className="inline-block border border-noir text-dore-mat font-body text-xs font-medium tracking-widest uppercase px-8 py-3.5 rounded hover:bg-dore hover:text-blanc transition-colors duration-300">
             Voir la boutique
           </Link>
         </div>

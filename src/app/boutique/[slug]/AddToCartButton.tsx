@@ -27,7 +27,7 @@ export default function AddToCartButton({ product }: { product: Product }) {
 
       <button
         onClick={() => addItem({ id: product.id, name: product.name, price: product.price, image: product.image }, qty)}
-        className="flex-1 bg-noir text-blanc border border-dore font-body font-medium text-xs tracking-widest uppercase py-4 px-8 rounded hover:bg-or transition-colors duration-300"
+        className="flex-1 bg-noir text-blanc border border-noir font-body font-medium text-xs tracking-widest uppercase py-4 px-8 rounded hover:bg-or transition-colors duration-300"
       >
         Ajouter au panier
       </button>

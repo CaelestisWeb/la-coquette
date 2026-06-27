@@ -70,7 +70,7 @@ export default function OrderConfirmation() {
           </p>
           <div className="mt-10">
             <Link href="/checkout"
-              className="inline-block bg-noir text-blanc border border-dore font-body text-xs font-medium tracking-widest uppercase px-10 py-4 rounded hover:bg-or transition-colors duration-300">
+              className="inline-block bg-noir text-blanc border border-noir font-body text-xs font-medium tracking-widest uppercase px-10 py-4 rounded hover:bg-or transition-colors duration-300">
               Reprendre ma commande
             </Link>
           </div>
@@ -92,7 +92,7 @@ export default function OrderConfirmation() {
           Caro a bien reçu votre commande et vous contactera très prochainement pour confirmer les détails de livraison.
         </p>
         <Link href="/boutique"
-          className="inline-block bg-noir text-blanc border border-dore font-body text-xs font-medium tracking-widest uppercase px-10 py-4 rounded hover:bg-or transition-colors duration-300">
+          className="inline-block bg-noir text-blanc border border-noir font-body text-xs font-medium tracking-widest uppercase px-10 py-4 rounded hover:bg-or transition-colors duration-300">
           Continuer mes achats
         </Link>
       </div>

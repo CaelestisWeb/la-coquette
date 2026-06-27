@@ -66,10 +66,10 @@ export default function HeroVisual({ before, hl, after, ctaPrimary, ctaSecondary
         </h1>
 
         <div className="hero-rise-2 flex flex-wrap justify-center gap-3 mt-8">
-          <Button href="/boutique" variant="primary" className="!bg-creme !text-noir hover:!bg-gris !px-6 !py-3 !text-[10px]">
+          <Button href="/boutique" variant="primary" className="!bg-creme !text-noir !border-creme hover:!bg-gris !px-6 !py-3 !text-[10px]">
             {ctaPrimary}
           </Button>
-          <Button href="/contact" variant="secondary" className="!border-dore !text-blanc !px-6 !py-3 !text-[10px]">
+          <Button href="/contact" variant="secondary" className="!border-creme !text-blanc !px-6 !py-3 !text-[10px]">
             {ctaSecondary}
           </Button>
         </div>

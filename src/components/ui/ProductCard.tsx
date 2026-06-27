@@ -32,7 +32,7 @@ export default function ProductCard({ product }: { product: Product }) {
         <div className="absolute inset-0 bg-noir/0 group-hover:bg-noir/10 transition-all duration-300 hidden sm:flex items-end justify-center pb-4 opacity-0 group-hover:opacity-100">
           <button
             onClick={handleAdd}
-            className="bg-creme text-noir border border-dore text-[10px] font-body font-semibold tracking-widest uppercase px-6 py-2.5 rounded hover:bg-or hover:text-blanc transition-colors duration-200"
+            className="bg-creme text-noir border border-noir text-[10px] font-body font-semibold tracking-widest uppercase px-6 py-2.5 rounded hover:bg-or hover:text-blanc transition-colors duration-200"
           >
             Ajouter au panier
           </button>
@@ -51,7 +51,7 @@ export default function ProductCard({ product }: { product: Product }) {
         {/* Bouton panier — mobile uniquement */}
         <button
           onClick={handleAdd}
-          className="sm:hidden mt-3 text-[9px] font-body tracking-wide uppercase py-1.5 px-4 border border-dore text-taupe rounded hover:text-or active:bg-or active:text-blanc transition-colors duration-150"
+          className="sm:hidden mt-3 text-[9px] font-body tracking-wide uppercase py-1.5 px-4 border border-noir text-taupe rounded hover:text-or active:bg-or active:text-blanc transition-colors duration-150"
         >
           + Panier
         </button>

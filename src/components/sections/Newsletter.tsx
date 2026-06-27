@@ -17,7 +17,7 @@ export default async function Newsletter() {
         </p>
         <Link
           href="/contact?sujet=Bijou+personnalisé"
-          className="inline-block mt-10 bg-creme text-noir border border-dore font-body text-[11px] font-normal tracking-[0.22em] uppercase px-10 py-4 rounded hover:bg-creme/80 transition-colors duration-500"
+          className="inline-block mt-10 bg-creme text-noir border border-noir font-body text-[11px] font-normal tracking-[0.22em] uppercase px-10 py-4 rounded hover:bg-creme/80 transition-colors duration-500"
         >
           {newsletterCta}
         </Link>
