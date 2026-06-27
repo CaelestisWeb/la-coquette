@@ -1,4 +1,5 @@
 import { client } from './client';
+import { urlForImage } from './image';
 import {
   HOME_DEFAULTS,
   SETTINGS_DEFAULTS,
@@ -33,11 +34,20 @@ export async function getHomeContent(): Promise<HomeContent> {
   } catch {
     /* repli sur les valeurs par défaut */
   }
+  let heroImageUrl = HOME_DEFAULTS.heroImageUrl;
+  try {
+    const img = (d as { heroImage?: { asset?: unknown } })?.heroImage;
+    if (img?.asset) heroImageUrl = urlForImage(img).width(1600).height(2000).fit('crop').url();
+  } catch {
+    /* garde la photo par défaut */
+  }
+
   return {
     heroTitle: d?.heroTitle || HOME_DEFAULTS.heroTitle,
     heroHighlight: d?.heroHighlight ?? HOME_DEFAULTS.heroHighlight,
     heroCtaPrimary: d?.heroCtaPrimary || HOME_DEFAULTS.heroCtaPrimary,
     heroCtaSecondary: d?.heroCtaSecondary || HOME_DEFAULTS.heroCtaSecondary,
+    heroImageUrl,
     reassuranceItems: nonEmpty(d?.reassuranceItems, HOME_DEFAULTS.reassuranceItems),
     featuredLabel: d?.featuredLabel || HOME_DEFAULTS.featuredLabel,
     featuredHeading: d?.featuredHeading || HOME_DEFAULTS.featuredHeading,

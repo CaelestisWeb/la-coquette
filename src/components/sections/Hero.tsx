@@ -16,7 +16,7 @@ export default async function Hero() {
 
       {/* Image de fond — légèrement assombrie */}
       <Image
-        src="/hero-banner.jpg"
+        src={c.heroImageUrl}
         alt="Bijou artisanal La Coquette — créole dorée sur pierre"
         fill
         priority

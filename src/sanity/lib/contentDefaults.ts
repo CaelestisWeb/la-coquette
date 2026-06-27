@@ -10,6 +10,7 @@ export type HomeContent = {
   heroHighlight: string;
   heroCtaPrimary: string;
   heroCtaSecondary: string;
+  heroImageUrl: string;
   reassuranceItems: ReassuranceItem[];
   featuredLabel: string;
   featuredHeading: string;
@@ -53,6 +54,7 @@ export const HOME_DEFAULTS: HomeContent = {
   heroHighlight: 'élégance',
   heroCtaPrimary: 'Découvrir la boutique',
   heroCtaSecondary: 'Prendre contact',
+  heroImageUrl: '/hero-banner.jpg',
   reassuranceItems: [
     { title: 'Fait main', text: 'Créé avec soin dans la Drôme' },
     { title: 'Acier inoxydable', text: 'Hypoallergénique & durable' },

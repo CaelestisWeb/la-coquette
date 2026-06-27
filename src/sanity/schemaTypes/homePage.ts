@@ -19,6 +19,7 @@ export const homePage = defineType({
     defineField({ name: 'heroHighlight', title: 'Mot mis en valeur (doré)', type: 'string', group: 'hero', description: 'Un mot du titre affiché en doré (ex : élégance). Vide = aucun.' }),
     defineField({ name: 'heroCtaPrimary', title: 'Bouton principal — texte', type: 'string', group: 'hero' }),
     defineField({ name: 'heroCtaSecondary', title: 'Bouton secondaire — texte', type: 'string', group: 'hero' }),
+    defineField({ name: 'heroImage', title: 'Photo de fond', type: 'image', options: { hotspot: true }, group: 'hero', description: 'Laissez vide pour garder la photo actuelle.' }),
 
     // ── Réassurance (bandeau 4 points) ──
     defineField({
