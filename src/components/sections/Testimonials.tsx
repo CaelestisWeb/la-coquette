@@ -31,7 +31,7 @@ function Card({ t, className = '' }: { t: Testimonial; className?: string }) {
 export default async function Testimonials() {
   const { testimonialsLabel, testimonialsHeading, testimonials } = await getHomeContent();
   return (
-    <section className="bg-rose py-24 sm:py-28 overflow-hidden">
+    <section className="bg-rose py-20 sm:py-28 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
 
         <div className="text-center mb-14 reveal">

@@ -29,7 +29,7 @@ const icons = [
 export default async function Values() {
   const { valuesLabel, valuesHeading, valuesItems } = await getHomeContent();
   return (
-    <section className="bg-ivoire py-32">
+    <section className="bg-ivoire py-20 sm:py-28">
       <div className="max-w-7xl mx-auto px-6">
 
         {/* Titre */}

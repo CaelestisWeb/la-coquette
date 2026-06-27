@@ -4,7 +4,7 @@ import { getHomeContent } from '@/sanity/lib/content';
 export default async function Newsletter() {
   const { newsletterLabel, newsletterHeading, newsletterText, newsletterCta } = await getHomeContent();
   return (
-    <section className="bg-noir py-28">
+    <section className="bg-noir py-20 sm:py-28">
       <div className="max-w-2xl mx-auto px-6 text-center reveal">
         <span className="font-body text-[10px] font-medium tracking-[0.3em] uppercase text-blanc/45">
           {newsletterLabel}

@@ -8,7 +8,7 @@ export default async function FeaturedProducts() {
   const featuredProducts = await getFeaturedProducts();
   const { featuredLabel, featuredHeading, featuredIntro } = await getHomeContent();
   return (
-    <section className="bg-ivoire py-28">
+    <section className="bg-ivoire py-20 sm:py-28">
       <div className="max-w-7xl mx-auto px-6">
 
         {/* Titre */}
