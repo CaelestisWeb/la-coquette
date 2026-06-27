@@ -2,21 +2,23 @@ import ProductCard from '@/components/ui/ProductCard';
 import Button from '@/components/ui/Button';
 import SectionLabel from '@/components/ui/SectionLabel';
 import { getFeaturedProducts } from '@/sanity/lib/products';
+import { getHomeContent } from '@/sanity/lib/content';
 
 export default async function FeaturedProducts() {
   const featuredProducts = await getFeaturedProducts();
+  const { featuredLabel, featuredHeading, featuredIntro } = await getHomeContent();
   return (
     <section className="bg-ivoire py-28">
       <div className="max-w-7xl mx-auto px-6">
 
         {/* Titre */}
         <div className="text-center mb-12 sm:mb-16 reveal">
-          <SectionLabel align="center">Sélection</SectionLabel>
+          <SectionLabel align="center">{featuredLabel}</SectionLabel>
           <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl text-noir mt-3">
-            Nos créations
+            {featuredHeading}
           </h2>
           <p className="font-body font-light text-sm sm:text-base text-taupe leading-relaxed max-w-xl mx-auto mt-5">
-            Des boucles d'oreilles pendantes montées à la main par Caro, en acier inoxydable doré qui ne ternit pas — à porter sous la pluie comme sous les projecteurs.
+            {featuredIntro}
           </p>
         </div>
 

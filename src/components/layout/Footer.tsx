@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { getSiteSettings } from '@/sanity/lib/content';
 
 const navLinks = [
   { href: '/', label: 'Accueil' },
@@ -9,7 +10,8 @@ const navLinks = [
   { href: '/contact', label: 'Contact' },
 ];
 
-export default function Footer() {
+export default async function Footer() {
+  const s = await getSiteSettings();
   return (
     <footer className="bg-noir text-blanc/70">
       <div className="max-w-2xl mx-auto px-6 py-20 flex flex-col items-center text-center">
@@ -25,8 +27,7 @@ export default function Footer() {
 
         {/* Accroche */}
         <p className="mt-8 font-body font-light text-sm leading-relaxed text-blanc/55 max-w-md">
-          Des bijoux artisanaux en acier inoxydable, conçus avec passion dans la Drôme
-          pour révéler votre élégance au quotidien.
+          {s.footerTagline}
         </p>
 
         {/* Navigation */}
@@ -44,9 +45,9 @@ export default function Footer() {
 
         {/* Contact */}
         <div className="mt-8 flex flex-col items-center gap-2 font-body font-light text-sm text-blanc/55">
-          <span>Drôme (26) · France</span>
-          <a href="mailto:contact@lacoquette-bycaro.fr" className="hover:text-blanc transition-colors break-all">
-            contact@lacoquette-bycaro.fr
+          <span>{s.contactLocation}</span>
+          <a href={`mailto:${s.contactEmail}`} className="hover:text-blanc transition-colors break-all">
+            {s.contactEmail}
           </a>
         </div>
 
@@ -59,7 +60,7 @@ export default function Footer() {
             Nous contacter
           </Link>
           <a
-            href="https://www.instagram.com/lacoquette_bycaro/"
+            href={s.instagramUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2.5 text-blanc/55 hover:text-blanc transition-colors text-sm font-body"
@@ -69,7 +70,7 @@ export default function Footer() {
               <circle cx="12" cy="12" r="4"/>
               <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/>
             </svg>
-            @lacoquette_bycaro
+            {s.instagramHandle}
           </a>
         </div>
       </div>
