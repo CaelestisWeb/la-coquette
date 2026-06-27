@@ -1,40 +1,55 @@
-import { kv } from '@vercel/kv';
+import { createClient, type VercelKV } from '@vercel/kv';
 
 const KEY = 'coming_soon';
 
-// Le stockage KV (Vercel) est-il branché sur le projet ?
-function kvReady(): boolean {
-  return Boolean(process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN);
+// Résout les identifiants du stockage, quel que soit le nom des variables
+// injectées par Vercel (KV_REST_API_* pour Vercel KV, UPSTASH_REDIS_REST_*
+// pour l'intégration Upstash via le Marketplace).
+function resolveCreds(): { url: string; token: string } | null {
+  const url = process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL;
+  const token = process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN;
+  return url && token ? { url, token } : null;
+}
+
+let client: VercelKV | null = null;
+function getClient(): VercelKV | null {
+  if (client) return client;
+  const creds = resolveCreds();
+  if (!creds) return null;
+  client = createClient(creds);
+  return client;
 }
 
 /**
  * Mode « site bientôt disponible » actif ?
- * - Si le stockage KV est branché → on lit le flag piloté par l'admin.
- * - Sinon (avant la mise en place du KV) → repli sur la variable
+ * - Si le stockage est branché → on lit le flag piloté par l'admin.
+ * - Sinon (avant la mise en place du stockage) → repli sur la variable
  *   d'environnement COMING_SOON, pour pouvoir activer le mode tout de suite.
  */
 export async function getComingSoon(): Promise<boolean> {
-  if (kvReady()) {
+  const c = getClient();
+  if (c) {
     try {
-      const v = await kv.get<boolean>(KEY);
+      const v = await c.get<boolean>(KEY);
       if (typeof v === 'boolean') return v;
     } catch {
-      // en cas d'erreur KV, on retombe sur la variable d'env
+      // en cas d'erreur de stockage, on retombe sur la variable d'env
     }
   }
   return process.env.COMING_SOON === 'true';
 }
 
 /**
- * Change l'état (réservé à l'admin). Nécessite le stockage KV.
- * Renvoie false si le KV n'est pas encore branché (rien persisté).
+ * Change l'état (réservé à l'admin). Nécessite le stockage branché.
+ * Renvoie false si le stockage n'est pas encore en place (rien persisté).
  */
 export async function setComingSoon(value: boolean): Promise<boolean> {
-  if (!kvReady()) return false;
-  await kv.set(KEY, value);
+  const c = getClient();
+  if (!c) return false;
+  await c.set(KEY, value);
   return true;
 }
 
 export function storageReady(): boolean {
-  return kvReady();
+  return resolveCreds() !== null;
 }

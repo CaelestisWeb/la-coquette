@@ -5,7 +5,7 @@ import { getComingSoon } from '@/lib/site-status';
 // la page d'attente elle-même, l'espace admin, et les fichiers statiques
 // (tout chemin contenant un point : .svg, .jpg, .ico…).
 export const config = {
-  matcher: ['/((?!api|_next|admin|bientot|.*\\.).*)'],
+  matcher: ['/((?!api|_next|admin|studio|bientot|.*\\.).*)'],
 };
 
 export async function middleware(req: NextRequest) {
