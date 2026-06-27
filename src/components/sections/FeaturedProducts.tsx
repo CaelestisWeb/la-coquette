@@ -1,9 +1,10 @@
 import ProductCard from '@/components/ui/ProductCard';
 import Button from '@/components/ui/Button';
 import SectionLabel from '@/components/ui/SectionLabel';
-import { featuredProducts } from '@/data/products';
+import { getFeaturedProducts } from '@/sanity/lib/products';
 
-export default function FeaturedProducts() {
+export default async function FeaturedProducts() {
+  const featuredProducts = await getFeaturedProducts();
   return (
     <section className="bg-ivoire py-28">
       <div className="max-w-7xl mx-auto px-6">

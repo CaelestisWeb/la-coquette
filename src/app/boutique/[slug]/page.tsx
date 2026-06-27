@@ -1,7 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { products, getProductBySlug, categoryLabels } from '@/data/products';
+import { getProducts, getProductBySlug } from '@/sanity/lib/products';
+import { categoryLabels } from '@/sanity/lib/productTypes';
 import AddToCartButton from './AddToCartButton';
 import ProductCard from '@/components/ui/ProductCard';
 import { SHIPPING_THRESHOLD } from '@/lib/shipping';
@@ -10,12 +11,13 @@ import type { Metadata } from 'next';
 type Props = { params: Promise<{ slug: string }> };
 
 export async function generateStaticParams() {
+  const products = await getProducts();
   return products.map(p => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const product = getProductBySlug(slug);
+  const product = await getProductBySlug(slug);
   if (!product) return {};
   return {
     title: `${product.name} | La Coquette`,
@@ -25,17 +27,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function ProductPage({ params }: Props) {
   const { slug } = await params;
-  const product = getProductBySlug(slug);
+  const product = await getProductBySlug(slug);
   if (!product) notFound();
 
-  const related = products.filter(p => p.id !== product.id).slice(0, 4);
+  const allProducts = await getProducts();
+  const related = allProducts.filter(p => p.id !== product.id).slice(0, 4);
 
   const productJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Product',
     name: product.name,
     description: product.description,
-    image: `https://lacoquette-bycaro.fr${product.image}`,
+    image: product.image.startsWith('http') ? product.image : `https://lacoquette-bycaro.fr${product.image}`,
     material: product.material,
     brand: { '@type': 'Brand', name: 'La Coquette' },
     offers: {

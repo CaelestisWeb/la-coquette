@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useCart } from '@/context/CartContext';
-import type { Product } from '@/data/products';
+import type { Product } from '@/sanity/lib/productTypes';
 
 export default function AddToCartButton({ product }: { product: Product }) {
   const { addItem } = useCart();

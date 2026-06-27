@@ -1,9 +1,9 @@
 import type { MetadataRoute } from 'next';
-import { products } from '@/data/products';
+import { getProducts } from '@/sanity/lib/products';
 
 const BASE = 'https://lacoquette-bycaro.fr';
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
 
   const staticPages: MetadataRoute.Sitemap = [
@@ -17,6 +17,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/mentions-legales`, lastModified: now, changeFrequency: 'yearly', priority: 0.2 },
   ];
 
+  const products = await getProducts();
   const productPages: MetadataRoute.Sitemap = products.map(p => ({
     url: `${BASE}/boutique/${p.slug}`,
     lastModified: now,

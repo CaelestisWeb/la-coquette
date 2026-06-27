@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useCart } from '@/context/CartContext';
-import { categoryLabels, type Product } from '@/data/products';
+import { categoryLabels, type Product } from '@/sanity/lib/productTypes';
 
 export default function ProductCard({ product }: { product: Product }) {
   const { addItem } = useCart();

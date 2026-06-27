@@ -1,4 +1,5 @@
-import { products, type ProductCategory } from '@/data/products';
+import { getProducts } from '@/sanity/lib/products';
+import type { ProductCategory } from '@/sanity/lib/productTypes';
 import ProductCard from '@/components/ui/ProductCard';
 import type { Metadata } from 'next';
 
@@ -15,6 +16,7 @@ export default async function BoutiquePage({
   const { cat } = await searchParams;
   const activeCat = cat as ProductCategory | undefined;
 
+  const products = await getProducts();
   const filtered = activeCat
     ? products.filter(p => p.category === activeCat)
     : products;
