@@ -36,7 +36,8 @@ export async function getHomeContent(): Promise<HomeContent> {
   }
   let heroImageUrl = HOME_DEFAULTS.heroImageUrl;
   try {
-    const img = (d as { heroImage?: { asset?: unknown } })?.heroImage;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const img = (d as any)?.heroImage;
     if (img?.asset) heroImageUrl = urlForImage(img).width(1600).height(2000).fit('crop').url();
   } catch {
     /* garde la photo par défaut */
