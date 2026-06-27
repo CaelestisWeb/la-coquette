@@ -1,4 +1,4 @@
-import { client } from './client';
+import { sanityFetch } from './fetch';
 import { urlForImage } from './image';
 import type { Product } from './productTypes';
 
@@ -8,8 +8,6 @@ const FIELDS = `
   name, category, price, description, material, featured, available,
   "image": images[0]
 `;
-
-const OPTS = { next: { revalidate: 60 } } as const;
 
 function toProduct(p: any): Product {
   let image = '/boucles-placeholder.jpg';
@@ -35,28 +33,23 @@ function toProduct(p: any): Product {
 }
 
 export async function getProducts(): Promise<Product[]> {
-  const raw = await client.fetch<any[]>(
+  const raw = await sanityFetch<any[]>(
     `*[_type == "product"] | order(order asc, _createdAt asc){ ${FIELDS} }`,
-    {},
-    OPTS,
   );
   return (raw || []).map(toProduct);
 }
 
 export async function getFeaturedProducts(): Promise<Product[]> {
-  const raw = await client.fetch<any[]>(
+  const raw = await sanityFetch<any[]>(
     `*[_type == "product" && featured == true] | order(order asc){ ${FIELDS} }`,
-    {},
-    OPTS,
   );
   return (raw || []).map(toProduct);
 }
 
 export async function getProductBySlug(slug: string): Promise<Product | null> {
-  const p = await client.fetch<any>(
+  const p = await sanityFetch<any>(
     `*[_type == "product" && slug.current == $slug][0]{ ${FIELDS} }`,
     { slug },
-    OPTS,
   );
   return p ? toProduct(p) : null;
 }

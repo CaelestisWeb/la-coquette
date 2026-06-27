@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 import { Jost, Inter, Pompiere } from 'next/font/google';
+import { draftMode } from 'next/headers';
+import { VisualEditing } from 'next-sanity/visual-editing';
 import './globals.css';
 import { CartProvider } from '@/context/CartContext';
 import Header from '@/components/layout/Header';
@@ -75,7 +77,8 @@ const jsonLd = {
   sameAs: ['https://www.instagram.com/lacoquette_bycaro/'],
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const { isEnabled: isDraft } = await draftMode();
   return (
     <html lang="fr" className={`${jost.variable} ${inter.variable} ${pompiere.variable}`}>
       <body className="min-h-screen flex flex-col" suppressHydrationWarning>
@@ -91,6 +94,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             {children}
           </ConditionalChrome>
         </CartProvider>
+        {/* Aperçu Studio : rafraîchissement en direct des brouillons (jamais sur le site public) */}
+        {isDraft && <VisualEditing />}
       </body>
     </html>
   );

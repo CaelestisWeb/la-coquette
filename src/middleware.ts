@@ -9,6 +9,12 @@ export const config = {
 };
 
 export async function middleware(req: NextRequest) {
+  // Aperçu Studio (Presentation) : laisser voir le vrai site même en mode
+  // « bientôt disponible ». Next pose ce cookie quand le draft mode est actif.
+  if (req.cookies.has('__prerender_bypass')) {
+    return NextResponse.next();
+  }
+
   if (await getComingSoon()) {
     const url = req.nextUrl.clone();
     url.pathname = '/bientot';

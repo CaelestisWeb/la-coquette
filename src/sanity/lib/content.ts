@@ -1,4 +1,4 @@
-import { client } from './client';
+import { sanityFetch } from './fetch';
 import { urlForImage } from './image';
 import {
   HOME_DEFAULTS,
@@ -22,15 +22,13 @@ export type {
   ContactContent,
 } from './contentDefaults';
 
-const OPTS = { next: { revalidate: 60 } } as const;
-
-const nonEmpty = <T,>(arr: T[] | undefined | null, fallback: T[]) =>
+const nonEmpty =<T,>(arr: T[] | undefined | null, fallback: T[]) =>
   Array.isArray(arr) && arr.length > 0 ? arr : fallback;
 
 export async function getHomeContent(): Promise<HomeContent> {
   let d: Partial<HomeContent> | null = null;
   try {
-    d = await client.fetch(`*[_type == "homePage"][0]`, {}, OPTS);
+    d = await sanityFetch(`*[_type == "homePage"][0]`);
   } catch {
     /* repli sur les valeurs par défaut */
   }
@@ -69,7 +67,7 @@ export async function getHomeContent(): Promise<HomeContent> {
 export async function getSiteSettings(): Promise<SiteSettings> {
   let d: Partial<SiteSettings> | null = null;
   try {
-    d = await client.fetch(`*[_type == "siteSettings"][0]`, {}, OPTS);
+    d = await sanityFetch(`*[_type == "siteSettings"][0]`);
   } catch {
     /* repli */
   }
@@ -86,7 +84,7 @@ export async function getSiteSettings(): Promise<SiteSettings> {
 export async function getFaqContent(): Promise<FaqContent> {
   let d: Partial<FaqContent> | null = null;
   try {
-    d = await client.fetch(`*[_type == "faqPage"][0]`, {}, OPTS);
+    d = await sanityFetch(`*[_type == "faqPage"][0]`);
   } catch {
     /* repli */
   }
@@ -101,7 +99,7 @@ export async function getFaqContent(): Promise<FaqContent> {
 export async function getContactContent(): Promise<ContactContent> {
   let d: Partial<ContactContent> | null = null;
   try {
-    d = await client.fetch(`*[_type == "contactPage"][0]`, {}, OPTS);
+    d = await sanityFetch(`*[_type == "contactPage"][0]`);
   } catch {
     /* repli */
   }
