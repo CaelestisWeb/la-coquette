@@ -1,7 +1,16 @@
 import Image from 'next/image';
 import Button from '@/components/ui/Button';
+import { getHomeContent } from '@/sanity/lib/content';
 
-export default function Hero() {
+export default async function Hero() {
+  const c = await getHomeContent();
+
+  // Découpe le titre autour du mot mis en valeur (affiché en doré).
+  const hl = c.heroHighlight.trim();
+  const idx = hl ? c.heroTitle.indexOf(hl) : -1;
+  const before = idx >= 0 ? c.heroTitle.slice(0, idx) : c.heroTitle;
+  const after = idx >= 0 ? c.heroTitle.slice(idx + hl.length) : '';
+
   return (
     <section className="relative min-h-screen overflow-hidden flex flex-col justify-end">
 
@@ -23,17 +32,18 @@ export default function Hero() {
       {/* Contenu — centré, vers le bas */}
       <div className="relative z-20 w-full text-center px-6 pb-24 sm:pb-28">
 
-        <h1 className="font-display font-light text-[2.1rem] sm:text-[2.6rem] lg:text-[50px] text-blanc leading-[1.08]">
-          Des bijoux pensés<br />
-          pour révéler votre <span className="text-dore-mat">élégance</span>
+        <h1 className="font-display font-light text-[2.1rem] sm:text-[2.6rem] lg:text-[50px] text-blanc leading-[1.08] whitespace-pre-line">
+          {before}
+          {idx >= 0 && <span className="text-dore-mat">{hl}</span>}
+          {after}
         </h1>
 
         <div className="flex flex-wrap justify-center gap-3 mt-8">
           <Button href="/boutique" variant="primary" className="!bg-creme !text-noir hover:!bg-gris !px-6 !py-3 !text-[10px]">
-            Découvrir la boutique
+            {c.heroCtaPrimary}
           </Button>
           <Button href="/contact" variant="secondary" className="!border-dore !text-blanc !px-6 !py-3 !text-[10px]">
-            Prendre contact
+            {c.heroCtaSecondary}
           </Button>
         </div>
       </div>
