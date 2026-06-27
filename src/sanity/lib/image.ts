@@ -1,8 +1,8 @@
-import imageUrlBuilder from '@sanity/image-url';
+import { createImageUrlBuilder } from '@sanity/image-url';
 import type { Image } from 'sanity';
-import { client } from './client';
+import { projectId, dataset } from '../env';
 
-const builder = imageUrlBuilder(client);
+const builder = createImageUrlBuilder({ projectId, dataset });
 
 // Construit l'URL optimisée d'une image Sanity.
 export function urlForImage(source: Image) {
