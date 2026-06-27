@@ -16,7 +16,15 @@ export async function sanityFetch<T = any>( // eslint-disable-line @typescript-e
   query: string,
   params: Record<string, unknown> = {},
 ): Promise<T> {
-  const { isEnabled: isDraft } = await draftMode();
+  // draftMode() lève une erreur hors contexte de requête (ex: generateStaticParams
+  // au build) ; dans ce cas on sert le contenu publié.
+  let isDraft = false;
+  try {
+    isDraft = (await draftMode()).isEnabled;
+  } catch {
+    isDraft = false;
+  }
+
   if (isDraft && projectId) {
     // Client brouillon créé à la volée (au runtime, projectId présent).
     const draftClient = client.withConfig({
