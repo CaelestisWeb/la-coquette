@@ -61,7 +61,7 @@ export default function HeroVisual({ before, hl, after, ctaPrimary, ctaSecondary
       <div className="relative z-20 w-full text-center px-6 pb-24 sm:pb-28">
         <h1 className="hero-rise font-display font-light text-[2.1rem] sm:text-[2.6rem] lg:text-[50px] text-blanc leading-[1.08] whitespace-pre-line">
           {before}
-          {hl && <span className="hero-underline text-dore-mat">{hl}</span>}
+          {hl && <span className="text-dore-mat">{hl}</span>}
           {after}
         </h1>
 

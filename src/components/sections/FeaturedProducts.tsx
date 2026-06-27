@@ -31,8 +31,12 @@ export default async function FeaturedProducts() {
 
         {/* Lien boutique */}
         <div className="text-center mt-14 reveal">
-          <Button href="/boutique" variant="ghost">
-            Voir toute la boutique →
+          <Button
+            href="/boutique"
+            variant="secondary"
+            className="!px-8 !py-3 hover:!bg-noir hover:!text-blanc"
+          >
+            Voir toute la boutique
           </Button>
         </div>
       </div>
