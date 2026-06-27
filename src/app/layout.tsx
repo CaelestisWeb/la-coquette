@@ -6,6 +6,7 @@ import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import CartDrawer from '@/components/ui/CartDrawer';
 import ScrollReveal from '@/components/ui/ScrollReveal';
+import SmoothScroll from '@/components/ui/SmoothScroll';
 import ConditionalChrome from '@/components/layout/ConditionalChrome';
 
 // Sans géométrique épuré — titres
@@ -85,7 +86,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <CartProvider>
           <ConditionalChrome
             header={<Header />}
-            footer={<><Footer /><CartDrawer /><ScrollReveal /></>}
+            footer={<><Footer /><CartDrawer /><ScrollReveal /><SmoothScroll /></>}
           >
             {children}
           </ConditionalChrome>

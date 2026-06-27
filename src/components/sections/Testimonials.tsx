@@ -42,7 +42,7 @@ export default async function Testimonials() {
         </div>
 
         {/* Mobile : scroll horizontal */}
-        <div className="md:hidden -mx-6 px-6 flex gap-4 overflow-x-auto hide-scrollbar snap-testimonials pb-2">
+        <div data-lenis-prevent className="md:hidden -mx-6 px-6 flex gap-4 overflow-x-auto hide-scrollbar snap-testimonials pb-2">
           {testimonials.map((t, i) => (
             <Card key={i} t={t} className="flex-none w-[82vw] p-6" />
           ))}
