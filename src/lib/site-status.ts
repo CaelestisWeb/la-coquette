@@ -1,55 +1,43 @@
-import { createClient, type VercelKV } from '@vercel/kv';
+import { apiVersion, dataset, projectId } from '@/sanity/env';
 
-const KEY = 'coming_soon';
+// État « boutique bientôt disponible » : piloté directement depuis le Studio
+// (document « Réglages du site », champ comingSoon). Le middleware lit cette
+// valeur ; on la met en cache quelques secondes en mémoire pour ne pas
+// interroger Sanity à chaque requête.
 
-// Résout les identifiants du stockage, quel que soit le nom des variables
-// injectées par Vercel (KV_REST_API_* pour Vercel KV, UPSTASH_REDIS_REST_*
-// pour l'intégration Upstash via le Marketplace).
-function resolveCreds(): { url: string; token: string } | null {
-  const url = process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL;
-  const token = process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN;
-  return url && token ? { url, token } : null;
-}
+const TTL_MS = 15_000;
+let cache: { value: boolean; at: number } | null = null;
 
-let client: VercelKV | null = null;
-function getClient(): VercelKV | null {
-  if (client) return client;
-  const creds = resolveCreds();
-  if (!creds) return null;
-  client = createClient(creds);
-  return client;
+const QUERY = '*[_type == "siteSettings"][0].comingSoon';
+
+async function readFromSanity(): Promise<boolean> {
+  if (!projectId) throw new Error('Sanity non configuré');
+  const token = process.env.SANITY_API_READ_TOKEN || process.env.SANITY_API_TOKEN;
+  const url =
+    `https://${projectId}.api.sanity.io/v${apiVersion}/data/query/${dataset}` +
+    `?query=${encodeURIComponent(QUERY)}`;
+  const res = await fetch(url, {
+    headers: token ? { Authorization: `Bearer ${token}` } : {},
+    cache: 'no-store',
+  });
+  if (!res.ok) throw new Error(`Sanity ${res.status}`);
+  const json = (await res.json()) as { result?: unknown };
+  return json.result === true;
 }
 
 /**
- * Mode « site bientôt disponible » actif ?
- * - Si le stockage est branché → on lit le flag piloté par l'admin.
- * - Sinon (avant la mise en place du stockage) → repli sur la variable
- *   d'environnement COMING_SOON, pour pouvoir activer le mode tout de suite.
+ * Mode « boutique bientôt disponible » actif ?
+ * Source : le champ comingSoon des Réglages du site (Studio).
+ * En cas d'erreur de lecture, repli sur la variable d'env COMING_SOON
+ * (sinon site en ligne par défaut).
  */
 export async function getComingSoon(): Promise<boolean> {
-  const c = getClient();
-  if (c) {
-    try {
-      const v = await c.get<boolean>(KEY);
-      if (typeof v === 'boolean') return v;
-    } catch {
-      // en cas d'erreur de stockage, on retombe sur la variable d'env
-    }
+  if (cache && Date.now() - cache.at < TTL_MS) return cache.value;
+  try {
+    const value = await readFromSanity();
+    cache = { value, at: Date.now() };
+    return value;
+  } catch {
+    return process.env.COMING_SOON === 'true';
   }
-  return process.env.COMING_SOON === 'true';
-}
-
-/**
- * Change l'état (réservé à l'admin). Nécessite le stockage branché.
- * Renvoie false si le stockage n'est pas encore en place (rien persisté).
- */
-export async function setComingSoon(value: boolean): Promise<boolean> {
-  const c = getClient();
-  if (!c) return false;
-  await c.set(KEY, value);
-  return true;
-}
-
-export function storageReady(): boolean {
-  return resolveCreds() !== null;
 }

@@ -2,12 +2,12 @@
 
 import { usePathname } from 'next/navigation';
 
-const BARE_PREFIXES = ['/bientot', '/admin', '/studio'];
+const BARE_PREFIXES = ['/bientot', '/studio'];
 
 /**
  * Affiche l'habillage du site (menu, pied de page, panier) sur les pages
- * normales, mais le masque sur la page d'attente et l'espace admin, qui
- * doivent rester épurés.
+ * normales, mais le masque sur la page d'attente et le Studio, qui doivent
+ * rester épurés.
  */
 export default function ConditionalChrome({
   header,
