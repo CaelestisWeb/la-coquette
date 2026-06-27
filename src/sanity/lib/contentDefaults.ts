@@ -30,8 +30,22 @@ export type SiteSettings = {
   footerTagline: string;
   contactEmail: string;
   contactLocation: string;
+  contactHours: string;
   instagramHandle: string;
   instagramUrl: string;
+};
+
+export type FaqItem = { q: string; a: string };
+export type FaqContent = {
+  label: string;
+  heading: string;
+  intro: string;
+  items: FaqItem[];
+};
+export type ContactContent = {
+  label: string;
+  heading: string;
+  intro: string;
 };
 
 export const HOME_DEFAULTS: HomeContent = {
@@ -73,6 +87,31 @@ export const SETTINGS_DEFAULTS: SiteSettings = {
   footerTagline: 'Des bijoux artisanaux en acier inoxydable, conçus avec passion dans la Drôme pour révéler votre élégance au quotidien.',
   contactEmail: 'contact@lacoquette-bycaro.fr',
   contactLocation: 'Drôme (26) · France',
+  contactHours: 'Du lundi au vendredi, de 9h à 18h.\nCaro répond généralement sous 24h.',
   instagramHandle: '@lacoquette_bycaro',
   instagramUrl: 'https://www.instagram.com/lacoquette_bycaro/',
+};
+
+export const FAQ_DEFAULTS: FaqContent = {
+  label: 'Bon à savoir',
+  heading: 'Questions fréquentes',
+  intro: "Tout ce qu'il faut savoir sur nos créations, la livraison et les retours.",
+  items: [
+    { q: 'En quelle matière sont vos bijoux ?', a: "Tous nos bijoux sont réalisés en acier inoxydable doré, un matériau noble, sans nickel, qui ne ternit pas et résiste au temps. C'est un choix volontaire pour des pièces à la fois élégantes et durables." },
+    { q: 'Conviennent-ils aux peaux sensibles ?', a: "Oui. L'acier inoxydable est hypoallergénique : il convient à la grande majorité des peaux sensibles et ne provoque pas les réactions souvent causées par les bijoux fantaisie classiques." },
+    { q: "Puis-je les porter sous l'eau ?", a: "L'acier inoxydable résiste très bien à l'eau et ne rouille pas. Vous pouvez les garder au quotidien sans crainte. Nous conseillons simplement d'éviter le contact prolongé avec le chlore, l'eau de mer et les produits chimiques pour préserver l'éclat de la dorure." },
+    { q: 'Comment entretenir mes bijoux ?', a: "Essuyez-les délicatement avec un chiffon doux et sec après usage. Appliquez parfum et crème avant de les mettre, jamais dessus, et rangez-les à l'abri de l'humidité. Ces gestes simples préservent durablement leur brillance." },
+    { q: 'Quels sont les délais de livraison ?', a: 'Chaque bijou étant préparé avec soin, votre commande est expédiée rapidement via La Poste, pour une réception sous 3 à 5 jours ouvrés en France métropolitaine.' },
+    { q: 'Quels sont les frais de livraison ?', a: "La livraison en France métropolitaine est de 2.99 €. Elle est offerte dès 100 € d'achat." },
+    { q: 'Proposez-vous des bijoux personnalisés ?', a: "Oui, c'est même une de nos spécialités ! Caro crée des boucles d'oreilles sur mesure dans toutes les couleurs, formes et tailles. Décrivez-nous vos envies via la page Contact et nous imaginerons ensemble la paire qui vous ressemble." },
+    { q: 'Puis-je retourner un article ?', a: "Vous disposez d'un délai de 14 jours après réception pour changer d'avis et nous retourner un article non porté, dans son état d'origine. Les bijoux personnalisés ou réalisés sur mesure ne sont pas repris. Tous les détails figurent dans nos Conditions Générales de Vente." },
+    { q: 'Le paiement est-il sécurisé ?', a: "Absolument. Les paiements sont traités par SumUp, une solution sécurisée. Vos données bancaires sont chiffrées et ne sont jamais conservées par La Coquette." },
+    { q: 'Comment vous contacter ?', a: 'Pour toute question, écrivez-nous à contact@lacoquette-bycaro.fr ou via le formulaire de la page Contact. Caro vous répond généralement sous 24h.' },
+  ],
+};
+
+export const CONTACT_DEFAULTS: ContactContent = {
+  label: 'Parlons-nous',
+  heading: 'Nous contacter',
+  intro: "Une question, une envie de bijou sur-mesure, ou juste un mot ? C'est Caro qui lit et répond elle-même, en général sous 24h.",
 };

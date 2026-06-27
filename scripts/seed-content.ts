@@ -1,6 +1,6 @@
 import { readFileSync } from 'fs';
 import { createClient } from '@sanity/client';
-import { HOME_DEFAULTS, SETTINGS_DEFAULTS } from '../src/sanity/lib/contentDefaults';
+import { HOME_DEFAULTS, SETTINGS_DEFAULTS, FAQ_DEFAULTS, CONTACT_DEFAULTS } from '../src/sanity/lib/contentDefaults';
 
 for (const l of readFileSync('.env.local', 'utf8').split('\n')) {
   const m = l.match(/^([A-Z0-9_]+)=(.*)$/);
@@ -31,7 +31,18 @@ async function main() {
     _type: 'siteSettings',
     ...SETTINGS_DEFAULTS,
   });
-  console.log('Contenu page d_accueil + réglages remplis dans Sanity.');
+  await client.createOrReplace({
+    _id: 'faqPage',
+    _type: 'faqPage',
+    ...FAQ_DEFAULTS,
+    items: keys(FAQ_DEFAULTS.items),
+  });
+  await client.createOrReplace({
+    _id: 'contactPage',
+    _type: 'contactPage',
+    ...CONTACT_DEFAULTS,
+  });
+  console.log('Contenu accueil + FAQ + contact + réglages remplis dans Sanity.');
 }
 
 main().catch((e) => {

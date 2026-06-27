@@ -1,7 +1,7 @@
 import type { StructureResolver } from 'sanity/structure';
 
-// Organisation du Studio : page d'accueil et réglages = documents uniques
-// (singletons) ; produits = liste.
+// Organisation du Studio : pages = documents uniques (singletons),
+// produits = liste.
 export const structure: StructureResolver = (S) =>
   S.list()
     .title('Contenu')
@@ -10,6 +10,14 @@ export const structure: StructureResolver = (S) =>
         .title("Page d'accueil")
         .id('homePage')
         .child(S.document().schemaType('homePage').documentId('homePage')),
+      S.listItem()
+        .title('FAQ')
+        .id('faqPage')
+        .child(S.document().schemaType('faqPage').documentId('faqPage')),
+      S.listItem()
+        .title('Page contact')
+        .id('contactPage')
+        .child(S.document().schemaType('contactPage').documentId('contactPage')),
       S.listItem()
         .title('Réglages du site')
         .id('siteSettings')
