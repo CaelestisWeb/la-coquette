@@ -8,6 +8,9 @@ import Lenis from 'lenis';
 export default function SmoothScroll() {
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    // Pas de smooth scroll sur tactile : le défilement natif est meilleur et
+    // on évite une boucle rAF continue (gain perf mobile).
+    if (window.matchMedia('(pointer: coarse)').matches) return;
 
     const lenis = new Lenis({
       duration: 1.1,
