@@ -63,17 +63,17 @@ export default function ContactForm() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>
-          <label className="font-body text-[10px] tracking-widest uppercase text-taupe block mb-2 text-center">Nom *</label>
-          <input name="nom" value={form.nom} onChange={handleChange} required placeholder="Votre nom" className={inputClass} />
+          <label htmlFor="contact-nom" className="font-body text-[10px] tracking-widest uppercase text-taupe block mb-2 text-center">Nom *</label>
+          <input id="contact-nom" name="nom" autoComplete="name" value={form.nom} onChange={handleChange} required placeholder="Votre nom" className={inputClass} />
         </div>
         <div>
-          <label className="font-body text-[10px] tracking-widest uppercase text-taupe block mb-2 text-center">Email *</label>
-          <input type="email" name="email" value={form.email} onChange={handleChange} required placeholder="votre@email.fr" className={inputClass} />
+          <label htmlFor="contact-email" className="font-body text-[10px] tracking-widest uppercase text-taupe block mb-2 text-center">Email *</label>
+          <input id="contact-email" type="email" name="email" autoComplete="email" value={form.email} onChange={handleChange} required placeholder="votre@email.fr" className={inputClass} />
         </div>
       </div>
       <div>
-        <label className="font-body text-[10px] tracking-widest uppercase text-taupe block mb-2 text-center">Sujet</label>
-        <select name="sujet" value={form.sujet} onChange={handleChange} className={inputClass}>
+        <label htmlFor="contact-sujet" className="font-body text-[10px] tracking-widest uppercase text-taupe block mb-2 text-center">Sujet</label>
+        <select id="contact-sujet" name="sujet" value={form.sujet} onChange={handleChange} className={inputClass}>
           <option value="">Choisir un sujet</option>
           <option>Commande</option>
           <option>Bijou personnalisé</option>
@@ -82,8 +82,8 @@ export default function ContactForm() {
         </select>
       </div>
       <div>
-        <label className="font-body text-[10px] tracking-widest uppercase text-taupe block mb-2 text-center">Message *</label>
-        <textarea name="message" value={form.message} onChange={handleChange} required rows={5} placeholder="Votre message..." className={`${inputClass} resize-none`} />
+        <label htmlFor="contact-message" className="font-body text-[10px] tracking-widest uppercase text-taupe block mb-2 text-center">Message *</label>
+        <textarea id="contact-message" name="message" value={form.message} onChange={handleChange} required rows={5} placeholder="Votre message..." className={`${inputClass} resize-none`} />
       </div>
       {error && <p className="font-body text-xs text-red-500">{error}</p>}
       <button type="submit" disabled={loading} className="w-full bg-noir text-blanc border border-noir rounded font-body font-medium text-xs tracking-widest uppercase py-4 hover:bg-or transition-colors duration-300 disabled:opacity-60 disabled:cursor-not-allowed">

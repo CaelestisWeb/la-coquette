@@ -46,6 +46,8 @@ export default function Header() {
             onClick={() => setMenuOpen(!menuOpen)}
             className={`md:hidden absolute left-0 p-2 transition-colors ${onDarkHero ? 'text-blanc' : 'text-noir'}`}
             aria-label={menuOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
+            aria-expanded={menuOpen}
+            aria-controls="mobile-menu"
           >
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
               {menuOpen
@@ -105,7 +107,10 @@ export default function Header() {
       </div>
 
       {/* Menu mobile — slide animé */}
-      <div className={`md:hidden bg-ivoire border-t border-gris overflow-hidden transition-all duration-300 ease-in-out ${
+      <div
+        id="mobile-menu"
+        inert={!menuOpen ? true : undefined}
+        className={`md:hidden bg-ivoire border-t border-gris overflow-hidden transition-all duration-300 ease-in-out ${
         menuOpen ? 'max-h-72 opacity-100' : 'max-h-0 opacity-0 pointer-events-none'
       }`}>
         <nav className="px-6 py-6 flex flex-col gap-5">

@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import CheckoutForm from './CheckoutForm';
 
 export const metadata: Metadata = {
-  title: 'Commande | La Coquette',
+  title: 'Commande',
   robots: { index: false },
 };
 

@@ -10,7 +10,7 @@ type Props = {
 export default function SectionLabel({ children, align = 'left', className = '' }: Props) {
   return (
     <span
-      className={`block font-body text-[10px] font-medium tracking-[0.3em] uppercase text-dore-mat ${
+      className={`block font-body text-[10px] font-medium tracking-[0.3em] uppercase text-[#7E601A] ${
         align === 'center' ? 'text-center' : ''
       } ${className}`}
     >

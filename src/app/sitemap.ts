@@ -12,9 +12,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${BASE}/blog`, lastModified: now, changeFrequency: 'monthly', priority: 0.6 },
     { url: `${BASE}/contact`, lastModified: now, changeFrequency: 'yearly', priority: 0.7 },
     { url: `${BASE}/faq`, lastModified: now, changeFrequency: 'monthly', priority: 0.6 },
-    { url: `${BASE}/cgv`, lastModified: now, changeFrequency: 'yearly', priority: 0.3 },
-    { url: `${BASE}/politique-confidentialite`, lastModified: now, changeFrequency: 'yearly', priority: 0.2 },
-    { url: `${BASE}/mentions-legales`, lastModified: now, changeFrequency: 'yearly', priority: 0.2 },
+    // Pages légales : volontairement hors sitemap (noindex).
   ];
 
   const products = await getProducts();

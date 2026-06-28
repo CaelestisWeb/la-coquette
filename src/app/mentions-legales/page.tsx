@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Mentions légales | La Coquette',
+  title: 'Mentions légales',
   robots: { index: false },
 };
 

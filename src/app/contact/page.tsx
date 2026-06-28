@@ -5,7 +5,7 @@ import SectionLabel from '@/components/ui/SectionLabel';
 import { getContactContent, getSiteSettings } from '@/sanity/lib/content';
 
 export const metadata: Metadata = {
-  title: 'Contact | La Coquette',
+  title: 'Contact',
   description: 'Contactez Caro pour une commande, un bijou personnalisé ou toute question. Réponse rapide garantie.',
 };
 

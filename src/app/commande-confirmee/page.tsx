@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import OrderConfirmation from './OrderConfirmation';
 
 export const metadata: Metadata = {
-  title: 'Commande confirmée | La Coquette',
+  title: 'Commande confirmée',
   robots: { index: false },
 };
 

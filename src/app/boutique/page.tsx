@@ -4,7 +4,7 @@ import ProductCard from '@/components/ui/ProductCard';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Boutique | La Coquette',
+  title: 'Boutique',
   description: 'Découvrez toutes nos créations : boucles d\'oreilles artisanales en acier inoxydable doré, élégantes et durables.',
 };
 

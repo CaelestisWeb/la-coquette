@@ -27,8 +27,14 @@ export default function ConditionalChrome({
 
   return (
     <>
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-3 focus:left-3 focus:z-[100] focus:bg-noir focus:text-blanc focus:px-4 focus:py-2 focus:rounded focus:font-body focus:text-sm"
+      >
+        Aller au contenu
+      </a>
       {header}
-      <main className="flex-1">{children}</main>
+      <main id="main-content" tabIndex={-1} className="flex-1">{children}</main>
       {footer}
     </>
   );

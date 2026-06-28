@@ -4,7 +4,7 @@ import type { Metadata } from 'next';
 import SectionLabel from '@/components/ui/SectionLabel';
 
 export const metadata: Metadata = {
-  title: 'Journal | La Coquette',
+  title: 'Journal',
   description: 'De son atelier dans la Drôme aux oreilles de ses clientes : la petite histoire des boucles d\'oreilles faites main de La Coquette.',
 };
 

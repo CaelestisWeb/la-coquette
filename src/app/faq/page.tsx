@@ -4,7 +4,7 @@ import FaqAccordion from './FaqAccordion';
 import { getFaqContent } from '@/sanity/lib/content';
 
 export const metadata: Metadata = {
-  title: 'Questions fréquentes | La Coquette',
+  title: 'Questions fréquentes',
   description: 'Matières, entretien, livraison, retours, bijoux personnalisés : toutes les réponses à vos questions sur les créations La Coquette.',
 };
 

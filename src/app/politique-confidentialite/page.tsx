@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Politique de confidentialité | La Coquette',
+  title: 'Politique de confidentialité',
   description: 'Comment La Coquette collecte, utilise et protège vos données personnelles, conformément au RGPD.',
-  robots: { index: true },
+  robots: { index: false },
 };
 
 export default function PolitiqueConfidentialitePage() {

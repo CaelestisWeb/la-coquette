@@ -2,9 +2,9 @@ import type { Metadata } from 'next';
 import { SHIPPING_THRESHOLD, SHIPPING_COST } from '@/lib/shipping';
 
 export const metadata: Metadata = {
-  title: 'Conditions Générales de Vente | La Coquette',
+  title: 'Conditions Générales de Vente',
   description: 'Conditions générales de vente de La Coquette : commande, paiement, livraison, droit de rétractation et garanties.',
-  robots: { index: true },
+  robots: { index: false },
 };
 
 export default function CGVPage() {

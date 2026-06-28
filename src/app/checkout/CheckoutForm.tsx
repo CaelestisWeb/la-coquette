@@ -126,27 +126,27 @@ export default function CheckoutForm() {
         <form onSubmit={handleCheckout} className="space-y-5">
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="font-body text-[10px] tracking-widest uppercase text-taupe block mb-1 text-center">Prénom *</label>
-              <input required value={form.prenom} onChange={e => setForm(f => ({ ...f, prenom: e.target.value }))}
+              <label htmlFor="co-prenom" className="font-body text-[10px] tracking-widest uppercase text-taupe block mb-1 text-center">Prénom *</label>
+              <input id="co-prenom" autoComplete="given-name" required value={form.prenom} onChange={e => setForm(f => ({ ...f, prenom: e.target.value }))}
                 className="w-full border border-gris bg-creme px-4 py-3 font-body text-sm text-noir outline-none focus:border-noir transition-colors" />
             </div>
             <div>
-              <label className="font-body text-[10px] tracking-widest uppercase text-taupe block mb-1 text-center">Nom *</label>
-              <input required value={form.nom} onChange={e => setForm(f => ({ ...f, nom: e.target.value }))}
+              <label htmlFor="co-nom" className="font-body text-[10px] tracking-widest uppercase text-taupe block mb-1 text-center">Nom *</label>
+              <input id="co-nom" autoComplete="family-name" required value={form.nom} onChange={e => setForm(f => ({ ...f, nom: e.target.value }))}
                 className="w-full border border-gris bg-creme px-4 py-3 font-body text-sm text-noir outline-none focus:border-noir transition-colors" />
             </div>
           </div>
 
           <div>
-            <label className="font-body text-[10px] tracking-widest uppercase text-taupe block mb-1 text-center">Email *</label>
-            <input required type="email" value={form.email} onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
+            <label htmlFor="co-email" className="font-body text-[10px] tracking-widest uppercase text-taupe block mb-1 text-center">Email *</label>
+            <input id="co-email" autoComplete="email" required type="email" value={form.email} onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
               className="w-full border border-gris bg-creme px-4 py-3 font-body text-sm text-noir outline-none focus:border-noir transition-colors" />
           </div>
 
           {/* Adresse avec autocomplétion */}
           <div className="relative">
-            <label className="font-body text-[10px] tracking-widest uppercase text-taupe block mb-1 text-center">Adresse *</label>
-            <input required value={form.adresse} onChange={e => handleAddressInput(e.target.value)}
+            <label htmlFor="co-adresse" className="font-body text-[10px] tracking-widest uppercase text-taupe block mb-1 text-center">Adresse *</label>
+            <input id="co-adresse" required value={form.adresse} onChange={e => handleAddressInput(e.target.value)}
               onFocus={() => { if (suggestions.length > 0) setShowSuggestions(true); }}
               onBlur={() => setTimeout(() => setShowSuggestions(false), 150)}
               autoComplete="off"
@@ -166,13 +166,13 @@ export default function CheckoutForm() {
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="font-body text-[10px] tracking-widest uppercase text-taupe block mb-1 text-center">Code postal *</label>
-              <input required value={form.codePostal} onChange={e => setForm(f => ({ ...f, codePostal: e.target.value }))}
+              <label htmlFor="co-cp" className="font-body text-[10px] tracking-widest uppercase text-taupe block mb-1 text-center">Code postal *</label>
+              <input id="co-cp" autoComplete="postal-code" inputMode="numeric" required value={form.codePostal} onChange={e => setForm(f => ({ ...f, codePostal: e.target.value }))}
                 className="w-full border border-gris bg-creme px-4 py-3 font-body text-sm text-noir outline-none focus:border-noir transition-colors" />
             </div>
             <div>
-              <label className="font-body text-[10px] tracking-widest uppercase text-taupe block mb-1 text-center">Ville *</label>
-              <input required value={form.ville} onChange={e => setForm(f => ({ ...f, ville: e.target.value }))}
+              <label htmlFor="co-ville" className="font-body text-[10px] tracking-widest uppercase text-taupe block mb-1 text-center">Ville *</label>
+              <input id="co-ville" autoComplete="address-level2" required value={form.ville} onChange={e => setForm(f => ({ ...f, ville: e.target.value }))}
                 className="w-full border border-gris bg-creme px-4 py-3 font-body text-sm text-noir outline-none focus:border-noir transition-colors" />
             </div>
           </div>
