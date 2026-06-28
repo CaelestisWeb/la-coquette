@@ -23,6 +23,7 @@ export default async function Footer() {
           alt="La Coquette — Bijoux artisanaux"
           width={639}
           height={321}
+          unoptimized
           className="w-72 sm:w-80 h-auto"
         />
 
