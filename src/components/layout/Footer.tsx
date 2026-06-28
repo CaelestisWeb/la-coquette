@@ -78,7 +78,7 @@ export default async function Footer() {
 
       {/* Barre basse */}
       <div className="border-t border-blanc/10">
-        <div className="max-w-7xl mx-auto px-6 py-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-[11px] font-body text-blanc/35">
+        <div className="max-w-7xl mx-auto px-6 py-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-[11px] font-body text-blanc/55">
           <p>© {new Date().getFullYear()} La Coquette · Caro. Tous droits réservés.</p>
           <nav className="flex flex-wrap justify-center gap-x-6 gap-y-2">
             <Link href="/cgv" className="hover:text-blanc/70 transition-colors">CGV</Link>
