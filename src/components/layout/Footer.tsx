@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { stegaClean } from 'next-sanity';
 import { getSiteSettings } from '@/sanity/lib/content';
 
 const navLinks = [
@@ -46,7 +47,7 @@ export default async function Footer() {
         {/* Contact */}
         <div className="mt-8 flex flex-col items-center gap-2 font-body font-light text-sm text-blanc/55">
           <span>{s.contactLocation}</span>
-          <a href={`mailto:${s.contactEmail}`} className="hover:text-blanc transition-colors break-all">
+          <a href={`mailto:${stegaClean(s.contactEmail)}`} className="hover:text-blanc transition-colors break-all">
             {s.contactEmail}
           </a>
         </div>

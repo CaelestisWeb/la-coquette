@@ -5,15 +5,14 @@ import { useEffect, useRef } from 'react';
 import Button from '@/components/ui/Button';
 
 type Props = {
-  before: string;
-  hl: string;
-  after: string;
+  title: string;
+  highlight: string;
   ctaPrimary: string;
   ctaSecondary: string;
   imageUrl: string;
 };
 
-export default function HeroVisual({ before, hl, after, ctaPrimary, ctaSecondary, imageUrl }: Props) {
+export default function HeroVisual({ title, highlight, ctaPrimary, ctaSecondary, imageUrl }: Props) {
   const imgRef = useRef<HTMLDivElement>(null);
 
   // Parallaxe douce : la photo défile plus lentement que le contenu.
@@ -60,9 +59,8 @@ export default function HeroVisual({ before, hl, after, ctaPrimary, ctaSecondary
       {/* Contenu */}
       <div className="relative z-20 w-full text-center px-6 pb-24 sm:pb-28">
         <h1 className="hero-rise font-display font-light text-[2.1rem] sm:text-[2.6rem] lg:text-[50px] text-blanc leading-[1.08] whitespace-pre-line">
-          {before}
-          {hl && <span className="text-dore-mat">{hl}</span>}
-          {after}
+          {title}
+          {highlight ? <> <span className="text-dore-mat">{highlight}</span></> : null}
         </h1>
 
         <div className="hero-rise-2 flex flex-wrap justify-center gap-3 mt-8">

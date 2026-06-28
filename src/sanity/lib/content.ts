@@ -52,6 +52,7 @@ export async function getHomeContent(): Promise<HomeContent> {
     featuredLabel: d?.featuredLabel || HOME_DEFAULTS.featuredLabel,
     featuredHeading: d?.featuredHeading || HOME_DEFAULTS.featuredHeading,
     featuredIntro: d?.featuredIntro || HOME_DEFAULTS.featuredIntro,
+    featuredCta: d?.featuredCta || HOME_DEFAULTS.featuredCta,
     valuesLabel: d?.valuesLabel || HOME_DEFAULTS.valuesLabel,
     valuesHeading: d?.valuesHeading || HOME_DEFAULTS.valuesHeading,
     valuesItems: nonEmpty(d?.valuesItems, HOME_DEFAULTS.valuesItems),
@@ -74,8 +75,9 @@ export async function getSiteSettings(): Promise<SiteSettings> {
   }
   return {
     footerTagline: d?.footerTagline || SETTINGS_DEFAULTS.footerTagline,
-    // email + URL servent de liens (mailto/href) : on retire le marquage stega.
-    contactEmail: stegaClean(d?.contactEmail || SETTINGS_DEFAULTS.contactEmail),
+    // L'email reste marqué (cliquable à l'affichage) ; il est nettoyé au cas par
+    // cas là où il sert de lien mailto. L'URL Instagram ne sert que de lien.
+    contactEmail: d?.contactEmail || SETTINGS_DEFAULTS.contactEmail,
     contactLocation: d?.contactLocation || SETTINGS_DEFAULTS.contactLocation,
     contactHours: d?.contactHours || SETTINGS_DEFAULTS.contactHours,
     instagramHandle: d?.instagramHandle || SETTINGS_DEFAULTS.instagramHandle,

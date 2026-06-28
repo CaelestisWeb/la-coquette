@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { stegaClean } from 'next-sanity';
 import ContactForm from './ContactForm';
 import SectionLabel from '@/components/ui/SectionLabel';
 import { getContactContent, getSiteSettings } from '@/sanity/lib/content';
@@ -51,7 +52,7 @@ export default async function ContactPage() {
               <span className="text-or">{MailIcon}</span>
               <div>
                 <p className="font-body text-[10px] tracking-[0.15em] uppercase text-taupe">Email</p>
-                <a href={`mailto:${s.contactEmail}`} className="font-body text-sm text-noir hover:text-or transition-colors mt-1 block">
+                <a href={`mailto:${stegaClean(s.contactEmail)}`} className="font-body text-sm text-noir hover:text-or transition-colors mt-1 block">
                   {s.contactEmail}
                 </a>
               </div>

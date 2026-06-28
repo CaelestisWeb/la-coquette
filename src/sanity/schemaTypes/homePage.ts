@@ -15,8 +15,8 @@ export const homePage = defineType({
   ],
   fields: [
     // ── Hero ──
-    defineField({ name: 'heroTitle', title: 'Titre principal', type: 'text', rows: 2, group: 'hero', description: 'Appuyez sur Entrée pour passer à la ligne.' }),
-    defineField({ name: 'heroHighlight', title: 'Mot mis en valeur (doré)', type: 'string', group: 'hero', description: 'Un mot du titre affiché en doré (ex : élégance). Vide = aucun.' }),
+    defineField({ name: 'heroTitle', title: 'Titre principal', type: 'text', rows: 2, group: 'hero', description: 'Le titre SANS le mot doré (il est ajouté juste après). Entrée = passer à la ligne.' }),
+    defineField({ name: 'heroHighlight', title: 'Mot doré (à la fin du titre)', type: 'string', group: 'hero', description: 'Le mot affiché en doré, ajouté à la fin du titre (ex : élégance). Vide = aucun.' }),
     defineField({ name: 'heroCtaPrimary', title: 'Bouton principal — texte', type: 'string', group: 'hero', description: 'Texte du bouton clair (ex : Découvrir la boutique).' }),
     defineField({ name: 'heroCtaSecondary', title: 'Bouton secondaire — texte', type: 'string', group: 'hero', description: 'Texte du bouton à contour (ex : Prendre contact).' }),
     defineField({ name: 'heroImage', title: 'Photo de fond', type: 'image', options: { hotspot: true }, group: 'hero', description: 'Laissez vide pour garder la photo actuelle.' }),
@@ -35,6 +35,7 @@ export const homePage = defineType({
     defineField({ name: 'featuredLabel', title: 'Petit texte au-dessus du titre', type: 'string', description: 'Le petit texte en majuscules affiché juste au-dessus du grand titre.', group: 'featured' }),
     defineField({ name: 'featuredHeading', title: 'Titre', type: 'string', group: 'featured' }),
     defineField({ name: 'featuredIntro', title: 'Texte d’introduction', type: 'text', rows: 3, group: 'featured' }),
+    defineField({ name: 'featuredCta', title: 'Bouton sous les produits — texte', type: 'string', group: 'featured', description: 'Ex : Voir toute la boutique.' }),
 
     // ── Valeurs ──
     defineField({ name: 'valuesLabel', title: 'Petit texte au-dessus du titre', type: 'string', description: 'Le petit texte en majuscules affiché juste au-dessus du grand titre.', group: 'values' }),

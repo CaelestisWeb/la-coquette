@@ -15,6 +15,7 @@ export type HomeContent = {
   featuredLabel: string;
   featuredHeading: string;
   featuredIntro: string;
+  featuredCta: string;
   valuesLabel: string;
   valuesHeading: string;
   valuesItems: ValueItem[];
@@ -50,7 +51,7 @@ export type ContactContent = {
 };
 
 export const HOME_DEFAULTS: HomeContent = {
-  heroTitle: 'Des bijoux pensés\npour révéler votre élégance',
+  heroTitle: 'Des bijoux pensés\npour révéler votre',
   heroHighlight: 'élégance',
   heroCtaPrimary: 'Découvrir la boutique',
   heroCtaSecondary: 'Prendre contact',
@@ -64,6 +65,7 @@ export const HOME_DEFAULTS: HomeContent = {
   featuredLabel: 'Sélection',
   featuredHeading: 'Nos créations',
   featuredIntro: "Des boucles d'oreilles pendantes montées à la main par Caro, en acier inoxydable doré qui ne ternit pas, à porter sous la pluie comme sous les projecteurs.",
+  featuredCta: 'Voir toute la boutique',
   valuesLabel: 'Ce qui nous anime',
   valuesHeading: 'Nos valeurs',
   valuesItems: [

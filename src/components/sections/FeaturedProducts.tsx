@@ -6,7 +6,7 @@ import { getHomeContent } from '@/sanity/lib/content';
 
 export default async function FeaturedProducts() {
   const featuredProducts = await getFeaturedProducts();
-  const { featuredLabel, featuredHeading, featuredIntro } = await getHomeContent();
+  const { featuredLabel, featuredHeading, featuredIntro, featuredCta } = await getHomeContent();
   return (
     <section className="bg-ivoire py-20 sm:py-28">
       <div className="max-w-7xl mx-auto px-6">
@@ -36,7 +36,7 @@ export default async function FeaturedProducts() {
             variant="secondary"
             className="!px-8 !py-3 hover:!bg-noir hover:!text-blanc"
           >
-            Voir toute la boutique
+            {featuredCta}
           </Button>
         </div>
       </div>
