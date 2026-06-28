@@ -17,8 +17,8 @@ export const homePage = defineType({
     // ── Hero ──
     defineField({ name: 'heroTitle', title: 'Titre principal', type: 'text', rows: 2, group: 'hero', description: 'Appuyez sur Entrée pour passer à la ligne.' }),
     defineField({ name: 'heroHighlight', title: 'Mot mis en valeur (doré)', type: 'string', group: 'hero', description: 'Un mot du titre affiché en doré (ex : élégance). Vide = aucun.' }),
-    defineField({ name: 'heroCtaPrimary', title: 'Bouton principal — texte', type: 'string', group: 'hero' }),
-    defineField({ name: 'heroCtaSecondary', title: 'Bouton secondaire — texte', type: 'string', group: 'hero' }),
+    defineField({ name: 'heroCtaPrimary', title: 'Bouton principal — texte', type: 'string', group: 'hero', description: 'Texte du bouton clair (ex : Découvrir la boutique).' }),
+    defineField({ name: 'heroCtaSecondary', title: 'Bouton secondaire — texte', type: 'string', group: 'hero', description: 'Texte du bouton à contour (ex : Prendre contact).' }),
     defineField({ name: 'heroImage', title: 'Photo de fond', type: 'image', options: { hotspot: true }, group: 'hero', description: 'Laissez vide pour garder la photo actuelle.' }),
 
     // ── Réassurance (bandeau 4 points) ──
@@ -32,12 +32,12 @@ export const homePage = defineType({
     }),
 
     // ── Section créations ──
-    defineField({ name: 'featuredLabel', title: 'Petit label', type: 'string', group: 'featured' }),
+    defineField({ name: 'featuredLabel', title: 'Petit texte au-dessus du titre', type: 'string', description: 'Le petit texte en majuscules affiché juste au-dessus du grand titre.', group: 'featured' }),
     defineField({ name: 'featuredHeading', title: 'Titre', type: 'string', group: 'featured' }),
     defineField({ name: 'featuredIntro', title: 'Texte d’introduction', type: 'text', rows: 3, group: 'featured' }),
 
     // ── Valeurs ──
-    defineField({ name: 'valuesLabel', title: 'Petit label', type: 'string', group: 'values' }),
+    defineField({ name: 'valuesLabel', title: 'Petit texte au-dessus du titre', type: 'string', description: 'Le petit texte en majuscules affiché juste au-dessus du grand titre.', group: 'values' }),
     defineField({ name: 'valuesHeading', title: 'Titre', type: 'string', group: 'values' }),
     defineField({
       name: 'valuesItems', title: 'Valeurs', type: 'array', group: 'values',
@@ -49,7 +49,7 @@ export const homePage = defineType({
     }),
 
     // ── Avis clients ──
-    defineField({ name: 'testimonialsLabel', title: 'Petit label', type: 'string', group: 'testimonials' }),
+    defineField({ name: 'testimonialsLabel', title: 'Petit texte au-dessus du titre', type: 'string', description: 'Le petit texte en majuscules affiché juste au-dessus du grand titre.', group: 'testimonials' }),
     defineField({ name: 'testimonialsHeading', title: 'Titre', type: 'string', group: 'testimonials' }),
     defineField({
       name: 'testimonials', title: 'Avis', type: 'array', group: 'testimonials',
@@ -63,10 +63,10 @@ export const homePage = defineType({
     }),
 
     // ── Sur mesure (bandeau noir) ──
-    defineField({ name: 'newsletterLabel', title: 'Petit label', type: 'string', group: 'newsletter' }),
+    defineField({ name: 'newsletterLabel', title: 'Petit texte au-dessus du titre', type: 'string', description: 'Le petit texte en majuscules affiché juste au-dessus du grand titre.', group: 'newsletter' }),
     defineField({ name: 'newsletterHeading', title: 'Titre', type: 'text', rows: 2, group: 'newsletter' }),
     defineField({ name: 'newsletterText', title: 'Texte', type: 'text', rows: 2, group: 'newsletter' }),
-    defineField({ name: 'newsletterCta', title: 'Bouton — texte', type: 'string', group: 'newsletter' }),
+    defineField({ name: 'newsletterCta', title: 'Bouton — texte', type: 'string', group: 'newsletter', description: 'Texte du bouton de cette section.' }),
   ],
   preview: { prepare: () => ({ title: "Page d'accueil" }) },
 });
