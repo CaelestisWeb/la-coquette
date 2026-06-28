@@ -1,3 +1,4 @@
+import { stegaClean } from 'next-sanity';
 import { sanityFetch } from './fetch';
 import { urlForImage } from './image';
 import {
@@ -73,11 +74,12 @@ export async function getSiteSettings(): Promise<SiteSettings> {
   }
   return {
     footerTagline: d?.footerTagline || SETTINGS_DEFAULTS.footerTagline,
-    contactEmail: d?.contactEmail || SETTINGS_DEFAULTS.contactEmail,
+    // email + URL servent de liens (mailto/href) : on retire le marquage stega.
+    contactEmail: stegaClean(d?.contactEmail || SETTINGS_DEFAULTS.contactEmail),
     contactLocation: d?.contactLocation || SETTINGS_DEFAULTS.contactLocation,
     contactHours: d?.contactHours || SETTINGS_DEFAULTS.contactHours,
     instagramHandle: d?.instagramHandle || SETTINGS_DEFAULTS.instagramHandle,
-    instagramUrl: d?.instagramUrl || SETTINGS_DEFAULTS.instagramUrl,
+    instagramUrl: stegaClean(d?.instagramUrl || SETTINGS_DEFAULTS.instagramUrl),
   };
 }
 

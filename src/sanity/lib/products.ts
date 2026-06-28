@@ -1,3 +1,4 @@
+import { stegaClean } from 'next-sanity';
 import { sanityFetch } from './fetch';
 import { urlForImage } from './image';
 import type { Product } from './productTypes';
@@ -20,7 +21,8 @@ function toProduct(p: any): Product {
   }
   return {
     id: p.id,
-    slug: p.slug,
+    // slug sert au routage (URL) : on retire tout marquage stega de l'aperçu.
+    slug: stegaClean(p.slug),
     name: p.name,
     category: (p.category as Product['category']) || 'boucles',
     price: p.price,

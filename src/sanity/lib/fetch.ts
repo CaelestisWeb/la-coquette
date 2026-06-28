@@ -27,11 +27,13 @@ export async function sanityFetch<T = any>( // eslint-disable-line @typescript-e
 
   if (isDraft && projectId) {
     // Client brouillon créé à la volée (au runtime, projectId présent).
+    // stega : marquage invisible reliant chaque texte à son champ dans le
+    // Studio → contours cliquables (visual editing). Uniquement en aperçu.
     const draftClient = client.withConfig({
       perspective: 'previewDrafts',
       useCdn: false,
       token,
-      stega: false,
+      stega: { enabled: true, studioUrl: '/studio' },
     });
     return draftClient.fetch<T>(query, params, { next: { revalidate: 0 } });
   }
