@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { Jost, Inter, Pompiere } from 'next/font/google';
 import { draftMode } from 'next/headers';
-import { VisualEditing } from 'next-sanity/visual-editing';
+import PreviewControls from '@/components/ui/PreviewControls';
 import './globals.css';
 import { CartProvider } from '@/context/CartContext';
 import Header from '@/components/layout/Header';
@@ -94,8 +94,10 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             {children}
           </ConditionalChrome>
         </CartProvider>
-        {/* Aperçu Studio : rafraîchissement en direct des brouillons (jamais sur le site public) */}
-        {isDraft && <VisualEditing />}
+        {/* Mode aperçu : contours d'édition dans le Studio uniquement ;
+            sur le domaine en direct, juste un bouton « Quitter l'aperçu ».
+            Jamais rien pour les vrais visiteurs (pas de cookie d'aperçu). */}
+        {isDraft && <PreviewControls />}
       </body>
     </html>
   );
