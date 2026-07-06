@@ -36,7 +36,7 @@ export default function ProductCard({ product }: { product: Product }) {
           alt={product.name}
           fill
           sizes="(max-width: 640px) 50vw, (max-width: 1024px) 50vw, 25vw"
-          className="object-cover transition-transform duration-700 group-hover:scale-105"
+          className="object-cover transition-transform duration-700 group-hover:scale-105 cursor-zoom-in"
         />
         {/* Overlay hover — desktop uniquement */}
         <div className="absolute inset-0 bg-noir/0 group-hover:bg-noir/10 transition-all duration-300 hidden sm:flex items-end justify-center pb-4 opacity-0 group-hover:opacity-100">

@@ -1,10 +1,10 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getProducts, getProductBySlug } from '@/sanity/lib/products';
 import { categoryLabels } from '@/sanity/lib/productTypes';
 import AddToCartButton from './AddToCartButton';
 import HeartButton from '@/components/ui/HeartButton';
+import ZoomableImage from '@/components/ui/ZoomableImage';
 import ProductCard from '@/components/ui/ProductCard';
 import { SHIPPING_THRESHOLD } from '@/lib/shipping';
 import type { Metadata } from 'next';
@@ -83,14 +83,7 @@ export default async function ProductPage({ params }: Props) {
                 className="w-10 h-10 rounded-full bg-blanc/85 backdrop-blur-sm shadow-sm hover:bg-blanc"
               />
             </div>
-            <Image
-              src={product.image}
-              alt={product.name}
-              fill
-              priority
-              className="object-cover"
-              sizes="(max-width: 1024px) 100vw, 50vw"
-            />
+            <ZoomableImage src={product.image} alt={product.name} />
           </div>
 
           {/* Infos produit */}
