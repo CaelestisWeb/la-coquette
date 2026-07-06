@@ -20,19 +20,16 @@ export default function ProductGallery({
   const many = photos.length > 1;
   const [active, setActive] = useState(0);
   const [open, setOpen] = useState(false);
-  const [zoom, setZoom] = useState({ on: false, x: 50, y: 50 });
+  // Zoom dans la vue plein écran uniquement.
+  const [zoomed, setZoomed] = useState(false);
+  const [origin, setOrigin] = useState({ x: 50, y: 50 });
   const cur = photos[Math.min(active, photos.length - 1)];
-
-  // Zoom au survol : la zone sous le curseur s'agrandit dans le cadre.
-  function onMove(e: React.MouseEvent<HTMLButtonElement>) {
-    const r = e.currentTarget.getBoundingClientRect();
-    const x = ((e.clientX - r.left) / r.width) * 100;
-    const y = ((e.clientY - r.top) / r.height) * 100;
-    setZoom({ on: true, x, y });
-  }
 
   const next = () => setActive((i) => (i + 1) % photos.length);
   const prev = () => setActive((i) => (i - 1 + photos.length) % photos.length);
+
+  // Réinitialise le zoom à l'ouverture/fermeture et au changement de photo.
+  useEffect(() => { setZoomed(false); setOrigin({ x: 50, y: 50 }); }, [open, active]);
 
   useEffect(() => {
     if (!open) return;
@@ -67,9 +64,6 @@ export default function ProductGallery({
         <button
           type="button"
           onClick={() => setOpen(true)}
-          onMouseEnter={() => setZoom((z) => ({ ...z, on: true }))}
-          onMouseLeave={() => setZoom((z) => ({ ...z, on: false }))}
-          onMouseMove={onMove}
           aria-label="Agrandir la photo"
           className="absolute inset-0 w-full h-full cursor-zoom-in"
         >
@@ -82,11 +76,6 @@ export default function ProductGallery({
             placeholder={cur.blurDataURL ? 'blur' : 'empty'}
             blurDataURL={cur.blurDataURL}
             className="object-cover motion-safe:animate-[lcFade_.3s_ease-out]"
-            style={{
-              transform: zoom.on ? 'scale(2.3)' : 'scale(1)',
-              transformOrigin: `${zoom.x}% ${zoom.y}%`,
-              transition: 'transform .18s ease-out',
-            }}
             sizes="(max-width: 1024px) 100vw, 50vw"
           />
         </button>
@@ -129,8 +118,23 @@ export default function ProductGallery({
           onClick={() => setOpen(false)}
           className="fixed inset-0 z-[100] flex items-center justify-center bg-noir/90 backdrop-blur-sm p-4 sm:p-8 cursor-zoom-out motion-safe:animate-[lcFade_.2s_ease-out]"
         >
-          <div className="relative w-full h-full max-w-4xl">
-            <Image src={cur.url} alt={alt} fill className="object-contain" sizes="90vw" />
+          <div
+            className={`relative w-full h-full max-w-4xl overflow-hidden ${zoomed ? 'cursor-zoom-out' : 'cursor-zoom-in'}`}
+            onClick={(e) => { e.stopPropagation(); setZoomed((z) => !z); }}
+            onMouseMove={(e) => {
+              if (!zoomed) return;
+              const r = e.currentTarget.getBoundingClientRect();
+              setOrigin({ x: ((e.clientX - r.left) / r.width) * 100, y: ((e.clientY - r.top) / r.height) * 100 });
+            }}
+          >
+            <Image
+              src={cur.url}
+              alt={alt}
+              fill
+              className="object-contain transition-transform duration-200"
+              style={{ transform: zoomed ? 'scale(2.2)' : 'scale(1)', transformOrigin: `${origin.x}% ${origin.y}%` }}
+              sizes="90vw"
+            />
           </div>
 
           {many && (
