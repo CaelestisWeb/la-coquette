@@ -46,7 +46,9 @@ export default async function ProductPage({ params }: Props) {
       '@type': 'Offer',
       price: product.price,
       priceCurrency: 'EUR',
-      availability: 'https://schema.org/InStock',
+      availability: product.available
+        ? 'https://schema.org/InStock'
+        : 'https://schema.org/SoldOut',
       url: `https://lacoquette-bycaro.fr/boutique/${product.slug}`,
     },
   };
@@ -109,10 +111,22 @@ export default async function ProductPage({ params }: Props) {
               ))}
             </ul>
 
-            {/* Bouton panier */}
-            <div id="main-add-to-cart" className="mt-10">
-              <AddToCartButton product={product} />
-            </div>
+            {/* Bouton panier (ou mention « vendu » pour une pièce unique) */}
+            {product.available ? (
+              <div id="main-add-to-cart" className="mt-10">
+                <AddToCartButton product={product} />
+              </div>
+            ) : (
+              <div className="mt-10 p-5 bg-beige rounded-lg text-center">
+                <p className="font-body text-sm font-medium text-noir tracking-wide uppercase">Pièce unique, déjà vendue</p>
+                <p className="font-body text-xs text-taupe mt-1.5 leading-relaxed">
+                  Chaque bijou est une création unique. Découvrez les autres pièces disponibles dans la boutique.
+                </p>
+                <Link href="/boutique" className="inline-block mt-4 font-body text-xs tracking-[0.12em] uppercase text-noir border border-noir px-6 py-2.5 rounded hover:bg-noir hover:text-blanc transition-colors">
+                  Voir la boutique
+                </Link>
+              </div>
+            )}
 
             {/* Livraison */}
             <div className="mt-6 p-4 bg-beige flex items-start gap-3 rounded-lg text-left">
@@ -148,7 +162,7 @@ export default async function ProductPage({ params }: Props) {
         )}
       </div>
 
-      <StickyAddToCart product={product} />
+      {product.available && <StickyAddToCart product={product} />}
     </div>
   );
 }

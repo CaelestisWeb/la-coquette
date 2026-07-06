@@ -1,10 +1,38 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { resolvePromo } from '@/lib/promo';
+import { writeClient } from '@/sanity/lib/writeClient';
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 const round2 = (n: number) => Math.round(n * 100) / 100;
 
 export async function POST(req: NextRequest) {
-  const { subtotal, shipping, promoCode, description, reference } = await req.json();
+  const { subtotal, shipping, promoCode, description, reference, items } = await req.json();
+
+  // Pièces uniques : on refuse le paiement si un bijou du panier vient d'être
+  // vendu (marqué indisponible). Lecture fraîche (writeClient, sans cache CDN).
+  const ids: string[] = Array.isArray(items)
+    ? items.map((i: any) => i?.id).filter((x: unknown): x is string => typeof x === 'string')
+    : [];
+  if (ids.length) {
+    const sold: any[] = await writeClient.fetch(
+      `*[_type == "product" && _id in $ids && available == false]{ _id, name }`,
+      { ids },
+    );
+    if (sold.length) {
+      const noms = sold.map((s) => s.name).filter(Boolean).join(', ');
+      return NextResponse.json(
+        {
+          error:
+            sold.length > 1
+              ? `Désolé, ces bijoux viennent d'être vendus et ne sont plus disponibles : ${noms}. Ils ont été retirés de votre panier.`
+              : `Désolé, ce bijou vient d'être vendu et n'est plus disponible : ${noms}. Il a été retiré de votre panier.`,
+          soldOut: sold.map((s) => s._id),
+        },
+        { status: 409 },
+      );
+    }
+  }
 
   // Montant recalculé CÔTÉ SERVEUR : la remise vient de la table serveur,
   // le navigateur ne peut pas la fabriquer.

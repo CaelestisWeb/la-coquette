@@ -1,13 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { revalidatePath } from 'next/cache';
 import { Resend } from 'resend';
 import { createClient } from '@/lib/supabase/server';
+import { writeClient } from '@/sanity/lib/writeClient';
 
 const SHOP_EMAIL = 'contact@lacoquette-bycaro.fr';
 // Expéditeur sur le domaine VÉRIFIÉ dans Resend → livraison à Caro ET aux clientes.
 const FROM = 'La Coquette <commandes@lacoquette-bycaro.fr>';
 const REPLY_TO = 'contact@lacoquette-bycaro.fr';
 
-type OrderItem = { name: string; quantity: number; price: number; image?: string };
+type OrderItem = { id?: string; name: string; quantity: number; price: number; image?: string };
 
 const eur = (n: number) => `${Number(n).toFixed(2)} €`;
 
@@ -169,6 +171,25 @@ export async function POST(req: NextRequest) {
   } catch (e) {
     // Ne bloque jamais la commande : l'email à Caro est déjà parti.
     console.warn('[order] Historique non enregistré:', e);
+  }
+
+  // ── 4. Pièces uniques : retirer les bijoux vendus de la vente ──
+  // Chaque bijou est unique : une fois payé, il devient indisponible (donc
+  // masqué de la boutique et non re-achetable). Caro en rajoute ensuite.
+  try {
+    const ids = (items as OrderItem[])
+      .map((i) => i.id)
+      .filter((x): x is string => typeof x === 'string');
+    if (ids.length) {
+      let tx = writeClient.transaction();
+      ids.forEach((id) => { tx = tx.patch(id, { set: { available: false } }); });
+      await tx.commit();
+      revalidatePath('/');
+      revalidatePath('/boutique');
+      revalidatePath('/boutique/[slug]', 'page');
+    }
+  } catch (e) {
+    console.warn('[order] Retrait de la vente impossible:', e);
   }
 
   return NextResponse.json({ ok: true, paid: true });

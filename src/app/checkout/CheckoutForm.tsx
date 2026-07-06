@@ -13,7 +13,7 @@ type AddressSuggestion = {
 };
 
 export default function CheckoutForm() {
-  const { items, total } = useCart();
+  const { items, total, removeItem } = useCart();
 
   const [form, setForm] = useState({
     prenom: '', nom: '', email: '',
@@ -127,9 +127,15 @@ export default function CheckoutForm() {
           promoCode: appliedCode,
           description: `Commande La Coquette — ${form.prenom} ${form.nom}`,
           reference: ref,
+          items: items.map(i => ({ id: i.id, quantity: i.quantity })),
         }),
       });
       const data = await res.json();
+      // Pièce unique vendue entre-temps : on la retire du panier et on prévient.
+      if (res.status === 409 && Array.isArray(data.soldOut)) {
+        data.soldOut.forEach((id: string) => removeItem(id));
+        throw new Error(data.error || "Un bijou de votre panier vient d'être vendu. Il a été retiré.");
+      }
       if (!res.ok || !data.hostedCheckoutUrl) {
         throw new Error(data.error || 'Erreur lors de la création du paiement');
       }
@@ -140,7 +146,7 @@ export default function CheckoutForm() {
         checkoutId: data.checkoutId,
         reference: ref,
         customer: form,
-        items: items.map(i => ({ name: i.name, quantity: i.quantity, price: i.price, image: i.image })),
+        items: items.map(i => ({ id: i.id, name: i.name, quantity: i.quantity, price: i.price, image: i.image })),
         subtotal: total,
         discount: discountAmount,
         discountLabel: promoLabel,

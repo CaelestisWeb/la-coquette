@@ -61,15 +61,17 @@ export async function getCollections(): Promise<ProductCollection[]> {
 }
 
 export async function getProducts(): Promise<Product[]> {
+  // Pièces uniques : les bijoux vendus (available == false) ne sont plus
+  // affichés dans la boutique.
   const raw = await sanityFetch<any[]>(
-    `*[_type == "product"] | order(order asc, _createdAt asc){ ${FIELDS} }`,
+    `*[_type == "product" && available != false] | order(order asc, _createdAt asc){ ${FIELDS} }`,
   );
   return (raw || []).map(toProduct);
 }
 
 export async function getFeaturedProducts(): Promise<Product[]> {
   const raw = await sanityFetch<any[]>(
-    `*[_type == "product" && featured == true] | order(order asc){ ${FIELDS} }`,
+    `*[_type == "product" && featured == true && available != false] | order(order asc){ ${FIELDS} }`,
   );
   return (raw || []).map(toProduct);
 }

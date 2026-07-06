@@ -7,7 +7,7 @@ import { useCart } from '@/context/CartContext';
 import { SHIPPING_THRESHOLD, SHIPPING_COST } from '@/lib/shipping';
 
 export default function CartDrawer() {
-  const { items, removeItem, updateQty, total, count, isOpen, setIsOpen } = useCart();
+  const { items, removeItem, total, count, isOpen, setIsOpen } = useCart();
 
   // Fermeture avec Échap + blocage du scroll de fond quand le panier est ouvert
   useEffect(() => {
@@ -88,18 +88,7 @@ export default function CartDrawer() {
                   <div className="flex-1 min-w-0">
                     <p className="font-display text-base text-noir truncate">{item.name}</p>
                     <p className="font-body text-sm text-taupe">{item.price} €</p>
-                    {/* Quantité */}
-                    <div className="flex items-center gap-2 mt-2">
-                      <button
-                        onClick={() => updateQty(item.id, item.quantity - 1)}
-                        className="w-6 h-6 border border-gris flex items-center justify-center text-taupe hover:border-or hover:text-or transition-colors text-sm"
-                      >−</button>
-                      <span className="font-body text-sm w-4 text-center">{item.quantity}</span>
-                      <button
-                        onClick={() => updateQty(item.id, item.quantity + 1)}
-                        className="w-6 h-6 border border-gris flex items-center justify-center text-taupe hover:border-or hover:text-or transition-colors text-sm"
-                      >+</button>
-                    </div>
+                    <p className="font-body text-[11px] text-taupe/80 tracking-wide uppercase mt-1.5">Pièce unique</p>
                   </div>
                   <div className="flex flex-col items-end justify-between">
                     <button

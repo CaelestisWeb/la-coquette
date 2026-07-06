@@ -14,7 +14,7 @@ export type CartItem = {
 
 type CartContextType = {
   items: CartItem[];
-  addItem: (item: Omit<CartItem, 'quantity'>, qty?: number) => void;
+  addItem: (item: Omit<CartItem, 'quantity'>) => void;
   removeItem: (id: string) => void;
   updateQty: (id: string, qty: number) => void;
   clearCart: () => void;
@@ -107,13 +107,12 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     return () => { if (saveTimer.current) clearTimeout(saveTimer.current); };
   }, [items, user, mounted, supabase]);
 
-  const addItem = useCallback((product: Omit<CartItem, 'quantity'>, qty: number = 1) => {
+  // Pièces uniques : un seul exemplaire. Si le bijou est déjà au panier, on ne
+  // l'ajoute pas une seconde fois (la quantité reste à 1).
+  const addItem = useCallback((product: Omit<CartItem, 'quantity'>) => {
     setItems(prev => {
-      const existing = prev.find(i => i.id === product.id);
-      if (existing) {
-        return prev.map(i => i.id === product.id ? { ...i, quantity: i.quantity + qty } : i);
-      }
-      return [...prev, { ...product, quantity: qty }];
+      if (prev.some(i => i.id === product.id)) return prev;
+      return [...prev, { ...product, quantity: 1 }];
     });
     setIsOpen(true);
   }, []);

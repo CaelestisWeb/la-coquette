@@ -291,7 +291,7 @@ export default function ProductManager() {
                 )}
 
                 <div className="flex flex-wrap gap-x-4 gap-y-1.5 mt-3">
-                  <Toggle on={p.available} onClick={() => toggle(p.id, 'available')} label={p.available ? 'En vente' : 'Épuisé'} tone="green" />
+                  <Toggle on={p.available} onClick={() => toggle(p.id, 'available')} label={p.available ? 'En vente' : 'Vendu'} tone="green" />
                   <Toggle on={p.featured} onClick={() => toggle(p.id, 'featured')} label="En avant" tone="gold" />
                 </div>
 

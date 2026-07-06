@@ -17,6 +17,7 @@ export default function ProductCard({ product }: { product: Product }) {
 
   // Affiche la collection si le produit en a une, sinon le libellé de catégorie.
   const catLabel = product.collection?.name || categoryLabels[product.category];
+  const sold = product.available === false;
 
   return (
     <Link href={`/boutique/${product.slug}`} className="group block bg-creme overflow-hidden">
@@ -31,6 +32,11 @@ export default function ProductCard({ product }: { product: Product }) {
             className="w-8 h-8 rounded-full bg-blanc/85 backdrop-blur-sm shadow-sm hover:bg-blanc"
           />
         </div>
+        {sold && (
+          <span className="absolute top-2 left-2 z-10 bg-noir/85 text-blanc text-[9px] font-body tracking-[0.15em] uppercase px-2.5 py-1 rounded-full">
+            Vendu
+          </span>
+        )}
         <Image
           src={product.image}
           alt={product.name}
@@ -38,7 +44,7 @@ export default function ProductCard({ product }: { product: Product }) {
           sizes="(max-width: 640px) 50vw, (max-width: 1024px) 50vw, 25vw"
           placeholder={product.blurDataURL ? 'blur' : 'empty'}
           blurDataURL={product.blurDataURL}
-          className={`object-cover cursor-zoom-in transition duration-700 ${
+          className={`object-cover cursor-zoom-in transition duration-700 ${sold ? 'opacity-60' : ''} ${
             product.hoverImage ? 'group-hover:opacity-0' : 'group-hover:scale-105'
           }`}
         />
@@ -54,15 +60,17 @@ export default function ProductCard({ product }: { product: Product }) {
             className="object-cover cursor-zoom-in absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700"
           />
         )}
-        {/* Overlay hover — desktop uniquement */}
-        <div className="absolute inset-0 bg-noir/0 group-hover:bg-noir/10 transition-all duration-300 hidden sm:flex items-end justify-center pb-4 opacity-0 group-hover:opacity-100">
-          <button
-            onClick={handleAdd}
-            className="bg-creme text-noir border border-noir text-[10px] font-body font-semibold tracking-widest uppercase px-6 py-2.5 rounded hover:bg-or hover:text-blanc transition-colors duration-200"
-          >
-            Ajouter au panier
-          </button>
-        </div>
+        {/* Overlay hover — desktop uniquement (masqué si vendu) */}
+        {!sold && (
+          <div className="absolute inset-0 bg-noir/0 group-hover:bg-noir/10 transition-all duration-300 hidden sm:flex items-end justify-center pb-4 opacity-0 group-hover:opacity-100">
+            <button
+              onClick={handleAdd}
+              className="bg-creme text-noir border border-noir text-[10px] font-body font-semibold tracking-widest uppercase px-6 py-2.5 rounded hover:bg-or hover:text-blanc transition-colors duration-200"
+            >
+              Ajouter au panier
+            </button>
+          </div>
+        )}
       </div>
 
       {/* Infos */}
@@ -74,13 +82,17 @@ export default function ProductCard({ product }: { product: Product }) {
           {product.name}
         </h3>
         <p className="font-body text-sm text-taupe mt-1.5">{product.price} €</p>
-        {/* Bouton panier — mobile uniquement */}
-        <button
-          onClick={handleAdd}
-          className="sm:hidden mt-3 text-[9px] font-body tracking-wide uppercase py-1.5 px-4 border border-noir text-taupe rounded hover:text-or active:bg-or active:text-blanc transition-colors duration-150"
-        >
-          + Panier
-        </button>
+        {/* Bouton panier — mobile uniquement (ou « vendu ») */}
+        {sold ? (
+          <p className="sm:hidden mt-3 text-[9px] font-body tracking-[0.15em] uppercase text-taupe">Vendu</p>
+        ) : (
+          <button
+            onClick={handleAdd}
+            className="sm:hidden mt-3 text-[9px] font-body tracking-wide uppercase py-1.5 px-4 border border-noir text-taupe rounded hover:text-or active:bg-or active:text-blanc transition-colors duration-150"
+          >
+            + Panier
+          </button>
+        )}
       </div>
 
     </Link>
