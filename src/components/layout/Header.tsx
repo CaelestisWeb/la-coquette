@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation';
 import { useCart } from '@/context/CartContext';
 import { useFavorites } from '@/context/FavoritesContext';
@@ -19,6 +19,8 @@ export default function Header() {
   const { count: favCount, user } = useFavorites();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [bump, setBump] = useState(false);
+  const prevCount = useRef(count);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -26,6 +28,12 @@ export default function Header() {
     window.addEventListener('scroll', handler, { passive: true });
     return () => window.removeEventListener('scroll', handler);
   }, []);
+
+  // Petit rebond de l'icône panier quand un article est ajouté.
+  useEffect(() => {
+    if (count > prevCount.current) setBump(true);
+    prevCount.current = count;
+  }, [count]);
 
   useEffect(() => { setMenuOpen(false); }, [pathname]);
 
@@ -104,7 +112,8 @@ export default function Header() {
             {/* Panier */}
             <button
               onClick={() => setIsOpen(true)}
-              className={`relative p-2 transition-colors ${onDarkHero ? 'hover:text-blanc' : 'hover:text-taupe'}`}
+              onAnimationEnd={() => setBump(false)}
+              className={`relative p-2 transition-colors ${onDarkHero ? 'hover:text-blanc' : 'hover:text-taupe'} ${bump ? 'motion-safe:animate-[lcCartBump_.4s_ease-out]' : ''}`}
               aria-label="Ouvrir le panier"
             >
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
@@ -127,13 +136,19 @@ export default function Header() {
             <Link
               key={link.href}
               href={link.href}
-              className={`font-body text-[11px] font-normal tracking-[0.22em] uppercase transition-colors duration-300 ${
+              className={`group relative pb-1 font-body text-[11px] font-normal tracking-[0.22em] uppercase transition-colors duration-300 ${
                 onDarkHero
                   ? pathname === link.href ? 'text-blanc' : 'text-blanc/65 hover:text-blanc'
                   : pathname === link.href ? 'text-noir' : 'text-taupe hover:text-noir'
               }`}
             >
               {link.label}
+              <span
+                aria-hidden
+                className={`pointer-events-none absolute left-0 bottom-0 h-px w-full origin-left transition-transform duration-300 ${
+                  onDarkHero ? 'bg-blanc' : 'bg-noir'
+                } ${pathname === link.href ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}`}
+              />
             </Link>
           ))}
         </nav>

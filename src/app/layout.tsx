@@ -10,6 +10,8 @@ import Footer from '@/components/layout/Footer';
 import CartDrawer from '@/components/ui/CartDrawer';
 import ScrollReveal from '@/components/ui/ScrollReveal';
 import SmoothScroll from '@/components/ui/SmoothScroll';
+import BackToTop from '@/components/ui/BackToTop';
+import CartTitle from '@/components/ui/CartTitle';
 import ConditionalChrome from '@/components/layout/ConditionalChrome';
 
 // Sans géométrique épuré — titres
@@ -91,7 +93,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           <FavoritesProvider>
             <ConditionalChrome
               header={<Header />}
-              footer={<><Footer /><CartDrawer /><ScrollReveal /><SmoothScroll /></>}
+              footer={<><Footer /><CartDrawer /><ScrollReveal /><SmoothScroll /><BackToTop /><CartTitle /></>}
             >
               {children}
             </ConditionalChrome>

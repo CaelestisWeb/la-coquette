@@ -3,8 +3,8 @@ import { notFound } from 'next/navigation';
 import { getProducts, getProductBySlug } from '@/sanity/lib/products';
 import { categoryLabels } from '@/sanity/lib/productTypes';
 import AddToCartButton from './AddToCartButton';
-import HeartButton from '@/components/ui/HeartButton';
-import ZoomableImage from '@/components/ui/ZoomableImage';
+import StickyAddToCart from './StickyAddToCart';
+import ProductGallery from '@/components/ui/ProductGallery';
 import ProductCard from '@/components/ui/ProductCard';
 import { SHIPPING_THRESHOLD } from '@/lib/shipping';
 import type { Metadata } from 'next';
@@ -74,17 +74,8 @@ export default async function ProductPage({ params }: Props) {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
 
-          {/* Image */}
-          <div className="aspect-square relative overflow-hidden bg-beige rounded-lg">
-            <div className="absolute top-3 right-3 z-10">
-              <HeartButton
-                productId={product.id}
-                size={20}
-                className="w-10 h-10 rounded-full bg-blanc/85 backdrop-blur-sm shadow-sm hover:bg-blanc"
-              />
-            </div>
-            <ZoomableImage src={product.image} alt={product.name} />
-          </div>
+          {/* Galerie photos */}
+          <ProductGallery images={product.gallery} alt={product.name} productId={product.id} />
 
           {/* Infos produit */}
           <div className="lg:sticky lg:top-28 text-center">
@@ -119,7 +110,7 @@ export default async function ProductPage({ params }: Props) {
             </ul>
 
             {/* Bouton panier */}
-            <div className="mt-10">
+            <div id="main-add-to-cart" className="mt-10">
               <AddToCartButton product={product} />
             </div>
 
@@ -156,6 +147,8 @@ export default async function ProductPage({ params }: Props) {
           </section>
         )}
       </div>
+
+      <StickyAddToCart product={product} />
     </div>
   );
 }

@@ -8,18 +8,25 @@ const FIELDS = `
   "slug": slug.current,
   name, category, price, description, material, featured, available,
   "collection": collection->{ "id": _id, name, "slug": slug.current },
-  "image": images[0]
+  "images": images[]{ ..., "lqip": asset->metadata.lqip }
 `;
 
 function toProduct(p: any): Product {
-  let image = '/boucles-placeholder.jpg';
-  try {
-    if (p?.image?.asset) {
-      image = urlForImage(p.image).width(900).height(900).fit('crop').url();
+  const gallery: Product['gallery'] = [];
+  for (const img of (p?.images || [])) {
+    try {
+      if (img?.asset) {
+        gallery.push({
+          url: urlForImage(img).width(1200).height(1200).fit('crop').url(),
+          blurDataURL: typeof img.lqip === 'string' ? img.lqip : undefined,
+        });
+      }
+    } catch {
+      // ignore une image non exploitable
     }
-  } catch {
-    // garde le placeholder si l'image n'est pas exploitable
   }
+  if (gallery.length === 0) gallery.push({ url: '/boucles-placeholder.jpg' });
+
   const collection: Product['collection'] = p?.collection?.id
     ? { id: p.collection.id, name: p.collection.name || '', slug: stegaClean(p.collection.slug) }
     : null;
@@ -33,7 +40,11 @@ function toProduct(p: any): Product {
     price: p.price,
     description: p.description || '',
     material: p.material || '',
-    image,
+    image: gallery[0].url,
+    blurDataURL: gallery[0].blurDataURL,
+    hoverImage: gallery[1]?.url,
+    hoverBlurDataURL: gallery[1]?.blurDataURL,
+    gallery,
     featured: Boolean(p.featured),
     available: p.available !== false,
   };

@@ -6,6 +6,8 @@ export type ProductCollection = {
   slug: string;
 };
 
+export type ProductImage = { url: string; blurDataURL?: string };
+
 export type Product = {
   id: string;
   slug: string;
@@ -15,7 +17,11 @@ export type Product = {
   price: number;
   description: string;
   material: string;
-  image: string;
+  image: string;              // première photo (compat)
+  blurDataURL?: string;       // aperçu flou de la première photo
+  hoverImage?: string;        // deuxième photo (survol des vignettes)
+  hoverBlurDataURL?: string;
+  gallery: ProductImage[];    // toutes les photos (page produit)
   featured?: boolean;
   available?: boolean;
 };

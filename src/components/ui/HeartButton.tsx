@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useFavorites } from '@/context/FavoritesContext';
 
@@ -17,11 +18,13 @@ export default function HeartButton({
   const { isFavorite, toggle } = useFavorites();
   const router = useRouter();
   const active = isFavorite(productId);
+  const [pop, setPop] = useState(false);
 
   async function handleClick(e: React.MouseEvent) {
     e.preventDefault();
     e.stopPropagation();
     const res = await toggle(productId);
+    if (res === 'added') setPop(true);
     if (res === 'need-auth') {
       const here = typeof window !== 'undefined' ? window.location.pathname : '/';
       router.push(`/connexion?next=${encodeURIComponent(here)}`);
@@ -47,6 +50,8 @@ export default function HeartButton({
         strokeWidth="1.6"
         strokeLinecap="round"
         strokeLinejoin="round"
+        onAnimationEnd={() => setPop(false)}
+        className={pop ? 'motion-safe:animate-[lcHeartPop_.35s_ease-out]' : ''}
       >
         <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z" />
       </svg>

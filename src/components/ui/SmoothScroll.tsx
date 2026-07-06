@@ -18,6 +18,9 @@ export default function SmoothScroll() {
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
     });
 
+    // Exposé pour le bouton « revenir en haut » (défilement fluide cohérent).
+    (window as unknown as { lenis?: Lenis }).lenis = lenis;
+
     let raf = 0;
     const loop = (time: number) => {
       lenis.raf(time);
@@ -28,6 +31,7 @@ export default function SmoothScroll() {
     return () => {
       cancelAnimationFrame(raf);
       lenis.destroy();
+      delete (window as unknown as { lenis?: Lenis }).lenis;
     };
   }, []);
 
