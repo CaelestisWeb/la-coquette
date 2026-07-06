@@ -127,7 +127,8 @@ export default function CheckoutForm() {
           promoCode: appliedCode,
           description: `Commande La Coquette — ${form.prenom} ${form.nom}`,
           reference: ref,
-          items: items.map(i => ({ id: i.id, quantity: i.quantity })),
+          customer: form,
+          items: items.map(i => ({ id: i.id, name: i.name, quantity: i.quantity, price: i.price, image: i.image })),
         }),
       });
       const data = await res.json();

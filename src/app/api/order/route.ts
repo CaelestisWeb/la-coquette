@@ -1,195 +1,58 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { revalidatePath } from 'next/cache';
-import { Resend } from 'resend';
 import { createClient } from '@/lib/supabase/server';
-import { writeClient } from '@/sanity/lib/writeClient';
+import { verifyPaid, claimSale, finalizeSale, type Order } from '@/lib/fulfill';
 
-const SHOP_EMAIL = 'contact@lacoquette-bycaro.fr';
-// Expéditeur sur le domaine VÉRIFIÉ dans Resend → livraison à Caro ET aux clientes.
-const FROM = 'La Coquette <commandes@lacoquette-bycaro.fr>';
-const REPLY_TO = 'contact@lacoquette-bycaro.fr';
-
-type OrderItem = { id?: string; name: string; quantity: number; price: number; image?: string };
-
-const eur = (n: number) => `${Number(n).toFixed(2)} €`;
-
-// Vignette du bijou pour l'email (seulement si l'URL est absolue : les clients
-// mail ne chargent pas les chemins relatifs comme le visuel de secours).
-function thumbCell(image?: string) {
-  if (!image || !/^https?:\/\//.test(image)) return '';
-  return `<td style="padding-right:12px;vertical-align:middle;" width="56">
-    <img src="${image}" width="56" height="56" alt="" style="display:block;width:56px;height:56px;object-fit:cover;border-radius:8px;border:1px solid #ECE7E1;" />
-  </td>`;
-}
-
+// Finalisation au RETOUR de la cliente sur /commande-confirmee.
+// Le webhook SumUp fait la même chose côté serveur : le verrou (claimSale)
+// garantit qu'emails + retrait de la vente ne se font qu'une seule fois.
 export async function POST(req: NextRequest) {
-  const resend = new Resend(process.env.RESEND_API_KEY);
-  const { customer, items, subtotal, shipping, total, reference, checkoutId, discount, promoCode } = await req.json();
+  const body = (await req.json()) as Order;
+  const { customer, items, checkoutId } = body;
 
   if (!customer?.email || !Array.isArray(items) || items.length === 0) {
     return NextResponse.json({ error: 'Commande invalide' }, { status: 400 });
   }
 
-  // Vérifie que le paiement a bien été encaissé côté SumUp avant d'envoyer
-  // quoi que ce soit : évite d'avertir Caro d'une commande non payée (cliente
-  // qui revient sur la page sans avoir finalisé le paiement, par exemple).
-  if (checkoutId) {
-    try {
-      const check = await fetch(`https://api.sumup.com/v0.1/checkouts/${checkoutId}`, {
-        headers: { Authorization: `Bearer ${process.env.SUMUP_SECRET_KEY}` },
-      });
-      const co = await check.json();
-      if (co.status !== 'PAID') {
-        return NextResponse.json({ ok: false, paid: false });
-      }
-    } catch (e) {
-      console.error('[order] Vérification du paiement impossible:', e);
-      return NextResponse.json({ ok: false, paid: false });
-    }
+  // Paiement bien encaissé ?
+  if (!(await verifyPaid(checkoutId))) {
+    return NextResponse.json({ ok: false, paid: false });
   }
 
-  const date = new Date().toLocaleString('fr-FR', {
-    dateStyle: 'long',
-    timeStyle: 'short',
-  });
-
-  const rows = (items as OrderItem[])
-    .map(
-      (i) => `
-      <tr>
-        <td style="padding:10px 0;border-bottom:1px solid #ECE7E1;color:#111111;">
-          <table role="presentation" cellpadding="0" cellspacing="0" style="border-collapse:collapse;"><tr>
-            ${thumbCell(i.image)}
-            <td style="vertical-align:middle;color:#111111;font-size:14px;">${i.name}</td>
-          </tr></table>
-        </td>
-        <td style="padding:10px 0;border-bottom:1px solid #ECE7E1;text-align:center;color:#6E655B;vertical-align:middle;">× ${i.quantity}</td>
-        <td style="padding:10px 0;border-bottom:1px solid #ECE7E1;text-align:right;color:#111111;vertical-align:middle;">${eur(i.price * i.quantity)}</td>
-      </tr>`
-    )
-    .join('');
-
-  const totals = `
-    <tr><td colspan="2" style="padding:6px 0;color:#6E655B;">Sous-total</td><td style="padding:6px 0;text-align:right;color:#6E655B;">${eur(subtotal)}</td></tr>
-    ${discount ? `<tr><td colspan="2" style="padding:6px 0;color:#A8842E;">Réduction${promoCode ? ` (${promoCode})` : ''}</td><td style="padding:6px 0;text-align:right;color:#A8842E;">-${eur(discount)}</td></tr>` : ''}
-    <tr><td colspan="2" style="padding:6px 0;color:#6E655B;">Livraison</td><td style="padding:6px 0;text-align:right;color:#6E655B;">${shipping === 0 ? 'Offerte' : eur(shipping)}</td></tr>
-    <tr><td colspan="2" style="padding:10px 0;font-weight:600;color:#111111;border-top:1px solid #DCD7D1;">Total</td><td style="padding:10px 0;text-align:right;font-weight:600;color:#111111;border-top:1px solid #DCD7D1;">${eur(total)}</td></tr>`;
-
-  const address = `${customer.prenom} ${customer.nom}<br/>${customer.adresse}<br/>${customer.codePostal} ${customer.ville}`;
-
-  const wrap = (inner: string) => `<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body style="margin:0;padding:0;background:#F4EEE5;">
-  <div style="font-family:Arial,Helvetica,sans-serif;max-width:560px;margin:0 auto;background:#FBF8F3;padding:32px 28px;color:#111111;">
-    ${inner}
-    <p style="margin-top:28px;font-size:12px;color:#9A9189;text-align:center;">La Coquette · Bijoux artisanaux · Drôme</p>
-  </div>
-</body>
-</html>`;
-
-  // ── 1. Email à Caro (essentiel) ─────────────────────────────
-  const shopHtml = wrap(`
-    <h1 style="font-size:20px;color:#111111;margin:0 0 4px;">Nouvelle commande</h1>
-    <p style="font-size:13px;color:#6E655B;margin:0 0 24px;">${reference || ''} · ${date}</p>
-
-    <h2 style="font-size:14px;color:#A8842E;text-transform:uppercase;letter-spacing:1px;margin:0 0 8px;">Cliente</h2>
-    <p style="font-size:14px;margin:0 0 4px;"><strong>${customer.prenom} ${customer.nom}</strong></p>
-    <p style="font-size:14px;margin:0 0 20px;"><a href="mailto:${customer.email}" style="color:#A8842E;">${customer.email}</a></p>
-
-    <h2 style="font-size:14px;color:#A8842E;text-transform:uppercase;letter-spacing:1px;margin:0 0 8px;">Adresse de livraison</h2>
-    <p style="font-size:14px;line-height:1.5;margin:0 0 24px;">${address}</p>
-
-    <h2 style="font-size:14px;color:#A8842E;text-transform:uppercase;letter-spacing:1px;margin:0 0 8px;">Articles</h2>
-    <table style="width:100%;border-collapse:collapse;font-size:14px;">${rows}${totals}</table>
-  `);
-
-  const { error } = await resend.emails.send({
-    from: FROM,
-    to: SHOP_EMAIL,
-    replyTo: customer.email,
-    subject: `🛍️ Nouvelle commande — ${customer.prenom} ${customer.nom} (${eur(total)})`,
-    html: shopHtml,
-  });
-
-  if (error) {
-    console.error('[order] Resend (boutique) error:', JSON.stringify(error));
+  // Emails + retrait de la vente, une seule fois.
+  try {
+    if (checkoutId) {
+      const claim = await claimSale(checkoutId);
+      if (claim.status === 'claimed') await finalizeSale(claim.order);
+      else if (claim.status === 'missing') await finalizeSale(body); // pas de commande enregistrée → depuis le navigateur
+      // 'done' : déjà traité par le webhook, on ne renvoie pas d'email
+    } else {
+      await finalizeSale(body);
+    }
+  } catch (e) {
+    console.error('[order] Finalisation échouée:', e);
     return NextResponse.json({ error: 'Envoi de la commande échoué' }, { status: 500 });
   }
 
-  // ── 2. Confirmation à la cliente (best-effort) ──────────────
-  // Échoue tant que le domaine n'est pas vérifié chez Resend : on n'interrompt
-  // pas la commande pour autant (le mail à Caro, lui, est déjà parti).
-  const customerHtml = wrap(`
-    <h1 style="font-size:20px;color:#111111;margin:0 0 4px;">Merci pour votre commande !</h1>
-    <p style="font-size:14px;color:#6E655B;line-height:1.6;margin:0 0 24px;">
-      Bonjour ${customer.prenom}, votre commande est bien confirmée. Caro la prépare avec soin
-      et vous contactera très prochainement pour la livraison.
-    </p>
-
-    <h2 style="font-size:14px;color:#A8842E;text-transform:uppercase;letter-spacing:1px;margin:0 0 8px;">Votre commande</h2>
-    <table style="width:100%;border-collapse:collapse;font-size:14px;">${rows}${totals}</table>
-
-    <h2 style="font-size:14px;color:#A8842E;text-transform:uppercase;letter-spacing:1px;margin:24px 0 8px;">Livraison</h2>
-    <p style="font-size:14px;line-height:1.5;margin:0;">${address}</p>
-  `);
-
-  const { error: custErr } = await resend.emails.send({
-    from: FROM,
-    to: customer.email,
-    replyTo: REPLY_TO,
-    subject: 'Votre commande La Coquette est confirmée ✨',
-    html: customerHtml,
-  });
-  if (custErr) {
-    console.warn('[order] Confirmation cliente non envoyée (domaine non vérifié ?):', JSON.stringify(custErr));
-  }
-
-  // ── 3. Historique de commande (si la cliente est connectée) ──
-  // Écrit avec SA propre session : le RLS garantit qu'elle ne peut créer
-  // qu'une commande à son nom. Les commandes des visiteurs non connectés ne
-  // sont pas stockées (elles restent notifiées par email à Caro).
+  // Historique de commande, si la cliente est connectée (RLS : sa commande à
+  // son nom). Toujours tenté ici, même si le webhook a déjà envoyé les emails.
   try {
     const supabase = await createClient();
     const { data: auth } = await supabase.auth.getUser();
     if (auth.user) {
       await supabase.from('orders').insert({
         user_id: auth.user.id,
-        reference: reference || null,
+        reference: body.reference || null,
         status: 'paid',
-        subtotal: Number(subtotal) || 0,
-        shipping: Number(shipping) || 0,
-        discount: Number(discount) || 0,
-        total: Number(total) || 0,
+        subtotal: Number(body.subtotal) || 0,
+        shipping: Number(body.shipping) || 0,
+        discount: Number(body.discount) || 0,
+        total: Number(body.total) || 0,
         items,
         customer,
       });
     }
   } catch (e) {
-    // Ne bloque jamais la commande : l'email à Caro est déjà parti.
     console.warn('[order] Historique non enregistré:', e);
-  }
-
-  // ── 4. Pièces uniques : retirer les bijoux vendus de la vente ──
-  // Chaque bijou est unique : une fois payé, il devient indisponible (donc
-  // masqué de la boutique et non re-achetable). Caro en rajoute ensuite.
-  try {
-    const ids = (items as OrderItem[])
-      .map((i) => i.id)
-      .filter((x): x is string => typeof x === 'string');
-    if (ids.length) {
-      let tx = writeClient.transaction();
-      ids.forEach((id) => { tx = tx.patch(id, { set: { available: false } }); });
-      await tx.commit();
-      revalidatePath('/');
-      revalidatePath('/boutique');
-      revalidatePath('/boutique/[slug]', 'page');
-    }
-  } catch (e) {
-    console.warn('[order] Retrait de la vente impossible:', e);
   }
 
   return NextResponse.json({ ok: true, paid: true });

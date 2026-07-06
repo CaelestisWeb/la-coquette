@@ -32,13 +32,32 @@ async function backupSupabase() {
   return out;
 }
 
-async function backupSanity() {
-  const c = createSanity({
+function sanityClient() {
+  return createSanity({
     projectId: env.NEXT_PUBLIC_SANITY_PROJECT_ID, dataset: env.NEXT_PUBLIC_SANITY_DATASET || 'production',
     apiVersion: '2024-01-01', token: env.SANITY_API_TOKEN, useCdn: false,
   });
+}
+
+async function backupSanity() {
   // Tous les documents publiés (produits, collections, pages, réglages).
-  return c.fetch('*[!(_id in path("drafts.**"))]');
+  return sanityClient().fetch('*[!(_id in path("drafts.**"))]');
+}
+
+// Purge les commandes en attente (transitoires) de plus de 7 jours.
+async function cleanupPending() {
+  try {
+    const c = sanityClient();
+    const old = await c.fetch('*[_type == "pendingOrder" && dateTime(_createdAt) < dateTime(now()) - 60*60*24*7]._id');
+    if (old.length) {
+      let tx = c.transaction();
+      old.forEach((id) => { tx = tx.delete(id); });
+      await tx.commit();
+      console.log(`Nettoyage : ${old.length} commande(s) en attente supprimée(s).`);
+    }
+  } catch (e) {
+    console.warn('Nettoyage commandes en attente ignoré:', e.message);
+  }
 }
 
 function prune() {
@@ -63,6 +82,7 @@ async function main() {
   const file = join(DIR, `backup-${stamp}.json`);
   writeFileSync(file, JSON.stringify(payload, null, 2), 'utf8');
   prune();
+  await cleanupPending();
   console.log('Sauvegarde OK →', file);
   console.log('Contenu :', JSON.stringify(payload.counts));
 }

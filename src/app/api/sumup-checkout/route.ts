@@ -1,13 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { resolvePromo } from '@/lib/promo';
 import { writeClient } from '@/sanity/lib/writeClient';
+import { savePending } from '@/lib/fulfill';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 const round2 = (n: number) => Math.round(n * 100) / 100;
 
 export async function POST(req: NextRequest) {
-  const { subtotal, shipping, promoCode, description, reference, items } = await req.json();
+  const { subtotal, shipping, promoCode, description, reference, items, customer } = await req.json();
 
   // Pièces uniques : on refuse le paiement si un bijou du panier vient d'être
   // vendu (marqué indisponible). Lecture fraîche (writeClient, sans cache CDN).
@@ -59,6 +60,9 @@ export async function POST(req: NextRequest) {
       merchant_code: 'M28Y0EMC',
       description: description || 'Commande La Coquette',
       redirect_url: 'https://lacoquette-bycaro.fr/commande-confirmee',
+      // Notification serveur (webhook) au changement de statut : la commande
+      // est finalisée même si la cliente ferme l'onglet après avoir payé.
+      return_url: 'https://lacoquette-bycaro.fr/api/sumup-webhook',
       // Page de paiement hébergée par SumUp : Apple Pay / Google Pay / carte
       // s'affichent automatiquement (domaine checkout.sumup.com déjà validé).
       hosted_checkout: { enabled: true },
@@ -70,6 +74,24 @@ export async function POST(req: NextRequest) {
   if (!res.ok) {
     console.error('[sumup] Erreur création checkout:', JSON.stringify(data));
     return NextResponse.json({ error: data.message || 'Erreur SumUp' }, { status: 500 });
+  }
+
+  // Enregistre la commande en attente (adresse + articles) pour que le webhook
+  // puisse la finaliser sans dépendre du retour de la cliente sur le site.
+  try {
+    await savePending({
+      checkoutId: data.id,
+      reference: reference || `LC-${Date.now()}`,
+      customer,
+      items: Array.isArray(items) ? items : [],
+      subtotal: base,
+      shipping: ship,
+      discount: round2(base * discount),
+      total: amount,
+      promoCode,
+    });
+  } catch (e) {
+    console.warn('[sumup] Enregistrement de la commande en attente échoué:', e);
   }
 
   const hostedCheckoutUrl =
