@@ -14,8 +14,6 @@ type AddressSuggestion = {
 
 export default function CheckoutForm() {
   const { items, total } = useCart();
-  const shipping = total >= SHIPPING_THRESHOLD ? 0 : SHIPPING_COST;
-  const grandTotal = total + shipping;
 
   const [form, setForm] = useState({
     prenom: '', nom: '', email: '',
@@ -26,6 +24,48 @@ export default function CheckoutForm() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // Code de réduction
+  const [promoInput, setPromoInput] = useState('');
+  const [appliedCode, setAppliedCode] = useState('');
+  const [discount, setDiscount] = useState(0); // part remisée, 0 à 1
+  const [promoLabel, setPromoLabel] = useState('');
+  const [promoMsg, setPromoMsg] = useState('');
+  const [promoLoading, setPromoLoading] = useState(false);
+
+  const round2 = (n: number) => Math.round(n * 100) / 100;
+  const shipping = total >= SHIPPING_THRESHOLD ? 0 : SHIPPING_COST;
+  const discountAmount = round2(total * discount);
+  const grandTotal = round2(total - discountAmount + shipping);
+
+  async function applyPromo() {
+    if (!promoInput.trim()) return;
+    setPromoLoading(true);
+    setPromoMsg('');
+    try {
+      const res = await fetch('/api/promo', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ code: promoInput }),
+      });
+      const data = await res.json();
+      if (data.valid) {
+        setDiscount(data.discount);
+        setAppliedCode(promoInput.trim());
+        setPromoLabel(data.label || '');
+        setPromoMsg('');
+      } else {
+        setDiscount(0);
+        setAppliedCode('');
+        setPromoLabel('');
+        setPromoMsg('Code invalide.');
+      }
+    } catch {
+      setPromoMsg('Erreur, réessayez.');
+    } finally {
+      setPromoLoading(false);
+    }
+  }
 
   // Autocomplétion adresse française (API officielle data.gouv — toute la France)
   async function searchAddress(query: string) {
@@ -78,7 +118,9 @@ export default function CheckoutForm() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          amount: grandTotal,
+          subtotal: total,
+          shipping,
+          promoCode: appliedCode,
           description: `Commande La Coquette — ${form.prenom} ${form.nom}`,
           reference: ref,
         }),
@@ -96,8 +138,11 @@ export default function CheckoutForm() {
         customer: form,
         items: items.map(i => ({ name: i.name, quantity: i.quantity, price: i.price })),
         subtotal: total,
+        discount: discountAmount,
+        discountLabel: promoLabel,
+        promoCode: appliedCode,
         shipping,
-        total: grandTotal,
+        total: data.amount ?? grandTotal,
       }));
 
       // Redirige vers la page de paiement hébergée SumUp (Apple Pay, Google
@@ -205,10 +250,32 @@ export default function CheckoutForm() {
             </li>
           ))}
         </ul>
+
+        {/* Code de réduction */}
+        <div className="border-t border-gris pt-4 mb-4">
+          <label htmlFor="promo" className="font-body text-[10px] tracking-widest uppercase text-taupe block mb-1.5">Code de réduction</label>
+          <div className="flex gap-2">
+            <input id="promo" value={promoInput} onChange={e => setPromoInput(e.target.value)}
+              placeholder="Votre code"
+              className="flex-1 min-w-0 border border-gris bg-creme px-3 py-2 font-body text-sm text-noir outline-none focus:border-noir transition-colors uppercase" />
+            <button type="button" onClick={applyPromo} disabled={promoLoading || !promoInput.trim()}
+              className="font-body text-[11px] tracking-widest uppercase px-4 py-2 rounded border border-noir text-noir hover:bg-noir hover:text-blanc transition-colors disabled:opacity-40">
+              {promoLoading ? '…' : 'Appliquer'}
+            </button>
+          </div>
+          {promoMsg && <p className="font-body text-xs text-red-500 mt-1.5">{promoMsg}</p>}
+          {discount > 0 && <p className="font-body text-xs text-or mt-1.5">Code appliqué : -{Math.round(discount * 100)} %{promoLabel ? ` (${promoLabel})` : ''}</p>}
+        </div>
+
         <div className="border-t border-gris pt-4 space-y-2">
           <div className="flex justify-between font-body text-sm text-taupe">
             <span>Sous-total</span><span>{total.toFixed(2)} €</span>
           </div>
+          {discount > 0 && (
+            <div className="flex justify-between font-body text-sm text-or">
+              <span>Réduction</span><span>-{discountAmount.toFixed(2)} €</span>
+            </div>
+          )}
           <div className="flex justify-between font-body text-sm text-taupe">
             <span>Livraison</span>
             <span>{shipping === 0 ? <span className="text-or">Gratuite</span> : `${shipping.toFixed(2)} €`}</span>

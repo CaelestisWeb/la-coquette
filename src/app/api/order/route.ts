@@ -10,7 +10,7 @@ const eur = (n: number) => `${Number(n).toFixed(2)} €`;
 
 export async function POST(req: NextRequest) {
   const resend = new Resend(process.env.RESEND_API_KEY);
-  const { customer, items, subtotal, shipping, total, reference, checkoutId } = await req.json();
+  const { customer, items, subtotal, shipping, total, reference, checkoutId, discount, promoCode } = await req.json();
 
   if (!customer?.email || !Array.isArray(items) || items.length === 0) {
     return NextResponse.json({ error: 'Commande invalide' }, { status: 400 });
@@ -52,6 +52,7 @@ export async function POST(req: NextRequest) {
 
   const totals = `
     <tr><td colspan="2" style="padding:6px 0;color:#6E655B;">Sous-total</td><td style="padding:6px 0;text-align:right;color:#6E655B;">${eur(subtotal)}</td></tr>
+    ${discount ? `<tr><td colspan="2" style="padding:6px 0;color:#A8842E;">Réduction${promoCode ? ` (${promoCode})` : ''}</td><td style="padding:6px 0;text-align:right;color:#A8842E;">-${eur(discount)}</td></tr>` : ''}
     <tr><td colspan="2" style="padding:6px 0;color:#6E655B;">Livraison</td><td style="padding:6px 0;text-align:right;color:#6E655B;">${shipping === 0 ? 'Offerte' : eur(shipping)}</td></tr>
     <tr><td colspan="2" style="padding:10px 0;font-weight:600;color:#111111;border-top:1px solid #DCD7D1;">Total</td><td style="padding:10px 0;text-align:right;font-weight:600;color:#111111;border-top:1px solid #DCD7D1;">${eur(total)}</td></tr>`;
 
