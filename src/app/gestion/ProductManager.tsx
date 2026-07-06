@@ -12,8 +12,11 @@ type Product = {
   featured: boolean;
   order: number;
   slug: string;
+  collectionId: string;
   thumb: string | null;
 };
+
+type Collection = { id: string; name: string };
 
 async function jsonApi(method: string, body: unknown) {
   const res = await fetch('/api/gestion/products', {
@@ -52,6 +55,7 @@ function Toggle({ on, onClick, label, tone }: { on: boolean; onClick: () => void
 
 export default function ProductManager() {
   const [products, setProducts] = useState<Product[]>([]);
+  const [collections, setCollections] = useState<Collection[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [savingId, setSavingId] = useState<string | null>(null);
@@ -61,6 +65,7 @@ export default function ProductManager() {
   const [nName, setNName] = useState('');
   const [nPrice, setNPrice] = useState('');
   const [nDesc, setNDesc] = useState('');
+  const [nColl, setNColl] = useState('');
   const [nFile, setNFile] = useState<File | null>(null);
   const [nPreview, setNPreview] = useState<string | null>(null);
   const [adding, setAdding] = useState(false);
@@ -73,6 +78,7 @@ export default function ProductManager() {
       const data = await res.json();
       const list: Product[] = data.products || [];
       setProducts(list);
+      setCollections(data.collections || []);
       saved.current = {};
       for (const p of list) saved.current[p.id] = { name: p.name, price: p.price };
     } catch (e) {
@@ -104,6 +110,11 @@ export default function ProductManager() {
     if (ref && String(ref[field]) === String(val)) return;
     if (ref) saved.current[id] = { ...ref, [field]: val };
     persist(id, { [field]: val });
+  }
+
+  function setCollection(id: string, collectionId: string) {
+    update(id, { collectionId });
+    persist(id, { collectionId });
   }
 
   async function toggle(id: string, field: 'available' | 'featured') {
@@ -171,8 +182,8 @@ export default function ProductManager() {
     try {
       let assetId: string | undefined;
       if (nFile) assetId = await uploadPhoto(nFile);
-      await jsonApi('POST', { name: nName.trim(), price: Number(nPrice) || 0, description: nDesc, assetId });
-      setNName(''); setNPrice(''); setNDesc(''); setNFile(null); setNPreview(null);
+      await jsonApi('POST', { name: nName.trim(), price: Number(nPrice) || 0, description: nDesc, collectionId: nColl, assetId });
+      setNName(''); setNPrice(''); setNDesc(''); setNColl(''); setNFile(null); setNPreview(null);
       await load();
     } catch (e) {
       setError(e instanceof Error ? e.message : "Ajout impossible");
@@ -220,6 +231,14 @@ export default function ProductManager() {
             <input className={input} placeholder="Nom du bijou *" value={nName} onChange={(e) => setNName(e.target.value)} required />
             <input className={input} type="number" step="0.01" min="0" placeholder="Prix en € *" value={nPrice} onChange={(e) => setNPrice(e.target.value)} />
             <textarea className={`${input} resize-none`} rows={2} placeholder="Description (optionnel)" value={nDesc} onChange={(e) => setNDesc(e.target.value)} />
+            {collections.length > 0 && (
+              <select className={input} value={nColl} onChange={(e) => setNColl(e.target.value)}>
+                <option value="">Collection (aucune)</option>
+                {collections.map((c) => (
+                  <option key={c.id} value={c.id}>{c.name}</option>
+                ))}
+              </select>
+            )}
             <button type="submit" disabled={adding || !nName.trim()} className="bg-noir text-blanc font-body text-xs font-medium tracking-widest uppercase px-6 py-3 rounded hover:bg-or transition-colors disabled:opacity-50">
               {adding ? 'Ajout en cours…' : 'Ajouter le produit'}
             </button>
@@ -257,6 +276,19 @@ export default function ProductManager() {
                   />
                   <span className="font-body text-sm text-taupe">€</span>
                 </div>
+
+                {collections.length > 0 && (
+                  <select
+                    className="mt-2 w-full max-w-[220px] font-body text-xs text-noir bg-blanc border border-gris rounded px-2 py-1.5 outline-none focus:border-noir"
+                    value={p.collectionId}
+                    onChange={(e) => setCollection(p.id, e.target.value)}
+                  >
+                    <option value="">Collection (aucune)</option>
+                    {collections.map((c) => (
+                      <option key={c.id} value={c.id}>{c.name}</option>
+                    ))}
+                  </select>
+                )}
 
                 <div className="flex flex-wrap gap-x-4 gap-y-1.5 mt-3">
                   <Toggle on={p.available} onClick={() => toggle(p.id, 'available')} label={p.available ? 'En vente' : 'Épuisé'} tone="green" />

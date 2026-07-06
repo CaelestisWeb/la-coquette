@@ -1,12 +1,13 @@
 import { stegaClean } from 'next-sanity';
 import { sanityFetch } from './fetch';
 import { urlForImage } from './image';
-import type { Product } from './productTypes';
+import type { Product, ProductCollection } from './productTypes';
 
 const FIELDS = `
   "id": _id,
   "slug": slug.current,
   name, category, price, description, material, featured, available,
+  "collection": collection->{ "id": _id, name, "slug": slug.current },
   "image": images[0]
 `;
 
@@ -19,12 +20,16 @@ function toProduct(p: any): Product {
   } catch {
     // garde le placeholder si l'image n'est pas exploitable
   }
+  const collection: Product['collection'] = p?.collection?.id
+    ? { id: p.collection.id, name: p.collection.name || '', slug: stegaClean(p.collection.slug) }
+    : null;
   return {
     id: p.id,
     // slug sert au routage (URL) : on retire tout marquage stega de l'aperçu.
     slug: stegaClean(p.slug),
     name: p.name,
     category: (p.category as Product['category']) || 'boucles',
+    collection,
     price: p.price,
     description: p.description || '',
     material: p.material || '',
@@ -32,6 +37,16 @@ function toProduct(p: any): Product {
     featured: Boolean(p.featured),
     available: p.available !== false,
   };
+}
+
+// Liste des collections (sous-catégories) pour les filtres de la boutique.
+export async function getCollections(): Promise<ProductCollection[]> {
+  const raw = await sanityFetch<any[]>(
+    `*[_type == "collection"] | order(order asc, name asc){ "id": _id, name, "slug": slug.current }`,
+  );
+  return (raw || [])
+    .filter((c) => c?.slug)
+    .map((c) => ({ id: c.id, name: c.name || '', slug: stegaClean(c.slug) }));
 }
 
 export async function getProducts(): Promise<Product[]> {

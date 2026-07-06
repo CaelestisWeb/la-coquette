@@ -14,7 +14,8 @@ export default function ProductCard({ product }: { product: Product }) {
     addItem({ id: product.id, name: product.name, price: product.price, image: product.image });
   }
 
-  const catLabel = categoryLabels[product.category];
+  // Affiche la collection si le produit en a une, sinon le libellé de catégorie.
+  const catLabel = product.collection?.name || categoryLabels[product.category];
 
   return (
     <Link href={`/boutique/${product.slug}`} className="group block bg-creme overflow-hidden">

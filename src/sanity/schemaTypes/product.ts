@@ -49,6 +49,13 @@ export const product = defineType({
       initialValue: 'boucles',
     }),
     defineField({
+      name: 'collection',
+      title: 'Collection',
+      type: 'reference',
+      to: [{ type: 'collection' }],
+      description: 'La collection (sous-catégorie) à laquelle appartient ce bijou.',
+    }),
+    defineField({
       name: 'images',
       title: 'Photos',
       type: 'array',

@@ -27,15 +27,20 @@ function imageField(assetId: string) {
   return { _type: 'image', _key: crypto.randomBytes(4).toString('hex'), asset: { _type: 'reference', _ref: assetId } };
 }
 
-// Liste des produits (pour le tableau de gestion).
+// Liste des produits + collections (pour le tableau de gestion).
 export async function GET() {
   if (!(await isAuthed())) return deny();
-  const items: any[] = await writeClient.fetch(
-    `*[_type == "product"] | order(order asc, _createdAt asc){
-      _id, name, price, description, material, available, featured, order,
-      "slug": slug.current, "image": images[0]
-    }`,
-  );
+  const [items, cols]: [any[], any[]] = await Promise.all([
+    writeClient.fetch(
+      `*[_type == "product"] | order(order asc, _createdAt asc){
+        _id, name, price, description, material, available, featured, order,
+        "slug": slug.current, "collectionId": collection._ref, "image": images[0]
+      }`,
+    ),
+    writeClient.fetch(
+      `*[_type == "collection"] | order(order asc, name asc){ "id": _id, name }`,
+    ),
+  ]);
   const products = items.map((p) => ({
     id: p._id,
     name: p.name || '',
@@ -46,9 +51,11 @@ export async function GET() {
     featured: !!p.featured,
     order: typeof p.order === 'number' ? p.order : 0,
     slug: p.slug || '',
+    collectionId: p.collectionId || '',
     thumb: p.image?.asset ? urlForImage(p.image).width(160).height(160).fit('crop').url() : null,
   }));
-  return NextResponse.json({ products });
+  const collections = (cols || []).map((c) => ({ id: c.id, name: c.name || '' }));
+  return NextResponse.json({ products, collections });
 }
 
 // Créer un produit, ou dupliquer (action: 'duplicate').
@@ -82,6 +89,7 @@ export async function POST(req: Request) {
   const name = String(body.name || '').trim();
   if (!name) return NextResponse.json({ error: 'Le nom est obligatoire.' }, { status: 400 });
   const suffix = crypto.randomBytes(3).toString('hex');
+  const collectionId = String(body.collectionId || '');
   const created = await writeClient.create({
     _type: 'product',
     name,
@@ -89,6 +97,7 @@ export async function POST(req: Request) {
     description: String(body.description || ''),
     material: String(body.material || 'Acier inoxydable doré'),
     category: 'boucles',
+    ...(collectionId ? { collection: { _type: 'reference', _ref: collectionId } } : {}),
     available: body.available !== false,
     featured: !!body.featured,
     slug: { _type: 'slug', current: `${slugify(name)}-${suffix}` },
@@ -116,7 +125,15 @@ export async function PATCH(req: Request) {
   if ('featured' in body) set.featured = !!body.featured;
   if (body.assetId) set.images = [imageField(body.assetId)];
 
-  await writeClient.patch(id).set(set).commit();
+  // Affectation à une collection : id => référence, vide => on retire la collection.
+  let patch = writeClient.patch(id);
+  if ('collectionId' in body) {
+    const cid = String(body.collectionId || '');
+    if (cid) set.collection = { _type: 'reference', _ref: cid };
+    else patch = patch.unset(['collection']);
+  }
+
+  await patch.set(set).commit();
   revalidateShop();
   return NextResponse.json({ ok: true });
 }
