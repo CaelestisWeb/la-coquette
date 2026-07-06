@@ -32,9 +32,11 @@ export default function CheckoutForm() {
   const [promoLabel, setPromoLabel] = useState('');
   const [promoMsg, setPromoMsg] = useState('');
   const [promoLoading, setPromoLoading] = useState(false);
+  const [freeShip, setFreeShip] = useState(false);
 
   const round2 = (n: number) => Math.round(n * 100) / 100;
-  const shipping = total >= SHIPPING_THRESHOLD ? 0 : SHIPPING_COST;
+  const baseShipping = total >= SHIPPING_THRESHOLD ? 0 : SHIPPING_COST;
+  const shipping = freeShip ? 0 : baseShipping;
   const discountAmount = round2(total * discount);
   const grandTotal = round2(total - discountAmount + shipping);
 
@@ -53,11 +55,13 @@ export default function CheckoutForm() {
         setDiscount(data.discount);
         setAppliedCode(promoInput.trim());
         setPromoLabel(data.label || '');
+        setFreeShip(!!data.freeShipping);
         setPromoMsg('');
       } else {
         setDiscount(0);
         setAppliedCode('');
         setPromoLabel('');
+        setFreeShip(false);
         setPromoMsg('Code invalide.');
       }
     } catch {

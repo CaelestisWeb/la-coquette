@@ -8,5 +8,5 @@ export async function POST(req: Request) {
   if (!promo) {
     return NextResponse.json({ valid: false, error: 'Code invalide' });
   }
-  return NextResponse.json({ valid: true, discount: promo.discount, label: promo.label });
+  return NextResponse.json({ valid: true, discount: promo.discount, label: promo.label, freeShipping: !!promo.freeShipping });
 }

@@ -9,8 +9,9 @@ export async function POST(req: NextRequest) {
   // Montant recalculé CÔTÉ SERVEUR : la remise vient de la table serveur,
   // le navigateur ne peut pas la fabriquer.
   const base = Number(subtotal) || 0;
-  const ship = Number(shipping) || 0;
-  const discount = resolvePromo(promoCode)?.discount ?? 0;
+  const promo = resolvePromo(promoCode);
+  const discount = promo?.discount ?? 0;
+  const ship = promo?.freeShipping ? 0 : (Number(shipping) || 0);
   const amount = round2(base * (1 - discount) + ship);
 
   if (!amount || amount <= 0) {
