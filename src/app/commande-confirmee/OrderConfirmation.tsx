@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { track } from '@vercel/analytics';
 import { useCart } from '@/context/CartContext';
 
 type Status = 'loading' | 'success' | 'unpaid';
@@ -42,6 +43,7 @@ export default function OrderConfirmation() {
         } else {
           clearCart();
           setStatus('success');
+          track('commande', { valeur: Number((order as { total?: number })?.total) || 0 });
         }
       })
       // En cas d'erreur réseau sur notre API, le paiement reste valide côté

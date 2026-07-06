@@ -12,6 +12,7 @@ import ScrollReveal from '@/components/ui/ScrollReveal';
 import SmoothScroll from '@/components/ui/SmoothScroll';
 import BackToTop from '@/components/ui/BackToTop';
 import CartTitle from '@/components/ui/CartTitle';
+import { Analytics } from '@vercel/analytics/next';
 import ConditionalChrome from '@/components/layout/ConditionalChrome';
 
 // Sans géométrique épuré — titres
@@ -103,6 +104,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             sur le domaine en direct, juste un bouton « Quitter l'aperçu ».
             Jamais rien pour les vrais visiteurs (pas de cookie d'aperçu). */}
         {isDraft && <PreviewControls />}
+        {/* Statistiques de fréquentation (sans cookie, respectueux du RGPD). */}
+        <Analytics />
       </body>
     </html>
   );
