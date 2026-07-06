@@ -56,6 +56,15 @@ export async function POST(req: Request) {
   if (!(await isAuthed())) return deny();
   const body: any = await req.json().catch(() => ({}));
 
+  if (body.action === 'reorder' && Array.isArray(body.ids)) {
+    const ids: string[] = body.ids.filter((x: unknown) => typeof x === 'string');
+    let tx = writeClient.transaction();
+    ids.forEach((id, i) => { tx = tx.patch(id, { set: { order: i } }); });
+    await tx.commit();
+    revalidateShop();
+    return NextResponse.json({ ok: true });
+  }
+
   if (body.action === 'duplicate' && body.id) {
     const src: any = await writeClient.getDocument(body.id);
     if (!src) return NextResponse.json({ error: 'Produit introuvable' }, { status: 404 });

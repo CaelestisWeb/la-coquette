@@ -136,6 +136,20 @@ export default function ProductManager() {
     }
   }
 
+  async function moveProduct(index: number, dir: -1 | 1) {
+    const target = index + dir;
+    if (target < 0 || target >= products.length) return;
+    const next = [...products];
+    [next[index], next[target]] = [next[target], next[index]];
+    setProducts(next);
+    try {
+      await jsonApi('POST', { action: 'reorder', ids: next.map((p) => p.id) });
+    } catch (e) {
+      setError(e instanceof Error ? e.message : 'Réorganisation impossible');
+      load();
+    }
+  }
+
   async function changePhoto(id: string, file: File) {
     setSavingId(id);
     try {
@@ -175,7 +189,7 @@ export default function ProductManager() {
       <div className="flex flex-wrap items-center justify-between gap-3 mb-8">
         <div>
           <h1 className="font-display text-3xl sm:text-4xl text-noir">Ma boutique</h1>
-          <p className="font-body text-xs text-taupe mt-1">{products.length} produit{products.length > 1 ? 's' : ''} · les changements sont visibles en ligne aussitôt</p>
+          <p className="font-body text-xs text-taupe mt-1">{products.length} produit{products.length > 1 ? 's' : ''} · changements visibles en ligne aussitôt · flèches ↑↓ = ordre d&apos;affichage</p>
         </div>
         <div className="flex items-center gap-2 font-body text-[11px] tracking-wide uppercase">
           <a href="/boutique" target="_blank" className="px-3 py-2 rounded border border-noir text-noir hover:bg-noir hover:text-blanc transition-colors">Voir la boutique</a>
@@ -218,7 +232,7 @@ export default function ProductManager() {
         <p className="font-body text-sm text-taupe text-center py-10">Chargement…</p>
       ) : (
         <div className="grid sm:grid-cols-2 gap-4">
-          {products.map((p) => (
+          {products.map((p, i) => (
             <div key={p.id} className={`bg-creme rounded-xl p-4 flex gap-4 ${savingId === p.id ? 'opacity-60' : ''}`}>
               <label className="relative shrink-0 cursor-pointer group">
                 <div className="w-24 h-24 rounded-lg bg-blanc overflow-hidden border border-gris">
@@ -249,7 +263,11 @@ export default function ProductManager() {
                   <Toggle on={p.featured} onClick={() => toggle(p.id, 'featured')} label="En avant" tone="gold" />
                 </div>
 
-                <div className="flex gap-3 mt-3 font-body text-[11px] tracking-wide uppercase">
+                <div className="flex items-center gap-3 mt-3 font-body text-[11px] tracking-wide uppercase">
+                  <div className="flex items-center gap-1">
+                    <button onClick={() => moveProduct(i, -1)} disabled={i === 0} title="Monter" aria-label="Monter" className="w-6 h-6 rounded border border-gris text-noir disabled:opacity-30 hover:bg-noir hover:text-blanc transition-colors leading-none">↑</button>
+                    <button onClick={() => moveProduct(i, 1)} disabled={i === products.length - 1} title="Descendre" aria-label="Descendre" className="w-6 h-6 rounded border border-gris text-noir disabled:opacity-30 hover:bg-noir hover:text-blanc transition-colors leading-none">↓</button>
+                  </div>
                   <button onClick={() => duplicate(p.id)} className="text-taupe hover:text-noir transition-colors">Dupliquer</button>
                   <button onClick={() => remove(p.id, p.name)} className="text-taupe hover:text-red-600 transition-colors">Supprimer</button>
                 </div>
