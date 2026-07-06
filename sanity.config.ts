@@ -27,6 +27,9 @@ export default defineConfig({
           homePage: defineLocations({
             locations: [{ title: "Page d'accueil", href: '/' }],
           }),
+          boutiquePage: defineLocations({
+            locations: [{ title: 'Page boutique', href: '/boutique' }],
+          }),
           contactPage: defineLocations({
             locations: [{ title: 'Page contact', href: '/contact' }],
           }),

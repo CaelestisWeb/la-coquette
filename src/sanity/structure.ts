@@ -1,5 +1,5 @@
 import type { StructureResolver } from 'sanity/structure';
-import { HomeIcon, TagIcon, EnvelopeIcon, HelpCircleIcon, CogIcon } from '@sanity/icons';
+import { HomeIcon, TagIcon, BasketIcon, EnvelopeIcon, HelpCircleIcon, CogIcon } from '@sanity/icons';
 
 // Organisation du Studio, dans l'ordre logique du site :
 // Accueil → Boutique (produits) → Contact → FAQ, puis les réglages globaux.
@@ -12,6 +12,11 @@ export const structure: StructureResolver = (S) =>
         .icon(HomeIcon)
         .id('homePage')
         .child(S.document().schemaType('homePage').documentId('homePage')),
+      S.listItem()
+        .title('Page boutique')
+        .icon(BasketIcon)
+        .id('boutiquePage')
+        .child(S.document().schemaType('boutiquePage').documentId('boutiquePage')),
       S.documentTypeListItem('product').title('Produits').icon(TagIcon),
       S.listItem()
         .title('Page contact')

@@ -49,6 +49,10 @@ export type ContactContent = {
   heading: string;
   intro: string;
 };
+export type BoutiqueContent = {
+  heading: string;
+  intro: string;
+};
 
 export const HOME_DEFAULTS: HomeContent = {
   heroTitle: 'Des bijoux pensés\npour révéler votre',
@@ -118,4 +122,9 @@ export const CONTACT_DEFAULTS: ContactContent = {
   label: 'Parlons-nous',
   heading: 'Nous contacter',
   intro: "Une question, une envie de bijou sur-mesure, ou juste un mot ? C'est Caro qui lit et répond elle-même, en général sous 24h.",
+};
+
+export const BOUTIQUE_DEFAULTS: BoutiqueContent = {
+  heading: 'Créations',
+  intro: "Des boucles d'oreilles pendantes faites main, en acier inoxydable doré : légères, sans nickel, et qui ne ternissent pas.",
 };

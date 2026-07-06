@@ -1,4 +1,5 @@
 import { getProducts } from '@/sanity/lib/products';
+import { getBoutiqueContent } from '@/sanity/lib/content';
 import type { ProductCategory } from '@/sanity/lib/productTypes';
 import ProductCard from '@/components/ui/ProductCard';
 import type { Metadata } from 'next';
@@ -17,6 +18,7 @@ export default async function BoutiquePage({
   const activeCat = cat as ProductCategory | undefined;
 
   const products = await getProducts();
+  const { heading, intro } = await getBoutiqueContent();
   const filtered = activeCat
     ? products.filter(p => p.category === activeCat)
     : products;
@@ -26,10 +28,10 @@ export default async function BoutiquePage({
       {/* En-tête */}
       <div className="bg-rose py-24 text-center">
         <h1 className="font-display text-4xl sm:text-5xl md:text-6xl text-noir">
-          Créations
+          {heading}
         </h1>
         <p className="font-body text-sm text-taupe mt-4 max-w-md mx-auto leading-relaxed">
-          Des boucles d'oreilles pendantes faites main, en acier inoxydable doré : légères, sans nickel, et qui ne ternissent pas.
+          {intro}
         </p>
       </div>
 

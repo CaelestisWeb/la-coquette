@@ -6,10 +6,12 @@ import {
   SETTINGS_DEFAULTS,
   FAQ_DEFAULTS,
   CONTACT_DEFAULTS,
+  BOUTIQUE_DEFAULTS,
   type HomeContent,
   type SiteSettings,
   type FaqContent,
   type ContactContent,
+  type BoutiqueContent,
 } from './contentDefaults';
 
 export type {
@@ -21,6 +23,7 @@ export type {
   FaqContent,
   FaqItem,
   ContactContent,
+  BoutiqueContent,
 } from './contentDefaults';
 
 const nonEmpty =<T,>(arr: T[] | undefined | null, fallback: T[]) =>
@@ -111,5 +114,18 @@ export async function getContactContent(): Promise<ContactContent> {
     label: d?.label || CONTACT_DEFAULTS.label,
     heading: d?.heading || CONTACT_DEFAULTS.heading,
     intro: d?.intro || CONTACT_DEFAULTS.intro,
+  };
+}
+
+export async function getBoutiqueContent(): Promise<BoutiqueContent> {
+  let d: Partial<BoutiqueContent> | null = null;
+  try {
+    d = await sanityFetch(`*[_type == "boutiquePage"][0]`);
+  } catch {
+    /* repli */
+  }
+  return {
+    heading: d?.heading || BOUTIQUE_DEFAULTS.heading,
+    intro: d?.intro || BOUTIQUE_DEFAULTS.intro,
   };
 }
