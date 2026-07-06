@@ -1,4 +1,4 @@
-import { getProducts, getCollections } from '@/sanity/lib/products';
+import { getProducts, getSoldProducts, getCollections } from '@/sanity/lib/products';
 import { getBoutiqueContent } from '@/sanity/lib/content';
 import ProductCard from '@/components/ui/ProductCard';
 import Link from 'next/link';
@@ -16,17 +16,19 @@ export default async function BoutiquePage({
 }) {
   const { c } = await searchParams;
 
-  const [products, collections, { heading, intro }] = await Promise.all([
+  const [products, sold, collections, { heading, intro }] = await Promise.all([
     getProducts(),
+    getSoldProducts(),
     getCollections(),
     getBoutiqueContent(),
   ]);
 
   // Filtre actif : slug de collection valide, sinon « tout ».
   const active = collections.some((col) => col.slug === c) ? c : undefined;
-  const filtered = active
-    ? products.filter((p) => p.collection?.slug === active)
-    : products;
+  const byCollection = (list: typeof products) =>
+    active ? list.filter((p) => p.collection?.slug === active) : list;
+  const filtered = byCollection(products);
+  const filteredSold = byCollection(sold);
 
   const tab = 'font-body text-xs sm:text-[13px] tracking-[0.12em] uppercase pb-1.5 border-b transition-colors';
 
@@ -79,10 +81,31 @@ export default async function BoutiquePage({
               <ProductCard key={product.id} product={product} />
             ))}
           </div>
-        ) : (
+        ) : filteredSold.length === 0 ? (
           <p className="font-body text-sm text-taupe text-center py-16">
             Aucune création dans cette collection pour le moment.
           </p>
+        ) : null}
+
+        {/* Déjà adoptées : pièces uniques vendues, en dernière position */}
+        {filteredSold.length > 0 && (
+          <section className="mt-20 pt-14 border-t border-gris/60">
+            <div className="text-center mb-10 max-w-lg mx-auto">
+              <h2 className="font-display text-3xl sm:text-4xl text-noir">Déjà adoptées</h2>
+              <p className="font-body text-sm text-taupe mt-3 leading-relaxed">
+                Ces pièces uniques ont trouvé preneuse. Un modèle vous plaît ?{' '}
+                <Link href="/contact" className="text-noir underline underline-offset-4 hover:text-or transition-colors">
+                  Caro peut en créer une dans le même esprit
+                </Link>
+                .
+              </p>
+            </div>
+            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
+              {filteredSold.map((product) => (
+                <ProductCard key={product.id} product={product} />
+              ))}
+            </div>
+          </section>
         )}
       </div>
     </div>

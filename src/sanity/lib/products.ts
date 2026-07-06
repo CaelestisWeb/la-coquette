@@ -76,6 +76,15 @@ export async function getFeaturedProducts(): Promise<Product[]> {
   return (raw || []).map(toProduct);
 }
 
+// Pièces déjà vendues (« Déjà adoptées ») : archivées, non achetables, montrées
+// en bas de la boutique. Les plus récemment vendues d'abord.
+export async function getSoldProducts(): Promise<Product[]> {
+  const raw = await sanityFetch<any[]>(
+    `*[_type == "product" && available == false] | order(_updatedAt desc){ ${FIELDS} }`,
+  );
+  return (raw || []).map(toProduct);
+}
+
 // Produits correspondant à une liste d'identifiants (pour la page favoris).
 // L'ordre suit celui des ids fournis (favoris récents en premier, par ex.).
 export async function getProductsByIds(ids: string[]): Promise<Product[]> {
