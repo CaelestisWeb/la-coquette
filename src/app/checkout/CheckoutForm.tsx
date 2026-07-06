@@ -140,7 +140,7 @@ export default function CheckoutForm() {
         checkoutId: data.checkoutId,
         reference: ref,
         customer: form,
-        items: items.map(i => ({ name: i.name, quantity: i.quantity, price: i.price })),
+        items: items.map(i => ({ name: i.name, quantity: i.quantity, price: i.price, image: i.image })),
         subtotal: total,
         discount: discountAmount,
         discountLabel: promoLabel,

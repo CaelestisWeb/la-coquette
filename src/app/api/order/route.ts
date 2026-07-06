@@ -6,9 +6,18 @@ const SHOP_EMAIL = 'contact@lacoquette-bycaro.fr';
 const FROM = 'La Coquette <commandes@lacoquette-bycaro.fr>';
 const REPLY_TO = 'contact@lacoquette-bycaro.fr';
 
-type OrderItem = { name: string; quantity: number; price: number };
+type OrderItem = { name: string; quantity: number; price: number; image?: string };
 
 const eur = (n: number) => `${Number(n).toFixed(2)} €`;
+
+// Vignette du bijou pour l'email (seulement si l'URL est absolue : les clients
+// mail ne chargent pas les chemins relatifs comme le visuel de secours).
+function thumbCell(image?: string) {
+  if (!image || !/^https?:\/\//.test(image)) return '';
+  return `<td style="padding-right:12px;vertical-align:middle;" width="56">
+    <img src="${image}" width="56" height="56" alt="" style="display:block;width:56px;height:56px;object-fit:cover;border-radius:8px;border:1px solid #ECE7E1;" />
+  </td>`;
+}
 
 export async function POST(req: NextRequest) {
   const resend = new Resend(process.env.RESEND_API_KEY);
@@ -45,9 +54,14 @@ export async function POST(req: NextRequest) {
     .map(
       (i) => `
       <tr>
-        <td style="padding:8px 0;border-bottom:1px solid #ECE7E1;color:#111111;">${i.name}</td>
-        <td style="padding:8px 0;border-bottom:1px solid #ECE7E1;text-align:center;color:#6E655B;">× ${i.quantity}</td>
-        <td style="padding:8px 0;border-bottom:1px solid #ECE7E1;text-align:right;color:#111111;">${eur(i.price * i.quantity)}</td>
+        <td style="padding:10px 0;border-bottom:1px solid #ECE7E1;color:#111111;">
+          <table role="presentation" cellpadding="0" cellspacing="0" style="border-collapse:collapse;"><tr>
+            ${thumbCell(i.image)}
+            <td style="vertical-align:middle;color:#111111;font-size:14px;">${i.name}</td>
+          </tr></table>
+        </td>
+        <td style="padding:10px 0;border-bottom:1px solid #ECE7E1;text-align:center;color:#6E655B;vertical-align:middle;">× ${i.quantity}</td>
+        <td style="padding:10px 0;border-bottom:1px solid #ECE7E1;text-align:right;color:#111111;vertical-align:middle;">${eur(i.price * i.quantity)}</td>
       </tr>`
     )
     .join('');
