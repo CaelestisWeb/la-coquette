@@ -2,7 +2,7 @@
 
 import { usePathname } from 'next/navigation';
 
-const BARE_PREFIXES = ['/bientot', '/studio'];
+const BARE_PREFIXES = ['/bientot', '/studio', '/gestion'];
 
 /**
  * Affiche l'habillage du site (menu, pied de page, panier) sur les pages

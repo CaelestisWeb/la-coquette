@@ -5,7 +5,7 @@ import { getComingSoon } from '@/lib/site-status';
 // le Studio (toujours joignable pour rééteindre le mode), la page d'attente
 // elle-même, et les fichiers statiques (tout chemin contenant un point).
 export const config = {
-  matcher: ['/((?!api|_next|studio|bientot|.*\\.).*)'],
+  matcher: ['/((?!api|_next|studio|gestion|bientot|.*\\.).*)'],
 };
 
 export async function middleware(req: NextRequest) {

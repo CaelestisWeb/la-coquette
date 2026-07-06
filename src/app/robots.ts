@@ -5,7 +5,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: '*',
       allow: '/',
-      disallow: ['/checkout', '/commande-confirmee', '/api/'],
+      disallow: ['/checkout', '/commande-confirmee', '/gestion', '/studio', '/api/'],
     },
     sitemap: 'https://lacoquette-bycaro.fr/sitemap.xml',
   };
