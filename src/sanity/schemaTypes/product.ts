@@ -84,11 +84,14 @@ export const product = defineType({
     },
   ],
   preview: {
-    select: { title: 'name', price: 'price', media: 'images.0' },
-    prepare({ title, price, media }) {
+    select: { title: 'name', price: 'price', media: 'images.0', available: 'available', featured: 'featured' },
+    prepare({ title, price, media, available, featured }) {
+      const bits = [typeof price === 'number' ? `${price.toFixed(2)} €` : ''];
+      if (featured) bits.push('★ en avant');
+      if (available === false) bits.push('indisponible');
       return {
         title,
-        subtitle: typeof price === 'number' ? `${price.toFixed(2)} €` : '',
+        subtitle: bits.filter(Boolean).join(' · '),
         media,
       };
     },

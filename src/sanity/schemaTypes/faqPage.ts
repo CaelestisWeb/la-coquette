@@ -5,7 +5,7 @@ export const faqPage = defineType({
   title: 'FAQ',
   type: 'document',
   fields: [
-    defineField({ name: 'label', title: 'Petit label', type: 'string' }),
+    defineField({ name: 'label', title: 'Petit texte au-dessus du titre', type: 'string', description: 'Le petit texte en majuscules au-dessus du grand titre.' }),
     defineField({ name: 'heading', title: 'Titre', type: 'string' }),
     defineField({ name: 'intro', title: "Texte d'introduction", type: 'text', rows: 2 }),
     defineField({
