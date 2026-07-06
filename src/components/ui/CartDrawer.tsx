@@ -111,7 +111,7 @@ export default function CartDrawer() {
                         <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
                       </svg>
                     </button>
-                    <p className="font-body text-sm font-medium text-noir">{(item.price * item.quantity).toFixed(0)} €</p>
+                    <p className="font-body text-sm font-medium text-noir">{(item.price * item.quantity).toFixed(2)} €</p>
                   </div>
                 </li>
               ))}
