@@ -2,7 +2,9 @@ import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
 const SHOP_EMAIL = 'contact@lacoquette-bycaro.fr';
-const FROM = 'La Coquette <onboarding@resend.dev>';
+// Expéditeur sur le domaine VÉRIFIÉ dans Resend → livraison à Caro ET aux clientes.
+const FROM = 'La Coquette <commandes@lacoquette-bycaro.fr>';
+const REPLY_TO = 'contact@lacoquette-bycaro.fr';
 
 type OrderItem = { name: string; quantity: number; price: number };
 
@@ -121,6 +123,7 @@ export async function POST(req: NextRequest) {
   const { error: custErr } = await resend.emails.send({
     from: FROM,
     to: customer.email,
+    replyTo: REPLY_TO,
     subject: 'Votre commande La Coquette est confirmée ✨',
     html: customerHtml,
   });
