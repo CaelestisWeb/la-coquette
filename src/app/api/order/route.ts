@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
+import { createClient } from '@/lib/supabase/server';
 
 const SHOP_EMAIL = 'contact@lacoquette-bycaro.fr';
 // Expéditeur sur le domaine VÉRIFIÉ dans Resend → livraison à Caro ET aux clientes.
@@ -143,6 +144,31 @@ export async function POST(req: NextRequest) {
   });
   if (custErr) {
     console.warn('[order] Confirmation cliente non envoyée (domaine non vérifié ?):', JSON.stringify(custErr));
+  }
+
+  // ── 3. Historique de commande (si la cliente est connectée) ──
+  // Écrit avec SA propre session : le RLS garantit qu'elle ne peut créer
+  // qu'une commande à son nom. Les commandes des visiteurs non connectés ne
+  // sont pas stockées (elles restent notifiées par email à Caro).
+  try {
+    const supabase = await createClient();
+    const { data: auth } = await supabase.auth.getUser();
+    if (auth.user) {
+      await supabase.from('orders').insert({
+        user_id: auth.user.id,
+        reference: reference || null,
+        status: 'paid',
+        subtotal: Number(subtotal) || 0,
+        shipping: Number(shipping) || 0,
+        discount: Number(discount) || 0,
+        total: Number(total) || 0,
+        items,
+        customer,
+      });
+    }
+  } catch (e) {
+    // Ne bloque jamais la commande : l'email à Caro est déjà parti.
+    console.warn('[order] Historique non enregistré:', e);
   }
 
   return NextResponse.json({ ok: true, paid: true });

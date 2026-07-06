@@ -1,6 +1,8 @@
 'use client';
 
-import { createContext, useContext, useState, useEffect, useCallback } from 'react';
+import { createContext, useContext, useState, useEffect, useCallback, useRef } from 'react';
+import type { User } from '@supabase/supabase-js';
+import { createClient } from '@/lib/supabase/client';
 
 export type CartItem = {
   id: string;
@@ -24,11 +26,33 @@ type CartContextType = {
 
 const CartContext = createContext<CartContextType | null>(null);
 
+// Fusionne deux paniers : union par produit, on garde la plus grande quantité
+// (évite de doubler un article présent des deux côtés).
+function mergeCarts(a: CartItem[], b: CartItem[]): CartItem[] {
+  const map = new Map<string, CartItem>();
+  for (const it of a) map.set(it.id, { ...it });
+  for (const it of b) {
+    const ex = map.get(it.id);
+    if (ex) ex.quantity = Math.max(ex.quantity, it.quantity);
+    else map.set(it.id, { ...it });
+  }
+  return [...map.values()];
+}
+
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([]);
   const [isOpen, setIsOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
 
+  const [supabase] = useState(() => createClient());
+  const [user, setUser] = useState<User | null>(null);
+  const itemsRef = useRef<CartItem[]>([]);
+  const syncedUserRef = useRef<string | null>(null); // uid dont le panier a été fusionné
+  const saveTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  itemsRef.current = items;
+
+  // Chargement du panier local (invité / avant connexion).
   useEffect(() => {
     setMounted(true);
     try {
@@ -38,10 +62,50 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   useEffect(() => {
-    if (mounted) {
-      localStorage.setItem('lacoquette-cart', JSON.stringify(items));
-    }
+    if (mounted) localStorage.setItem('lacoquette-cart', JSON.stringify(items));
   }, [items, mounted]);
+
+  // À la connexion : fusionne le panier de l'appareil avec celui du compte,
+  // puis enregistre le résultat sur le compte (synchro entre appareils).
+  const syncWithServer = useCallback(
+    async (uid: string) => {
+      const { data } = await supabase.from('carts').select('items').eq('user_id', uid).maybeSingle();
+      const serverItems: CartItem[] = Array.isArray(data?.items) ? data.items : [];
+      const merged = mergeCarts(serverItems, itemsRef.current);
+      setItems(merged);
+      syncedUserRef.current = uid;
+      await supabase.from('carts').upsert({ user_id: uid, items: merged, updated_at: new Date().toISOString() });
+    },
+    [supabase],
+  );
+
+  // Suivi de la session.
+  useEffect(() => {
+    supabase.auth.getUser().then(({ data }) => {
+      setUser(data.user);
+      if (data.user && syncedUserRef.current !== data.user.id) syncWithServer(data.user.id);
+    });
+    const { data: sub } = supabase.auth.onAuthStateChange((_event, session) => {
+      const u = session?.user ?? null;
+      setUser(u);
+      if (u) {
+        if (syncedUserRef.current !== u.id) syncWithServer(u.id);
+      } else {
+        syncedUserRef.current = null; // déconnexion : on garde le panier local
+      }
+    });
+    return () => sub.subscription.unsubscribe();
+  }, [supabase, syncWithServer]);
+
+  // Enregistrement (débounce) du panier sur le compte à chaque changement.
+  useEffect(() => {
+    if (!mounted || !user || syncedUserRef.current !== user.id) return;
+    if (saveTimer.current) clearTimeout(saveTimer.current);
+    saveTimer.current = setTimeout(() => {
+      supabase.from('carts').upsert({ user_id: user.id, items, updated_at: new Date().toISOString() });
+    }, 700);
+    return () => { if (saveTimer.current) clearTimeout(saveTimer.current); };
+  }, [items, user, mounted, supabase]);
 
   const addItem = useCallback((product: Omit<CartItem, 'quantity'>, qty: number = 1) => {
     setItems(prev => {

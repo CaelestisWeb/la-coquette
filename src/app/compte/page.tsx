@@ -18,10 +18,11 @@ export default async function ComptePage() {
   const prenom =
     (user.user_metadata?.full_name as string | undefined)?.split(' ')[0] || '';
 
-  // Nombre de favoris (RLS : la cliente ne voit que les siens).
-  const { count } = await supabase
-    .from('favorites')
-    .select('product_id', { count: 'exact', head: true });
+  // Nombres (RLS : la cliente ne voit que les siens).
+  const [{ count }, { count: orderCount }] = await Promise.all([
+    supabase.from('favorites').select('product_id', { count: 'exact', head: true }),
+    supabase.from('orders').select('id', { count: 'exact', head: true }),
+  ]);
 
   return (
     <div className="pt-32 md:pt-44 pb-24 min-h-screen bg-ivoire">
@@ -51,15 +52,20 @@ export default async function ComptePage() {
             </p>
           </Link>
 
-          <div className="bg-creme rounded-xl p-6">
+          <Link
+            href="/compte/commandes"
+            className="group bg-creme rounded-xl p-6 hover:bg-rose transition-colors"
+          >
             <div className="flex items-center justify-between">
               <span className="font-display text-2xl text-noir">Mes commandes</span>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#A8842E" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" /><line x1="3" y1="6" x2="21" y2="6" /><path d="M16 10a4 4 0 0 1-8 0" />
               </svg>
             </div>
-            <p className="font-body text-sm text-taupe mt-2">Bientôt disponible ici.</p>
-          </div>
+            <p className="font-body text-sm text-taupe mt-2">
+              {orderCount ? `${orderCount} commande${orderCount > 1 ? 's' : ''}` : 'Aucune commande pour l’instant'}
+            </p>
+          </Link>
         </div>
 
         <AccountActions />

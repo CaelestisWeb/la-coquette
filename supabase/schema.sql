@@ -43,6 +43,45 @@ create policy favorites_insert_own on public.favorites for insert with check (au
 drop policy if exists favorites_delete_own on public.favorites;
 create policy favorites_delete_own on public.favorites for delete using (auth.uid() = user_id);
 
+-- Historique des commandes, relié au compte. Écrit côté serveur (après
+-- vérification du paiement) avec la session de la cliente. RLS : lecture de
+-- ses seules commandes.
+create table if not exists public.orders (
+  id uuid primary key default gen_random_uuid(),
+  user_id uuid not null references auth.users(id) on delete cascade,
+  reference text,
+  status text default 'paid',
+  subtotal numeric,
+  shipping numeric,
+  discount numeric,
+  total numeric not null,
+  items jsonb not null default '[]',
+  customer jsonb,
+  created_at timestamptz default now()
+);
+alter table public.orders enable row level security;
+drop policy if exists orders_select_own on public.orders;
+create policy orders_select_own on public.orders for select using (auth.uid() = user_id);
+drop policy if exists orders_insert_own on public.orders;
+create policy orders_insert_own on public.orders for insert with check (auth.uid() = user_id);
+create index if not exists orders_user_created_idx on public.orders (user_id, created_at desc);
+
+-- Panier synchronisé entre appareils (1 par cliente).
+create table if not exists public.carts (
+  user_id uuid primary key references auth.users(id) on delete cascade,
+  items jsonb not null default '[]',
+  updated_at timestamptz default now()
+);
+alter table public.carts enable row level security;
+drop policy if exists carts_select_own on public.carts;
+create policy carts_select_own on public.carts for select using (auth.uid() = user_id);
+drop policy if exists carts_insert_own on public.carts;
+create policy carts_insert_own on public.carts for insert with check (auth.uid() = user_id);
+drop policy if exists carts_update_own on public.carts;
+create policy carts_update_own on public.carts for update using (auth.uid() = user_id);
+drop policy if exists carts_delete_own on public.carts;
+create policy carts_delete_own on public.carts for delete using (auth.uid() = user_id);
+
 -- Suppression de compte (RGPD, droit à l'effacement). La cliente connectée
 -- supprime SON propre compte ; profil et favoris partent en cascade. Pas
 -- besoin de la clé d'administration côté application.
