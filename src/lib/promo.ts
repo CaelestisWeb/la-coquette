@@ -5,8 +5,9 @@ import 'server-only';
 type Promo = { discount: number; label: string; freeShipping?: boolean };
 
 const CODES: Record<string, Promo> = {
-  // Code de TEST (paiement à petit montant) — à retirer après vérification.
-  'lacoquettedu26gratuit': { discount: 0.95, label: 'Test', freeShipping: true },
+  // Aucun code actif. Pour un test, ajouter temporairement une entrée ici
+  // (ex. 'moncode': { discount: 0.9, label: 'Test', freeShipping: true })
+  // puis la retirer après vérification.
 };
 
 export function resolvePromo(code: unknown): Promo | null {
