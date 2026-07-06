@@ -28,7 +28,7 @@ export default function ProductGallery({
     const r = e.currentTarget.getBoundingClientRect();
     const x = ((e.clientX - r.left) / r.width) * 100;
     const y = ((e.clientY - r.top) / r.height) * 100;
-    setZoom((z) => ({ ...z, x, y }));
+    setZoom({ on: true, x, y });
   }
 
   const next = () => setActive((i) => (i + 1) % photos.length);
