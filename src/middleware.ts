@@ -1,5 +1,6 @@
 import { NextResponse, type NextRequest } from 'next/server';
 import { getComingSoon } from '@/lib/site-status';
+import { updateSession } from '@/lib/supabase/middleware';
 
 // S'applique à toutes les pages SAUF : l'API, les fichiers Next internes,
 // le Studio (toujours joignable pour rééteindre le mode), la page d'attente
@@ -20,5 +21,6 @@ export async function middleware(req: NextRequest) {
     url.pathname = '/bientot';
     return NextResponse.redirect(url);
   }
-  return NextResponse.next();
+  // Rafraîchit la session Supabase (cookies) et laisse passer la requête.
+  return await updateSession(req);
 }

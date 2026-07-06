@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import { useCart } from '@/context/CartContext';
+import { useFavorites } from '@/context/FavoritesContext';
 
 const navLinks = [
   { href: '/', label: 'Accueil' },
@@ -15,6 +16,7 @@ const navLinks = [
 
 export default function Header() {
   const { count, setIsOpen } = useCart();
+  const { count: favCount, user } = useFavorites();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
@@ -70,23 +72,53 @@ export default function Header() {
             />
           </Link>
 
-          {/* Panier — à droite */}
-          <button
-            onClick={() => setIsOpen(true)}
-            className={`absolute right-0 p-2 transition-colors ${onDarkHero ? 'text-blanc/80 hover:text-blanc' : 'text-noir hover:text-taupe'}`}
-            aria-label="Ouvrir le panier"
-          >
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
-              <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
-              <line x1="3" y1="6" x2="21" y2="6"/>
-              <path d="M16 10a4 4 0 01-8 0"/>
-            </svg>
-            {count > 0 && (
-              <span className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-noir text-blanc text-[9px] font-body font-medium flex items-center justify-center rounded-full">
-                {count}
-              </span>
-            )}
-          </button>
+          {/* Icônes — à droite */}
+          <div className={`absolute right-0 flex items-center gap-1 sm:gap-2 ${onDarkHero ? 'text-blanc/80' : 'text-noir'}`}>
+            {/* Favoris */}
+            <Link
+              href="/compte/favoris"
+              className={`relative p-2 transition-colors ${onDarkHero ? 'hover:text-blanc' : 'hover:text-or'}`}
+              aria-label="Mes favoris"
+            >
+              <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z" />
+              </svg>
+              {favCount > 0 && (
+                <span className="absolute top-0 right-0 min-w-4 h-4 px-1 bg-or text-blanc text-[9px] font-body font-medium flex items-center justify-center rounded-full">
+                  {favCount}
+                </span>
+              )}
+            </Link>
+
+            {/* Compte */}
+            <Link
+              href={user ? '/compte' : '/connexion'}
+              className={`p-2 transition-colors ${onDarkHero ? 'hover:text-blanc' : 'hover:text-taupe'}`}
+              aria-label={user ? 'Mon compte' : 'Se connecter'}
+            >
+              <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" />
+              </svg>
+            </Link>
+
+            {/* Panier */}
+            <button
+              onClick={() => setIsOpen(true)}
+              className={`relative p-2 transition-colors ${onDarkHero ? 'hover:text-blanc' : 'hover:text-taupe'}`}
+              aria-label="Ouvrir le panier"
+            >
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+                <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+                <line x1="3" y1="6" x2="21" y2="6"/>
+                <path d="M16 10a4 4 0 01-8 0"/>
+              </svg>
+              {count > 0 && (
+                <span className="absolute top-0 right-0 w-4 h-4 bg-noir text-blanc text-[9px] font-body font-medium flex items-center justify-center rounded-full">
+                  {count}
+                </span>
+              )}
+            </button>
+          </div>
         </div>
 
         {/* Rangée du bas : navigation centrée — desktop */}

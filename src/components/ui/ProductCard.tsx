@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useCart } from '@/context/CartContext';
+import HeartButton from '@/components/ui/HeartButton';
 import { categoryLabels, type Product } from '@/sanity/lib/productTypes';
 
 export default function ProductCard({ product }: { product: Product }) {
@@ -22,6 +23,14 @@ export default function ProductCard({ product }: { product: Product }) {
 
       {/* Image */}
       <div className="relative aspect-square overflow-hidden bg-beige rounded-md">
+        {/* Favori — coin haut droit */}
+        <div className="absolute top-2 right-2 z-10">
+          <HeartButton
+            productId={product.id}
+            size={17}
+            className="w-8 h-8 rounded-full bg-blanc/85 backdrop-blur-sm shadow-sm hover:bg-blanc"
+          />
+        </div>
         <Image
           src={product.image}
           alt={product.name}

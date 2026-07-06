@@ -4,6 +4,7 @@ import { draftMode } from 'next/headers';
 import PreviewControls from '@/components/ui/PreviewControls';
 import './globals.css';
 import { CartProvider } from '@/context/CartContext';
+import { FavoritesProvider } from '@/context/FavoritesContext';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import CartDrawer from '@/components/ui/CartDrawer';
@@ -87,12 +88,14 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         <CartProvider>
-          <ConditionalChrome
-            header={<Header />}
-            footer={<><Footer /><CartDrawer /><ScrollReveal /><SmoothScroll /></>}
-          >
-            {children}
-          </ConditionalChrome>
+          <FavoritesProvider>
+            <ConditionalChrome
+              header={<Header />}
+              footer={<><Footer /><CartDrawer /><ScrollReveal /><SmoothScroll /></>}
+            >
+              {children}
+            </ConditionalChrome>
+          </FavoritesProvider>
         </CartProvider>
         {/* Mode aperçu : contours d'édition dans le Studio uniquement ;
             sur le domaine en direct, juste un bouton « Quitter l'aperçu ».

@@ -63,6 +63,18 @@ export async function getFeaturedProducts(): Promise<Product[]> {
   return (raw || []).map(toProduct);
 }
 
+// Produits correspondant à une liste d'identifiants (pour la page favoris).
+// L'ordre suit celui des ids fournis (favoris récents en premier, par ex.).
+export async function getProductsByIds(ids: string[]): Promise<Product[]> {
+  if (!ids || ids.length === 0) return [];
+  const raw = await sanityFetch<any[]>(
+    `*[_type == "product" && _id in $ids]{ ${FIELDS} }`,
+    { ids },
+  );
+  const byId = new Map((raw || []).map((p) => [p.id, toProduct(p)]));
+  return ids.map((id) => byId.get(id)).filter(Boolean) as Product[];
+}
+
 export async function getProductBySlug(slug: string): Promise<Product | null> {
   const p = await sanityFetch<any>(
     `*[_type == "product" && slug.current == $slug][0]{ ${FIELDS} }`,

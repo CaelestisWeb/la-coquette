@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import { getProducts, getProductBySlug } from '@/sanity/lib/products';
 import { categoryLabels } from '@/sanity/lib/productTypes';
 import AddToCartButton from './AddToCartButton';
+import HeartButton from '@/components/ui/HeartButton';
 import ProductCard from '@/components/ui/ProductCard';
 import { SHIPPING_THRESHOLD } from '@/lib/shipping';
 import type { Metadata } from 'next';
@@ -75,6 +76,13 @@ export default async function ProductPage({ params }: Props) {
 
           {/* Image */}
           <div className="aspect-square relative overflow-hidden bg-beige rounded-lg">
+            <div className="absolute top-3 right-3 z-10">
+              <HeartButton
+                productId={product.id}
+                size={20}
+                className="w-10 h-10 rounded-full bg-blanc/85 backdrop-blur-sm shadow-sm hover:bg-blanc"
+              />
+            </div>
             <Image
               src={product.image}
               alt={product.name}
