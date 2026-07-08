@@ -53,10 +53,16 @@ function Toggle({ on, onClick, label, tone }: { on: boolean; onClick: () => void
   );
 }
 
-export default function ProductManager() {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [collections, setCollections] = useState<Collection[]>([]);
-  const [loading, setLoading] = useState(true);
+export default function ProductManager({
+  initialProducts,
+  initialCollections,
+}: {
+  initialProducts?: Product[];
+  initialCollections?: Collection[];
+}) {
+  const [products, setProducts] = useState<Product[]>(initialProducts ?? []);
+  const [collections, setCollections] = useState<Collection[]>(initialCollections ?? []);
+  const [loading, setLoading] = useState(!initialProducts);
   const [error, setError] = useState('');
   const [savingId, setSavingId] = useState<string | null>(null);
   const saved = useRef<Record<string, { name: string; price: number }>>({});
@@ -87,7 +93,17 @@ export default function ProductManager() {
       setLoading(false);
     }
   }
-  useEffect(() => { load(); }, []);
+  useEffect(() => {
+    // Données déjà fournies par le serveur (chargement immédiat) : on prépare
+    // juste les repères d'édition, sans second aller-retour réseau.
+    if (initialProducts) {
+      saved.current = {};
+      for (const p of initialProducts) saved.current[p.id] = { name: p.name, price: p.price };
+    } else {
+      load();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   function update(id: string, patch: Partial<Product>) {
     setProducts((ps) => ps.map((p) => (p.id === id ? { ...p, ...patch } : p)));

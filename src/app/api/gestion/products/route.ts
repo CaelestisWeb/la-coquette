@@ -2,8 +2,8 @@ import { NextResponse } from 'next/server';
 import { revalidatePath } from 'next/cache';
 import crypto from 'crypto';
 import { writeClient } from '@/sanity/lib/writeClient';
-import { urlForImage } from '@/sanity/lib/image';
 import { isAuthed } from '@/lib/gestion-auth';
+import { getGestionProducts } from '@/lib/gestion-data';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
@@ -30,32 +30,7 @@ function imageField(assetId: string) {
 // Liste des produits + collections (pour le tableau de gestion).
 export async function GET() {
   if (!(await isAuthed())) return deny();
-  const [items, cols]: [any[], any[]] = await Promise.all([
-    writeClient.fetch(
-      `*[_type == "product"] | order(order asc, _createdAt asc){
-        _id, name, price, description, material, available, featured, order,
-        "slug": slug.current, "collectionId": collection._ref, "image": images[0]
-      }`,
-    ),
-    writeClient.fetch(
-      `*[_type == "collection"] | order(order asc, name asc){ "id": _id, name }`,
-    ),
-  ]);
-  const products = items.map((p) => ({
-    id: p._id,
-    name: p.name || '',
-    price: typeof p.price === 'number' ? p.price : 0,
-    description: p.description || '',
-    material: p.material || '',
-    available: p.available !== false,
-    featured: !!p.featured,
-    order: typeof p.order === 'number' ? p.order : 0,
-    slug: p.slug || '',
-    collectionId: p.collectionId || '',
-    thumb: p.image?.asset ? urlForImage(p.image).width(160).height(160).fit('crop').url() : null,
-  }));
-  const collections = (cols || []).map((c) => ({ id: c.id, name: c.name || '' }));
-  return NextResponse.json({ products, collections });
+  return NextResponse.json(await getGestionProducts());
 }
 
 // Créer un produit, ou dupliquer (action: 'duplicate').
