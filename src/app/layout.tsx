@@ -1,7 +1,5 @@
 import type { Metadata } from 'next';
-import { Jost, Inter, Pompiere } from 'next/font/google';
-import { draftMode } from 'next/headers';
-import PreviewControls from '@/components/ui/PreviewControls';
+import { Jost, Inter } from 'next/font/google';
 import './globals.css';
 import { CartProvider } from '@/context/CartContext';
 import { FavoritesProvider } from '@/context/FavoritesContext';
@@ -28,14 +26,6 @@ const inter = Inter({
   subsets: ['latin'],
   weight: ['300', '400', '500'],
   variable: '--font-inter',
-  display: 'swap',
-});
-
-// Display décorative — uniquement le wordmark du logo
-const pompiere = Pompiere({
-  subsets: ['latin'],
-  weight: ['400'],
-  variable: '--font-pompiere',
   display: 'swap',
 });
 
@@ -81,10 +71,9 @@ const jsonLd = {
   sameAs: ['https://www.instagram.com/lacoquette_bycaro/'],
 };
 
-export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const { isEnabled: isDraft } = await draftMode();
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="fr" className={`${jost.variable} ${inter.variable} ${pompiere.variable}`}>
+    <html lang="fr" className={`${jost.variable} ${inter.variable}`}>
       <body className="min-h-screen flex flex-col" suppressHydrationWarning>
         <script
           type="application/ld+json"
@@ -100,10 +89,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             </ConditionalChrome>
           </FavoritesProvider>
         </CartProvider>
-        {/* Mode aperçu : contours d'édition dans le Studio uniquement ;
-            sur le domaine en direct, juste un bouton « Quitter l'aperçu ».
-            Jamais rien pour les vrais visiteurs (pas de cookie d'aperçu). */}
-        {isDraft && <PreviewControls />}
         {/* Statistiques de fréquentation (sans cookie, respectueux du RGPD). */}
         <Analytics />
       </body>
