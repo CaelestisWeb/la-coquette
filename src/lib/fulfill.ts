@@ -137,7 +137,7 @@ async function sendEmails(order: Order) {
 
   const customerHtml = wrap(`
     <h1 style="font-size:20px;color:#111111;margin:0 0 4px;">Merci pour votre commande !</h1>
-    <p style="font-size:14px;color:#6E655B;line-height:1.6;margin:0 0 24px;">Bonjour ${customer.prenom}, votre commande est bien confirmée. Caro la prépare avec soin et vous contactera très prochainement pour la livraison.</p>
+    <p style="font-size:14px;color:#6E655B;line-height:1.6;margin:0 0 24px;">Bonjour ${customer.prenom}, votre commande est bien confirmée. L'équipe de Caro la prépare avec soin, pour vous garantir la meilleure qualité et la meilleure livraison. Nous mettons tout en œuvre pour qu'elle soit prête dans les meilleurs délais.</p>
     <h2 style="font-size:14px;color:#A8842E;text-transform:uppercase;letter-spacing:1px;margin:0 0 8px;">Votre commande</h2>
     <table style="width:100%;border-collapse:collapse;font-size:14px;">${rows}${totals}</table>
     <h2 style="font-size:14px;color:#A8842E;text-transform:uppercase;letter-spacing:1px;margin:24px 0 8px;">Livraison</h2>
