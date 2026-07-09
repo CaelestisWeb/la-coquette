@@ -19,7 +19,7 @@ export default function ConnexionForm() {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [msg, setMsg] = useState<{ type: 'ok' | 'err'; text: string } | null>(
-    linkError ? { type: 'err', text: "Ce lien a expiré ou a déjà été utilisé. Réessaie." } : null,
+    linkError ? { type: 'err', text: "Ce lien a expiré ou a déjà été utilisé. Réessayez." } : null,
   );
 
   const redirectTo =
@@ -48,7 +48,7 @@ export default function ConnexionForm() {
           router.push(next);
           router.refresh();
         } else {
-          setMsg({ type: 'ok', text: "Compte créé. Vérifie ta boîte mail pour confirmer ton adresse." });
+          setMsg({ type: 'ok', text: "Compte créé. Vérifiez votre boîte mail pour confirmer votre adresse." });
         }
       }
     } catch (err) {
@@ -59,7 +59,7 @@ export default function ConnexionForm() {
   }
 
   async function handleMagicLink() {
-    if (!email) { setMsg({ type: 'err', text: "Renseigne ton email d'abord." }); return; }
+    if (!email) { setMsg({ type: 'err', text: "Renseignez votre email d'abord." }); return; }
     setLoading(true);
     setMsg(null);
     try {
@@ -68,7 +68,7 @@ export default function ConnexionForm() {
         options: { emailRedirectTo: redirectTo },
       });
       if (error) throw error;
-      setMsg({ type: 'ok', text: `Un lien de connexion a été envoyé à ${email}. Regarde ta boîte mail.` });
+      setMsg({ type: 'ok', text: `Un lien de connexion a été envoyé à ${email}. Regardez votre boîte mail.` });
     } catch (err) {
       setMsg({ type: 'err', text: translate(err) });
     } finally {
@@ -93,7 +93,7 @@ export default function ConnexionForm() {
     <div className="w-full max-w-md mx-auto">
       <h1 className="font-display text-4xl text-noir text-center">Mon compte</h1>
       <p className="font-body text-sm text-taupe text-center mt-2 mb-8">
-        Retrouve tes favoris et tes commandes, sur tous tes appareils.
+        Retrouvez vos favoris et suivez vos commandes.
       </p>
 
       {/* Onglets */}
@@ -205,9 +205,9 @@ export default function ConnexionForm() {
 function translate(err: unknown): string {
   const m = (err as { message?: string })?.message || '';
   if (/Invalid login credentials/i.test(m)) return 'Email ou mot de passe incorrect.';
-  if (/User already registered/i.test(m)) return 'Un compte existe déjà avec cet email. Connecte-toi.';
-  if (/Email not confirmed/i.test(m)) return "Confirme d'abord ton email (lien reçu par mail).";
+  if (/User already registered/i.test(m)) return 'Un compte existe déjà avec cet email. Connectez-vous.';
+  if (/Email not confirmed/i.test(m)) return "Confirmez d'abord votre email (lien reçu par mail).";
   if (/provider is not enabled/i.test(m)) return "La connexion Google n'est pas encore activée.";
-  if (/rate limit|too many/i.test(m)) return 'Trop de tentatives, réessaie dans quelques minutes.';
-  return m || 'Une erreur est survenue. Réessaie.';
+  if (/rate limit|too many/i.test(m)) return 'Trop de tentatives, réessayez dans quelques minutes.';
+  return m || 'Une erreur est survenue. Réessayez.';
 }

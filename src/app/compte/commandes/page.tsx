@@ -86,7 +86,7 @@ export default async function CommandesPage() {
         ) : (
           <div className="text-center py-20">
             <p className="font-body text-sm text-taupe">
-              Tu n’as pas encore de commande. Les commandes passées en étant connectée apparaîtront ici.
+              Vous n’avez pas encore de commande. Les commandes passées une fois connectée apparaîtront ici.
             </p>
             <Link
               href="/boutique"

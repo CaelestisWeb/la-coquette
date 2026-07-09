@@ -6,7 +6,7 @@ import ConnexionForm from './ConnexionForm';
 
 export const metadata: Metadata = {
   title: 'Connexion',
-  description: 'Connecte-toi à ton compte La Coquette pour retrouver tes favoris et tes commandes.',
+  description: 'Connectez-vous à votre compte La Coquette pour retrouver vos favoris et vos commandes.',
   robots: { index: false, follow: false },
 };
 

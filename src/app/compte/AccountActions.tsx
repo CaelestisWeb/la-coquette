@@ -19,7 +19,7 @@ export default function AccountActions() {
 
   async function deleteAccount() {
     if (!confirm(
-      'Supprimer définitivement ton compte ? Tes favoris seront effacés. Cette action est irréversible.',
+      'Supprimer définitivement votre compte ? Vos favoris seront effacés. Cette action est irréversible.',
     )) return;
     setBusy(true);
     setErr('');

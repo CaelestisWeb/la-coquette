@@ -48,7 +48,7 @@ export default async function FavorisPage() {
         ) : (
           <div className="text-center py-20">
             <p className="font-body text-sm text-taupe">
-              Tu n’as pas encore de favori. Explore la boutique et clique sur le cœur des bijoux que tu aimes.
+              Vous n’avez pas encore de favori. Explorez la boutique et cliquez sur le cœur des bijoux que vous aimez.
             </p>
             <Link
               href="/boutique"
