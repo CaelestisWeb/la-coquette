@@ -10,9 +10,10 @@ type Props = {
   ctaPrimary: string;
   ctaSecondary: string;
   imageUrl: string;
+  blurDataURL?: string;
 };
 
-export default function HeroVisual({ title, highlight, ctaPrimary, ctaSecondary, imageUrl }: Props) {
+export default function HeroVisual({ title, highlight, ctaPrimary, ctaSecondary, imageUrl, blurDataURL }: Props) {
   const imgRef = useRef<HTMLDivElement>(null);
 
   // Parallaxe douce : la photo défile plus lentement que le contenu.
@@ -46,6 +47,8 @@ export default function HeroVisual({ title, highlight, ctaPrimary, ctaSecondary,
           alt="Bijou artisanal La Coquette, créole dorée sur pierre"
           fill
           priority
+          placeholder={blurDataURL ? 'blur' : 'empty'}
+          blurDataURL={blurDataURL}
           className="object-cover object-[38%_50%] opacity-80"
           sizes="100vw"
         />

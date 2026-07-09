@@ -13,6 +13,7 @@ export default async function Hero() {
       ctaPrimary={c.heroCtaPrimary}
       ctaSecondary={c.heroCtaSecondary}
       imageUrl={c.heroImageUrl}
+      blurDataURL={c.heroBlurDataURL}
     />
   );
 }

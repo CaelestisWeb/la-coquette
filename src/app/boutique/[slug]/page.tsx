@@ -67,7 +67,7 @@ export default async function ProductPage({ params }: Props) {
           <span aria-hidden>/</span>
           <Link href="/boutique" className="hover:text-or transition-colors">Boutique</Link>
           <span aria-hidden>/</span>
-          <Link href={`/boutique?cat=${product.category}`} className="hover:text-or transition-colors">
+          <Link href="/boutique" className="hover:text-or transition-colors">
             {categoryLabels[product.category]}
           </Link>
           <span aria-hidden>/</span>
@@ -81,7 +81,7 @@ export default async function ProductPage({ params }: Props) {
 
           {/* Infos produit */}
           <div className="lg:sticky lg:top-28 text-center">
-            <span className="font-body text-[10px] font-semibold tracking-[0.2em] uppercase text-or">
+            <span className="font-body text-[10px] font-medium tracking-[0.2em] uppercase text-or">
               {categoryLabels[product.category]}
             </span>
             <h1 className="font-display text-4xl sm:text-5xl text-noir mt-3">
@@ -131,7 +131,7 @@ export default async function ProductPage({ params }: Props) {
         {related.length > 0 && (
           <section className="mt-24">
             <div className="text-center mb-10">
-              <span className="font-body text-[10px] font-semibold tracking-[0.25em] uppercase text-or">
+              <span className="font-body text-[10px] font-medium tracking-[0.25em] uppercase text-or">
                 Sélection
               </span>
               <h2 className="font-display text-3xl sm:text-4xl text-noir mt-2">Vous aimerez aussi</h2>

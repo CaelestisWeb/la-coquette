@@ -32,7 +32,7 @@ const nonEmpty =<T,>(arr: T[] | undefined | null, fallback: T[]) =>
 export async function getHomeContent(): Promise<HomeContent> {
   let d: Partial<HomeContent> | null = null;
   try {
-    d = await sanityFetch(`*[_type == "homePage"][0]`);
+    d = await sanityFetch(`*[_type == "homePage"][0]{ ..., "heroLqip": heroImage.asset->metadata.lqip }`);
   } catch {
     /* repli sur les valeurs par défaut */
   }
@@ -44,6 +44,8 @@ export async function getHomeContent(): Promise<HomeContent> {
   } catch {
     /* garde la photo par défaut */
   }
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const heroBlurDataURL = typeof (d as any)?.heroLqip === 'string' ? (d as any).heroLqip : undefined;
 
   return {
     heroTitle: d?.heroTitle || HOME_DEFAULTS.heroTitle,
@@ -51,6 +53,7 @@ export async function getHomeContent(): Promise<HomeContent> {
     heroCtaPrimary: d?.heroCtaPrimary || HOME_DEFAULTS.heroCtaPrimary,
     heroCtaSecondary: d?.heroCtaSecondary || HOME_DEFAULTS.heroCtaSecondary,
     heroImageUrl,
+    heroBlurDataURL,
     reassuranceItems: nonEmpty(d?.reassuranceItems, HOME_DEFAULTS.reassuranceItems),
     featuredLabel: d?.featuredLabel || HOME_DEFAULTS.featuredLabel,
     featuredHeading: d?.featuredHeading || HOME_DEFAULTS.featuredHeading,

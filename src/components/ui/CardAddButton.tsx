@@ -25,7 +25,7 @@ export default function CardAddButton({
     return (
       <button
         onClick={add}
-        className="bg-creme text-noir border border-noir text-[10px] font-body font-semibold tracking-widest uppercase px-6 py-2.5 rounded hover:bg-or hover:text-blanc transition-colors duration-200"
+        className="bg-creme text-noir border border-noir text-[10px] font-body font-medium tracking-widest uppercase px-6 py-2.5 rounded hover:bg-or hover:text-blanc transition-colors duration-200"
       >
         Ajouter au panier
       </button>

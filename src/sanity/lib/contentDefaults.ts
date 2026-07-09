@@ -11,6 +11,7 @@ export type HomeContent = {
   heroCtaPrimary: string;
   heroCtaSecondary: string;
   heroImageUrl: string;
+  heroBlurDataURL?: string;
   reassuranceItems: ReassuranceItem[];
   featuredLabel: string;
   featuredHeading: string;
