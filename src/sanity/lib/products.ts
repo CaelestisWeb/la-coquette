@@ -6,7 +6,7 @@ import type { Product, ProductCollection, Review } from './productTypes';
 const FIELDS = `
   "id": _id,
   "slug": slug.current,
-  name, category, price, description, material, featured, available,
+  name, category, price, description, material, featured, available, couleurs,
   "collection": collection->{ "id": _id, name, "slug": slug.current },
   "images": images[]{ ..., "lqip": asset->metadata.lqip },
   "reviews": reviews[]{ author, rating, text, date }
@@ -61,6 +61,7 @@ function toProduct(p: any): Product {
     featured: Boolean(p.featured),
     available: p.available !== false,
     reviews,
+    couleurs: Array.isArray(p?.couleurs) ? p.couleurs.filter((c: any) => typeof c === 'string') : [],
   };
 }
 

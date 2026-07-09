@@ -1,4 +1,5 @@
 import { defineField, defineType } from 'sanity';
+import { PRODUCT_COLORS } from '../lib/colors';
 
 // Modèle d'un bijou : exactement ce que Caro remplit pour chaque produit.
 export const product = defineType({
@@ -37,6 +38,17 @@ export const product = defineType({
       title: 'Matière',
       type: 'string',
       initialValue: 'Acier inoxydable doré',
+    }),
+    defineField({
+      name: 'couleurs',
+      title: 'Couleur(s)',
+      type: 'array',
+      of: [{ type: 'string' }],
+      options: {
+        list: PRODUCT_COLORS.map((c) => ({ title: c, value: c })),
+        layout: 'grid',
+      },
+      description: 'Sert au filtre par couleur dans la boutique. Pré-rempli automatiquement depuis le nom, ajustable à tout moment.',
     }),
     defineField({
       name: 'category',

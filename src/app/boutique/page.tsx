@@ -39,6 +39,7 @@ export default async function BoutiquePage({
   const cards: BoutiqueCard[] = filtered.map((product, i) => ({
     id: product.id,
     price: product.price,
+    couleurs: product.couleurs ?? [],
     search: norm(`${product.name} ${product.collection?.name ?? ''}`),
     node: <ProductCard key={product.id} product={product} priority={i < 4} />,
   }));

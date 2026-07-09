@@ -32,6 +32,7 @@ export type Product = {
   featured?: boolean;
   available?: boolean;
   reviews?: Review[];         // avis clientes (réels), pour la fiche + rich snippets
+  couleurs?: string[];        // familles de couleurs (filtre boutique)
 };
 
 export const categoryLabels: Record<ProductCategory, string> = {
