@@ -1,8 +1,12 @@
 import { getProducts, getSoldProducts, getCollections } from '@/sanity/lib/products';
 import { getBoutiqueContent } from '@/sanity/lib/content';
 import ProductCard from '@/components/ui/ProductCard';
+import BoutiqueBrowser, { type BoutiqueCard } from './BoutiqueBrowser';
 import Link from 'next/link';
 import type { Metadata } from 'next';
+
+const norm = (s: string) =>
+  s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
 
 export const metadata: Metadata = {
   title: 'Boutique',
@@ -29,6 +33,15 @@ export default async function BoutiquePage({
     active ? list.filter((p) => p.collection?.slug === active) : list;
   const filtered = byCollection(products);
   const filteredSold = byCollection(sold);
+
+  // Cartes pré-rendues côté serveur (non ré-hydratées) + métadonnées légères
+  // pour la recherche/tri client. On garde ainsi la grille en composant serveur.
+  const cards: BoutiqueCard[] = filtered.map((product, i) => ({
+    id: product.id,
+    price: product.price,
+    search: norm(`${product.name} ${product.collection?.name ?? ''}`),
+    node: <ProductCard key={product.id} product={product} priority={i < 4} />,
+  }));
 
   const tab = 'font-body text-xs sm:text-[13px] tracking-[0.12em] uppercase pb-1.5 border-b transition-colors';
 
@@ -70,17 +83,10 @@ export default async function BoutiquePage({
         </nav>
       )}
 
-      {/* Grille produits */}
+      {/* Grille produits : recherche + tri (cartes rendues côté serveur) */}
       <div className="max-w-7xl mx-auto px-6 pt-10 pb-24">
-        <p className="font-body text-xs text-taupe tracking-[0.12em] uppercase text-center mb-10">
-          {filtered.length} création{filtered.length > 1 ? 's' : ''}
-        </p>
         {filtered.length > 0 ? (
-          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
-            {filtered.map((product, i) => (
-              <ProductCard key={product.id} product={product} priority={i < 4} />
-            ))}
-          </div>
+          <BoutiqueBrowser cards={cards} />
         ) : filteredSold.length === 0 ? (
           <p className="font-body text-sm text-taupe text-center py-16">
             Aucune création dans cette collection pour le moment.
