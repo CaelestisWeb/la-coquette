@@ -20,9 +20,24 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const product = await getProductBySlug(slug);
   if (!product) return {};
+  const ogImage = product.image.startsWith('http') ? product.image : undefined;
   return {
     title: product.name,
     description: product.description,
+    alternates: { canonical: `/boutique/${product.slug}` },
+    openGraph: {
+      title: `${product.name} · La Coquette`,
+      description: product.description,
+      url: `https://lacoquette-bycaro.fr/boutique/${product.slug}`,
+      type: 'website',
+      images: ogImage ? [{ url: ogImage, width: 1200, height: 1200, alt: product.name }] : undefined,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${product.name} · La Coquette`,
+      description: product.description,
+      images: ogImage ? [ogImage] : undefined,
+    },
   };
 }
 

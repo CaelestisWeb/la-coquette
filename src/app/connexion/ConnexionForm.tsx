@@ -128,6 +128,7 @@ export default function ConnexionForm() {
         {mode === 'signup' && (
           <input
             className={input}
+            aria-label="Prénom"
             placeholder="Prénom"
             value={prenom}
             onChange={(e) => setPrenom(e.target.value)}
@@ -138,6 +139,7 @@ export default function ConnexionForm() {
           className={input}
           type="email"
           required
+          aria-label="Adresse email"
           placeholder="Adresse email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
@@ -148,6 +150,7 @@ export default function ConnexionForm() {
           type="password"
           required
           minLength={6}
+          aria-label="Mot de passe"
           placeholder="Mot de passe"
           value={password}
           onChange={(e) => setPassword(e.target.value)}

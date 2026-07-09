@@ -35,7 +35,9 @@ export default function LoginForm() {
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          aria-label="Mot de passe"
           placeholder="Mot de passe"
+          autoComplete="current-password"
           autoFocus
           className="w-full border border-gris bg-blanc px-4 py-3 rounded font-body text-sm text-noir outline-none focus:border-noir transition-colors text-center"
         />
