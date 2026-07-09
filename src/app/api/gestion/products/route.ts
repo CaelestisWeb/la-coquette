@@ -53,6 +53,7 @@ export async function POST(req: Request) {
     const suffix = crypto.randomBytes(3).toString('hex');
     const copy: any = { ...src };
     delete copy._id; delete copy._rev; delete copy._createdAt; delete copy._updatedAt;
+    delete copy.reviews; // les avis appartiennent au produit d'origine, pas à la copie
     copy.name = `${src.name || 'Produit'} (copie)`;
     copy.slug = { _type: 'slug', current: `${slugify(src.name || 'produit')}-${suffix}` };
     copy.available = false;

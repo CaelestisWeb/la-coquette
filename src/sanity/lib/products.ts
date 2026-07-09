@@ -1,14 +1,15 @@
 import { stegaClean } from 'next-sanity';
 import { sanityFetch } from './fetch';
 import { urlForImage } from './image';
-import type { Product, ProductCollection } from './productTypes';
+import type { Product, ProductCollection, Review } from './productTypes';
 
 const FIELDS = `
   "id": _id,
   "slug": slug.current,
   name, category, price, description, material, featured, available,
   "collection": collection->{ "id": _id, name, "slug": slug.current },
-  "images": images[]{ ..., "lqip": asset->metadata.lqip }
+  "images": images[]{ ..., "lqip": asset->metadata.lqip },
+  "reviews": reviews[]{ author, rating, text, date }
 `;
 
 function toProduct(p: any): Product {
@@ -30,6 +31,18 @@ function toProduct(p: any): Product {
   const collection: Product['collection'] = p?.collection?.id
     ? { id: p.collection.id, name: p.collection.name || '', slug: stegaClean(p.collection.slug) }
     : null;
+
+  const reviews: Review[] = Array.isArray(p?.reviews)
+    ? p.reviews
+        .filter((r: any) => r && typeof r.rating === 'number' && r.text)
+        .map((r: any) => ({
+          author: stegaClean(r.author) || '',
+          rating: Math.max(1, Math.min(5, Math.round(r.rating))),
+          text: r.text,
+          date: typeof r.date === 'string' ? r.date : undefined,
+        }))
+    : [];
+
   return {
     id: p.id,
     // slug sert au routage (URL) : on retire tout marquage stega de l'aperçu.
@@ -47,6 +60,7 @@ function toProduct(p: any): Product {
     gallery,
     featured: Boolean(p.featured),
     available: p.available !== false,
+    reviews,
   };
 }
 

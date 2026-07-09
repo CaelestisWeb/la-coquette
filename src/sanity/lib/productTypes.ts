@@ -8,6 +8,13 @@ export type ProductCollection = {
 
 export type ProductImage = { url: string; blurDataURL?: string };
 
+export type Review = {
+  author: string;
+  rating: number; // 1 à 5
+  text: string;
+  date?: string; // ISO (YYYY-MM-DD)
+};
+
 export type Product = {
   id: string;
   slug: string;
@@ -24,6 +31,7 @@ export type Product = {
   gallery: ProductImage[];    // toutes les photos (page produit)
   featured?: boolean;
   available?: boolean;
+  reviews?: Review[];         // avis clientes (réels), pour la fiche + rich snippets
 };
 
 export const categoryLabels: Record<ProductCategory, string> = {

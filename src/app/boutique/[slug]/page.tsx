@@ -7,6 +7,7 @@ import StickyAddToCart from './StickyAddToCart';
 import ProductGallery from '@/components/ui/ProductGallery';
 import ProductDetails from '@/components/ui/ProductDetails';
 import ProductCard from '@/components/ui/ProductCard';
+import ProductReviews, { ReviewStars } from '@/components/ui/ProductReviews';
 import type { Metadata } from 'next';
 
 type Props = { params: Promise<{ slug: string }> };
@@ -49,6 +50,9 @@ export default async function ProductPage({ params }: Props) {
   const allProducts = await getProducts();
   const related = allProducts.filter(p => p.id !== product.id).slice(0, 4);
 
+  const reviews = product.reviews ?? [];
+  const reviewAvg = reviews.length > 0 ? reviews.reduce((s, r) => s + r.rating, 0) / reviews.length : 0;
+
   const productJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Product',
@@ -66,6 +70,25 @@ export default async function ProductPage({ params }: Props) {
         : 'https://schema.org/SoldOut',
       url: `https://lacoquette-bycaro.fr/boutique/${product.slug}`,
     },
+    // Étoiles dans Google : uniquement s'il y a de vrais avis.
+    ...(reviews.length > 0
+      ? {
+          aggregateRating: {
+            '@type': 'AggregateRating',
+            ratingValue: reviewAvg.toFixed(1),
+            reviewCount: reviews.length,
+            bestRating: 5,
+            worstRating: 1,
+          },
+          review: reviews.map((r) => ({
+            '@type': 'Review',
+            reviewRating: { '@type': 'Rating', ratingValue: r.rating, bestRating: 5, worstRating: 1 },
+            author: { '@type': 'Person', name: r.author || 'Cliente' },
+            reviewBody: r.text,
+            ...(r.date ? { datePublished: r.date } : {}),
+          })),
+        }
+      : {}),
   };
 
   return (
@@ -104,6 +127,19 @@ export default async function ProductPage({ params }: Props) {
             </h1>
             <p className="font-display text-3xl text-or mt-4">{product.price} €</p>
 
+            {reviews.length > 0 && (
+              <a
+                href="#avis"
+                className="mt-4 inline-flex items-center gap-2 group"
+                aria-label={`${reviews.length} avis, note moyenne ${reviewAvg.toFixed(1)} sur 5`}
+              >
+                <ReviewStars value={reviewAvg} size={15} />
+                <span className="font-body text-xs text-taupe group-hover:text-noir transition-colors underline underline-offset-4 decoration-transparent group-hover:decoration-inherit">
+                  {reviews.length} avis
+                </span>
+              </a>
+            )}
+
             <p className="font-body text-base text-taupe leading-relaxed mt-6 max-w-md mx-auto">
               {product.description}
             </p>
@@ -141,6 +177,9 @@ export default async function ProductPage({ params }: Props) {
             <ProductDetails />
           </div>
         </div>
+
+        {/* Avis clientes (réels) */}
+        <ProductReviews reviews={reviews} />
 
         {/* Produits similaires */}
         {related.length > 0 && (

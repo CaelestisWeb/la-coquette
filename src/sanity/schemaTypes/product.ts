@@ -82,6 +82,41 @@ export const product = defineType({
       type: 'number',
       description: 'Plus le nombre est petit, plus le produit apparaît en premier.',
     }),
+    defineField({
+      name: 'reviews',
+      title: 'Avis clientes',
+      type: 'array',
+      description:
+        "Avis RÉELS uniquement (reçus sur Instagram, Google, par message). Ils s'affichent sur la fiche et peuvent faire apparaître les étoiles dans Google. N'inventez jamais d'avis.",
+      of: [
+        defineField({
+          name: 'review',
+          title: 'Avis',
+          type: 'object',
+          fields: [
+            defineField({ name: 'author', title: 'Prénom', type: 'string', validation: (r) => r.required() }),
+            defineField({
+              name: 'rating',
+              title: 'Note (1 à 5 étoiles)',
+              type: 'number',
+              initialValue: 5,
+              validation: (r) => r.required().min(1).max(5).integer(),
+            }),
+            defineField({ name: 'text', title: 'Texte de l’avis', type: 'text', rows: 3, validation: (r) => r.required() }),
+            defineField({ name: 'date', title: 'Date (optionnel)', type: 'date', options: { dateFormat: 'DD/MM/YYYY' } }),
+          ],
+          preview: {
+            select: { author: 'author', rating: 'rating', text: 'text' },
+            prepare({ author, rating, text }) {
+              return {
+                title: `${author || 'Anonyme'} — ${'★'.repeat(rating || 0)}`,
+                subtitle: text,
+              };
+            },
+          },
+        }),
+      ],
+    }),
   ],
   orderings: [
     {
