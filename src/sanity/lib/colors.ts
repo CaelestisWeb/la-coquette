@@ -36,3 +36,27 @@ export const COLOR_SWATCH: Record<ProductColor, string> = {
   'Violet': '#8A6BB0',
   'Multicolore': 'conic-gradient(from 0deg, #E8836B, #E4C15A, #5F8D57, #3FB6B2, #3E6EA5, #8A6BB0, #D98AA6, #E8836B)',
 };
+
+// Mots-clés (sans accents) pour déduire les couleurs d'un nom de produit.
+const COLOR_KEYWORDS: Record<ProductColor, string[]> = {
+  'Doré': ['dore'],
+  'Argenté': ['argent'],
+  'Blanc': ['blanc', 'nacre', 'ivoire'],
+  'Noir': ['noir'],
+  'Bleu': ['bleu', 'marine', 'saphir'],
+  'Turquoise': ['turquoise'],
+  'Vert': ['vert', 'emeraude', 'olive', 'kaki'],
+  'Jaune': ['jaune', 'ambre', 'miel', 'moutarde'],
+  'Orange': ['orange', 'abricot'],
+  'Corail': ['corail'],
+  'Rose': ['rose', 'fushia', 'fuchsia', 'poudre'],
+  'Rouge': ['rouge', 'bordeaux', 'grenat', 'rubis'],
+  'Violet': ['violet', 'mauve', 'lilas', 'parme', 'amethyste', 'lavande', 'prune'],
+  'Multicolore': ['multicolore', 'multicouleur', 'arc-en-ciel', 'arc en ciel'],
+};
+
+// Déduit la ou les familles de couleurs à partir d'un nom (pour pré-remplir).
+export function detectColors(name: string): ProductColor[] {
+  const n = (name || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+  return PRODUCT_COLORS.filter((c) => COLOR_KEYWORDS[c].some((k) => n.includes(k)));
+}

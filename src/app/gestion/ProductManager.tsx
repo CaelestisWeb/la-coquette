@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { PRODUCT_COLORS, COLOR_SWATCH } from '@/sanity/lib/colors';
 
 type Product = {
   id: string;
@@ -14,6 +15,7 @@ type Product = {
   slug: string;
   collectionId: string;
   thumb: string | null;
+  couleurs: string[];
 };
 
 type Collection = { id: string; name: string };
@@ -139,6 +141,16 @@ export default function ProductManager({
     const next = !p[field];
     update(id, { [field]: next });
     persist(id, { [field]: next });
+  }
+
+  function toggleColor(id: string, color: string) {
+    const p = products.find((x) => x.id === id);
+    if (!p) return;
+    const next = p.couleurs.includes(color)
+      ? p.couleurs.filter((c) => c !== color)
+      : [...p.couleurs, color];
+    update(id, { couleurs: next });
+    persist(id, { couleurs: next });
   }
 
   async function remove(id: string, name: string) {
@@ -309,6 +321,28 @@ export default function ProductManager({
                 <div className="flex flex-wrap gap-x-4 gap-y-1.5 mt-3">
                   <Toggle on={p.available} onClick={() => toggle(p.id, 'available')} label={p.available ? 'En vente' : 'Vendu'} tone="green" />
                   <Toggle on={p.featured} onClick={() => toggle(p.id, 'featured')} label="En avant" tone="gold" />
+                </div>
+
+                {/* Couleurs (pour le filtre de la boutique) */}
+                <div className="mt-3">
+                  <p className="font-body text-[10px] tracking-wide uppercase text-taupe mb-1.5">Couleurs (filtre boutique)</p>
+                  <div className="flex flex-wrap gap-1.5">
+                    {PRODUCT_COLORS.map((c) => {
+                      const active = p.couleurs.includes(c);
+                      return (
+                        <button
+                          key={c}
+                          type="button"
+                          title={c}
+                          aria-label={c}
+                          aria-pressed={active}
+                          onClick={() => toggleColor(p.id, c)}
+                          className={`w-5 h-5 rounded-full border transition ${active ? 'ring-2 ring-noir ring-offset-1 border-noir' : 'border-gris/50 opacity-40 hover:opacity-100'}`}
+                          style={{ background: COLOR_SWATCH[c as keyof typeof COLOR_SWATCH] }}
+                        />
+                      );
+                    })}
+                  </div>
                 </div>
 
                 <div className="flex items-center gap-3 mt-3 font-body text-[11px] tracking-wide uppercase">

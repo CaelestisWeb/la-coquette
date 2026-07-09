@@ -4,6 +4,7 @@ import crypto from 'crypto';
 import { writeClient } from '@/sanity/lib/writeClient';
 import { isAuthed } from '@/lib/gestion-auth';
 import { getGestionProducts } from '@/lib/gestion-data';
+import { detectColors } from '@/sanity/lib/colors';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
@@ -73,6 +74,7 @@ export async function POST(req: Request) {
     description: String(body.description || ''),
     material: String(body.material || 'Acier inoxydable doré'),
     category: 'boucles',
+    couleurs: detectColors(name), // pré-remplissage auto (ajustable ensuite)
     ...(collectionId ? { collection: { _type: 'reference', _ref: collectionId } } : {}),
     available: body.available !== false,
     featured: !!body.featured,
@@ -99,6 +101,7 @@ export async function PATCH(req: Request) {
   if ('order' in body) set.order = Number(body.order) || 0;
   if ('available' in body) set.available = !!body.available;
   if ('featured' in body) set.featured = !!body.featured;
+  if (Array.isArray(body.couleurs)) set.couleurs = body.couleurs.filter((c: unknown) => typeof c === 'string');
   if (body.assetId) set.images = [imageField(body.assetId)];
 
   // Affectation à une collection : id => référence, vide => on retire la collection.
