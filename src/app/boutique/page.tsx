@@ -77,8 +77,8 @@ export default async function BoutiquePage({
         </p>
         {filtered.length > 0 ? (
           <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
-            {filtered.map((product) => (
-              <ProductCard key={product.id} product={product} />
+            {filtered.map((product, i) => (
+              <ProductCard key={product.id} product={product} priority={i < 4} />
             ))}
           </div>
         ) : filteredSold.length === 0 ? (

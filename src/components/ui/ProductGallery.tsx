@@ -75,7 +75,7 @@ export default function ProductGallery({
             priority
             placeholder={cur.blurDataURL ? 'blur' : 'empty'}
             blurDataURL={cur.blurDataURL}
-            className="object-cover motion-safe:animate-[lcFade_.3s_ease-out]"
+            className="object-cover"
             sizes="(max-width: 1024px) 100vw, 50vw"
           />
         </button>
