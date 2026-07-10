@@ -33,6 +33,7 @@ export default function CheckoutForm() {
   const [promoMsg, setPromoMsg] = useState('');
   const [promoLoading, setPromoLoading] = useState(false);
   const [freeShip, setFreeShip] = useState(false);
+  const [showPromo, setShowPromo] = useState(false);
 
   const round2 = (n: number) => Math.round(n * 100) / 100;
   const baseShipping = total >= SHIPPING_THRESHOLD ? 0 : SHIPPING_COST;
@@ -262,20 +263,30 @@ export default function CheckoutForm() {
           ))}
         </ul>
 
-        {/* Code de réduction */}
+        {/* Code de réduction : masqué par défaut pour ne pas distraire ni
+            inciter à quitter la page chercher un code (friction CRO connue). */}
         <div className="border-t border-gris pt-4 mb-4">
-          <label htmlFor="promo" className="font-body text-[10px] tracking-widest uppercase text-taupe block mb-1.5">Code de réduction</label>
-          <div className="flex gap-2">
-            <input id="promo" value={promoInput} onChange={e => setPromoInput(e.target.value)}
-              placeholder="Votre code"
-              className="flex-1 min-w-0 border border-gris bg-creme px-3 py-2 font-body text-sm text-noir outline-none focus:border-noir transition-colors uppercase" />
-            <button type="button" onClick={applyPromo} disabled={promoLoading || !promoInput.trim()}
-              className="font-body text-[11px] tracking-widest uppercase px-4 py-2 rounded border border-noir text-noir hover:bg-noir hover:text-blanc transition-colors disabled:opacity-40">
-              {promoLoading ? '…' : 'Appliquer'}
+          {!showPromo && discount === 0 ? (
+            <button type="button" onClick={() => setShowPromo(true)}
+              className="font-body text-xs text-taupe hover:text-noir underline underline-offset-4 transition-colors">
+              J&apos;ai un code de réduction
             </button>
-          </div>
-          {promoMsg && <p className="font-body text-xs text-red-500 mt-1.5">{promoMsg}</p>}
-          {discount > 0 && <p className="font-body text-xs text-or mt-1.5">Code appliqué : -{Math.round(discount * 100)} %{promoLabel ? ` (${promoLabel})` : ''}</p>}
+          ) : (
+            <>
+              <label htmlFor="promo" className="font-body text-[10px] tracking-widest uppercase text-taupe block mb-1.5">Code de réduction</label>
+              <div className="flex gap-2">
+                <input id="promo" value={promoInput} onChange={e => setPromoInput(e.target.value)}
+                  placeholder="Votre code" autoFocus
+                  className="flex-1 min-w-0 border border-gris bg-creme px-3 py-2 font-body text-sm text-noir outline-none focus:border-noir transition-colors uppercase" />
+                <button type="button" onClick={applyPromo} disabled={promoLoading || !promoInput.trim()}
+                  className="font-body text-[11px] tracking-widest uppercase px-4 py-2 rounded border border-noir text-noir hover:bg-noir hover:text-blanc transition-colors disabled:opacity-40">
+                  {promoLoading ? '…' : 'Appliquer'}
+                </button>
+              </div>
+              {promoMsg && <p className="font-body text-xs text-red-500 mt-1.5">{promoMsg}</p>}
+              {discount > 0 && <p className="font-body text-xs text-taupe mt-1.5">Code appliqué : -{Math.round(discount * 100)} %{promoLabel ? ` (${promoLabel})` : ''}</p>}
+            </>
+          )}
         </div>
 
         <div className="border-t border-gris pt-4 space-y-2">
@@ -283,13 +294,13 @@ export default function CheckoutForm() {
             <span>Sous-total</span><span>{total.toFixed(2)} €</span>
           </div>
           {discount > 0 && (
-            <div className="flex justify-between font-body text-sm text-or">
+            <div className="flex justify-between font-body text-sm text-taupe">
               <span>Réduction</span><span>-{discountAmount.toFixed(2)} €</span>
             </div>
           )}
           <div className="flex justify-between font-body text-sm text-taupe">
             <span>Livraison</span>
-            <span>{shipping === 0 ? <span className="text-or">Gratuite</span> : `${shipping.toFixed(2)} €`}</span>
+            <span>{shipping === 0 ? <span className="text-noir font-medium">Gratuite</span> : `${shipping.toFixed(2)} €`}</span>
           </div>
           <div className="flex justify-between font-body text-base font-medium text-noir pt-2 border-t border-gris">
             <span>Total</span><span>{grandTotal.toFixed(2)} €</span>
