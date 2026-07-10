@@ -149,6 +149,19 @@ html.lenis, html.lenis body { height: auto; }
 .reveal-d3 { transition-delay: 0.24s; }
 .reveal-d4 { transition-delay: 0.32s; }
 
+/* ── Moment signature : révélation d'image produit au scroll ──
+   Calme et monochrome. transform/opacity uniquement (GPU), jamais posé sur
+   une image LCP (réservé aux grilles hors premier écran). */
+.lc-veil {
+  opacity: 0;
+  transform: scale(1.06);
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 1.15s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.lc-veil.visible { opacity: 1; transform: none; }
+@media (scripting: none) { .lc-veil { opacity: 1; transform: none; } }
+
 /* Sans JavaScript (crawler, JS désactivé, échec du bundle) : on ne laisse
    jamais une section masquée derrière une animation qui ne se jouera pas.
    Le contenu reste visible par défaut. */
@@ -183,6 +196,6 @@ html.lenis, html.lenis body { height: auto; }
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-  .reveal { opacity: 1 !important; transform: none !important; }
+  .reveal, .lc-veil { opacity: 1 !important; transform: none !important; }
   .scroll-hairline::after { display: none; }
 }

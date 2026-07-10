@@ -16,7 +16,7 @@ export default function ScrollReveal() {
       }),
       { threshold: 0.07, rootMargin: '0px 0px -40px 0px' }
     );
-    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+    document.querySelectorAll('.reveal, .lc-veil').forEach(el => obs.observe(el));
     return () => obs.disconnect();
   }, [pathname]);
 

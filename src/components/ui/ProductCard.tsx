@@ -7,7 +7,7 @@ import { categoryLabels, type Product } from '@/sanity/lib/productTypes';
 // Composant SERVEUR : la carte (lien, images, textes) n'est pas hydratée.
 // Seuls les petits îlots interactifs (cœur, ajout au panier) sont côté client,
 // ce qui allège fortement le JS au chargement (surtout la grille boutique).
-export default function ProductCard({ product, priority = false }: { product: Product; priority?: boolean }) {
+export default function ProductCard({ product, priority = false, reveal = false }: { product: Product; priority?: boolean; reveal?: boolean }) {
   const catLabel = product.collection?.name || categoryLabels[product.category];
   const sold = product.available === false;
 
@@ -15,7 +15,7 @@ export default function ProductCard({ product, priority = false }: { product: Pr
     <Link href={`/boutique/${product.slug}`} className="group block bg-creme overflow-hidden">
 
       {/* Image */}
-      <div className="relative aspect-square overflow-hidden bg-beige rounded-md">
+      <div className={`relative aspect-square overflow-hidden bg-beige rounded-md${reveal && !priority ? ' lc-veil' : ''}`}>
         {/* Favori — coin haut droit */}
         <div className="absolute top-2 right-2 z-10">
           <HeartButton
