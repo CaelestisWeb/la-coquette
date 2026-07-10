@@ -8,6 +8,7 @@ import ProductGallery from '@/components/ui/ProductGallery';
 import ProductDetails from '@/components/ui/ProductDetails';
 import ProductCard from '@/components/ui/ProductCard';
 import ProductReviews, { ReviewStars } from '@/components/ui/ProductReviews';
+import ProductTrust from '@/components/ui/ProductTrust';
 import type { Metadata } from 'next';
 
 type Props = { params: Promise<{ slug: string }> };
@@ -119,13 +120,13 @@ export default async function ProductPage({ params }: Props) {
 
           {/* Infos produit */}
           <div className="lg:sticky lg:top-28 text-center">
-            <span className="font-body text-[10px] font-medium tracking-[0.2em] uppercase text-or">
+            <span className="font-body text-[10px] font-medium tracking-[0.2em] uppercase text-taupe">
               {categoryLabels[product.category]}
             </span>
             <h1 className="font-display text-4xl sm:text-5xl text-noir mt-3">
               {product.name}
             </h1>
-            <p className="font-display text-3xl text-or mt-4">{product.price} €</p>
+            <p className="font-display text-3xl text-noir mt-4">{product.price} €</p>
 
             {reviews.length > 0 && (
               <a
@@ -158,9 +159,12 @@ export default async function ProductPage({ params }: Props) {
 
             {/* Bouton panier (ou mention « vendu » pour une pièce unique) */}
             {product.available ? (
-              <div id="main-add-to-cart" className="mt-10">
-                <AddToCartButton product={product} />
-              </div>
+              <>
+                <div id="main-add-to-cart" className="mt-10">
+                  <AddToCartButton product={product} />
+                </div>
+                <ProductTrust />
+              </>
             ) : (
               <div className="mt-10 p-5 bg-beige rounded-lg text-center">
                 <p className="font-body text-sm font-medium text-noir tracking-wide uppercase">Pièce unique, déjà vendue</p>
@@ -185,7 +189,7 @@ export default async function ProductPage({ params }: Props) {
         {related.length > 0 && (
           <section className="mt-24">
             <div className="text-center mb-10">
-              <span className="font-body text-[10px] font-medium tracking-[0.25em] uppercase text-or">
+              <span className="font-body text-[10px] font-medium tracking-[0.25em] uppercase text-taupe">
                 Sélection
               </span>
               <h2 className="font-display text-3xl sm:text-4xl text-noir mt-2">Vous aimerez aussi</h2>
