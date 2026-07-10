@@ -56,7 +56,7 @@ export type BoutiqueContent = {
 };
 
 export const HOME_DEFAULTS: HomeContent = {
-  heroTitle: 'Des bijoux pensés\npour révéler votre',
+  heroTitle: 'Des bijoux faits main\npour révéler votre',
   heroHighlight: 'élégance',
   heroCtaPrimary: 'Découvrir la boutique',
   heroCtaSecondary: 'Prendre contact',
@@ -69,15 +69,15 @@ export const HOME_DEFAULTS: HomeContent = {
   ],
   featuredLabel: 'Sélection',
   featuredHeading: 'Nos créations',
-  featuredIntro: "Des boucles d'oreilles pendantes montées à la main par Caro, en acier inoxydable doré qui ne ternit pas, à porter sous la pluie comme sous les projecteurs.",
+  featuredIntro: "Des boucles d'oreilles montées à la main par Caro, en acier inoxydable doré qui ne ternit pas. Légères, pensées pour vous accompagner chaque jour.",
   featuredCta: 'Voir toute la boutique',
-  valuesLabel: 'Ce qui nous anime',
-  valuesHeading: 'Nos valeurs',
+  valuesLabel: 'La maison',
+  valuesHeading: 'Pourquoi La Coquette',
   valuesItems: [
-    { title: 'Passion', text: 'Chaque bijou est imaginé avec amour et attention. La passion de Caro pour la création se ressent dans chaque détail.' },
-    { title: 'Qualité', text: "Acier inoxydable doré, anti-allergie, résistant à l'eau et au temps. Des matières nobles pour un rendu précieux et durable." },
-    { title: 'Proximité', text: 'Caro est à votre écoute pour chaque commande, chaque question. Une relation directe, chaleureuse et authentique.' },
-    { title: 'Confiance', text: 'Paiement sécurisé, livraison soignée, satisfaction garantie. Votre confiance est notre plus belle récompense.' },
+    { title: 'Fait main dans la Drôme', text: "Chaque paire est imaginée et assemblée à la main par Caro, dans son atelier de la Drôme." },
+    { title: 'Des matières qui durent', text: "Acier inoxydable doré, sans nickel : hypoallergénique, résistant à l'eau, et qui ne ternit pas." },
+    { title: 'Préparé avec soin', text: "Votre commande est emballée à la main et expédiée sous 3 à 5 jours, suivi inclus." },
+    { title: 'Un achat serein', text: "Paiement sécurisé, livraison soignée et retours sous 14 jours. Vous êtes accompagnée à chaque étape." },
   ],
   testimonialsLabel: 'Elles nous font confiance',
   testimonialsHeading: 'Avis clients',
