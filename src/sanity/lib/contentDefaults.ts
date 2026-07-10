@@ -64,7 +64,7 @@ export const HOME_DEFAULTS: HomeContent = {
   reassuranceItems: [
     { title: 'Fait main', text: 'Créé avec soin dans la Drôme' },
     { title: 'Acier inoxydable', text: 'Hypoallergénique & durable' },
-    { title: 'Livraison offerte', text: "Dès 100 € d'achat en France" },
+    { title: 'Livraison offerte', text: "Dès 75 € d'achat en France" },
     { title: 'Paiement sécurisé', text: 'Transaction 100 % protégée' },
   ],
   featuredLabel: 'Sélection',
@@ -111,7 +111,7 @@ export const FAQ_DEFAULTS: FaqContent = {
     { q: "Puis-je les porter sous l'eau ?", a: "L'acier inoxydable résiste très bien à l'eau et ne rouille pas. Vous pouvez les garder au quotidien sans crainte. Nous conseillons simplement d'éviter le contact prolongé avec le chlore, l'eau de mer et les produits chimiques pour préserver l'éclat de la dorure." },
     { q: 'Comment entretenir mes bijoux ?', a: "Essuyez-les délicatement avec un chiffon doux et sec après usage. Appliquez parfum et crème avant de les mettre, jamais dessus, et rangez-les à l'abri de l'humidité. Ces gestes simples préservent durablement leur brillance." },
     { q: 'Quels sont les délais de livraison ?', a: 'Chaque bijou étant préparé avec soin, votre commande est expédiée rapidement via La Poste, pour une réception sous 3 à 5 jours ouvrés en France métropolitaine.' },
-    { q: 'Quels sont les frais de livraison ?', a: "La livraison en France métropolitaine est de 2.99 €. Elle est offerte dès 100 € d'achat." },
+    { q: 'Quels sont les frais de livraison ?', a: "La livraison en France métropolitaine est de 2.99 €. Elle est offerte dès 75 € d'achat." },
     { q: 'Proposez-vous des bijoux personnalisés ?', a: "Oui, c'est même une de nos spécialités ! Caro crée des boucles d'oreilles sur mesure dans toutes les couleurs, formes et tailles. Décrivez-nous vos envies via la page Contact et nous imaginerons ensemble la paire qui vous ressemble." },
     { q: 'Puis-je retourner un article ?', a: "Vous disposez d'un délai de 14 jours après réception pour changer d'avis et nous retourner un article non porté, dans son état d'origine. Les bijoux personnalisés ou réalisés sur mesure ne sont pas repris. Tous les détails figurent dans nos Conditions Générales de Vente." },
     { q: 'Le paiement est-il sécurisé ?', a: "Absolument. Les paiements sont traités par SumUp, une solution sécurisée. Vos données bancaires sont chiffrées et ne sont jamais conservées par La Coquette." },
