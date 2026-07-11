@@ -14,6 +14,18 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
       {
+        // Assets statiques de /public (logos, hero, og-image, placeholder) :
+        // Vercel les sert en max-age=0 par défaut, donc re-téléchargés à
+        // chaque visite. Cache 7 jours, sans immutable (noms non fingerprintés).
+        source: "/:all*(svg|jpg|jpeg|png|webp|avif|ico|woff2)",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=604800, stale-while-revalidate=86400",
+          },
+        ],
+      },
+      {
         source: "/:path*",
         headers: [
           { key: "X-Content-Type-Options", value: "nosniff" },
