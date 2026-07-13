@@ -56,7 +56,7 @@ export type BoutiqueContent = {
 };
 
 export const HOME_DEFAULTS: HomeContent = {
-  heroTitle: 'Des bijoux faits main\npour révéler votre',
+  heroTitle: 'Des bijoux fait main\npour révéler votre',
   heroHighlight: 'élégance',
   heroCtaPrimary: 'Découvrir la boutique',
   heroCtaSecondary: 'Prendre contact',
@@ -127,5 +127,5 @@ export const CONTACT_DEFAULTS: ContactContent = {
 
 export const BOUTIQUE_DEFAULTS: BoutiqueContent = {
   heading: 'Créations',
-  intro: "Des boucles d'oreilles pendantes faites main, en acier inoxydable doré : légères, sans nickel, et qui ne ternissent pas.",
+  intro: "Des boucles d'oreilles pendantes fait main, en acier inoxydable doré : légères, sans nickel, et qui ne ternissent pas.",
 };

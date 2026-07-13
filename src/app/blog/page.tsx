@@ -5,7 +5,7 @@ import SectionLabel from '@/components/ui/SectionLabel';
 
 export const metadata: Metadata = {
   title: 'Journal',
-  description: 'De son atelier dans la Drôme aux oreilles de ses clientes : la petite histoire des boucles d\'oreilles faites main de La Coquette.',
+  description: 'De son atelier dans la Drôme aux oreilles de ses clientes : la petite histoire des boucles d\'oreilles fait main de La Coquette.',
 };
 
 const article = {

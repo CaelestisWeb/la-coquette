@@ -35,7 +35,7 @@ export default function CGVPage() {
 
           <section>
             <h2 className="font-display text-2xl text-noir mb-4">3. Produits</h2>
-            <p>Les bijoux proposés sont des créations artisanales, fabriquées principalement en acier inoxydable doré. Chaque pièce étant faite main, de légères variations (teinte, finition) peuvent exister et ne constituent pas un défaut. Les produits sont présentés avec la plus grande exactitude possible.</p>
+            <p>Les bijoux proposés sont des créations artisanales, fabriquées principalement en acier inoxydable doré. Chaque pièce étant fait main, de légères variations (teinte, finition) peuvent exister et ne constituent pas un défaut. Les produits sont présentés avec la plus grande exactitude possible.</p>
           </section>
 
           <section>

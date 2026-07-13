@@ -22,7 +22,7 @@ export default function BientotPage() {
         </h1>
 
         <p className="font-body text-sm text-taupe leading-relaxed mb-10 max-w-md mx-auto">
-          Des créations faites main en acier inoxydable doré, pensées pour révéler votre élégance
+          Des créations fait main en acier inoxydable doré, pensées pour révéler votre élégance
           au quotidien. La boutique en ligne ouvre ses portes très prochainement.
         </p>
 

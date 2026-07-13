@@ -129,7 +129,7 @@ export default async function ProductPage({ params }: Props) {
             <p className="font-display text-3xl text-noir mt-4">{product.price} €</p>
             {product.available && (
               <p className="mt-3 font-body text-[11px] font-medium tracking-[0.18em] uppercase text-taupe">
-                Pièce unique · faite main
+                Pièce unique · fait main
               </p>
             )}
 

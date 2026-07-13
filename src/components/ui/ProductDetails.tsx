@@ -31,7 +31,7 @@ const SECTIONS: Section[] = [
     ),
   },
   {
-    title: 'Une pièce unique, faite main',
+    title: 'Une pièce unique, fait main',
     body: (
       <>
         <p>Chaque bijou est imaginé et assemblé à la main par Caro, dans la Drôme.</p>
