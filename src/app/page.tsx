@@ -1,6 +1,8 @@
 import Hero from '@/components/vitrine/Hero';
+import Reassurance from '@/components/vitrine/Reassurance';
 import Atelier from '@/components/vitrine/Atelier';
 import Galerie from '@/components/vitrine/Galerie';
+import SurMesure from '@/components/vitrine/SurMesure';
 import OuAcheter from '@/components/vitrine/OuAcheter';
 import Contact from '@/components/vitrine/Contact';
 
@@ -10,8 +12,10 @@ export default function HomePage() {
   return (
     <>
       <Hero />
+      <Reassurance />
       <Atelier />
       <Galerie />
+      <SurMesure />
       <OuAcheter />
       <Contact />
     </>
