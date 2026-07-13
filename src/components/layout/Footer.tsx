@@ -4,11 +4,10 @@ import { stegaClean } from 'next-sanity';
 import { getSiteSettings } from '@/sanity/lib/content';
 
 const navLinks = [
-  { href: '/', label: 'Accueil' },
-  { href: '/boutique', label: 'Boutique' },
-  { href: '/blog', label: 'Journal' },
-  { href: '/faq', label: 'FAQ' },
-  { href: '/contact', label: 'Contact' },
+  { href: '/#atelier', label: "L'atelier" },
+  { href: '/#galerie', label: 'Galerie' },
+  { href: '/#ou-acheter', label: 'Où me trouver' },
+  { href: '/#contact', label: 'Contact' },
 ];
 
 export default async function Footer() {
@@ -56,10 +55,10 @@ export default async function Footer() {
         {/* Actions */}
         <div className="mt-9 flex flex-col sm:flex-row items-center gap-5">
           <Link
-            href="/contact"
+            href="/#contact"
             className="inline-flex items-center font-body text-[11px] tracking-[0.22em] uppercase text-blanc border border-creme px-7 py-3.5 rounded hover:bg-creme hover:text-noir transition-colors duration-500"
           >
-            Nous contacter
+            Me contacter
           </Link>
           <a
             href={s.instagramUrl}
@@ -80,9 +79,8 @@ export default async function Footer() {
       {/* Barre basse */}
       <div className="border-t border-blanc/10">
         <div className="max-w-7xl mx-auto px-6 py-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-[11px] font-body text-blanc/55">
-          <p>© {new Date().getFullYear()} La Coquette · Caro. Tous droits réservés.</p>
+          <p>© {new Date().getFullYear()} La Coquette, Caro. Tous droits réservés.</p>
           <nav className="flex flex-wrap justify-center gap-x-6 gap-y-2">
-            <Link href="/cgv" className="hover:text-blanc/70 transition-colors">CGV</Link>
             <Link href="/politique-confidentialite" className="hover:text-blanc/70 transition-colors">Confidentialité</Link>
             <Link href="/mentions-legales" className="hover:text-blanc/70 transition-colors">Mentions légales</Link>
           </nav>

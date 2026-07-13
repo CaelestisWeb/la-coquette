@@ -5,11 +5,9 @@ import { CartProvider } from '@/context/CartContext';
 import { FavoritesProvider } from '@/context/FavoritesContext';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
-import CartDrawer from '@/components/ui/CartDrawer';
 import ScrollReveal from '@/components/ui/ScrollReveal';
 import SmoothScroll from '@/components/ui/SmoothScroll';
 import BackToTop from '@/components/ui/BackToTop';
-import CartTitle from '@/components/ui/CartTitle';
 import { Analytics } from '@vercel/analytics/next';
 import ConditionalChrome from '@/components/layout/ConditionalChrome';
 
@@ -29,45 +27,47 @@ const inter = Inter({
   display: 'swap',
 });
 
+const DESC =
+  'La Coquette, créations de bijoux fait main par Caro, dans la Drôme. Boucles d\'oreilles en acier inoxydable doré, pièces uniques. Retrouvez-moi sur les marchés et sur Instagram.';
+
 export const metadata: Metadata = {
   metadataBase: new URL('https://lacoquette-bycaro.fr'),
   title: {
-    default: 'La Coquette | Bijoux artisanaux pour femmes élégantes',
+    default: 'La Coquette | Bijoux fait main, en Drôme',
     template: '%s | La Coquette',
   },
-  description: 'Découvrez la collection La Coquette : boucles d\'oreilles artisanales en acier inoxydable doré, élégantes et durables, pensées pour révéler votre féminité au quotidien.',
-  keywords: ['bijoux artisanaux', 'boucles d\'oreilles', 'acier inoxydable doré', 'bijoux femme', 'Drôme', 'fait main', 'La Coquette'],
+  description: DESC,
+  keywords: ['bijoux fait main', 'boucles d\'oreilles', 'créatrice de bijoux', 'artisan bijoux', 'Drôme', 'acier inoxydable doré', 'La Coquette', 'Caro'],
   authors: [{ name: 'La Coquette' }],
   icons: { icon: '/favicon.svg', apple: '/apple-icon.png' },
   alternates: { canonical: '/' },
   openGraph: {
-    title: 'La Coquette | Bijoux artisanaux',
-    description: 'Des créations en acier inoxydable doré pensées pour révéler votre élégance au quotidien.',
+    title: 'La Coquette | Bijoux fait main',
+    description: DESC,
     url: 'https://lacoquette-bycaro.fr',
     siteName: 'La Coquette',
     locale: 'fr_FR',
     type: 'website',
-    images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: 'La Coquette — Bijoux artisanaux' }],
+    images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: 'La Coquette, bijoux fait main' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'La Coquette | Bijoux artisanaux',
-    description: 'Des créations en acier inoxydable doré pensées pour révéler votre élégance au quotidien.',
+    title: 'La Coquette | Bijoux fait main',
+    description: DESC,
     images: ['/og-image.jpg'],
   },
 };
 
 const jsonLd = {
   '@context': 'https://schema.org',
-  '@type': 'Store',
+  '@type': 'JewelryStore',
   name: 'La Coquette',
-  description: 'Bijoux artisanaux en acier inoxydable doré, créés par Caro dans la Drôme.',
+  description: 'Créations de bijoux fait main par Caro, dans la Drôme. Vente sur les marchés et via Instagram.',
   url: 'https://lacoquette-bycaro.fr',
   email: 'contact@lacoquette-bycaro.fr',
   image: 'https://lacoquette-bycaro.fr/logo.png',
   address: { '@type': 'PostalAddress', addressRegion: 'Drôme', addressCountry: 'FR' },
   areaServed: 'FR',
-  priceRange: '€€',
   sameAs: ['https://www.instagram.com/lacoquette_bycaro/'],
 };
 
@@ -83,7 +83,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <FavoritesProvider>
             <ConditionalChrome
               header={<Header />}
-              footer={<><Footer /><CartDrawer /><ScrollReveal /><SmoothScroll /><BackToTop /><CartTitle /></>}
+              footer={<><Footer /><ScrollReveal /><SmoothScroll /><BackToTop /></>}
             >
               {children}
             </ConditionalChrome>

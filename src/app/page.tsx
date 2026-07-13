@@ -1,21 +1,19 @@
-import Hero from '@/components/sections/Hero';
-import Reassurance from '@/components/sections/Reassurance';
-import Collections from '@/components/sections/Collections';
-import FeaturedProducts from '@/components/sections/FeaturedProducts';
-import Values from '@/components/sections/Values';
-import Testimonials from '@/components/sections/Testimonials';
-import Newsletter from '@/components/sections/Newsletter';
+import Hero from '@/components/vitrine/Hero';
+import Atelier from '@/components/vitrine/Atelier';
+import Galerie from '@/components/vitrine/Galerie';
+import OuAcheter from '@/components/vitrine/OuAcheter';
+import Contact from '@/components/vitrine/Contact';
 
+// Site vitrine (une page) : présentation de l'activité de Caro. La vente se
+// fait sur les marchés et via Instagram, pas en ligne.
 export default function HomePage() {
   return (
     <>
       <Hero />
-      <Reassurance />
-      <Collections />
-      <FeaturedProducts />
-      <Values />
-      <Testimonials />
-      <Newsletter />
+      <Atelier />
+      <Galerie />
+      <OuAcheter />
+      <Contact />
     </>
   );
 }
