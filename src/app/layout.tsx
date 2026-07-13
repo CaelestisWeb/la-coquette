@@ -1,8 +1,6 @@
 import type { Metadata } from 'next';
 import { Jost, Inter } from 'next/font/google';
 import './globals.css';
-import { CartProvider } from '@/context/CartContext';
-import { FavoritesProvider } from '@/context/FavoritesContext';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import ScrollReveal from '@/components/ui/ScrollReveal';
@@ -79,16 +77,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        <CartProvider>
-          <FavoritesProvider>
-            <ConditionalChrome
-              header={<Header />}
-              footer={<><Footer /><ScrollReveal /><SmoothScroll /><BackToTop /></>}
-            >
-              {children}
-            </ConditionalChrome>
-          </FavoritesProvider>
-        </CartProvider>
+        <ConditionalChrome
+          header={<Header />}
+          footer={<><Footer /><ScrollReveal /><SmoothScroll /><BackToTop /></>}
+        >
+          {children}
+        </ConditionalChrome>
         {/* Statistiques de fréquentation (sans cookie, respectueux du RGPD). */}
         <Analytics />
       </body>
