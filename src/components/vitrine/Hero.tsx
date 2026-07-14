@@ -1,7 +1,9 @@
 import Image from 'next/image';
-import { INSTAGRAM } from './data';
+import { getContent, getSettings } from '@/sanity/lib/vitrine';
 
-export default function Hero() {
+export default async function Hero() {
+  const [content, settings] = await Promise.all([getContent(), getSettings()]);
+
   return (
     <section className="relative min-h-[92vh] flex flex-col justify-center items-center text-center overflow-hidden">
       <Image
@@ -29,11 +31,11 @@ export default function Hero() {
           Bijoux fait main, en {`Drôme`}
         </p>
         <p className="mt-6 font-body font-light text-base md:text-lg text-blanc/85 max-w-md mx-auto leading-relaxed">
-          Des boucles d&apos;oreilles imaginées et assemblées une à une, par Caro.
+          {content.heroText}
         </p>
         <div className="mt-10 flex flex-wrap justify-center gap-3">
           <a
-            href={INSTAGRAM}
+            href={settings.instagram}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 bg-creme text-noir font-body text-[11px] font-medium tracking-[0.18em] uppercase px-7 py-3.5 rounded hover:bg-blanc transition-colors"

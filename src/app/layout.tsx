@@ -8,6 +8,7 @@ import SmoothScroll from '@/components/ui/SmoothScroll';
 import BackToTop from '@/components/ui/BackToTop';
 import { Analytics } from '@vercel/analytics/next';
 import ConditionalChrome from '@/components/layout/ConditionalChrome';
+import { getSettings } from '@/sanity/lib/vitrine';
 
 // Sans géométrique épuré — titres
 const jost = Jost({
@@ -69,7 +70,8 @@ const jsonLd = {
   sameAs: ['https://www.instagram.com/lacoquette_bycaro/'],
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const settings = await getSettings();
   return (
     <html lang="fr" className={`${jost.variable} ${inter.variable}`}>
       <body className="min-h-screen flex flex-col" suppressHydrationWarning>
@@ -78,7 +80,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         <ConditionalChrome
-          header={<Header />}
+          header={<Header instagram={settings.instagram} />}
           footer={<><Footer /><ScrollReveal /><SmoothScroll /><BackToTop /></>}
         >
           {children}

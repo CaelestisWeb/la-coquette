@@ -1,34 +1,18 @@
 import type { StructureResolver } from 'sanity/structure';
-import { HomeIcon, TagIcon, BasketIcon, EnvelopeIcon, HelpCircleIcon, CogIcon, FolderIcon } from '@sanity/icons';
+import { DocumentIcon, FolderIcon, CogIcon } from '@sanity/icons';
 
-// Organisation du Studio, dans l'ordre logique du site :
-// Accueil → Boutique (produits) → Contact → FAQ, puis les réglages globaux.
+// Organisation du Studio vitrine : le contenu de la page, les collections de
+// photos, puis les réglages. Simple et sans notion de boutique.
 export const structure: StructureResolver = (S) =>
   S.list()
-    .title('Contenu')
+    .title('La Coquette')
     .items([
       S.listItem()
-        .title("Page d'accueil")
-        .icon(HomeIcon)
-        .id('homePage')
-        .child(S.document().schemaType('homePage').documentId('homePage')),
-      S.listItem()
-        .title('Page boutique')
-        .icon(BasketIcon)
-        .id('boutiquePage')
-        .child(S.document().schemaType('boutiquePage').documentId('boutiquePage')),
-      S.documentTypeListItem('product').title('Produits').icon(TagIcon),
-      S.documentTypeListItem('collection').title('Collections').icon(FolderIcon),
-      S.listItem()
-        .title('Page contact')
-        .icon(EnvelopeIcon)
-        .id('contactPage')
-        .child(S.document().schemaType('contactPage').documentId('contactPage')),
-      S.listItem()
-        .title('FAQ')
-        .icon(HelpCircleIcon)
-        .id('faqPage')
-        .child(S.document().schemaType('faqPage').documentId('faqPage')),
+        .title('Contenu de la page')
+        .icon(DocumentIcon)
+        .id('vitrineContent')
+        .child(S.document().schemaType('vitrineContent').documentId('vitrineContent')),
+      S.documentTypeListItem('collection').title('Collections (photos)').icon(FolderIcon),
       S.divider(),
       S.listItem()
         .title('Réglages du site')

@@ -9,5 +9,7 @@ export const client = createClient({
   dataset,
   apiVersion,
   useCdn: false,
+  // Le site public ne lit QUE le contenu publié (jamais les brouillons du Studio).
+  perspective: 'published',
   token: process.env.SANITY_API_READ_TOKEN || process.env.SANITY_API_TOKEN,
 });

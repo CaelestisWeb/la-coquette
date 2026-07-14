@@ -1,7 +1,10 @@
 import Image from 'next/image';
-import { INSTAGRAM } from './data';
+import { getContent, getSettings } from '@/sanity/lib/vitrine';
 
-export default function SurMesure() {
+export default async function SurMesure() {
+  const [content, settings] = await Promise.all([getContent(), getSettings()]);
+  const paras = content.surMesureText.split(/\n\n+/).filter(Boolean);
+
   return (
     <section id="sur-mesure" className="bg-ivoire py-24 sm:py-32">
       <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
@@ -11,14 +14,12 @@ export default function SurMesure() {
             La paire qui vous ressemble
           </h2>
           <div className="mt-7 space-y-4 font-body font-light text-[15px] sm:text-base text-taupe leading-relaxed max-w-md">
-            <p>
-              Une couleur précise, une forme, une idée pour un cadeau ? Décrivez-moi votre envie et je crée une paire
-              rien que pour vous, dans le même esprit fait main.
-            </p>
-            <p>Le plus simple : un petit message sur Instagram, et on imagine ça ensemble.</p>
+            {paras.map((p, i) => (
+              <p key={i}>{p}</p>
+            ))}
           </div>
           <a
-            href={INSTAGRAM}
+            href={settings.instagram}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 mt-9 bg-noir text-blanc font-body text-[11px] font-medium tracking-[0.18em] uppercase px-8 py-4 rounded hover:bg-or transition-colors"

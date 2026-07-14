@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { INSTAGRAM, INSTA_HANDLE, EMAIL, ZONE } from '@/components/vitrine/data';
+import { getSettings } from '@/sanity/lib/vitrine';
 
 const navLinks = [
   { href: '/#atelier', label: "L'atelier" },
@@ -9,7 +9,9 @@ const navLinks = [
   { href: '/#contact', label: 'Contact' },
 ];
 
-export default function Footer() {
+export default async function Footer() {
+  const settings = await getSettings();
+
   return (
     <footer className="bg-noir text-blanc/70">
       <div className="max-w-2xl mx-auto px-6 py-20 flex flex-col items-center text-center">
@@ -23,7 +25,7 @@ export default function Footer() {
         />
 
         <p className="mt-8 font-body font-light text-sm leading-relaxed text-blanc/55 max-w-md">
-          Bijoux fait main, imaginés et assemblés une à une par Caro, dans la Drôme.
+          {settings.footerTagline}
         </p>
 
         <nav aria-label="Pied de page" className="mt-10 flex flex-wrap justify-center gap-x-8 gap-y-3">
@@ -39,15 +41,15 @@ export default function Footer() {
         </nav>
 
         <div className="mt-8 flex flex-col items-center gap-2 font-body font-light text-sm text-blanc/55">
-          <span>{ZONE}, France</span>
-          <a href={`mailto:${EMAIL}`} className="hover:text-blanc transition-colors break-all">
-            {EMAIL}
+          <span>{settings.zone}, France</span>
+          <a href={`mailto:${settings.email}`} className="hover:text-blanc transition-colors break-all">
+            {settings.email}
           </a>
         </div>
 
         <div className="mt-9">
           <a
-            href={INSTAGRAM}
+            href={settings.instagram}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2.5 text-blanc font-body text-sm border border-creme/70 px-7 py-3.5 rounded hover:bg-creme hover:text-noir transition-colors duration-500"
@@ -55,7 +57,7 @@ export default function Footer() {
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
               <rect x="2" y="2" width="20" height="20" rx="5" ry="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" />
             </svg>
-            {INSTA_HANDLE}
+            {settings.instaHandle}
           </a>
         </div>
       </div>

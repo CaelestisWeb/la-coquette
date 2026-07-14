@@ -1,7 +1,9 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
-import { COLLECTIONS, INSTAGRAM } from '@/components/vitrine/data';
+import { getCollections, getSettings } from '@/sanity/lib/vitrine';
+
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: "La galerie, boucles d'oreilles fait main",
@@ -10,8 +12,9 @@ export const metadata: Metadata = {
   alternates: { canonical: '/galerie' },
 };
 
-export default function GaleriePage() {
-  const total = COLLECTIONS.reduce((n, c) => n + c.photos.length, 0);
+export default async function GaleriePage() {
+  const [collections, settings] = await Promise.all([getCollections(), getSettings()]);
+  const total = collections.reduce((n, c) => n + c.photos.length, 0);
 
   return (
     <div className="bg-creme">
@@ -26,7 +29,7 @@ export default function GaleriePage() {
           Instagram, ou retrouvez-moi sur les marchés.
         </p>
         <div className="flex flex-wrap items-center justify-center gap-3 mt-8">
-          {COLLECTIONS.map((c) => (
+          {collections.map((c) => (
             <a
               key={c.slug}
               href={`#${c.slug}`}
@@ -40,11 +43,11 @@ export default function GaleriePage() {
 
       {/* Collections */}
       <div className="max-w-6xl mx-auto px-6 pb-24 sm:pb-32 space-y-20 sm:space-y-28">
-        {COLLECTIONS.map((c) => (
+        {collections.map((c) => (
           <section key={c.slug} id={c.slug} className="scroll-mt-24">
             <div className="text-center max-w-lg mx-auto mb-9 sm:mb-11">
               <h2 className="font-display text-2xl sm:text-3xl text-noir">{c.nom}</h2>
-              <p className="font-body font-light text-sm text-taupe leading-relaxed mt-2">{c.desc}</p>
+              {c.desc && <p className="font-body font-light text-sm text-taupe leading-relaxed mt-2">{c.desc}</p>}
             </div>
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-5">
               {c.photos.map((src, i) => (
@@ -71,7 +74,7 @@ export default function GaleriePage() {
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-9">
           <a
-            href={INSTAGRAM}
+            href={settings.instagram}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 bg-blanc text-noir font-body text-[11px] font-medium tracking-[0.18em] uppercase px-8 py-4 rounded hover:bg-or hover:text-noir transition-colors"

@@ -13,7 +13,7 @@ const navLinks = [
   { href: '/#contact', label: 'Contact' },
 ];
 
-export default function Header() {
+export default function Header({ instagram = INSTAGRAM }: { instagram?: string }) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
@@ -68,7 +68,7 @@ export default function Header() {
 
           {/* Instagram, à droite */}
           <a
-            href={INSTAGRAM}
+            href={instagram}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Instagram"

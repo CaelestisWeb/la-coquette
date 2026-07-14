@@ -1,19 +1,11 @@
 import { type SchemaTypeDefinition } from 'sanity';
-import { product } from './product';
+import { vitrineContent } from './vitrineContent';
 import { collection } from './collection';
-import { homePage } from './homePage';
 import { siteSettings } from './siteSettings';
-import { faqPage } from './faqPage';
-import { contactPage } from './contactPage';
-import { boutiquePage } from './boutiquePage';
 
-// Tous les types de contenu éditables.
+// Contenu éditable du site vitrine (aucune notion de boutique/vente).
 export const schemaTypes: SchemaTypeDefinition[] = [
-  product,
+  vitrineContent,
   collection,
-  homePage,
-  boutiquePage,
-  faqPage,
-  contactPage,
   siteSettings,
 ];

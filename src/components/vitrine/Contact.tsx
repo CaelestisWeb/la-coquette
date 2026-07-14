@@ -1,4 +1,4 @@
-import { INSTAGRAM, INSTA_HANDLE, EMAIL, ZONE } from './data';
+import { getSettings } from '@/sanity/lib/vitrine';
 
 function Item({ href, label, value, children }: { href: string; label: string; value: string; children: React.ReactNode }) {
   const external = href.startsWith('http');
@@ -17,7 +17,9 @@ function Item({ href, label, value, children }: { href: string; label: string; v
   );
 }
 
-export default function Contact() {
+export default async function Contact() {
+  const settings = await getSettings();
+
   return (
     <section id="contact" className="bg-ivoire py-24 sm:py-28">
       <div className="max-w-3xl mx-auto px-6 text-center reveal">
@@ -28,12 +30,12 @@ export default function Contact() {
         </p>
 
         <div className="mt-12 flex flex-col sm:flex-row justify-center gap-y-10 sm:gap-x-16">
-          <Item href={INSTAGRAM} label="Instagram" value={INSTA_HANDLE}>
+          <Item href={settings.instagram} label="Instagram" value={settings.instaHandle}>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden>
               <rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
             </svg>
           </Item>
-          <Item href={`mailto:${EMAIL}`} label="Email" value={EMAIL}>
+          <Item href={`mailto:${settings.email}`} label="Email" value={settings.email}>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
               <rect x="3" y="5" width="18" height="14" rx="2" /><path d="m3 7 9 6 9-6" />
             </svg>
@@ -45,7 +47,7 @@ export default function Contact() {
               </svg>
             </span>
             <span className="font-body text-[10px] tracking-[0.2em] uppercase text-taupe">Zone</span>
-            <span className="font-body text-sm text-noir">{ZONE}, France</span>
+            <span className="font-body text-sm text-noir">{settings.zone}, France</span>
           </div>
         </div>
       </div>

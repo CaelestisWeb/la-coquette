@@ -1,8 +1,10 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { COLLECTIONS } from './data';
+import { getCollections, getContent } from '@/sanity/lib/vitrine';
 
-export default function Galerie() {
+export default async function Galerie() {
+  const [collections, content] = await Promise.all([getCollections(), getContent()]);
+
   return (
     <section id="galerie" className="bg-creme py-24 sm:py-32">
       <div className="max-w-6xl mx-auto px-6">
@@ -10,13 +12,13 @@ export default function Galerie() {
           <span className="font-body text-[11px] font-medium tracking-[0.3em] uppercase text-taupe">Les créations</span>
           <h2 className="font-display font-light text-4xl sm:text-5xl text-noir mt-4">La galerie</h2>
           <p className="font-body font-light text-sm sm:text-base text-taupe leading-relaxed mt-5">
-            Un aperçu de chaque collection. Chaque bijou est une pièce unique, faite main dans la Drôme.
+            {content.galerieIntro}
           </p>
         </div>
 
-        {/* Une couverture par collection : six familles en un coup d'œil */}
+        {/* Une couverture par collection : les familles en un coup d'œil */}
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
-          {COLLECTIONS.map((c, i) => (
+          {collections.map((c, i) => (
             <Link
               key={c.slug}
               href={`/galerie#${c.slug}`}
