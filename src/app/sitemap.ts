@@ -6,6 +6,7 @@ const BASE = 'https://lacoquette-bycaro.fr';
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     { url: BASE, changeFrequency: 'monthly', priority: 1 },
+    { url: `${BASE}/galerie`, changeFrequency: 'monthly', priority: 0.8 },
     // Pages légales volontairement hors sitemap (noindex).
   ];
 }

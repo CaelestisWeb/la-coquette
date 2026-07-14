@@ -6,7 +6,7 @@ export default function Atelier() {
       <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
         <div className="relative aspect-[4/5] rounded-md overflow-hidden bg-beige reveal">
           <Image
-            src="/galerie/1-creoles-papillon.jpg"
+            src="/galerie/creole-1.jpg"
             alt="Créations La Coquette, faites main"
             fill
             sizes="(max-width: 1024px) 100vw, 50vw"

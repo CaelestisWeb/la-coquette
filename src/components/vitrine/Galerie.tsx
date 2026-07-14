@@ -1,58 +1,56 @@
 import Image from 'next/image';
-import { COLLECTIONS, INSTAGRAM } from './data';
+import Link from 'next/link';
+import { COLLECTIONS } from './data';
 
 export default function Galerie() {
   return (
     <section id="galerie" className="bg-creme py-24 sm:py-32">
       <div className="max-w-6xl mx-auto px-6">
-        <div className="text-center max-w-xl mx-auto mb-16 sm:mb-20 reveal">
+        <div className="text-center max-w-xl mx-auto mb-14 sm:mb-16 reveal">
           <span className="font-body text-[11px] font-medium tracking-[0.3em] uppercase text-taupe">Les créations</span>
           <h2 className="font-display font-light text-4xl sm:text-5xl text-noir mt-4">La galerie</h2>
           <p className="font-body font-light text-sm sm:text-base text-taupe leading-relaxed mt-5">
-            Un aperçu de chaque collection. Chaque bijou est une pièce unique. Pour commander, retrouvez-moi sur
-            Instagram ou sur les marchés.
+            Un aperçu de chaque collection. Chaque bijou est une pièce unique, faite main dans la Drôme.
           </p>
         </div>
 
-        <div className="space-y-16 sm:space-y-24">
-          {COLLECTIONS.map((c) => (
-            <div key={c.nom} className="reveal">
-              <div className="text-center mb-8 max-w-lg mx-auto">
-                <h3 className="font-display text-2xl sm:text-3xl text-noir">{c.nom}</h3>
-                <p className="font-body font-light text-sm text-taupe leading-relaxed mt-2">{c.desc}</p>
-              </div>
-              <div className="flex flex-wrap justify-center gap-3 sm:gap-5">
-                {c.photos.map((src) => (
-                  <figure key={src} className="group relative overflow-hidden rounded-md bg-beige w-[46%] sm:w-[30%] max-w-[260px]">
-                    <div className="relative aspect-[3/4]">
-                      <Image
-                        src={src}
-                        alt={`${c.nom}, boucles d'oreilles fait main La Coquette`}
-                        fill
-                        sizes="(max-width: 640px) 46vw, 260px"
-                        className="object-cover transition duration-700 group-hover:scale-[1.04]"
-                      />
-                    </div>
-                  </figure>
-                ))}
-              </div>
-            </div>
+        {/* Une couverture par collection : six familles en un coup d'œil */}
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
+          {COLLECTIONS.map((c, i) => (
+            <Link
+              key={c.slug}
+              href={`/galerie#${c.slug}`}
+              className={`group block reveal ${i > 0 ? `reveal-d${Math.min(i, 3)}` : ''}`}
+            >
+              <figure className="relative aspect-[3/4] overflow-hidden rounded-md bg-beige">
+                <Image
+                  src={c.photos[0]}
+                  alt={`${c.nom}, boucles d'oreilles fait main La Coquette`}
+                  fill
+                  sizes="(max-width: 768px) 46vw, 30vw"
+                  className="object-cover transition duration-700 group-hover:scale-[1.04]"
+                />
+                <span className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-noir/55 to-transparent px-4 pb-3 pt-10">
+                  <span className="font-display text-lg sm:text-xl text-blanc">{c.nom}</span>
+                </span>
+              </figure>
+            </Link>
           ))}
         </div>
 
-        <div className="text-center mt-16 sm:mt-20 reveal">
-          <p className="font-body font-light text-sm text-taupe mb-6">Et bien d&apos;autres, renouvelées au fil des saisons.</p>
-          <a
-            href={INSTAGRAM}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 border border-noir text-noir font-body text-[11px] font-medium tracking-[0.18em] uppercase px-8 py-3.5 rounded hover:bg-noir hover:text-blanc transition-colors"
+        <div className="text-center mt-14 sm:mt-16 reveal">
+          <Link
+            href="/galerie"
+            className="inline-flex items-center gap-2 bg-noir text-blanc font-body text-[11px] font-medium tracking-[0.18em] uppercase px-9 py-4 rounded hover:bg-or transition-colors"
           >
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden>
-              <rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+            Voir toute la galerie
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+              <path d="M5 12h14M13 6l6 6-6 6" />
             </svg>
-            Voir toute la collection sur Instagram
-          </a>
+          </Link>
+          <p className="font-body font-light text-[13px] text-taupe mt-5">
+            Les créations sont renouvelées au fil des saisons.
+          </p>
         </div>
       </div>
     </section>
