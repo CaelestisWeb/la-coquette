@@ -16,11 +16,9 @@ export default function MentionsLegalesPage() {
           <section>
             <h2 className="font-display text-2xl text-noir mb-4">Éditeur du site</h2>
             <p><strong className="text-noir font-medium">La Coquette</strong><br />
-            Entreprise individuelle DESHAYES CAROLINE — micro-entreprise<br />
+            Entreprise individuelle DESHAYES CAROLINE, micro-entreprise<br />
             26750 Saint-Paul-lès-Romans, France<br />
-            SIREN : 479 539 082 — SIRET : 479 539 082 00095<br />
-            RCS : 479 539 082 R.C.S. Romans<br />
-            N° TVA intracommunautaire : FR73479539082<br />
+            SIREN : 479 539 082, SIRET : 479 539 082 00095<br />
             Directrice de la publication : Caroline Deshayes<br />
             Contact : contact@lacoquette-bycaro.fr</p>
           </section>
@@ -33,17 +31,17 @@ export default function MentionsLegalesPage() {
 
           <section>
             <h2 className="font-display text-2xl text-noir mb-4">Propriété intellectuelle</h2>
-            <p>L'ensemble du contenu de ce site (textes, images, logos, graphismes) est protégé par le droit d'auteur. Toute reproduction, même partielle, est interdite sans autorisation préalable écrite.</p>
+            <p>L&apos;ensemble du contenu de ce site (textes, images, logos, graphismes) est protégé par le droit d&apos;auteur. Toute reproduction, même partielle, est interdite sans autorisation préalable écrite.</p>
           </section>
 
           <section>
             <h2 className="font-display text-2xl text-noir mb-4">Données personnelles</h2>
-            <p>Les informations collectées via les formulaires sont destinées exclusivement à La Coquette et ne seront en aucun cas cédées à des tiers. Conformément au RGPD, vous disposez d'un droit d'accès, de rectification et de suppression de vos données en contactant : contact@lacoquette-bycaro.fr. Pour le détail des traitements, consultez notre <a href="/politique-confidentialite" className="text-noir underline underline-offset-2 hover:text-dore-mat transition-colors">Politique de confidentialité</a>.</p>
+            <p>Ce site est un site vitrine : il ne comporte ni boutique, ni compte, ni formulaire, et ne collecte aucune donnée à votre insu. Si vous nous écrivez (par email ou via Instagram), vous nous transmettez les informations contenues dans votre message. Conformément au RGPD, vous disposez d&apos;un droit d&apos;accès, de rectification et de suppression en écrivant à contact@lacoquette-bycaro.fr. Pour le détail, consultez notre <a href="/politique-confidentialite" className="text-noir underline underline-offset-2 hover:text-taupe transition-colors">Politique de confidentialité</a>.</p>
           </section>
 
           <section>
             <h2 className="font-display text-2xl text-noir mb-4">Cookies</h2>
-            <p>Ce site utilise uniquement des cookies techniques nécessaires à son fonctionnement (panier, préférences). Aucun cookie publicitaire n'est utilisé.</p>
+            <p>Ce site n&apos;utilise aucun cookie de pistage ni de publicité. La mesure d&apos;audience (Vercel Analytics) fonctionne sans cookie et sans donnée personnelle identifiable.</p>
           </section>
         </div>
       </div>
