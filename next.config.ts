@@ -11,6 +11,17 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "cdn.sanity.io", pathname: "/images/**" },
     ],
   },
+  // Anciennes URLs de la boutique -> équivalents de la vitrine (SEO + UX).
+  async redirects() {
+    return [
+      { source: "/boutique", destination: "/galerie", permanent: true },
+      { source: "/boutique/:path*", destination: "/galerie", permanent: true },
+      { source: "/contact", destination: "/#contact", permanent: true },
+      { source: "/faq", destination: "/", permanent: true },
+      { source: "/blog", destination: "/", permanent: true },
+      { source: "/blog/:path*", destination: "/", permanent: true },
+    ];
+  },
   async headers() {
     return [
       {
