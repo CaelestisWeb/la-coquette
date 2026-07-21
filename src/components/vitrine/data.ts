@@ -1,4 +1,4 @@
-// Contenu du site vitrine — VALEURS DE REPLI (fallback).
+// Contenu du site vitrine : VALEURS DE REPLI (fallback).
 // Sanity peut surcharger ces valeurs pour que Caro édite le site elle-même ;
 // si Sanity est indisponible ou vide, le site affiche exactement ce contenu.
 // Aucune casse possible.

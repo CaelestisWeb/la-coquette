@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Jost, Inter } from 'next/font/google';
+import { Instrument_Serif, Schibsted_Grotesk } from 'next/font/google';
 import './globals.css';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
@@ -10,19 +10,20 @@ import { Analytics } from '@vercel/analytics/next';
 import ConditionalChrome from '@/components/layout/ConditionalChrome';
 import { getSettings } from '@/sanity/lib/vitrine';
 
-// Sans géométrique épuré — titres
-const jost = Jost({
+// Serif éditorial haute-contraste, lettres hautes et fines : le registre
+// « magazine de mode » qui donne sa noblesse au bijou. Titres uniquement.
+const instrument = Instrument_Serif({
   subsets: ['latin'],
-  weight: ['300', '400', '500'],
-  variable: '--font-jost',
+  weight: ['400'],
+  variable: '--font-instrument',
   display: 'swap',
 });
 
-// Neo-grotesque neutre — corps, labels, UI
-const inter = Inter({
+// Grotesque scandinave neutre et très lisible en petit — corps, labels, UI.
+const schibsted = Schibsted_Grotesk({
   subsets: ['latin'],
-  weight: ['300', '400', '500'],
-  variable: '--font-inter',
+  weight: ['400', '500', '600'],
+  variable: '--font-schibsted',
   display: 'swap',
 });
 
@@ -73,7 +74,7 @@ const jsonLd = {
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const settings = await getSettings();
   return (
-    <html lang="fr" className={`${jost.variable} ${inter.variable}`}>
+    <html lang="fr" className={`${instrument.variable} ${schibsted.variable}`}>
       <body className="min-h-screen flex flex-col" suppressHydrationWarning>
         <script
           type="application/ld+json"

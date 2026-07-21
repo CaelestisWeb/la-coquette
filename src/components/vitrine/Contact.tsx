@@ -1,54 +1,47 @@
 import { getSettings } from '@/sanity/lib/vitrine';
-
-function Item({ href, label, value, children }: { href: string; label: string; value: string; children: React.ReactNode }) {
-  const external = href.startsWith('http');
-  return (
-    <a
-      href={href}
-      {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-      className="group flex flex-col items-center gap-2.5"
-    >
-      <span className="w-11 h-11 rounded-full border border-gris flex items-center justify-center text-noir group-hover:border-noir transition-colors">
-        {children}
-      </span>
-      <span className="font-body text-[10px] tracking-[0.2em] uppercase text-taupe">{label}</span>
-      <span className="font-body text-sm text-noir">{value}</span>
-    </a>
-  );
-}
+import ContactForm from './ContactForm';
 
 export default async function Contact() {
   const settings = await getSettings();
 
   return (
-    <section id="contact" className="bg-ivoire py-24 sm:py-28">
-      <div className="max-w-3xl mx-auto px-6 text-center reveal">
-        <span className="font-body text-[11px] font-medium tracking-[0.3em] uppercase text-taupe">Contact</span>
-        <h2 className="font-display font-light text-4xl sm:text-5xl text-noir mt-4">Écrivez-moi</h2>
-        <p className="font-body font-light text-sm sm:text-base text-taupe leading-relaxed mt-5 max-w-md mx-auto">
-          Une question, une envie de bijou sur mesure, une commande ? C&apos;est moi qui lis et réponds, avec plaisir.
-        </p>
+    <section id="contact" className="bg-ivoire border-t border-gris py-24 sm:py-32">
+      {/* Deux colonnes inégales : le propos à gauche, le formulaire à droite */}
+      <div className="max-w-6xl mx-auto px-6 sm:px-10 grid grid-cols-1 lg:grid-cols-12 gap-14 lg:gap-20">
+        <div className="lg:col-span-5 reveal">
+          <h2 className="font-display text-noir text-[clamp(2.1rem,4vw,3.25rem)] leading-[1.02] tracking-[-0.015em]">
+            Écrivez-moi
+          </h2>
+          <p className="font-body text-[15px] text-taupe leading-relaxed mt-6 max-w-sm text-pretty">
+            Une question, une envie de bijou sur mesure, une commande ? C&apos;est moi qui lis et réponds, avec plaisir.
+          </p>
 
-        <div className="mt-12 flex flex-col sm:flex-row justify-center gap-y-10 sm:gap-x-16">
-          <Item href={settings.instagram} label="Instagram" value={settings.instaHandle}>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden>
-              <rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
-            </svg>
-          </Item>
-          <Item href={`mailto:${settings.email}`} label="Email" value={settings.email}>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-              <rect x="3" y="5" width="18" height="14" rx="2" /><path d="m3 7 9 6 9-6" />
-            </svg>
-          </Item>
-          <div className="flex flex-col items-center gap-2.5">
-            <span className="w-11 h-11 rounded-full border border-gris flex items-center justify-center text-noir">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z" /><circle cx="12" cy="10" r="3" />
-              </svg>
-            </span>
-            <span className="font-body text-[10px] tracking-[0.2em] uppercase text-taupe">Zone</span>
-            <span className="font-body text-sm text-noir">{settings.zone}, France</span>
-          </div>
+          <dl className="mt-12 space-y-6">
+            <div>
+              <dt className="font-body text-[11px] font-medium tracking-[0.18em] uppercase text-taupe">Email</dt>
+              <dd className="mt-1.5">
+                <a href={`mailto:${settings.email}`} className="font-body text-[15px] text-noir border-b border-noir/20 hover:border-noir pb-0.5 transition-colors break-all">
+                  {settings.email}
+                </a>
+              </dd>
+            </div>
+            <div>
+              <dt className="font-body text-[11px] font-medium tracking-[0.18em] uppercase text-taupe">Instagram</dt>
+              <dd className="mt-1.5">
+                <a href={settings.instagram} target="_blank" rel="noopener noreferrer" className="font-body text-[15px] text-noir border-b border-noir/20 hover:border-noir pb-0.5 transition-colors">
+                  {settings.instaHandle}
+                </a>
+              </dd>
+            </div>
+            <div>
+              <dt className="font-body text-[11px] font-medium tracking-[0.18em] uppercase text-taupe">Où</dt>
+              <dd className="mt-1.5 font-body text-[15px] text-noir">{settings.zone}, France</dd>
+            </div>
+          </dl>
+        </div>
+
+        <div className="lg:col-span-7 lg:pl-6 reveal reveal-d1">
+          <ContactForm />
         </div>
       </div>
     </section>

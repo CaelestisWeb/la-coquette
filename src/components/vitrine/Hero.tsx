@@ -1,61 +1,66 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import { getContent, getSettings } from '@/sanity/lib/vitrine';
 
 export default async function Hero() {
   const [content, settings] = await Promise.all([getContent(), getSettings()]);
 
   return (
-    <section className="relative min-h-[92vh] flex flex-col justify-center items-center text-center overflow-hidden">
-      <Image
-        src="/hero-banner.jpg"
-        alt="Bijou artisanal La Coquette"
-        fill
-        priority
-        sizes="100vw"
-        className="object-cover object-[38%_50%]"
-      />
-      {/* Voiles pour la lisibilité */}
-      <div className="absolute inset-0 bg-gradient-to-b from-noir/55 via-noir/25 to-noir/60" />
+    <section className="relative bg-ivoire">
+      {/* Composition asymétrique 5/7 : le texte respire à gauche, la photo
+          part à fond perdu à droite. Aucun voile, aucun dégradé : la photo
+          n'a pas besoin d'être assombrie puisque le texte est à côté. */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 lg:min-h-[92vh]">
+        {/* Texte, calé en bas : la tension éditoriale vient de ce décalage */}
+        <div className="lg:col-span-5 flex flex-col justify-end order-2 lg:order-1 px-6 sm:px-10 lg:pl-[6vw] lg:pr-12 pt-14 pb-16 lg:pt-40 lg:pb-24">
+          <p className="font-body text-[11px] font-medium tracking-[0.28em] uppercase text-taupe">
+            Atelier de bijoux, {settings.zone}
+          </p>
 
-      <div className="relative z-10 px-6 hero-rise">
-        <Image
-          src="/logo-wordmark-dark.svg"
-          alt="La Coquette"
-          width={527}
-          height={130}
-          priority
-          unoptimized
-          className="h-16 md:h-24 w-auto mx-auto"
-        />
-        <p className="mt-7 font-body text-[11px] md:text-xs tracking-[0.34em] uppercase text-blanc/85">
-          Bijoux fait main, en {`Drôme`}
-        </p>
-        <p className="mt-6 font-body font-light text-base md:text-lg text-blanc/85 max-w-md mx-auto leading-relaxed">
-          {content.heroText}
-        </p>
-        <div className="mt-10 flex flex-wrap justify-center gap-3">
-          <a
-            href={settings.instagram}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 bg-creme text-noir font-body text-[11px] font-medium tracking-[0.18em] uppercase px-7 py-3.5 rounded hover:bg-blanc transition-colors"
-          >
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden>
-              <rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
-            </svg>
-            Suivre sur Instagram
-          </a>
-          <a
-            href="#galerie"
-            className="inline-flex items-center border border-creme/80 text-blanc font-body text-[11px] font-medium tracking-[0.18em] uppercase px-7 py-3.5 rounded hover:bg-creme hover:text-noir transition-colors"
-          >
-            Voir les créations
-          </a>
+          <h1 className="font-display text-noir mt-7 text-[clamp(2.7rem,5.6vw,4.75rem)] leading-[0.98] tracking-[-0.018em] text-balance">
+            Le bijou fait main,
+            <br />une paire à la fois.
+          </h1>
+
+          <p className="font-body text-[15px] sm:text-base text-taupe leading-relaxed mt-7 max-w-sm text-pretty">
+            {content.heroText}
+          </p>
+
+          <div className="mt-11 flex flex-wrap items-center gap-x-8 gap-y-4">
+            <Link
+              href="/galerie"
+              className="inline-flex items-center gap-2.5 bg-noir text-blanc font-body text-[11px] font-medium tracking-[0.16em] uppercase px-8 py-4 hover:bg-taupe transition-colors duration-300"
+            >
+              Voir la galerie
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                <path d="M5 12h14M13 6l6 6-6 6" />
+              </svg>
+            </Link>
+
+            <a
+              href={settings.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group font-body text-[13px] text-noir inline-flex items-center gap-2"
+            >
+              <span className="border-b border-noir/25 group-hover:border-noir transition-colors pb-0.5">
+                {settings.instaHandle}
+              </span>
+            </a>
+          </div>
         </div>
-      </div>
 
-      <div className="hero-rise-3 absolute bottom-7 left-1/2 -translate-x-1/2 z-10">
-        <div className="scroll-hairline" aria-hidden />
+        {/* Photo à fond perdu, sans arrondi ni voile */}
+        <div className="lg:col-span-7 relative order-1 lg:order-2 min-h-[56vh] sm:min-h-[64vh] lg:min-h-full">
+          <Image
+            src="/hero-banner.jpg"
+            alt="Boucles d'oreilles fait main de La Coquette"
+            fill
+            priority
+            sizes="(max-width: 1024px) 100vw, 58vw"
+            className="object-cover object-[38%_50%]"
+          />
+        </div>
       </div>
     </section>
   );
