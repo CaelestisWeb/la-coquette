@@ -1,9 +1,7 @@
 const ITEMS = [
   {
     label: 'Fait main dans la Drôme',
-    icon: (
-      <path d="M12 20s-6-4.3-6-9a3.6 3.6 0 0 1 6-2.4A3.6 3.6 0 0 1 18 11c0 4.7-6 9-6 9z" />
-    ),
+    icon: <path d="M12 20s-6-4.3-6-9a3.6 3.6 0 0 1 6-2.4A3.6 3.6 0 0 1 18 11c0 4.7-6 9-6 9z" />,
   },
   {
     label: 'Sans nickel, hypoallergénique',
@@ -24,18 +22,36 @@ const ITEMS = [
   },
 ];
 
+// Bandeau de caractéristiques : une bande fine séparée par des filets,
+// pas quatre cartes identiques. Aligné à gauche, sans fond ni arrondi.
 export default function Reassurance() {
   return (
-    <section className="bg-beige py-14 sm:py-16 border-y border-gris/60">
-      <div className="max-w-6xl mx-auto px-6 grid grid-cols-2 lg:grid-cols-4 gap-y-8 gap-x-6">
-        {ITEMS.map((it) => (
-          <div key={it.label} className="flex flex-col items-center text-center gap-3">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" className="text-noir" aria-hidden>
-              {it.icon}
-            </svg>
-            <span className="font-body text-[12px] sm:text-[13px] text-taupe leading-snug max-w-[10rem]">{it.label}</span>
-          </div>
-        ))}
+    <section className="bg-ivoire border-t border-gris">
+      <div className="max-w-6xl mx-auto px-6 sm:px-10">
+        <ul className="grid grid-cols-2 lg:grid-cols-4 divide-y divide-gris lg:divide-y-0 lg:divide-x lg:divide-gris">
+          {ITEMS.map((it) => (
+            <li
+              key={it.label}
+              className="flex items-start gap-3 py-7 lg:py-9 pr-4 lg:px-8 lg:first:pl-0 lg:last:pr-0"
+            >
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.3"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="text-noir shrink-0 mt-0.5"
+                aria-hidden
+              >
+                {it.icon}
+              </svg>
+              <span className="font-body text-[13px] text-taupe leading-snug">{it.label}</span>
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );

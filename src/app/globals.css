@@ -15,7 +15,7 @@
   --color-dore-mat: #A8842E;   /* or mat foncé — texte doré (eyebrows, accents) */
 
   /* ── Typographies ── */
-  --font-display: var(--font-instrument);
+  --font-display: var(--font-cabinet);
   --font-body:    var(--font-schibsted);
   --font-accent:  var(--font-schibsted);
 }

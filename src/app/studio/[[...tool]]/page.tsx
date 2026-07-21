@@ -4,7 +4,7 @@ import StudioClient from './StudioClient';
 export const dynamic = 'force-static';
 
 export const metadata = {
-  title: 'La Coquette — Studio',
+  title: 'La Coquette, Studio',
   robots: { index: false, follow: false },
 };
 

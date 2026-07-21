@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
-import { Instrument_Serif, Schibsted_Grotesk } from 'next/font/google';
+import { Schibsted_Grotesk } from 'next/font/google';
+import localFont from 'next/font/local';
 import './globals.css';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
@@ -10,16 +11,21 @@ import { Analytics } from '@vercel/analytics/next';
 import ConditionalChrome from '@/components/layout/ConditionalChrome';
 import { getSettings } from '@/sanity/lib/vitrine';
 
-// Serif éditorial haute-contraste, lettres hautes et fines : le registre
-// « magazine de mode » qui donne sa noblesse au bijou. Titres uniquement.
-const instrument = Instrument_Serif({
-  subsets: ['latin'],
-  weight: ['400'],
-  variable: '--font-instrument',
+// Grotesque de caractère (Fontshare), auto-hébergé : titres. Formes serrées
+// et légèrement condensées, une personnalité que n'ont pas les sans-serif
+// génériques, tout en restant sobre et monochrome.
+const cabinet = localFont({
+  src: [
+    { path: '../../public/fonts/CabinetGrotesk-400.woff2', weight: '400', style: 'normal' },
+    { path: '../../public/fonts/CabinetGrotesk-500.woff2', weight: '500', style: 'normal' },
+    { path: '../../public/fonts/CabinetGrotesk-700.woff2', weight: '700', style: 'normal' },
+    { path: '../../public/fonts/CabinetGrotesk-800.woff2', weight: '800', style: 'normal' },
+  ],
+  variable: '--font-cabinet',
   display: 'swap',
 });
 
-// Grotesque scandinave neutre et très lisible en petit — corps, labels, UI.
+// Grotesque scandinave neutre et très lisible en petit : corps, labels, UI.
 const schibsted = Schibsted_Grotesk({
   subsets: ['latin'],
   weight: ['400', '500', '600'],
@@ -74,7 +80,7 @@ const jsonLd = {
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const settings = await getSettings();
   return (
-    <html lang="fr" className={`${instrument.variable} ${schibsted.variable}`}>
+    <html lang="fr" className={`${cabinet.variable} ${schibsted.variable}`}>
       <body className="min-h-screen flex flex-col" suppressHydrationWarning>
         <script
           type="application/ld+json"
