@@ -5,13 +5,14 @@
 
 export const INSTAGRAM = 'https://www.instagram.com/lacoquette_bycaro/';
 export const INSTA_HANDLE = '@lacoquette_bycaro';
-export const EMAIL = 'contact@lacoquette-bycaro.fr';
 export const ZONE = 'Drôme';
 
+// Le contact passe uniquement par Instagram. L'adresse email n'apparaît plus
+// sur le site public : elle reste seulement dans les mentions légales, où la
+// loi impose un moyen de contact direct de l'éditeur.
 export type SiteSettings = {
   instagram: string;
   instaHandle: string;
-  email: string;
   zone: string;
   footerTagline: string;
 };
@@ -19,7 +20,6 @@ export type SiteSettings = {
 export const SETTINGS_DEFAULTS: SiteSettings = {
   instagram: INSTAGRAM,
   instaHandle: INSTA_HANDLE,
-  email: EMAIL,
   zone: ZONE,
   footerTagline: 'Bijoux fait main, imaginés et assemblés une à une par Caro, dans la Drôme.',
 };

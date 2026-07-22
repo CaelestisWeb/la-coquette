@@ -7,12 +7,6 @@ export const siteSettings = defineType({
   type: 'document',
   fields: [
     defineField({
-      name: 'email',
-      title: 'Email de contact',
-      type: 'string',
-      description: 'Affiché sur la page et dans le pied de page.',
-    }),
-    defineField({
       name: 'zone',
       title: 'Zone',
       type: 'string',

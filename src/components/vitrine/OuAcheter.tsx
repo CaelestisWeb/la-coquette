@@ -28,6 +28,9 @@ export default async function OuAcheter() {
             </svg>
             {settings.instaHandle}
           </a>
+          <p className="font-body text-[13px] text-blanc/45 mt-6">
+            {settings.zone}, France. Réponse en général sous 48 heures.
+          </p>
         </div>
       </div>
     </section>

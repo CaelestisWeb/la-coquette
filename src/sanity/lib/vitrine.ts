@@ -22,13 +22,12 @@ export const getSettings = cache(async (): Promise<SiteSettings> => {
   if (!enabled) return SETTINGS_DEFAULTS;
   try {
     const d = await client.fetch(
-      `*[_type=="siteSettings"][0]{instagramUrl, instaHandle, email, zone, footerTagline}`,
+      `*[_type=="siteSettings"][0]{instagramUrl, instaHandle, zone, footerTagline}`,
     );
     if (!d) return SETTINGS_DEFAULTS;
     return {
       instagram: d.instagramUrl || SETTINGS_DEFAULTS.instagram,
       instaHandle: d.instaHandle || SETTINGS_DEFAULTS.instaHandle,
-      email: d.email || SETTINGS_DEFAULTS.email,
       zone: d.zone || SETTINGS_DEFAULTS.zone,
       footerTagline: d.footerTagline || SETTINGS_DEFAULTS.footerTagline,
     };

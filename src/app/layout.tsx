@@ -70,7 +70,6 @@ const jsonLd = {
   name: 'La Coquette',
   description: 'Créations de bijoux fait main par Caro, dans la Drôme. Vente sur les marchés et via Instagram.',
   url: 'https://lacoquette-bycaro.fr',
-  email: 'contact@lacoquette-bycaro.fr',
   image: 'https://lacoquette-bycaro.fr/logo.png',
   address: { '@type': 'PostalAddress', addressRegion: 'Drôme', addressCountry: 'FR' },
   areaServed: 'FR',
