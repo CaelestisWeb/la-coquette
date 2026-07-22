@@ -42,9 +42,13 @@ Contrôles greppables avant livraison : `bg-gradient` = 0, `italic|<em>|<i>` = 0
 
 Repeupler Sanity : `node scripts/seed-vitrine.mjs`. Régénérer les photos web : `node scripts/build-galerie.mjs`.
 
-## Formulaire de contact
+## Contact : Instagram uniquement (décision du 22/07/2026)
 
-`/api/contact` → **Resend** (`RESEND_API_KEY` requise sur Vercel, **ne pas la supprimer**). Champ piège anti-robot, validation serveur, accusé de réception à l'écran. Expéditeur : `CONTACT_FROM` si le domaine est vérifié chez Resend, sinon `onboarding@resend.dev`.
+**Il n'y a plus de formulaire de contact, plus de route `/api/contact`, plus de dépendance `resend`, et plus d'email sur le site public.** Tout le contact passe par Instagram (`settings.instagram`). La section « Où me trouver » sert de section de clôture (Instagram, marchés, zone, délai de réponse) ; il n'y a plus de section « Contact » distincte.
+
+L'adresse `contact@lacoquette-bycaro.fr` **reste uniquement dans les mentions légales et la politique de confidentialité** : la loi impose un moyen de contact direct de l'éditeur, qu'un compte Instagram ne remplit pas. Ne pas la réintroduire ailleurs sans demande explicite.
+
+`RESEND_API_KEY` n'est plus utilisée et peut être supprimée de Vercel.
 
 ## Rédaction
 
