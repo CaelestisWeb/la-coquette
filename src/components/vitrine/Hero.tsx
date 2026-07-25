@@ -41,11 +41,12 @@ export default async function Hero() {
               href={settings.instagram}
               target="_blank"
               rel="noopener noreferrer"
-              className="group font-body text-[13px] text-noir inline-flex items-center gap-2"
+              className="inline-flex items-center gap-2.5 border border-noir text-noir font-body text-[11px] font-medium tracking-[0.16em] uppercase px-8 py-4 hover:bg-noir hover:text-blanc transition-colors duration-300"
             >
-              <span className="border-b border-noir/25 group-hover:border-noir transition-colors pb-0.5">
-                {settings.instaHandle}
-              </span>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden>
+                <rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+              </svg>
+              {settings.instaHandle}
             </a>
           </div>
         </div>
@@ -53,12 +54,12 @@ export default async function Hero() {
         {/* Photo à fond perdu, sans arrondi ni voile */}
         <div className="lg:col-span-7 relative order-1 lg:order-2 min-h-[56vh] sm:min-h-[64vh] lg:min-h-full">
           <Image
-            src="/hero-banner.jpg"
-            alt="Boucles d'oreilles fait main de La Coquette"
+            src="/hero-creole.jpg"
+            alt="Créoles corail et or, boucles d'oreilles fait main de Caro, La Coquette"
             fill
             priority
             sizes="(max-width: 1024px) 100vw, 58vw"
-            className="object-cover object-[38%_50%]"
+            className="object-cover object-[55%_22%]"
           />
         </div>
       </div>
