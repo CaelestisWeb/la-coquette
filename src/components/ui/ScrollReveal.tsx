@@ -17,7 +17,16 @@ export default function ScrollReveal() {
       { threshold: 0.07, rootMargin: '0px 0px -40px 0px' }
     );
     document.querySelectorAll('.reveal, .lc-veil').forEach(el => obs.observe(el));
-    return () => obs.disconnect();
+
+    // Filet de sécurité : si l'observer ne se déclenche pas (onglet en
+    // arrière-plan, rendu headless, moteur bridé), rien ne doit rester
+    // masqué. Au-delà de 2 s, tout ce qui est encore caché devient visible.
+    const safety = window.setTimeout(() => {
+      document.querySelectorAll('.reveal:not(.visible), .lc-veil:not(.visible)')
+        .forEach(el => el.classList.add('visible'));
+    }, 2000);
+
+    return () => { obs.disconnect(); window.clearTimeout(safety); };
   }, [pathname]);
 
   return null;
