@@ -9,6 +9,14 @@ export const vitrineContent = defineType({
   type: 'document',
   fields: [
     defineField({
+      name: 'heroImage',
+      title: "Photo de la bannière d'accueil",
+      type: 'image',
+      options: { hotspot: true },
+      description:
+        "La grande photo en haut du site. Choisissez une photo verticale, avec le bijou plutôt dans la moitié haute. Si ce champ est vide, la bannière actuelle (créoles papillon) reste affichée.",
+    }),
+    defineField({
       name: 'heroText',
       title: 'Accroche (sous le logo)',
       type: 'text',

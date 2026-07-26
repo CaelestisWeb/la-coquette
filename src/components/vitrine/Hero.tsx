@@ -54,12 +54,16 @@ export default async function Hero() {
         {/* Photo à fond perdu, sans arrondi ni voile */}
         <div className="lg:col-span-7 relative order-1 lg:order-2 min-h-[56vh] sm:min-h-[64vh] lg:min-h-full">
           <Image
-            src="/hero-papillon.jpg"
-            alt="Créoles papillon bleu nuit et or, boucles d'oreilles fait main de Caro, La Coquette"
+            src={content.heroImage}
+            alt="Boucles d'oreilles fait main de Caro, La Coquette"
             fill
             priority
             sizes="(max-width: 1024px) 100vw, 58vw"
-            className="object-cover object-[50%_25%]"
+            className={`object-cover ${
+              // Cadrage affiné pour la photo par défaut (paire entière sur tous
+              // les écrans) ; cadrage haut générique pour une photo de Caro.
+              content.heroImage === '/hero-papillon.jpg' ? 'object-[50%_25%]' : 'object-[50%_30%]'
+            }`}
           />
         </div>
       </div>

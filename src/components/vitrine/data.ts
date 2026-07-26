@@ -25,6 +25,7 @@ export const SETTINGS_DEFAULTS: SiteSettings = {
 };
 
 export type VitrineContent = {
+  heroImage: string;
   heroText: string;
   galerieIntro: string;
   atelierText: string;
@@ -33,6 +34,7 @@ export type VitrineContent = {
 };
 
 export const CONTENT_DEFAULTS: VitrineContent = {
+  heroImage: '/hero-papillon.jpg',
   heroText: "Des boucles d'oreilles imaginées et assemblées une à une, par Caro.",
   galerieIntro:
     'Six collections, du cabochon émaillé au métal martelé, à découvrir pièce par pièce dans la galerie.',

@@ -40,10 +40,12 @@ export const getContent = cache(async (): Promise<VitrineContent> => {
   if (!enabled) return CONTENT_DEFAULTS;
   try {
     const d = await client.fetch(
-      `*[_type=="vitrineContent"][0]{heroText, galerieIntro, atelierText, surMesureText, ouAcheterText}`,
+      `*[_type=="vitrineContent"][0]{heroImage, heroText, galerieIntro, atelierText, surMesureText, ouAcheterText}`,
     );
     if (!d) return CONTENT_DEFAULTS;
     return {
+      // Bannière : la photo choisie par Caro dans le Studio, sinon celle du code.
+      heroImage: d.heroImage?.asset ? urlForImage(d.heroImage).url() : CONTENT_DEFAULTS.heroImage,
       heroText: d.heroText || CONTENT_DEFAULTS.heroText,
       galerieIntro: d.galerieIntro || CONTENT_DEFAULTS.galerieIntro,
       atelierText: d.atelierText || CONTENT_DEFAULTS.atelierText,
