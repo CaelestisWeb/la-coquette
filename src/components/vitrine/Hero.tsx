@@ -54,12 +54,12 @@ export default async function Hero() {
         {/* Photo à fond perdu, sans arrondi ni voile */}
         <div className="lg:col-span-7 relative order-1 lg:order-2 min-h-[56vh] sm:min-h-[64vh] lg:min-h-full">
           <Image
-            src="/hero-creole.jpg"
-            alt="Créoles corail et or, boucles d'oreilles fait main de Caro, La Coquette"
+            src="/hero-papillon.jpg"
+            alt="Créoles papillon bleu nuit et or, boucles d'oreilles fait main de Caro, La Coquette"
             fill
             priority
             sizes="(max-width: 1024px) 100vw, 58vw"
-            className="object-cover object-[55%_22%]"
+            className="object-cover object-[50%_25%]"
           />
         </div>
       </div>
