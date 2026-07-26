@@ -22,17 +22,17 @@ const ITEMS = [
   },
 ];
 
-// Bandeau de caractéristiques : une bande fine séparée par des filets,
-// pas quatre cartes identiques. Aligné à gauche, sans fond ni arrondi.
+// Bandeau de caractéristiques : quatre cases fermées, filet complet,
+// sans fond ni arrondi (choix de Célestin, 25/07/2026).
 export default function Reassurance() {
   return (
-    <section className="bg-ivoire border-t border-gris">
+    <section className="bg-ivoire border-t border-gris py-8 sm:py-10">
       <div className="max-w-6xl mx-auto px-6 sm:px-10">
-        <ul className="grid grid-cols-2 lg:grid-cols-4 divide-y divide-gris lg:divide-y-0 lg:divide-x lg:divide-gris">
+        <ul className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
           {ITEMS.map((it) => (
             <li
               key={it.label}
-              className="flex items-start gap-3 py-7 lg:py-9 pr-4 lg:px-8 lg:first:pl-0 lg:last:pr-0"
+              className="flex items-start gap-3 border border-gris px-5 py-6 lg:px-6 lg:py-7"
             >
               <svg
                 width="18"
