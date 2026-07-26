@@ -54,13 +54,13 @@ export const metadata: Metadata = {
     siteName: 'La Coquette',
     locale: 'fr_FR',
     type: 'website',
-    images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: 'La Coquette, bijoux fait main' }],
+    images: [{ url: '/og-papillon.jpg', width: 1200, height: 630, alt: 'La Coquette, bijoux fait main' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'La Coquette | Bijoux fait main',
     description: DESC,
-    images: ['/og-image.jpg'],
+    images: ['/og-papillon.jpg'],
   },
 };
 
