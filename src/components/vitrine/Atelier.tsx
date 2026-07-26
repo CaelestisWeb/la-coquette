@@ -13,22 +13,21 @@ export default async function Atelier() {
         <figure className="lg:col-span-6 reveal">
           <div className="relative aspect-[4/5] overflow-hidden bg-beige">
             <Image
-              src="/galerie/creole-1.jpg"
-              alt="Créations La Coquette, faites main"
+              src="/galerie/martelee-2.jpg"
+              alt="Boucles d'oreilles martelées, or et jaune, faites main par Caro"
               fill
               sizes="(max-width: 1024px) 100vw, 50vw"
               className="object-cover"
             />
           </div>
           <figcaption className="mt-3 font-body text-[12px] text-taupe">
-            Créoles papillon, assemblées à la main.
+            Boucles martelées, assemblées à la main.
           </figcaption>
         </figure>
 
         <div className="lg:col-span-5 lg:col-start-8 lg:pt-20 reveal reveal-d1">
           <h2 className="font-display text-noir text-[clamp(2.1rem,4.4vw,3.5rem)] leading-[1.02] tracking-[-0.015em]">
-            La main de Caro,
-            <br />dans la Drôme
+            La main de Caro
           </h2>
           <div className="mt-8 space-y-5 font-body text-[15px] sm:text-base text-taupe leading-relaxed text-pretty">
             {paras.map((p, i) => (

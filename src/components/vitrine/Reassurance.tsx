@@ -4,7 +4,7 @@ const ITEMS = [
     icon: <path d="M12 20s-6-4.3-6-9a3.6 3.6 0 0 1 6-2.4A3.6 3.6 0 0 1 18 11c0 4.7-6 9-6 9z" />,
   },
   {
-    label: 'Sans nickel, hypoallergénique',
+    label: 'En acier inoxydable',
     icon: (
       <>
         <circle cx="12" cy="12" r="9" />
