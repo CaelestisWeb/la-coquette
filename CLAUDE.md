@@ -53,3 +53,19 @@ L'adresse `contact@lacoquette-bycaro.fr` **reste uniquement dans les mentions l�
 ## Rédaction
 
 Vouvoiement systématique. Jamais d'italique, ni de tiret cadratin, ni de point médian décoratif. « fait main » invariable.
+
+## Bannière d'accueil (26/07/2026)
+
+Photo par défaut : `public/hero-papillon.jpg` (créoles papillon bleu nuit, choisie par Célestin). **Caro peut la remplacer** via le champ « Photo de la bannière d'accueil » du Studio (Contenu de la page) ; champ vide = retour au fichier par défaut. Cadrage : `object-[50%_25%]` pour le fichier par défaut, `object-[50%_30%]` pour une photo Sanity. **Si on change la bannière côté code, toujours un NOUVEAU nom de fichier** (les assets de `/public` sont en cache navigateur 7 jours).
+
+Image de partage social : `public/og-papillon.jpg` (logo + photo réelle). Même règle de renommage.
+
+## Cohérence des textes (audit du 26/07/2026)
+
+Règle : **chaque information n'apparaît qu'une fois par page, avec ses propres mots.** La bande de réassurance affirme, le texte de l'atelier explique (douche/mer/quotidien), le footer complète (dessinées, émaillées, montées). Pas de « Chaque pièce est unique » absolu (contredisait « la plupart ») : on dit « Des pièces uniques » et l'atelier garde la nuance. Les textes Sanity et les replis de `data.ts` doivent rester **identiques** ; dernier alignement : `scripts/update-copy-coherence.mjs`.
+
+## Divers
+
+- Animations d'apparition : filet de sécurité 2 s dans `ScrollReveal.tsx` (rien ne reste masqué si l'observer ne vient pas) + repli `@media (scripting: none)`.
+- Guide d'utilisation du Studio pour Caro : `docs/Guide-Studio-Caro.pdf` (source .md à côté). Le tenir à jour si le Studio change.
+- Resend : les clés API du compte `lacoquette-bycaro` ont été supprimées le 22/07 (compte inerte).
