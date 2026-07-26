@@ -8,7 +8,7 @@ export const revalidate = 60;
 export const metadata: Metadata = {
   title: "La galerie, boucles d'oreilles fait main",
   description:
-    "Toute la galerie des boucles d'oreilles fait main de La Coquette : cabochons, créoles, bohème, cœur, étoile filante et martelée. Chaque pièce est unique.",
+    "Toute la galerie des boucles d'oreilles fait main de La Coquette : cabochons, créoles, bohème, cœur, étoile filante et martelée. Des pièces uniques, renouvelées au fil des saisons.",
   alternates: { canonical: '/galerie' },
 };
 
@@ -26,8 +26,7 @@ export default async function GaleriePage() {
           </h1>
           <div className="lg:col-span-5 lg:col-start-8">
             <p className="font-body text-[15px] text-taupe leading-relaxed text-pretty">
-              {total} pièces, faites main dans la Drôme. Chaque bijou est unique. Un modèle vous plaît ? Écrivez-moi sur
-              Instagram, ou retrouvez-moi sur les marchés.
+              {total} pièces faites main, presque toutes uniques, renouvelées au fil des saisons.
             </p>
             <nav aria-label="Collections" className="flex flex-wrap gap-x-5 gap-y-2 mt-7">
               {collections.map((c) => (

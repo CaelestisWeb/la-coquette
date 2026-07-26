@@ -17,7 +17,7 @@ const ITEMS = [
     icon: <path d="M12 3s5.5 6 5.5 10a5.5 5.5 0 0 1-11 0C6.5 9 12 3 12 3z" />,
   },
   {
-    label: 'Chaque pièce est unique',
+    label: 'Des pièces uniques',
     icon: <path d="m12 3 2.4 5.9 6.3.5-4.8 4.1 1.5 6.1L12 16.9 6.6 19.7l1.5-6.1-4.8-4.1 6.3-.5z" />,
   },
 ];

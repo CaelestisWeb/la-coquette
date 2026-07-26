@@ -21,7 +21,7 @@ export const SETTINGS_DEFAULTS: SiteSettings = {
   instagram: INSTAGRAM,
   instaHandle: INSTA_HANDLE,
   zone: ZONE,
-  footerTagline: 'Bijoux fait main, imaginés et assemblés une à une par Caro, dans la Drôme.',
+  footerTagline: "L'atelier de bijoux de Caro : des boucles d'oreilles dessinées, émaillées et montées de ses mains.",
 };
 
 export type VitrineContent = {
@@ -35,13 +35,13 @@ export type VitrineContent = {
 export const CONTENT_DEFAULTS: VitrineContent = {
   heroText: "Des boucles d'oreilles imaginées et assemblées une à une, par Caro.",
   galerieIntro:
-    'Un aperçu de chaque collection. Chaque bijou est une pièce unique, faite main dans la Drôme.',
+    'Six collections, du cabochon émaillé au métal martelé, à découvrir pièce par pièce dans la galerie.',
   atelierText:
-    "Chaque paire de boucles d'oreilles est imaginée et assemblée à la main, une à une, dans mon atelier de la Drôme. Rien n'est produit en série.\n\nJe travaille l'acier inoxydable doré, sans nickel : hypoallergénique, résistant à l'eau, et qui ne ternit pas. Des matières simples et durables, pour des bijoux qui vous accompagnent au quotidien.\n\nLa plupart de mes créations sont des pièces uniques. Celle que vous choisirez ne sera qu'à vous.",
+    "Tout se passe dans mon atelier de la Drôme : je façonne chaque paire moi-même, du choix des breloques aux dernières finitions. Rien n'est produit en série.\n\nJe travaille un acier inoxydable doré, sans nickel : hypoallergénique, il supporte la douche, la mer et le quotidien sans ternir.\n\nLa plupart de mes créations sont des pièces uniques. Celle que vous choisirez ne sera qu'à vous.",
   surMesureText:
-    "Une couleur précise, une forme, une idée pour un cadeau ? Décrivez-moi votre envie et je crée une paire rien que pour vous, dans le même esprit fait main.\n\nLe plus simple : un petit message sur Instagram, et on imagine ça ensemble.",
+    "Une couleur précise, une forme, une idée pour un cadeau ? Décrivez-moi votre envie et je crée une paire rien que pour vous.\n\nLe plus simple : un petit message sur Instagram, et on imagine ça ensemble.",
   ouAcheterText:
-    "Je présente mes créations sur les marchés de la Drôme, au fil des saisons. L'agenda, les nouveautés et les coulisses de l'atelier, c'est sur Instagram. Une pièce vous plaît ? Un simple message suffit pour la réserver ou pour commander la vôtre.",
+    "Je présente mes créations sur les marchés de la Drôme, au fil des saisons. L'agenda, les nouveautés et les coulisses de l'atelier, c'est sur Instagram. Une pièce vous plaît ? Dites-le-moi en message privé : je vous la réserve.",
 };
 
 export type Collection = {
@@ -78,7 +78,7 @@ export const COLLECTIONS: Collection[] = [
   {
     nom: 'Cœur',
     slug: 'coeur',
-    desc: 'Le cœur, tout en tendresse, décliné en couleurs.',
+    desc: 'Le cœur, décliné en couleurs douces ou franches.',
     photos: paths('coeur', 4),
   },
   {

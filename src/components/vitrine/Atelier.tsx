@@ -21,7 +21,7 @@ export default async function Atelier() {
             />
           </div>
           <figcaption className="mt-3 font-body text-[12px] text-taupe">
-            Boucles martelées, assemblées à la main.
+            Boucles martelées, or et jaune.
           </figcaption>
         </figure>
 

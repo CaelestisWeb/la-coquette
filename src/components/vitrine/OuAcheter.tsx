@@ -9,7 +9,7 @@ export default async function OuAcheter() {
           rien n'est centré. */}
       <div className="max-w-6xl mx-auto px-6 sm:px-10 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start reveal">
         <h2 className="lg:col-span-6 font-display text-blanc text-[clamp(2.2rem,4.8vw,3.75rem)] leading-[1.0] tracking-[-0.015em]">
-          Sur les marchés,
+          Sur les marchés
           <br />et sur Instagram
         </h2>
 
@@ -29,7 +29,7 @@ export default async function OuAcheter() {
             {settings.instaHandle}
           </a>
           <p className="font-body text-[13px] text-blanc/45 mt-6">
-            {settings.zone}, France. Réponse en général sous 48 heures.
+            Réponse en général sous 48 heures.
           </p>
         </div>
       </div>
