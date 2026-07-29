@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { getCollections, getSettings } from '@/sanity/lib/vitrine';
+import { filAriane, pageGalerie, jsonLd } from '@/lib/schema';
 
 export const revalidate = 60;
 
@@ -18,6 +19,24 @@ export default async function GaleriePage() {
 
   return (
     <div className="bg-creme">
+      {/* Décrit le contenu réel de la page, collection par collection : une IA
+          peut alors répondre précisément sur ce que propose l'atelier. */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: jsonLd(pageGalerie(collections)) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: jsonLd(
+            filAriane([
+              { nom: 'Accueil', chemin: '/' },
+              { nom: 'La galerie', chemin: '/galerie' },
+            ]),
+          ),
+        }}
+      />
+
       {/* En-tête éditorial : titre à gauche, propos décalé à droite */}
       <header className="border-b border-gris">
         <div className="max-w-6xl mx-auto px-6 sm:px-10 pt-32 sm:pt-44 pb-14 sm:pb-16 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-end">

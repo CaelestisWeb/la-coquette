@@ -10,6 +10,7 @@ import BackToTop from '@/components/ui/BackToTop';
 import { Analytics } from '@vercel/analytics/next';
 import ConditionalChrome from '@/components/layout/ConditionalChrome';
 import { getSettings } from '@/sanity/lib/vitrine';
+import { grapheGlobal, jsonLd } from '@/lib/schema';
 
 // Grotesque de caractère (Fontshare), auto-hébergé : titres. Formes serrées
 // et légèrement condensées, une personnalité que n'ont pas les sans-serif
@@ -64,17 +65,9 @@ export const metadata: Metadata = {
   },
 };
 
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'JewelryStore',
-  name: 'La Coquette',
-  description: 'Créations de bijoux fait main par Caro, dans la Drôme. Vente sur les marchés et via Instagram.',
-  url: 'https://lacoquette-bycaro.fr',
-  image: 'https://lacoquette-bycaro.fr/logo.png',
-  address: { '@type': 'PostalAddress', addressRegion: 'Drôme', addressCountry: 'FR' },
-  areaServed: 'FR',
-  sameAs: ['https://www.instagram.com/lacoquette_bycaro/'],
-};
+// Le graphe complet vit dans src/lib/schema.ts : entreprise, créatrice et site
+// s'y référencent par identifiant, ce qui permet aux moteurs (classiques comme
+// IA) d'identifier une seule et même entité d'une page à l'autre.
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const settings = await getSettings();
@@ -83,7 +76,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <body className="min-h-screen flex flex-col" suppressHydrationWarning>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{ __html: jsonLd(grapheGlobal) }}
         />
         <ConditionalChrome
           header={<Header instagram={settings.instagram} />}
