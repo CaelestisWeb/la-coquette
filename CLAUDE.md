@@ -42,13 +42,13 @@ Contrôles greppables avant livraison : `bg-gradient` = 0, `italic|<em>|<i>` = 0
 
 Repeupler Sanity : `node scripts/seed-vitrine.mjs`. Régénérer les photos web : `node scripts/build-galerie.mjs`.
 
-## Contact : Instagram uniquement (décision du 22/07/2026)
+## Contact (mis à jour le 31/07/2026 : formulaire ajouté)
 
-**Il n'y a plus de formulaire de contact, plus de route `/api/contact`, plus de dépendance `resend`, et plus d'email sur le site public.** Tout le contact passe par Instagram (`settings.instagram`). La section « Où me trouver » sert de section de clôture (Instagram, marchés, zone, délai de réponse) ; il n'y a plus de section « Contact » distincte.
+Historique : du 22/07 au 31/07, le contact passait **uniquement** par Instagram (aucun formulaire, aucun email public). Le 31/07, pour viser 99+ au diagnostic Caelestis (famille Conversion), une **section Contact avec formulaire a été ajoutée** sur l'accueil (`src/components/vitrine/Contact.tsx`, ancre `#contact`, lien « Contact » dans l'en-tête).
 
-L'adresse `contact@lacoquette-bycaro.fr` **reste uniquement dans les mentions légales et la politique de confidentialité** : la loi impose un moyen de contact direct de l'éditeur, qu'un compte Instagram ne remplit pas. Ne pas la réintroduire ailleurs sans demande explicite.
+Le formulaire est un **composant serveur** : il n'envoie rien à un backend, il ouvre la messagerie du visiteur (`mailto:contact@lacoquette-bycaro.fr`) via un petit script inline (aucun fichier chargé en plus, donc pas de chunk client). Instagram reste mis en avant. Le site **ne collecte toujours aucune donnée** ; les mentions légales et la politique de confidentialité ont été ajustées en conséquence.
 
-`RESEND_API_KEY` n'est plus utilisée et peut être supprimée de Vercel.
+Pas de route `/api/contact`, pas de dépendance `resend` (`RESEND_API_KEY` supprimable de Vercel). L'email `contact@lacoquette-bycaro.fr` est désormais visible dans la section Contact **et** dans les pages légales (obligation d'un contact direct de l'éditeur).
 
 ## Rédaction
 
