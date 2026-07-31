@@ -9,7 +9,8 @@ import { INSTAGRAM } from '@/components/vitrine/data';
 const navLinks = [
   { href: '/#atelier', label: "L'atelier" },
   { href: '/galerie', label: 'Galerie' },
-  { href: '/#ou-acheter', label: 'Où me trouver' },
+  { href: '/sur-mesure', label: 'Sur mesure' },
+  { href: '/#contact', label: 'Contact' },
 ];
 
 export default function Header({ instagram = INSTAGRAM }: { instagram?: string }) {

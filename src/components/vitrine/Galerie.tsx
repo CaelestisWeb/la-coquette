@@ -32,9 +32,10 @@ export default async function Galerie() {
                   <Image
                     src={c.photos[0]}
                     alt={`${c.nom}, boucles d'oreilles fait main La Coquette`}
-                    fill
+                    width={800}
+                    height={1000}
                     sizes="(max-width: 768px) 46vw, 30vw"
-                    className="object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.03]"
+                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.03]"
                   />
                 </div>
                 <figcaption className="mt-4 flex items-baseline justify-between gap-3 border-t border-gris pt-3">

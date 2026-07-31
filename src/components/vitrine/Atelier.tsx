@@ -15,9 +15,10 @@ export default async function Atelier() {
             <Image
               src="/galerie/martelee-2.jpg"
               alt="Boucles d'oreilles martelées, or et jaune, faites main par Caro"
-              fill
+              width={800}
+              height={1000}
               sizes="(max-width: 1024px) 100vw, 50vw"
-              className="object-cover"
+              className="absolute inset-0 h-full w-full object-cover"
             />
           </div>
           <figcaption className="mt-3 font-body text-[12px] text-taupe">

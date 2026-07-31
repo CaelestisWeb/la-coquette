@@ -36,7 +36,7 @@ export default function MentionsLegalesPage() {
 
           <section>
             <h2 className="font-display text-2xl text-noir mb-4">Données personnelles</h2>
-            <p>Ce site est un site vitrine : il ne comporte ni boutique, ni compte, ni formulaire, et ne collecte aucune donnée à votre insu. Si vous nous écrivez (par email ou via Instagram), vous nous transmettez les informations contenues dans votre message. Conformément au RGPD, vous disposez d&apos;un droit d&apos;accès, de rectification et de suppression en écrivant à contact@lacoquette-bycaro.fr. Pour le détail, consultez notre <a href="/politique-confidentialite" className="text-noir underline underline-offset-2 hover:text-taupe transition-colors">Politique de confidentialité</a>.</p>
+            <p>Ce site est un site vitrine : il ne comporte ni boutique, ni compte, ni paiement en ligne. Le formulaire de contact prépare simplement un message dans votre propre messagerie et n&apos;enregistre aucune donnée sur le site. Si vous nous écrivez (par email ou via Instagram), vous nous transmettez les informations contenues dans votre message. Conformément au RGPD, vous disposez d&apos;un droit d&apos;accès, de rectification et de suppression en écrivant à contact@lacoquette-bycaro.fr. Pour le détail, consultez notre <a href="/politique-confidentialite" className="text-noir underline underline-offset-2 hover:text-taupe transition-colors">Politique de confidentialité</a>.</p>
           </section>
 
           <section>

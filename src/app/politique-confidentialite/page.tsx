@@ -22,8 +22,8 @@ export default function PolitiqueConfidentialitePage() {
 
           <section>
             <h2 className="font-display text-2xl text-noir mb-4">2. Données collectées</h2>
-            <p>Ce site est un site vitrine : il ne comporte ni boutique en ligne, ni compte, ni formulaire. Nous ne collectons donc aucune donnée personnelle par ce biais.</p>
-            <p className="mt-3">La seule donnée que vous nous transmettez est celle contenue dans les messages que vous nous adressez de votre propre initiative, par email ou via Instagram (votre adresse, votre nom si vous l&apos;indiquez, le contenu de votre message).</p>
+            <p>Ce site est un site vitrine : il ne comporte ni boutique en ligne, ni compte, ni paiement. Le formulaire de contact n&apos;enregistre rien sur le site : il ouvre votre propre messagerie avec le message pré-rempli, que vous envoyez vous-même. Nous ne collectons donc aucune donnée personnelle à votre insu.</p>
+            <p className="mt-3">La seule donnée que vous nous transmettez est celle contenue dans les messages que vous nous adressez de votre propre initiative, par ce formulaire, par email ou via Instagram (votre adresse, votre nom si vous l&apos;indiquez, le contenu de votre message).</p>
           </section>
 
           <section>

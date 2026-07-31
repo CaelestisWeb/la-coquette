@@ -97,12 +97,6 @@
 .animate-fadein  { animation: fadeUp 0.7s ease both; }
 .animate-marquee { animation: marquee 28s linear infinite; }
 
-/* ── Smooth scroll (Lenis) ── */
-html.lenis, html.lenis body { height: auto; }
-.lenis.lenis-smooth { scroll-behavior: auto !important; }
-.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
-.lenis.lenis-stopped { overflow: hidden; }
-
 /* ── Hero : révélation à l'arrivée (CSS pur, fiable sans JS) ── */
 @keyframes heroRise {
   from { opacity: 0; transform: translateY(30px); }

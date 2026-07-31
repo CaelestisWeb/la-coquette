@@ -1,12 +1,10 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Schibsted_Grotesk } from 'next/font/google';
 import localFont from 'next/font/local';
 import './globals.css';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import ScrollReveal from '@/components/ui/ScrollReveal';
-import SmoothScroll from '@/components/ui/SmoothScroll';
-import BackToTop from '@/components/ui/BackToTop';
 import { Analytics } from '@vercel/analytics/next';
 import ConditionalChrome from '@/components/layout/ConditionalChrome';
 import { getSettings } from '@/sanity/lib/vitrine';
@@ -15,12 +13,13 @@ import { grapheGlobal, jsonLd } from '@/lib/schema';
 // Grotesque de caractère (Fontshare), auto-hébergé : titres. Formes serrées
 // et légèrement condensées, une personnalité que n'ont pas les sans-serif
 // génériques, tout en restant sobre et monochrome.
+// Seules les graisses réellement utilisées sont chargées : les titres sont en
+// 400 (le 300 des h1/h2 retombe sur le 400 chargé) et le corps porte le medium
+// via Schibsted. Charger 700/800 alourdissait la page sans servir à rien.
 const cabinet = localFont({
   src: [
     { path: '../../public/fonts/CabinetGrotesk-400.woff2', weight: '400', style: 'normal' },
     { path: '../../public/fonts/CabinetGrotesk-500.woff2', weight: '500', style: 'normal' },
-    { path: '../../public/fonts/CabinetGrotesk-700.woff2', weight: '700', style: 'normal' },
-    { path: '../../public/fonts/CabinetGrotesk-800.woff2', weight: '800', style: 'normal' },
   ],
   variable: '--font-cabinet',
   display: 'swap',
@@ -35,7 +34,7 @@ const schibsted = Schibsted_Grotesk({
 });
 
 const DESC =
-  'La Coquette, créations de bijoux fait main par Caro, dans la Drôme. Boucles d\'oreilles en acier inoxydable doré, pièces uniques. Retrouvez-moi sur les marchés et sur Instagram.';
+  'Bijoux fait main par Caro, en Drôme : boucles d\'oreilles en acier inoxydable doré, pièces uniques. À retrouver sur les marchés et sur Instagram.';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://lacoquette-bycaro.fr'),
@@ -65,6 +64,12 @@ export const metadata: Metadata = {
   },
 };
 
+// Couleur de la barre du navigateur sur mobile : l'ivoire du site (fond du
+// bandeau), pour que le haut de l'écran reprenne l'identité plutôt que du gris.
+export const viewport: Viewport = {
+  themeColor: '#F4EEE5',
+};
+
 // Le graphe complet vit dans src/lib/schema.ts : entreprise, créatrice et site
 // s'y référencent par identifiant, ce qui permet aux moteurs (classiques comme
 // IA) d'identifier une seule et même entité d'une page à l'autre.
@@ -80,7 +85,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         />
         <ConditionalChrome
           header={<Header instagram={settings.instagram} />}
-          footer={<><Footer /><ScrollReveal /><SmoothScroll /><BackToTop /></>}
+          footer={<><Footer /><ScrollReveal /></>}
         >
           {children}
         </ConditionalChrome>
