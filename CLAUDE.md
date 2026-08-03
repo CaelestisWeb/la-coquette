@@ -69,3 +69,7 @@ Règle : **chaque information n'apparaît qu'une fois par page, avec ses propres
 - Animations d'apparition : filet de sécurité 2 s dans `ScrollReveal.tsx` (rien ne reste masqué si l'observer ne vient pas) + repli `@media (scripting: none)`.
 - Guide d'utilisation du Studio pour Caro : `docs/Guide-Studio-Caro.pdf` (source .md à côté). Le tenir à jour si le Studio change.
 - Resend : les clés API du compte `lacoquette-bycaro` ont été supprimées le 22/07 (compte inerte).
+
+## Mosaïque du hero (04/08/2026)
+
+Le hero affiche une **mosaïque 2x2 de 4 paires** (au lieu d'une photo unique), pour multiplier les chances de coup de cœur au premier écran : papillon bleu nuit (case 1 = photo Studio de Caro, repli `hero-papillon.jpg`), cabochon corail (`cabochon-2`), bohème verte (`boheme-2`), cœur fuchsia (`coeur-2`). Règle : les 4 photos ne doivent apparaître **nulle part ailleurs sur l'accueil** (pas les couvertures de collections, pas l'atelier, pas le sur-mesure). Cases de réassurance : contenu **centré** (`items-center justify-center`).
