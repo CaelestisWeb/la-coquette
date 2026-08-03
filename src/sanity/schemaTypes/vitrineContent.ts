@@ -14,7 +14,7 @@ export const vitrineContent = defineType({
       type: 'image',
       options: { hotspot: true },
       description:
-        "La grande photo en haut du site. Choisissez une photo verticale, avec le bijou plutôt dans la moitié haute. Si ce champ est vide, la bannière actuelle (créoles papillon) reste affichée.",
+        "La première photo de la mosaïque d'accueil (case en haut à gauche). Choisissez une photo verticale, avec le bijou plutôt dans la moitié haute. Si ce champ est vide, la photo actuelle (créoles papillon) reste affichée.",
     }),
     defineField({
       name: 'heroText',

@@ -51,20 +51,43 @@ export default async function Hero() {
           </div>
         </div>
 
-        {/* Photo à fond perdu, sans arrondi ni voile */}
-        <div className="lg:col-span-7 relative order-1 lg:order-2 min-h-[56vh] sm:min-h-[64vh] lg:min-h-full">
-          <Image
-            src={content.heroImage}
-            alt="Boucles d'oreilles fait main de Caro, La Coquette"
-            fill
-            priority
-            sizes="(max-width: 1024px) 100vw, 58vw"
-            className={`object-cover ${
-              // Cadrage affiné pour la photo par défaut (paire entière sur tous
-              // les écrans) ; cadrage haut générique pour une photo de Caro.
-              content.heroImage === '/hero-papillon.jpg' ? 'object-[50%_25%]' : 'object-[50%_30%]'
-            }`}
-          />
+        {/* Mosaïque 2x2 : quatre paires de collections et couleurs différentes,
+            pour multiplier les chances qu'une pièce plaise au premier regard.
+            La première case reste la photo choisie par Caro dans le Studio. */}
+        <div className="lg:col-span-7 order-1 lg:order-2 min-h-[56vh] sm:min-h-[64vh] lg:min-h-full grid grid-cols-2 grid-rows-2 gap-1 bg-ivoire">
+          {[
+            {
+              src: content.heroImage,
+              alt: 'Créoles papillon bleu nuit et or, fait main par Caro',
+              pos: content.heroImage === '/hero-papillon.jpg' ? 'object-[50%_25%]' : 'object-[50%_30%]',
+            },
+            {
+              src: '/galerie/cabochon-2.jpg',
+              alt: 'Cabochons corail et or, boucles fait main La Coquette',
+              pos: 'object-[50%_32%]',
+            },
+            {
+              src: '/galerie/boheme-2.jpg',
+              alt: 'Bohème verte, cascades de chaînes et perles fait main',
+              pos: 'object-[50%_40%]',
+            },
+            {
+              src: '/galerie/coeur-2.jpg',
+              alt: 'Cœurs rose fuchsia, boucles fait main La Coquette',
+              pos: 'object-[50%_35%]',
+            },
+          ].map((p) => (
+            <div key={p.src} className="relative">
+              <Image
+                src={p.src}
+                alt={p.alt}
+                fill
+                priority
+                sizes="(max-width: 1024px) 50vw, 29vw"
+                className={`object-cover ${p.pos}`}
+              />
+            </div>
+          ))}
         </div>
       </div>
     </section>

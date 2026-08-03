@@ -32,7 +32,7 @@ export default function Reassurance() {
           {ITEMS.map((it) => (
             <li
               key={it.label}
-              className="flex items-start gap-3 border border-gris px-5 py-6 lg:px-6 lg:py-7"
+              className="flex items-center justify-center gap-3 border border-gris px-5 py-6 lg:px-6 lg:py-7 text-center"
             >
               <svg
                 width="18"
@@ -43,7 +43,7 @@ export default function Reassurance() {
                 strokeWidth="1.3"
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                className="text-noir shrink-0 mt-0.5"
+                className="text-noir shrink-0"
                 aria-hidden
               >
                 {it.icon}
