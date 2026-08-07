@@ -3,6 +3,7 @@ import Reassurance from '@/components/vitrine/Reassurance';
 import Atelier from '@/components/vitrine/Atelier';
 import Galerie from '@/components/vitrine/Galerie';
 import SurMesure from '@/components/vitrine/SurMesure';
+import Faq from '@/components/vitrine/Faq';
 import OuAcheter from '@/components/vitrine/OuAcheter';
 import Contact from '@/components/vitrine/Contact';
 
@@ -19,6 +20,7 @@ export default function HomePage() {
       <Atelier />
       <Galerie />
       <SurMesure />
+      <Faq />
       <OuAcheter />
       <Contact />
     </>
